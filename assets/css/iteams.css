@@ -1,0 +1,158 @@
+body
+{
+	font-family: calibri;
+
+}
+/*------------------------ HEADER -----------------------*/
+header
+{
+	position: fixed;
+	top: 0.1px;
+	right: 1px;
+	left: 1px;
+	display: flex;
+	background-color: rgba(38, 118, 119, 1.0);
+}
+
+.logo
+{
+	padding: 3px 3px 0px 10px;
+}
+
+.logo img
+{
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px 1px rgba(193, 193, 193, 1.0); 
+}
+
+.iteams
+{
+	font-size: 2.3em;
+	margin: 0.5cm 3cm 0.1cm 0.5cm;
+	color: white;
+}
+
+.titre
+{
+	font-size: 3.7em;
+	font-family: 'Z003';
+	margin: 0.3cm 3cm 0.1cm 4cm;
+	color: white;
+}
+
+/* ------------------------ SECTION --------------------*/
+section
+{
+	margin-top: 3cm;
+}
+
+form
+{
+	display: flex;
+}
+
+.identite, .fonction, .socialNetwork
+{
+	border: 1px solid rgba(193, 193, 193, 1.0);
+	padding: 0.5cm 1.5cm 0.5cm 2cm;
+	margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+	border-radius: 7px;
+	box-shadow: 2px 2px 2px 2px rgba(193, 193, 193, 1.0);
+	color: rgba(30, 55, 90, 1.0);
+}
+
+input
+{
+	width: 7cm;
+	height: 1cm;
+	border-radius: 7px;
+	box-shadow: 3px 3px 3px 3px rgba(193, 193, 193, 1.0);
+	border: 1px inset rgba(193, 193, 193, 1.0);
+}
+
+input:hover, textarea:hover
+{
+	background-color: rgba(38, 118, 119, 0.7);
+}
+
+textarea
+{
+	border-radius: 7px;
+	box-shadow: 3px 3px 3px 3px rgba(193, 193, 193, 1.0);
+	border: 1px inset rgba(193, 193, 193, 1.0);
+}
+
+.envoyer
+{
+	display: inline-block; 
+	float: right;
+}
+
+.envoyer input
+{
+	font-size: 1.7em; width:3.5cm; 
+	text-align: center; 
+	color: white; 
+	background-color: rgba(38, 118, 119, 1.0); 
+	box-shadow: 3px 3px 3px 3px rgba(193, 193, 193, 1.0); 
+	font-weight: bold; 
+	font-family: 'Z003';
+}
+
+.envoyer input:hover
+{
+	background-color: white;
+	color: rgba(38, 118, 119, 1.0);
+}
+
+.icones
+{
+	display: flex;
+	margin-bottom: 5px;
+}
+
+.icones label
+{
+	padding: 6px 1px 3px 10px;
+}
+
+/*----------------------- FOOTER -----------------------*/
+
+
+footer
+{
+	height: 3cm;
+	border-radius: 5px;
+	display: flex;
+	box-shadow: 2px 2px 2px 2px rgba(38, 118, 119, 1.0);
+	padding: 1cm 1.5cm 1cm 1cm;
+}
+
+.titreIteams
+{
+	font-size: 2.3em;
+	margin: 0cm 3cm 0.1cm 0.5cm;
+	color: rgba(38, 118, 119, 1.0);
+}
+
+.lienImages
+{
+	display: flex;
+	border-radius: 3px;
+	background-color: white;
+	margin: 0.5cm 0.3cm 1cm 17cm;
+}
+
+.lienImages img
+{
+	margin: 0cm 0.5cm 0cm 0.5cm;
+}
+
+.lienImages a:hover
+{
+	box-shadow: 1px 1px 1px 1px rgba(193, 193, 193, 1.0);
+	border-radius: 3px;
+	width: 2.5cm;
+	height: 1.5cm;
+}
+
