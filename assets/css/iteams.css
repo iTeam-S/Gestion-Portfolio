@@ -57,7 +57,7 @@ form
 	padding: 0.5cm 1.5cm 0.5cm 2cm;
 	margin: 0.5cm 0.5cm 0.5cm 0.5cm;
 	border-radius: 7px;
-	box-shadow: 2px 2px 2px 2px rgba(193, 193, 193, 1.0);
+	box-shadow: 2px 2px 2px 2px rgba(193, 193, 193, 0.7);
 	color: rgba(30, 55, 90, 1.0);
 }
 
@@ -66,19 +66,19 @@ input
 	width: 7cm;
 	height: 1cm;
 	border-radius: 7px;
-	box-shadow: 3px 3px 3px 3px rgba(193, 193, 193, 1.0);
+	box-shadow: 1px 1px 1px 1px rgba(193, 193, 193, 0.7);
 	border: 1px inset rgba(193, 193, 193, 1.0);
 }
 
 input:hover, textarea:hover
 {
-	background-color: rgba(38, 118, 119, 0.7);
+	box-shadow: 2px 2px 2px 2px rgba(38, 118, 119, 1.0);
 }
 
 textarea
 {
 	border-radius: 7px;
-	box-shadow: 3px 3px 3px 3px rgba(193, 193, 193, 1.0);
+	box-shadow: 1px 1px 1px 1px rgba(193, 193, 193, 1.0);
 	border: 1px inset rgba(193, 193, 193, 1.0);
 }
 
@@ -90,11 +90,12 @@ textarea
 
 .envoyer input
 {
-	font-size: 1.7em; width:3.5cm; 
+	font-size: 1.7em; 
+	width:3.5cm; 
 	text-align: center; 
 	color: white; 
 	background-color: rgba(38, 118, 119, 1.0); 
-	box-shadow: 3px 3px 3px 3px rgba(193, 193, 193, 1.0); 
+	box-shadow: 2px 2px 2px 2px rgba(193, 193, 193, 0.7); 
 	font-weight: bold; 
 	font-family: 'Z003';
 }
@@ -116,6 +117,14 @@ textarea
 	padding: 6px 1px 3px 10px;
 }
 
+h1
+{
+	text-decoration: underline;
+	color: rgba(38, 118, 119, 1.0);
+	font-family: 'Z003';
+	margin-left: 0.5cm;
+}
+
 /*----------------------- FOOTER -----------------------*/
 
 
@@ -124,7 +133,8 @@ footer
 	height: 3cm;
 	border-radius: 5px;
 	display: flex;
-	box-shadow: 2px 2px 2px 2px rgba(38, 118, 119, 1.0);
+	/* box-shadow: 2px 2px 2px 2px rgba(38, 118, 119, 1.0); */
+	border-top: 1px solid rgb(206, 204, 204);
 	padding: 1cm 1.5cm 1cm 1cm;
 }
 

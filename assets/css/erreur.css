@@ -1,0 +1,18 @@
+body
+{
+    margin: 3cm 3cm 3cm 3cm;
+}
+
+h1
+{
+    margin-left: 10cm;
+    text-decoration: underline;
+}
+
+.message
+{
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px 3px rgb(192, 192, 196);
+    background-color: rgba(38, 118, 119, 1.0);
+    padding: 0.5cm 1cm 1cm 1cm;
+}
