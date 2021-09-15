@@ -1,12 +1,25 @@
 <?php
-    include('../models/requeteFormation.php');
+    include_once('../models/models_class.php');
+
+    $formation = new Formation();
+    $membre_id = new Membre();
+
+    $reponse = $membre_id -> get_last_id_membre();
+
     $donnee = $reponse -> fetch();
-    $requete -> execute(array(
+
+    $infromation_formation = array(
         'lieu' => strip_tags($_POST['lieu']),
         'annee' => strip_tags($_POST['annee']),
         'type' => strip_tags($_POST['type']),
         'descriptions' => strip_tags($_POST['description']),
         'idMembre' => $donnee['id']
-    ));
+    );
+
+    $formation -> inserer_information_formation($infromation_formation);
+
+    unset($membre_id);
+    unset($formation);
+    
     header("Location:../views/experience.php");
 ?>
