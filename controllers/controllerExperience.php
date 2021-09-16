@@ -1,8 +1,8 @@
 <?php
     include('../models/models_class.php');
 
-    $experience = new Experience();
-    $membre_id = new Membre();
+    $experience = new ExperienceModels();
+    $membre_id = new MembreModels();
 
     $reponse = $membre_id -> get_last_id_membre();
 

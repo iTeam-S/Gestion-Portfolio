@@ -6,7 +6,7 @@
     // echo "</pre>";
     if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['tel1']) AND !empty($_POST['email']))
     {
-        $membre = new Membre();
+        $membre = new MembreModels();
         $reponses = $membre -> get_prenom_usuel();
 
         while($donnee = $reponses ->fetch())

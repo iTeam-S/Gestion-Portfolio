@@ -19,7 +19,7 @@ class ConnectToDb
     }
 }
 
-class Membre extends ConnectToDb
+class MembreModels extends ConnectToDb
 {
     public function get_prenom_usuel()
     {
@@ -48,7 +48,7 @@ class Membre extends ConnectToDb
     }
 }
 
-class Formation extends ConnectToDb
+class FormationModels extends ConnectToDb
 {
     public function inserer_information_formation($donneesFormation)
     {
@@ -61,7 +61,7 @@ class Formation extends ConnectToDb
     }
 }
 
-class Experience extends ConnectToDb
+class ExperienceModels extends ConnectToDb
 {
     public function inserer_information_experience($donneesExperience)
     {
@@ -74,7 +74,7 @@ class Experience extends ConnectToDb
     }
 }
 
-class Competence extends ConnectToDb
+class CompetenceModels extends ConnectToDb
 {
     public function inserer_information_competence($donneesCompetence)
     {

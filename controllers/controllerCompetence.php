@@ -11,8 +11,8 @@
             'Outils informatiques' => strip_tags($_POST['outils'])
         );
         
-        $competence = new Competence();
-        $membre_id = new Membre();
+        $competence = new CompetenceModels();
+        $membre_id = new MembreModels();
 
         $reponse = $membre_id -> get_last_id_membre();
 
@@ -28,13 +28,13 @@
                 'idMembre' => $donnee['id']
             );
 
-            $competence -> inserer_information_competence();
+            $competence -> inserer_information_competence($information_competence);
             $i++;
         }
         
         unset($membre_id);
         unset($competence);
-        
+
         header('Location:../views/membre.php');
     }
 

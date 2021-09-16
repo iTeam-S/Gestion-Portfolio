@@ -1,8 +1,8 @@
 <?php
     include_once('../models/models_class.php');
 
-    $formation = new Formation();
-    $membre_id = new Membre();
+    $formation = new FormationModels();
+    $membre_id = new MembreModels();
 
     $reponse = $membre_id -> get_last_id_membre();
 
