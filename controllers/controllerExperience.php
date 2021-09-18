@@ -20,5 +20,5 @@
 
     unset($membre_id);
     unset($experience);
-    header('Location:../views/competence.php')
+    header('Location:../views/view.c.php')
 ?>

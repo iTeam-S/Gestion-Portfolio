@@ -35,7 +35,7 @@
         unset($membre_id);
         unset($competence);
 
-        header('Location:../views/membre.php');
+        header('Location:../views/view.m.php');
     }
 
     else

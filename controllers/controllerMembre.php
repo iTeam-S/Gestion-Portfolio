@@ -36,7 +36,7 @@
 
         $membre -> inserer_information_membre($informations_membre);
         unset($membre);
-        header("Location:../views/formation.php");
+        header("Location:../views/view.f.php");
     }
 
     else

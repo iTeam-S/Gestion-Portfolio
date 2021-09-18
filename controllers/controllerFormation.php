@@ -21,5 +21,5 @@
     unset($membre_id);
     unset($formation);
     
-    header("Location:../views/experience.php");
+    header("Location:../views/view.e.php");
 ?>
