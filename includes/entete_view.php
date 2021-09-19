@@ -24,7 +24,7 @@
 					<div id="navbarContent" class="collapse navbar-collapse">
 						<ul class="navbar-nav">
 							<li class="nav-item active">
-								<a href="view.php" class="nav-link">Inscription</a>
+								<a href="view.m.php" class="nav-link">Inscription</a>
 							</li>			
 							<li class="nav-item">
 								<a href="#" class="nav-link"> Mise à jour</a>
