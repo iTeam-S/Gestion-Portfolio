@@ -1,7 +1,7 @@
 <?php include_once('../includes/entete_view.php'); ?>
 
 <section>
-<form action="../controllers/controller.php" method="post">
+<form action="teste.php" method="post">
     <div class="container mt-3" id="membre">
     <p class="font-weight-bold">Indentité:</p>
         <div class="row form-group">
@@ -17,7 +17,7 @@
 
                 <label for="prenomUsuel"><b>Prenom usuel:</b></label>
                 <input type="text" name="prenomUsuel" 
-                    placeholder="Prenom usuel ***" id="prenomUsuel" class="form-control"><br>
+                    placeholder="Prenom usuel ***" id="prenomUsuel" class="form-control" required><br>
 
                 <img src="../assets/images/telephone.png" width="30" height="30">
 				<label for="telephonePrimo"><b>Téléphones</b>:</label>
@@ -41,7 +41,7 @@
                 <img src="../assets/images/cv.png" width="30" height="30">
                 <label for="lien_cv"><b>Cirrucilum vitea:</b></label>
                 <input type="url" name="cv" id="lien_cv" 
-                    placeholder="URL sur votre CV sur drive... ***" class="form-control"><br>
+                    placeholder="URL sur votre CV... ***" class="form-control"><br>
 
                 <label for="fonction"><b>Votre fonction:</b></label><br>
                 <input type="text" name="fonction" id="fonction" 
@@ -86,37 +86,138 @@
 
     <div class="container mt-3" id="formation">
     <p class="font-weight-bold">Formations:</p>
-        <div class="row form-group">
-            <div class="col-12 col-lg-5 pb-1 m-1 rounded border">
+        <div class="row form-group" id="infosF1">
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded border">
                 <label for="lieuFormation"><b>Lieu:</b></label>
-                <input type="text" name="lieu" id="lieuFormation" 
+                <input type="text" name="lieuFormation[]" id="lieuFormation" 
                     placeholder="lieu de formation ***" class="form-control"><br>
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
-                <input type="text" name="annee" id="anneeFormation" 
+                <input type="text" name="anneeFormation[]" id="anneeFormation" 
                     placeholder="Année de formation ***"class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
-                <input type="text" name="type" id="typeFormation" 
+                <input type="text" name="typeFormation[]" id="typeFormation" 
                     placeholder="L'intitulé de formation ***" class="form-control"><br>
-            </div>
-            <div class="col-12 col-lg-6 ml-lg-3 pb-1 m-1 rounded border">
+
                 <label for="descriptionFormation"><b>Description:</b></label><br>
-                <textarea name = "descriptionFormation" id="descriptionFormation"  rows="7" 
+                <textarea name = "descriptionFormation[]" id="descriptionFormation"  rows="7" 
                     placeholder="Une petite description sur votre formation ... ***" class="form-control">
                 </textarea>
-
-                <div class="container mt-3 text-center" id="bouttonFormation">
-                    <div class="row">
-                        <div class="col precedant">
-                            <button type="button" class="btn btn-success"><<< Précédant</button>
-                        </div>
-                        <div class="col suivant">
-                            <button type="button" class="btn btn-success">Suivant >>></button>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded border">
+                <label for="lieuFormation"><b>Lieu:</b></label>
+                <input type="text" name="lieuFormation[]" id="lieuFormation" 
+                    placeholder="lieu de formation ***" class="form-control"><br>
+
+                <label for="anneeFormation"><b>Année:</b></label><br>
+                <input type="text" name="anneeFormation[]" id="anneeFormation" 
+                    placeholder="Année de formation ***"class="form-control"><br>
+
+                <label for="typeFormation"><b>Type:</b></label><br>
+                <input type="text" name="typeFormation[]" id="typeFormation" 
+                    placeholder="L'intitulé de formation ***" class="form-control"><br>
+
+                <label for="descriptionFormation"><b>Description:</b></label><br>
+                <textarea name = "descriptionFormation[]" id="descriptionFormation"  rows="7" 
+                    placeholder="Une petite description sur votre formation ... ***" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded border">
+                <label for="lieuFormation"><b>Lieu:</b></label>
+                <input type="text" name="lieuFormation[]" id="lieuFormation" 
+                    placeholder="lieu de formation ***" class="form-control"><br>
+
+                <label for="anneeFormation"><b>Année:</b></label><br>
+                <input type="text" name="anneeFormation[]" id="anneeFormation" 
+                    placeholder="Année de formation ***"class="form-control"><br>
+
+                <label for="typeFormation"><b>Type:</b></label><br>
+                <input type="text" name="typeFormation[]" id="typeFormation" 
+                    placeholder="L'intitulé de formation ***" class="form-control"><br>
+
+                <label for="descriptionFormation"><b>Description:</b></label><br>
+                <textarea name = "descriptionFormation[]" id="descriptionFormation"  rows="7" 
+                    placeholder="Une petite description sur votre formation ... ***" class="form-control">
+                </textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row form-group" id="infosF2">
+        <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded border">
+                <label for="lieuFormation"><b>Lieu:</b></label>
+                <input type="text" name="lieuFormation[]" id="lieuFormation" 
+                    placeholder="lieu de formation ***" class="form-control"><br>
+
+                <label for="anneeFormation"><b>Année:</b></label><br>
+                <input type="text" name="anneeFormation[]" id="anneeFormation" 
+                    placeholder="Année de formation ***"class="form-control"><br>
+
+                <label for="typeFormation"><b>Type:</b></label><br>
+                <input type="text" name="typeFormation[]" id="typeFormation" 
+                    placeholder="L'intitulé de formation ***" class="form-control"><br>
+
+                <label for="descriptionFormation"><b>Description:</b></label><br>
+                <textarea name = "descriptionFormation[]" id="descriptionFormation"  rows="7" 
+                    placeholder="Une petite description sur votre formation ... ***" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded border">
+                <label for="lieuFormation"><b>Lieu:</b></label>
+                <input type="text" name="lieuFormation[]" id="lieuFormation" 
+                    placeholder="lieu de formation ***" class="form-control"><br>
+
+                <label for="anneeFormation"><b>Année:</b></label><br>
+                <input type="text" name="anneeFormation[]" id="anneeFormation" 
+                    placeholder="Année de formation ***"class="form-control"><br>
+
+                <label for="typeFormation"><b>Type:</b></label><br>
+                <input type="text" name="typeFormation[]" id="typeFormation" 
+                    placeholder="L'intitulé de formation ***" class="form-control"><br>
+
+                <label for="descriptionFormation"><b>Description:</b></label><br>
+                <textarea name = "descriptionFormation[]" id="descriptionFormation"  rows="7" 
+                    placeholder="Une petite description sur votre formation ... ***" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded border">
+                <label for="lieuFormation"><b>Lieu:</b></label>
+                <input type="text" name="lieuFormation[]" id="lieuFormation" 
+                    placeholder="lieu de formation ***" class="form-control"><br>
+
+                <label for="anneeFormation"><b>Année:</b></label><br>
+                <input type="text" name="anneeFormation[]" id="anneeFormation" 
+                    placeholder="Année de formation ***"class="form-control"><br>
+
+                <label for="typeFormation"><b>Type:</b></label><br>
+                <input type="text" name="typeFormation[]" id="typeFormation" 
+                    placeholder="L'intitulé de formation ***" class="form-control"><br>
+
+                <label for="descriptionFormation"><b>Description:</b></label><br>
+                <textarea name = "descriptionFormation[]" id="descriptionFormation"  rows="7" 
+                    placeholder="Une petite description sur votre formation ... ***" class="form-control">
+                </textarea>
+            </div>
+        </div>
+
+        <div class="row rounded border text-center pt-2 pb-2 passer" id="bouttonFormation">
+            <div class="col-4 precedant">
+                <button type="button" class="btn btn-success"><< Précédant</button>
+            </div>
+
+            <div class="col-4 ajouter">
+                <button type="button" class="btn btn-secondary">
+                <img src="../assets/images/addButton.jpg" id="ajoutIcone" width="30" height="25" alt="" title="Plus d'informations"></button>
+            </div>
+
+            <div class="col-4 suivant">
+                <button type="button" class="btn btn-success">Suivant >></button>
+            </div>
+            <br>
         </div>
     </div>
     <br>
@@ -165,39 +266,134 @@
 
     <div class="container mt-3" id="experience">
     <p class="font-weight-bold">Expériences:</p>
-        <div class="row form-group">
-            <div class="col-12 col-lg-5 pb-1 m-1 rounded  border">
+        <div class="row form-group" id="infosE1">
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded  border">
                 <label for="nomOrganisation"><b>Nom d'organisation:</b></label>
-                <input type="text" name="nom" id="nomOrganisation" 
+                <input type="text" name="nomOrganisation[]" id="nomOrganisation" 
                     placeholder="Entreprise et/ou institut supérieur ***" class="form-control"><br>
                 
                 <label for="anneeExperience"><b>Année:</b></label>
-                <input type="text" name="annee" id="anneeExperience" 
+                <input type="text" name="anneeExperience[]" id="anneeExperience" 
                     placeholder="Durée d'expérience ***" class="form-control"><br>
 
                 <label for="typeExperience"><b>Type:</b></label>
-                <input type="text" name="type" id="typeExperience" 
+                <input type="text" name="typeExperience[]" id="typeExperience" 
                     placeholder="L'intitulé d'expérience ***" class="form-control"><br>
-            </div>
-
-            <div class="col-12 col-lg-6 ml-lg-3 m-1 pb-1 rounded  border">
                 <label for="descriptionExperience"><b>Description:</b></label><br>
-                <textarea name = "descriptionExperience" id="descriptionExperience" rows="7" 
+                <textarea name = "descriptionExperience[]" id="descriptionExperience" rows="7" 
                     placeholder="Une petite description sur ce dernier ... ***" class="form-control">
                 </textarea>
-
-                <div class="container mt-3 text-center" id="bouttonExperience">
-                    <div class="row">
-                        <div class="col precedant">
-                            <button type="button" class="btn btn-success"><<< Précédant</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-success" 
-                            type="submit">Enregistrer</button>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded  border">
+                <label for="nomOrganisation"><b>Nom d'organisation:</b></label>
+                <input type="text" name="nomOrganisation[]" id="nomOrganisation" 
+                    placeholder="Entreprise et/ou institut supérieur ***" class="form-control"><br>
+                
+                <label for="anneeExperience"><b>Année:</b></label>
+                <input type="text" name="anneeExperience[]" id="anneeExperience" 
+                    placeholder="Durée d'expérience ***" class="form-control"><br>
+
+                <label for="typeExperience"><b>Type:</b></label>
+                <input type="text" name="typeExperience[]" id="typeExperience" 
+                    placeholder="L'intitulé d'expérience ***" class="form-control"><br>
+                <label for="descriptionExperience"><b>Description:</b></label><br>
+                <textarea name = "descriptionExperience[]" id="descriptionExperience" rows="7" 
+                    placeholder="Une petite description sur ce dernier ... ***" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded  border">
+                <label for="nomOrganisation"><b>Nom d'organisation:</b></label>
+                <input type="text" name="nomOrganisation[]" id="nomOrganisation" 
+                    placeholder="Entreprise et/ou institut supérieur ***" class="form-control"><br>
+                
+                <label for="anneeExperience"><b>Année:</b></label>
+                <input type="text" name="anneeExperience[]" id="anneeExperience" 
+                    placeholder="Durée d'expérience ***" class="form-control"><br>
+
+                <label for="typeExperience"><b>Type:</b></label>
+                <input type="text" name="typeExperience[]" id="typeExperience" 
+                    placeholder="L'intitulé d'expérience ***" class="form-control"><br>
+                <label for="descriptionExperience"><b>Description:</b></label><br>
+                <textarea name = "descriptionExperience[]" id="descriptionExperience" rows="7" 
+                    placeholder="Une petite description sur ce dernier ... ***" class="form-control">
+                </textarea>
+            </div>
+        </div>
+<!------------------------------------- InfosE2 --------------------------------->
+        <div class="row form-group" id="infosE2">
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded  border">
+                <label for="nomOrganisation"><b>Nom d'organisation:</b></label>
+                <input type="text" name="nomOrganisation[]" id="nomOrganisation" 
+                    placeholder="Entreprise et/ou institut supérieur ***" class="form-control"><br>
+                
+                <label for="anneeExperience"><b>Année:</b></label>
+                <input type="text" name="anneeExperience[]" id="anneeExperience" 
+                    placeholder="Durée d'expérience ***" class="form-control"><br>
+
+                <label for="typeExperience"><b>Type:</b></label>
+                <input type="text" name="typeExperience[]" id="typeExperience" 
+                    placeholder="L'intitulé d'expérience ***" class="form-control"><br>
+                <label for="descriptionExperience"><b>Description:</b></label><br>
+                <textarea name = "descriptionExperience[]" id="descriptionExperience" rows="7" 
+                    placeholder="Une petite description sur ce dernier ... ***" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded  border">
+                <label for="nomOrganisation"><b>Nom d'organisation:</b></label>
+                <input type="text" name="nomOrganisation[]" id="nomOrganisation" 
+                    placeholder="Entreprise et/ou institut supérieur ***" class="form-control"><br>
+                
+                <label for="anneeExperience"><b>Année:</b></label>
+                <input type="text" name="anneeExperience[]" id="anneeExperience" 
+                    placeholder="Durée d'expérience ***" class="form-control"><br>
+
+                <label for="typeExperience"><b>Type:</b></label>
+                <input type="text" name="typeExperience[]" id="typeExperience" 
+                    placeholder="L'intitulé d'expérience ***" class="form-control"><br>
+                <label for="descriptionExperience"><b>Description:</b></label><br>
+                <textarea name = "descriptionExperience[]" id="descriptionExperience" rows="7" 
+                    placeholder="Une petite description sur ce dernier ... ***" class="form-control">
+                </textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 pb-1 m-3 ml-5 rounded  border">
+                <label for="nomOrganisation"><b>Nom d'organisation:</b></label>
+                <input type="text" name="nomOrganisation[]" id="nomOrganisation" 
+                    placeholder="Entreprise et/ou institut supérieur ***" class="form-control"><br>
+                
+                <label for="anneeExperience"><b>Année:</b></label>
+                <input type="text" name="anneeExperience[]" id="anneeExperience" 
+                    placeholder="Durée d'expérience ***" class="form-control"><br>
+
+                <label for="typeExperience"><b>Type:</b></label>
+                <input type="text" name="typeExperience[]" id="typeExperience" 
+                    placeholder="L'intitulé d'expérience ***" class="form-control"><br>
+                <label for="descriptionExperience"><b>Description:</b></label><br>
+                <textarea name = "descriptionExperience[]" id="descriptionExperience" rows="7" 
+                    placeholder="Une petite description sur ce dernier ... ***" class="form-control">
+                </textarea>
+            </div>
+        </div>
+
+        <!---------------------------- ***************** ---------------------->
+
+        <div class="row rounded border text-center pt-2 pb-2 passer" id="bouttonExperience">
+            <div class="col-4 precedant">
+                <button type="button" class="btn btn-success"><< Précédant</button>
+            </div>
+
+            <div class="col-4 ajouter">
+                <button type="button" class="btn btn-secondary">
+                <img src="../assets/images/addButton.jpg" id="ajoutIcone" width="30" height="25" alt="" title="Plus d'informations"></button>
+            </div>
+
+            <div class="col-4">
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+            </div>
+            <br>
         </div>
     </div>
     <br>

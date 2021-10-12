@@ -5,7 +5,7 @@
 
     $membre = new MembreModels();
 
-    if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['tel1']) AND !empty($_POST['email']))
+    if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['tel1']) AND !empty($_POST['email']) AND !empty($_POST['prenomUsuel']))
     {
         $reponses = $membre -> get_prenom_usuel();
 

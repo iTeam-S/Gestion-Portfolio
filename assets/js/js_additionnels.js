@@ -4,33 +4,40 @@ $(document).ready(function()
     $("#experience").hide();
     $("#competence").hide();
 
+
     $("#bouttonMembre button").click(function()
     {   
-        if($('#nomPersonne').val().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !")
-        }
+        // if($('#nomPersonne').val().length === 0)
+        // {
+        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        // }
 
-        else if($('#prenomsPersonne').val().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !")
-        }
+        // else if($('#prenomsPersonne').val().length === 0)
+        // {
+        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        // }
 
-        else if($('#telephonePrimo').val().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !")
-        }
+        // else if($('#prenomUsuel').val().length === 0)
+        // {
+        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        // }
 
-        else if($('#email').val().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !")
-        }
+        // else if($('#telephonePrimo').val().length === 0)
+        // {
+        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        // }
 
-        else
-        {
+        // else if($('#email').val().length === 0)
+        // {
+        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        // }
+
+        // else
+        // {
             $("#membre").hide(1000);
             $("#formation").show(1000);
-        }
+            $("#infosF2").hide();
+        // }
     });
 
 
@@ -47,35 +54,41 @@ $(document).ready(function()
         $("#membre").show(1000);
     });
 
+    $("#bouttonFormation .ajouter button").click(function()
+    {
+        $("#infosF2").show(1000);
+    });
+
 
     // ----------------------------------------------
     $("#bouttonCompetence .suivant button").click(function()
     {
-        if($('#stylo').val().length === 0)
-        {
-            alert("Tous ces champs sont obligatoires veuillez les remplir...!")
-        }
+        // if($('#stylo').val().length === 0)
+        // {
+        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
+        // }
 
-        else if($('#mobile').val().length === 0)
-        {
-            alert("Tous ces champs sont obligatoires veuillez les remplir...!")
-        }
+        // else if($('#mobile').val().length === 0)
+        // {
+        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
+        // }
 
-        else if($('#parametre').val().length === 0)
-        {
-            alert("Tous ces champs sont obligatoires veuillez les remplir...!")
-        }
+        // else if($('#parametre').val().length === 0)
+        // {
+        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
+        // }
         
-        else if($('#laptop').val().length === 0)
-        {
-            alert("Tous ces champs sont obligatoires veuillez les remplir...!")
-        }
+        // else if($('#laptop').val().length === 0)
+        // {
+        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
+        // }
         
-        else
-        {
+        // else
+        // {
             $("#competence").hide(1000);
             $("#experience").show(1000);
-        }
+            $("#infosE2").hide();
+        // }
     });
 
     $("#bouttonCompetence .precedant button").click(function()
@@ -88,7 +101,12 @@ $(document).ready(function()
     //----------------------------------------------------
     $("#bouttonExperience .precedant button").click(function()
         {
-            $("#experience").hide(1000)
-            $("#competence").show(1000)
+            $("#experience").hide(1000);
+            $("#competence").show(1000);
         });
+
+    $("#bouttonExperience .ajouter button").click(function()
+    {
+        $("#infosE2").show(1000);
+    });
 });

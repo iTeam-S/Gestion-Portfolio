@@ -16,7 +16,7 @@
                 <nav class="col navbar navbar-expand-md navbar-dark">
                     <a href="#" class="navbar-brand">
                         <img class="logo_iteams shadow" src="../assets/images/iteams.jpg" alt="Iteams'logo" width="57" height="57">
-                        <span class="nom_iteams ml-3 font-weight-bold">Iteam-$</span> 
+                        <span class="nom_iteams ml-3 font-weight-bold">iTeam-$</span> 
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
    						<span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
 					<div id="navbarContent" class="collapse navbar-collapse">
 						<ul class="navbar-nav">
 							<li class="nav-item active">
-								<a href="view.m.php" class="nav-link">Inscription</a>
+								<a href="view.php" class="nav-link">Inscription</a>
 							</li>			
 							<li class="nav-item">
 								<a href="#" class="nav-link"> Mise à jour</a>

@@ -22,3 +22,13 @@ p
     font-size: 1.3em;
     text-decoration: underline;
 }
+
+#ajoutIcone
+{
+    border-radius: 10px;
+}
+
+.passer
+{
+    background-color: rgba(38, 118, 119, 1.0);
+}
