@@ -94,7 +94,7 @@
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
                 <input type="text" name="anneeFormation[]" id="anneeFormation" 
-                    placeholder="Année de formation ***"class="form-control"><br>
+                    placeholder="Année de formation ***" class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
                 <input type="text" name="typeFormation[]" id="typeFormation" 
@@ -113,7 +113,7 @@
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
                 <input type="text" name="anneeFormation[]" id="anneeFormation" 
-                    placeholder="Année de formation ***"class="form-control"><br>
+                    placeholder="Année de formation ***" class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
                 <input type="text" name="typeFormation[]" id="typeFormation" 
@@ -132,7 +132,7 @@
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
                 <input type="text" name="anneeFormation[]" id="anneeFormation" 
-                    placeholder="Année de formation ***"class="form-control"><br>
+                    placeholder="Année de formation ***" class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
                 <input type="text" name="typeFormation[]" id="typeFormation" 
@@ -153,7 +153,7 @@
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
                 <input type="text" name="anneeFormation[]" id="anneeFormation" 
-                    placeholder="Année de formation ***"class="form-control"><br>
+                    placeholder="Année de formation ***" class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
                 <input type="text" name="typeFormation[]" id="typeFormation" 
@@ -172,7 +172,7 @@
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
                 <input type="text" name="anneeFormation[]" id="anneeFormation" 
-                    placeholder="Année de formation ***"class="form-control"><br>
+                    placeholder="Année de formation ***" class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
                 <input type="text" name="typeFormation[]" id="typeFormation" 
@@ -191,7 +191,7 @@
 
                 <label for="anneeFormation"><b>Année:</b></label><br>
                 <input type="text" name="anneeFormation[]" id="anneeFormation" 
-                    placeholder="Année de formation ***"class="form-control"><br>
+                    placeholder="Année de formation ***" class="form-control"><br>
 
                 <label for="typeFormation"><b>Type:</b></label><br>
                 <input type="text" name="typeFormation[]" id="typeFormation" 

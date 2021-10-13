@@ -24,7 +24,7 @@
                     <li class="list-inline-item">&middot;</li>
 
                     <li class="list-inline-item">
-                        <a href="#"><a href="https://web.facebook.com/iTeam.Community/" target="_blank" title="facebook.com/iTeam.Community/"><img src="../assets/images/facebook.png" alt="Contact github" width="30" height="30"> Facebook</a>
+                        <a href="https://web.facebook.com/iTeam.Community/" target="_blank" title="facebook.com/iTeam.Community/"><img src="../assets/images/facebook.png" alt="Contact github" width="30" height="30"> Facebook</a>
                     </li>
                     <li class="list-inline-item">&middot;</li>
 

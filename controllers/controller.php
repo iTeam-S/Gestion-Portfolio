@@ -48,14 +48,37 @@
     $formation = new FormationModels();
     $reponseF = $membre -> get_last_id_membre();
     $donneeF = $reponseF -> fetch();
-    $infromation_formation = array(
-        'lieu' => strip_tags($_POST['lieu']),
-        'annee' => strip_tags($_POST['annee']),
-        'type' => strip_tags($_POST['type']),
-        'descriptions' => strip_tags($_POST['descriptionFormation']),
-        'idMembre' => $donneeF['id']
-    );
-    $formation -> inserer_information_formation($infromation_formation);
+    // $information_formation = array(
+    //     'lieu' => strip_tags($_POST['lieu']),
+    //     'annee' => strip_tags($_POST['annee']),
+    //     'type' => strip_tags($_POST['type']),
+    //     'descriptions' => strip_tags($_POST['descriptionFormation']),
+    //     'idMembre' => $donneeF['id']
+    // );
+    // $formation -> inserer_information_formation($information_formation);
+    
+    $itemF = 0;
+    $lieuFormation = $_POST['lieuFormation'];
+    $anneeFormation = $_POST['anneeFormation'];
+    $typeFormation = $_POST['typeFormation'];
+    $descriptionFormation = $_POST['descriptionFormation'];
+
+    while($itemF < 6)
+    {
+        if(!empty($lieuFormation[$itemF]) AND !empty($anneeFormation[$itemF]) AND !empty($typeFormation[$itemF]) AND !empty($descriptionFormation[$itemF]))
+        {
+            $information_formation = array(
+                'lieu' => strip_tags($lieuFormation[$itemF]),
+                'annee' => strip_tags($anneeFormation[$itemF]),
+                'type' => strip_tags($typeFormation[$itemF]),
+                'descriptions' => strip_tags($descriptionFormation[$itemF]),
+                'idMembre' => $donneeF['id'];
+            );
+            $formation -> inserer_information_formation($information_formation);
+        }
+        $itemF += 1;
+    }
+
     unset($formation);
 
     //------------------------------ Competence -----------------------------------------
@@ -97,17 +120,38 @@
     $experience = new ExperienceModels();
     $reponseE = $membre -> get_last_id_membre();
     $donneeE = $reponseE -> fetch();
-    $information_experience = array(
-        'nom' => strip_tags($_POST['nom']),
-        'annee' => strip_tags($_POST['annee']),
-        'type' => strip_tags($_POST['type']),
-        'descriptions' => strip_tags($_POST['descriptionExperience']),
-        'idMembre' => $donneeE['id']
-    );
+    // $information_experience = array(
+    //     'nom' => strip_tags($_POST['nom']),
+    //     'annee' => strip_tags($_POST['annee']),
+    //     'type' => strip_tags($_POST['type']),
+    //     'descriptions' => strip_tags($_POST['descriptionExperience']),
+    //     'idMembre' => $donneeE['id']
+    // );
 
-    $experience -> inserer_information_experience($information_experience);
+    // $experience -> inserer_information_experience($information_experience);
+
+    $itemE = 0;
+    $nomOrganisation = $_POST['nomOrganisation'];
+    $anneeExperience = $_POST['anneeExperience'];
+    $typeExperience = $_POST['typeExperience'];
+    $descriptionExperience = $_POST['descriptionExperience'];
+
+    while($itemE < 6)
+    {
+        if(!empty($nomOrganisation[$itemE]) AND !empty($anneeExperience[$itemE]) AND !empty($typeExperience[$itemE]) AND !empty($descriptionExperience[$itemE]))
+        {
+            $information_experience = array(
+                'nom' => strip_tags($nomOrganisation[$itemE]),
+                'annee' => strip_tags($anneeExperience[$itemE]),
+                'type' => strip_tags($typeExperience[$itemE]),
+                'descriptions' => strip_tags($descriptionExperience[$itemE]))
+            );
+            $experience -> inserer_information_experience($information_experience);
+        }
+        $itemE += 1;
+    }
     unset($experience);
     unset($membre);
-    header('Location:../views/view.m.php');
+    header('Location:../views/view.php');
 
 ?>
