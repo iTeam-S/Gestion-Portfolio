@@ -45,7 +45,7 @@
 
                 <label for="fonction"><b>Votre fonction:</b></label><br>
                 <input type="text" id="fonction" 
-                    placeholder="Votre travail et/ou étude ***" class="form-control"><br>
+                    placeholder="Votre travail et/ou étude (..., ...... ,...) ***" class="form-control"><br>
 
                 <label for="descriptionTravail"><b>Description:</b></label><br>
                 <textarea id="descriptionTravail" rows="7" 
@@ -60,10 +60,8 @@
                 
                 <img src="../assets/images/github.png" width="30" height="30">
 				<label for="lien_github"><b>Github:</b></label>
-                <input type="text" id="lien_github" 
+                <input type="text" id="username_github" 
                     placeholder="Username sur github ***" class="form-control"><br>
-                <input type="url" id="githubAvatar"
-                    placeholder="Lien d'avatar sur github ***" class="form-control"><br>
 
                 <img src="../assets/images/facebook.png" width="30" height="30">
 				<label for="lien_facebook"><b>Facebook:</b></label>
@@ -160,7 +158,7 @@
         <div class="row form-group m-1 ml-lg-5">
             <div class="col-12 col-lg-7 m-1 p-2 rounded border text-center">
                 <select id="icones_categories" class="m-1 form-control">
-                    <option value="0" selected>--choisir</option>
+                    <option value="0" selected>--- Veuillez en choisir ***</option>
                     <option value="1">Mobile</option>
                     <option value="2">Laptop</option>
                     <option value="3">Stylo</option>

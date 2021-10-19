@@ -33,18 +33,11 @@ class MembreModels extends ConnectToDb
         $database = $this -> db_connect();
 
         $requete = $database -> prepare("INSERT INTO membre(nom, prenom, prenom_usuel, user_github,
-            user_github_pic, tel1,tel2, mail, facebook, linkedin, cv, adresse, description, fonction)
-            VALUES(:nom, :prenom, :prenom_usuel,:user_github, :user_github_pic, :tel1, :tel2, :mail, 
+            tel1, tel2, mail, facebook, linkedin, cv, adresse, description, fonction)
+            VALUES(:nom, :prenom, :prenom_usuel,:user_github, :tel1, :tel2, :mail, 
             :facebook, :linkedin, :cv, :adresse, :descriptions, :fonction)");
 
         $requete -> execute($donneesMembre);
-    }
-
-    public function get_last_id_membre()
-    {
-        $database = $this -> db_connect();
-
-        return $database -> query('SELECT id FROM membre ORDER BY id DESC LIMIT 0, 1');
     }
 }
 
@@ -84,5 +77,18 @@ class CompetenceModels extends ConnectToDb
             VALUES(:nom, :liste,:idCategorie, :idMembre)");
 
         $requete -> execute($donneesCompetence);
+    }
+}
+
+class IdMembre extends ConnectToDb
+{
+    public function get_id_membre($prenomUsuel)
+    {
+        $database = $this -> db_connect();
+
+        $reponse = $database -> prepare('SELECT id FROM membre WHERE prenom_usuel = :prenom_usuel');
+        $reponse -> execute($prenomUsuel);
+        $donnee = $reponse -> fetch();
+        return $donnee['id'];
     }
 }

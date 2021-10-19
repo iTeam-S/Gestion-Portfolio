@@ -7,40 +7,40 @@ $(document).ready(function()
 
     $("#bouttonMembre button").click(function()
     {   
-        // if($('#nomPersonne').val().length === 0)
-        // {
-        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        // }
+        if($('#nomPersonne').val().length === 0)
+        {
+            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        }
 
-        // else if($('#prenomsPersonne').val().length === 0)
-        // {
-        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        // }
+        else if($('#prenomsPersonne').val().length === 0)
+        {
+            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        }
 
-        // else if($('#prenomUsuel').val().length === 0)
-        // {
-        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        // }
+        else if($('#prenomUsuel').val().length === 0)
+        {
+            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        }
 
-        // else if($('#telephonePrimo').val().length === 0)
-        // {
-        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        // }
+        else if($('#telephonePrimo').val().length === 0)
+        {
+            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        }
 
-        // else if($('#email').val().length === 0)
-        // {
-        //     alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        // }
+        else if($('#email').val().length === 0)
+        {
+            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
+        }
 
-        // else
-        // {
-                $("#membre").hide(1000);
-                $("#formation").show(1000);
-        // }
+        else
+        {
+            $("#membre").hide(1000);
+            $("#formation").show(1000);
+        }
     });
 
 
-    //----------------------------------------------------- formation ---------------------------
+    //--------------------------------- formation -----------------------------
 
     var lieuFormation = [];
     var anneeFormation = [];
@@ -87,7 +87,7 @@ $(document).ready(function()
     });
 
 
-    // ---------------------------------------------- competence ----------------------------------
+    // ---------------------------------- competence ----------------------------------
     var icones_categories = [];
     var mes_competences = [];
     var descritpionCompetences = [];
@@ -104,35 +104,30 @@ $(document).ready(function()
 
     $("#bouttonCompetence .suivant button").click(function()
     {
-        // if($('#stylo').val().length === 0)
-        // {
-        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
-        // }
+        if($('#icones_categories').val().length === 0)
+        {
+            alert("Veuillez choisir sur les icônes ...!");
+        }
 
-        // else if($('#mobile').val().length === 0)
-        // {
-        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
-        // }
+        else if($('#mes_competences').val().length === 0)
+        {
+            alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
+        }
 
-        // else if($('#parametre').val().length === 0)
-        // {
-        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
-        // }
-        
-        // else if($('#laptop').val().length === 0)
-        // {
-        //     alert("Tous ces champs sont obligatoires veuillez les remplir...!");
-        // }
-        
-        // else
-        // {
-                icones_categories.push($('#icones_categories').val());
-                mes_competences.push($('#mes_competences').val());
-                descritpionCompetences.push($('#descritpionCompetences').val());
-                $("#competence").hide(1000);
-                $("#experience").show(1000);
+        else if($('#descritpionCompetences').val().length === 0)
+        {
+            alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
+        }
 
-        // }
+        else
+        {
+            icones_categories.push($('#icones_categories').val());
+            mes_competences.push($('#mes_competences').val());
+            descritpionCompetences.push($('#descritpionCompetences').val());
+            $("#competence").hide(1000);
+            $("#experience").show(1000);
+
+        }
     });
 
     $("#bouttonCompetence .precedant button").click(function()
@@ -206,8 +201,7 @@ $(document).ready(function()
         fonction: $('#fonction').val(),
         descriptionTravail: $('#descriptionTravail').val(),
         lien_linkedin: $('#lien_linkedin').val(),
-        lien_github: $('#lien_github').val(),
-        githubAvatar:$('#githubAvatar').val(),
+        lien_github: $('#username_github').val(),
         lien_facebook: $('#lien_facebook').val(),
         //------------------- formation ---------------------------
         lieuF: lieuFormation,
@@ -228,38 +222,37 @@ $(document).ready(function()
     $('#register').click(function()
     {
         console.log(donnees);
-        $.post( "../controllers/new_controllers.php", donnees, function( data )
+        $.post( "../controllers/controllers.php", donnees, function(data)
         {
-            $('body').hide();
-            alert("Success...!");
-            $('#nomPersonne').val("");
-            $('#prenomsPersonne').val("");
-            $('#prenomUsuel').val("");
-            $('#telephonePrimo').val("");
-            $('#telephoneSecondo').val("");
-            $('#domicile').val("");
-            $('#email').val("");
-            $('#lien_cv').val("");
-            $('#fonction').val("");
-            $('#descriptionTravail').val("");
-            $('#lien_linkedin').val("");
-            $('#lien_github').val("");
-            $('#githubAvatar').val("");
-            $('#lien_facebook').val("");
-            //------------------- formation ---------------------------
-            lieuFormation = [];
-            anneeFormation = [];
-            typeFormation = [];
-            descriptionFormation = [];
-            //-------------------- Competences ------------------------
-            icones_categories = [];
-            mes_competences = [];
-            descritpionCompetences = [];
-            //------------------- Experience ------------------------
-            nomOrganisation = [];
-            anneeExperience = [];
-            typeExperience = [];
-            descriptionExperiences = [];
+            console.log(data);
+            alert(data);
         });
+        $('#nomPersonne').val("");
+        $('#prenomsPersonne').val("");
+        $('#prenomUsuel').val("");
+        $('#telephonePrimo').val("");
+        $('#telephoneSecondo').val("");
+        $('#domicile').val("");
+        $('#email').val("");
+        $('#lien_cv').val("");
+        $('#fonction').val("");
+        $('#descriptionTravail').val("");
+        $('#lien_linkedin').val("");
+        $('#username_github').val("");
+        $('#lien_facebook').val("");
+        //------------------- formation ---------------------------
+        lieuFormation = [];
+        anneeFormation = [];
+        typeFormation = [];
+        descriptionFormation = [];
+        //-------------------- Competences ------------------------
+        icones_categories = [];
+        mes_competences = [];
+        descritpionCompetences = [];
+        //------------------- Experience ------------------------
+        nomOrganisation = [];
+        anneeExperience = [];
+        typeExperience = [];
+        descriptionExperiences = [];
     });
 });
