@@ -7,27 +7,27 @@ $(document).ready(function()
 
     $("#bouttonMembre button").click(function()
     {   
-        if($('#nomPersonne').val().length === 0)
+        if($('#nomPersonne').val().trim().length === 0)
         {
             alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
         }
 
-        else if($('#prenomsPersonne').val().length === 0)
+        else if($('#prenomsPersonne').val().trim().length === 0)
         {
             alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
         }
 
-        else if($('#prenomUsuel').val().length === 0)
+        else if($('#prenomUsuel').val().trim().length === 0)
         {
             alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
         }
 
-        else if($('#telephonePrimo').val().length === 0)
+        else if($('#telephonePrimo').val().trim().length === 0)
         {
             alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
         }
 
-        else if($('#email').val().length === 0)
+        else if($('#email').val().trim().length === 0)
         {
             alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
         }
@@ -104,17 +104,17 @@ $(document).ready(function()
 
     $("#bouttonCompetence .suivant button").click(function()
     {
-        if($('#icones_categories').val().length === 0)
+        if($('#icones_categories').val().trim().length === 0)
         {
             alert("Veuillez choisir sur les icônes ...!");
         }
 
-        else if($('#mes_competences').val().length === 0)
+        else if($('#mes_competences').val().trim().length === 0)
         {
             alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
         }
 
-        else if($('#descritpionCompetences').val().length === 0)
+        else if($('#descritpionCompetences').val().trim().length === 0)
         {
             alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
         }

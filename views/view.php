@@ -2,7 +2,7 @@
 
 <section>
 <form method="post">
-    <div class="container mt-3" id="membre">
+    <div class="container mt-2" id="membre">
     <p class="font-weight-bold">Indentité:</p>
         <div class="row form-group">
 
@@ -82,7 +82,7 @@
 
     <!--------------------------------------------------formation---------------------------------------------------------->
 
-    <div class="container mt-3" id="formation">
+    <div class="container mt-2" id="formation">
     <p class="font-weight-bold">Formations:</p>
         <div class="row form-group rounded border-lg shadow text-center">
             <div class="col-12 col-md-4 pb-1 m-md-3 m-1 ml-md-5 rounded border">
@@ -127,7 +127,7 @@
 
     <!--------------------------------------------------------- Compétence ----------------------------------------------------------->
 
-    <div class="container mt-3" id="competence">
+    <div class="container mt-2" id="competence">
     <p class="font-weight-bold">Compétences:</p>
         <div class="row text-center shadow rounded mb-3 p-1">
             <div class="col-lg-2 col-4">
@@ -194,7 +194,7 @@
 
     <!------------------------------------------ experience --------------------------------------> 
 
-    <div class="container mt-3" id="experience">
+    <div class="container mt-2" id="experience">
         <p class="font-weight-bold">Expériences:</p>
         <div class="row form-group row text-center shadow rounded mb-3 p-1">
             <div class="col-12 col-md-4 pb-1 m-md-3 m-1 ml-md-5 rounded border">
