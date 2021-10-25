@@ -222,24 +222,24 @@ $(document).ready(function()
     $('#register').click(function()
     {
         console.log(donnees);
-        $.post( "../controllers/controllers.php", donnees, function(data)
+        $.post( "controllers/controllers.php", donnees, function(data)
         {
             console.log(data);
             alert(data);
         });
-        $('#nomPersonne').val("");
-        $('#prenomsPersonne').val("");
-        $('#prenomUsuel').val("");
-        $('#telephonePrimo').val("");
-        $('#telephoneSecondo').val("");
-        $('#domicile').val("");
-        $('#email').val("");
-        $('#lien_cv').val("");
-        $('#fonction').val("");
-        $('#descriptionTravail').val("");
-        $('#lien_linkedin').val("");
-        $('#username_github').val("");
-        $('#lien_facebook').val("");
+        // $('#nomPersonne').val("");
+        // $('#prenomsPersonne').val("");
+        // $('#prenomUsuel').val("");
+        // $('#telephonePrimo').val("");
+        // $('#telephoneSecondo').val("");
+        // $('#domicile').val("");
+        // $('#email').val("");
+        // $('#lien_cv').val("");
+        // $('#fonction').val("");
+        // $('#descriptionTravail').val("");
+        // $('#lien_linkedin').val("");
+        // $('#username_github').val("");
+        // $('#lien_facebook').val("");
         //------------------- formation ---------------------------
         lieuFormation = [];
         anneeFormation = [];

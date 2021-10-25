@@ -73,7 +73,7 @@
 
     //---------------------------- Competences -------------------------------
 
-    if(count(trim($_POST['iconeC'])) > 0 AND count(trim($_POST['competences'])) > 0 AND count(trim($_POST['descriptionC']) > 0))
+    if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0 AND count($_POST['descriptionC']) > 0)
     {
         $competence = new CompetenceModels();
 
