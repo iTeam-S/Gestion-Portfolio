@@ -6,7 +6,7 @@ class ConnectToDb
     {
         try
         {
-            $database = new PDO('mysql:host=localhost; dbname=iteam-s; charset=utf8', 'root', '',
+            $database = new PDO('mysql:host=localhost; dbname=iTeam-$; charset=utf8', 'root', '',
             array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
             return $database;
