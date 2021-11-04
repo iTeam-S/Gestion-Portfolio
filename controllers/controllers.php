@@ -1,10 +1,13 @@
 <?php
     session_start();
-    include_once('../models/models_class.php');
-    //------------------------- Membres ------------------------    
+    include_once('../models/models.php');
+    
+    //------------------------- Membres ------------------------   
+    $id_membre = null;
+
     if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['prenomUsuel']) AND !empty($_POST['telephonePrimo']) AND !empty($_POST['email'])) 
     {
-        $membre = new MembreModels();
+        $membre = new MembreModels(3);
         $reponses = $membre -> get_prenom_usuel();
         while($donnees = $reponses -> fetch())
         {
@@ -32,20 +35,29 @@
         );
         $membre -> inserer_information_membre($informations_membre);
         unset($membre);
+
+        //-------------------------- ID du MEMBRE ----------------------------
+        $id = new IdMembre();
+        $prenomUsuel = array('prenom_usuel' => $_SESSION['prenom']);
+        $id_membre = $id -> get_id_membre($prenomUsuel);
+
+        // --------------------------- Fonction -------------------------------
+        $fonction = new FonctionModels(3);
+        $information_fonction = array(
+            'id_membre' => $id_membre,
+            'id_poste' => strip_tags($_POST['poste'])
+        );
+        $fonction -> inserer_information_fonction($information_fonction);
+        unset($fonction);
     }
     else
     {
-        header("Location:../views/erreurs/erreurMembre.php");
+    //  header("Location:../views/erreurs/erreurMembre.php");
+        $id_membre = $_SESSION['id']; 
     }
 
-    //-------------------------- ID du MEMBRE ----------------------------
-
-    $id = new IdMembre();
-    $prenomUsuel = array('prenom_usuel' => $_SESSION['prenom']);
-    $id_membre = $id -> get_id_membre($prenomUsuel);
-
     //--------------------------- Formations -----------------------------
-    $formation = new FormationModels();
+    $formation = new FormationModels(3);
 
     $i = 0;
     $lieuFormation = $_POST['lieuF'];
@@ -62,7 +74,8 @@
                 'annee' => strip_tags($anneeFormation[$i]),
                 'type' => strip_tags($typeFormation[$i]),
                 'descriptions' => strip_tags($descriptionFormation[$i]),
-                'idMembre' => $id_membre
+                'idMembre' => $id_membre,
+                'ordre' => 0
             );
             $formation -> inserer_information_formation($information_formation);
         }
@@ -73,9 +86,9 @@
 
     //---------------------------- Competences -------------------------------
 
-    if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0 AND count($_POST['descriptionC']) > 0)
+    if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0)
     {
-        $competence = new CompetenceModels();
+        $competence = new CompetenceModels(3);
 
         $i = 0;
         $icones = $_POST['iconeC'];
@@ -90,7 +103,8 @@
                     'nom' => strip_tags($competences[$i]),
                     'liste' => strip_tags($descriptionCempetence[$i]),
                     'idCategorie' => strip_tags($icones[$i]),
-                    'idMembre' => $id_membre
+                    'idMembre' => $id_membre,
+                    'ordre' => 0
                 );
                 $competence -> inserer_information_competence($information_competence);
             }
@@ -99,14 +113,14 @@
         unset($competence);
     }
 
-    else
-    {
-        header('Location:../views/erreurs/erreurCompetence.php');
-    }
+    // else
+    // {
+    //     header('Location:../views/erreurs/erreurCompetence.php');
+    // }
 
     //---------------------------- Expérience ----------------------------------------
 
-    $experience = new ExperienceModels();
+    $experience = new ExperienceModels(3);
 
     $i = 0;
     $nomOrganisation = $_POST['nomE'];
@@ -123,14 +137,57 @@
                 'annee' => strip_tags($anneeExperience[$i]),
                 'type' => strip_tags($typeExperience[$i]),
                 'descriptions' => strip_tags($descriptionExperience[$i]),
-                'idMembre' => $id_membre
+                'idMembre' => $id_membre,
+                'ordre' => 0
             );
             $experience -> inserer_information_experience($information_experience);
         }
         $i++;
     }
     unset($experience);
+
+    // ------------------------- Distinction -------------------------
+
+    $i = 0;
+    $organisateurs = $_POST['nomD'];
+    $anneeDistinction = $_POST['anneeD'];
+    $typeDistinction = $_POST['typeD'];
+    $descriptionDistinction = $_POST['descriptionD'];
+    $rangDistinction = $_POST['rangD'];
+    $ordre = null;
+
+    if(count($organisateurs) > 0 AND count($anneeDistinction) > 0 AND count($typeDistinction) > 0)
+    {
+        $distinction = new DistinctionModels(3);
+
+        while($i < count($organisateurs))
+        {
+            if(!empty($organisateurs[$i]) AND !empty($anneeDistinction) AND !empty($typeDistinction))
+            {
+                if(!empty($rangDistinction[$i]))
+                {
+                    $ordre = strip_tags($rangDistinction[$i]);  
+                }
+                else
+                {
+                    $ordre = 0;
+                }
+                $information_distinction = array(
+                        'organisateur' => strip_tags($organisateurs[$i]),
+                        'annee' => strip_tags($anneeDistinction[$i]),
+                        'types' => strip_tags($typeDistinction[$i]),
+                        'descriptions' => strip_tags($descriptionDistinction[$i]),
+                        'id_membre' => $id_membre,
+                        'ordre' => $ordre
+                    );
+                $distinction -> inserer_information_distinction($information_distinction);
+            }
+            $i++;
+        }
+        unset($distinction);
+    }
+
     unset($id);
     session_destroy();
-    header('Location:../views/view.php');
+    header('Location:../index.php');
 ?>

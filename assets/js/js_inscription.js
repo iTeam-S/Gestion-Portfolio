@@ -1,8 +1,10 @@
 $(document).ready(function()
 {
+    // $('#membre').hide();
     $("#formation").hide();
     $("#experience").hide();
     $("#competence").hide();
+    $("#distinction").hide();
     $('#register').hide();
 
     $("#bouttonMembre button").click(function()
@@ -91,13 +93,14 @@ $(document).ready(function()
     var icones_categories = [];
     var mes_competences = [];
     var descritpionCompetences = [];
+    
 
     $('#bouttonCompetence .ajouter button').click(function()
     {
         icones_categories.push($('#icones_categories').val());
         mes_competences.push($('#mes_competences').val());
         descritpionCompetences.push($('#descritpionCompetences').val());
-        $('#icones_categories').val("0");
+        $('#icones_categories').val("");
         $('#mes_competences').val("");
         $('#descritpionCompetences').val("");
     });
@@ -119,6 +122,11 @@ $(document).ready(function()
             alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
         }
 
+        else if($('#poste').val().trim().length === 0)
+        {
+            alert("Veuillez choisir votre poste...!");
+        }
+
         else
         {
             icones_categories.push($('#icones_categories').val());
@@ -132,9 +140,10 @@ $(document).ready(function()
 
     $("#bouttonCompetence .precedant button").click(function()
     {
-        $('#icones_categories').val("0");
+        $('#icones_categories').val("");
         $('#mes_competences').val("");
         $('#descritpionCompetences').val("");
+        $('#poste').val("");
         icones_categories = [];
         mes_competences = [];
         descritpionCompetences = [];
@@ -177,15 +186,67 @@ $(document).ready(function()
             $("#experience").hide(1000);
             $("#competence").show(1000);
     });
+
     $('#bouttonExperience .suivant button').click(function()
     {
         nomOrganisation.push($('#nomOrganisation').val());
         anneeExperience.push($('#anneeExperience').val());
         typeExperience.push($('#typeExperience').val());
         descriptionExperiences.push($('#descriptionExperiences').val());
-        $('#register').show(1000);
+        $('#experience').hide(1000);
+        $('#distinction').show(1000);
     });
         
+    // --------------------------- Distinction -------------------------------
+
+    var organisateurs = [];
+    var anneeDistinction = [];
+    var typeDistinction = [];
+    var descriptionDistinction = [];
+    var rangDistinction = [];
+
+    $('#bouttonDistinction .ajouter button').click(function()
+    {
+        organisateurs.push($('#organisateurs').val());
+        anneeDistinction.push($('#anneeDistinction').val());
+        typeDistinction.push($('#typeDistinction').val());
+        descriptionDistinction.push($('#descriptionDistinction').val());
+        rangDistinction.push($('#rangDistinction').val());
+        $('#organisateurs').val("");
+        $('#anneeDistinction').val("");
+        $('#typeDistinction').val("");
+        $('#descriptionDistinction').val("");
+        $('#rangDistinction').val("");
+    });
+
+    $('#bouttonDistinction .precedant button').click(function()
+    {
+        $('#organisateurs').val("");
+        $('#anneeDistinction').val("");
+        $('#typeDistinction').val("");
+        $('#descriptionDistinction').val("");
+        $('#rangDistinction').val("");
+        organisateurs = [];
+        anneeDistinction = [];
+        typeDistinction = [];
+        descriptionDistinction = [];
+        rangDistinction = [];
+
+        $('#distinction').hide(1000);
+        $('#experience').show(1000);
+    });
+
+    $('#bouttonDistinction .suivant button').click(function()
+    {
+        organisateurs.push($('#organisateurs').val());
+        anneeDistinction.push($('#anneeDistinction').val());
+        typeDistinction.push($('#typeDistinction').val());
+        descriptionDistinction.push($('#descriptionDistinction').val());
+        rangDistinction.push($('#rangDistinction').val());
+
+        $('#register').show(1000);
+    });
+    
     //-------------------------- LES DONNEES ---------------------------------
 
     var donnees = {
@@ -216,30 +277,25 @@ $(document).ready(function()
         nomE: nomOrganisation,
         anneeE: anneeExperience,
         typeE: typeExperience,
-        descriptionE: descriptionExperiences
+        descriptionE: descriptionExperiences,
+        // ------------------- Distinction ----------------------
+        nomD: organisateurs,
+        anneeD: anneeDistinction,
+        typeD: typeDistinction,
+        descriptionD: descriptionDistinction,
+        rangD: rangDistinction,
+        // ------------------------ Poste -----------------------
+        poste: $('#poste').val()
     };
 
     $('#register').click(function()
     {
         console.log(donnees);
-        $.post( "controllers/controllers.php", donnees, function(data)
+        $.post( "../controllers/controllers.php", donnees, function(data)
         {
             console.log(data);
             alert(data);
         });
-        // $('#nomPersonne').val("");
-        // $('#prenomsPersonne').val("");
-        // $('#prenomUsuel').val("");
-        // $('#telephonePrimo').val("");
-        // $('#telephoneSecondo').val("");
-        // $('#domicile').val("");
-        // $('#email').val("");
-        // $('#lien_cv').val("");
-        // $('#fonction').val("");
-        // $('#descriptionTravail').val("");
-        // $('#lien_linkedin').val("");
-        // $('#username_github').val("");
-        // $('#lien_facebook').val("");
         //------------------- formation ---------------------------
         lieuFormation = [];
         anneeFormation = [];
@@ -254,5 +310,11 @@ $(document).ready(function()
         anneeExperience = [];
         typeExperience = [];
         descriptionExperiences = [];
+        // ------------------ Distinction ------------------------
+        organisateurs = [];
+        anneeDistinction = [];
+        typeDistinction = [];
+        descriptionDistinction = [];
+        rangDistinction = [];
     });
 });

@@ -21,6 +21,7 @@ p
     color: rgba(38, 118, 119, 1.0);
     font-size: 1.3em;
     text-decoration: underline;
+    font-family: 'Z003';
 }
 
 #ajoutIcone
@@ -31,4 +32,19 @@ p
 .passer
 {
     background-color: rgba(38, 118, 119, 1.0);
+}
+
+.logo_index
+{
+    font-family: 'Z003';
+    text-decoration: none;
+    font-size: 1.9em;
+}
+
+.instruction
+{
+    font-family: 'Z003';
+    font-size: larger;
+    background-color: rgba(38, 118, 119, 1.0);
+    color: white;
 }
