@@ -290,10 +290,9 @@ $(document).ready(function()
 
     $('#register').click(function()
     {
-        console.log(donnees);
+        // console.log(donnees);
         $.post( "../controllers/controllers.php", donnees, function(data)
         {
-            console.log(data);
             alert(data);
         });
         //------------------- formation ---------------------------
@@ -316,5 +315,7 @@ $(document).ready(function()
         typeDistinction = [];
         descriptionDistinction = [];
         rangDistinction = [];
+
+        $('document').load('../index.php');
     });
 });

@@ -228,8 +228,11 @@ $(document).ready(function()
 
     $('#register').click(function()
     {
-        console.log(donnees);
-        $.post( "../controllers/controllers.php", donnees);
+        // console.log(donnees);
+        $.post( "../controllers/controllers.php", donnees, function(data)
+        {
+            alert(data);
+        });
         //------------------- formation ---------------------------
         lieuFormation = [];
         anneeFormation = [];
