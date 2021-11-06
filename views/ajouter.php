@@ -3,6 +3,7 @@ session_start();
 include_once('../includes/entete_view.php'); ?>
 
 <section>
+    <p class="ml-2 text-center">Soyez le bienvenu !<br>Vous pouvez rajouter vos informations...</p>
 <form method="post">
     <div class="container mt-2" id="formation">
     <p class="font-weight-bold">Formations:</p>
@@ -47,7 +48,7 @@ include_once('../includes/entete_view.php'); ?>
     </div>
     <br>
 
-    <!--------------------------------------------------------- Compétence ----------------------------------------------------------->
+    <!------------------------------- Compétence ------------------------------------->
 
     <div class="container mt-2" id="competence">
     <p class="font-weight-bold">Compétences:</p>

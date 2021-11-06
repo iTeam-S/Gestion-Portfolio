@@ -1,6 +1,5 @@
 $(document).ready(function()
 {
-    // $('#membre').hide();
     $("#formation").hide();
     $("#experience").hide();
     $("#competence").hide();
@@ -249,51 +248,59 @@ $(document).ready(function()
     
     //-------------------------- LES DONNEES ---------------------------------
 
-    var donnees = {
-        //------------------ Membres --------------------------
-        nomPersonne: $('#nomPersonne').val(),
-        prenomsPersonne: $('#prenomsPersonne').val(),
-        prenomUsuel: $('#prenomUsuel').val(),
-        telephonePrimo: $('#telephonePrimo').val(),
-        telephoneSecondo: $('#telephoneSecondo').val(),
-        domicile: $('#domicile').val(),
-        email: $('#email').val(),
-        lien_cv: $('#lien_cv').val(),
-        fonction: $('#fonction').val(),
-        descriptionTravail: $('#descriptionTravail').val(),
-        lien_linkedin: $('#lien_linkedin').val(),
-        lien_github: $('#username_github').val(),
-        lien_facebook: $('#lien_facebook').val(),
-        //------------------- formation ---------------------------
-        lieuF: lieuFormation,
-        anneeF: anneeFormation,
-        typeF: typeFormation,
-        descriptionF: descriptionFormation,
-        //-------------------- Competences ------------------------
-        iconeC: icones_categories,
-        competences: mes_competences,
-        descriptionC: descritpionCompetences,
-        //------------------- Experience ------------------------
-        nomE: nomOrganisation,
-        anneeE: anneeExperience,
-        typeE: typeExperience,
-        descriptionE: descriptionExperiences,
-        // ------------------- Distinction ----------------------
-        nomD: organisateurs,
-        anneeD: anneeDistinction,
-        typeD: typeDistinction,
-        descriptionD: descriptionDistinction,
-        rangD: rangDistinction,
-        // ------------------------ Poste -----------------------
-        poste: $('#poste').val()
-    };
-
     $('#register').click(function()
     {
-        // console.log(donnees);
-        $.post( "../controllers/controllers.php", donnees, function(data)
+        var donnees = {
+            //------------------ Membres --------------------------
+            nomPersonne: $('#nomPersonne').val(),
+            prenomsPersonne: $('#prenomsPersonne').val(),
+            prenomUsuel: $('#prenomUsuel').val(),
+            telephonePrimo: $('#telephonePrimo').val(),
+            telephoneSecondo: $('#telephoneSecondo').val(),
+            domicile: $('#domicile').val(),
+            email: $('#email').val(),
+            lien_cv: $('#lien_cv').val(),
+            fonction: $('#fonction').val(),
+            descriptionTravail: $('#descriptionTravail').val(),
+            lien_linkedin: $('#lien_linkedin').val(),
+            lien_github: $('#username_github').val(),
+            lien_facebook: $('#lien_facebook').val(),
+            //------------------- formation ---------------------------
+            lieuF: lieuFormation,
+            anneeF: anneeFormation,
+            typeF: typeFormation,
+            descriptionF: descriptionFormation,
+            //-------------------- Competences ------------------------
+            iconeC: icones_categories,
+            competences: mes_competences,
+            descriptionC: descritpionCompetences,
+            //------------------- Experience ------------------------
+            nomE: nomOrganisation,
+            anneeE: anneeExperience,
+            typeE: typeExperience,
+            descriptionE: descriptionExperiences,
+            // ------------------- Distinction ----------------------
+            nomD: organisateurs,
+            anneeD: anneeDistinction,
+            typeD: typeDistinction,
+            descriptionD: descriptionDistinction,
+            rangD: rangDistinction,
+            // ------------------------ Poste -----------------------
+            poste: $('#poste').val()
+        };
+
+        console.log(donnees);
+        $.post("../controllers/controllers.php", donnees, function(data,status)
         {
-            alert(data);
+            if(status == 'success')
+            {
+                alert('Super ! Vous êtes parmis nous...!');
+                window.location.replace('../index.php');
+            }
+            else
+            {
+                alert(data);
+            }
         });
         //------------------- formation ---------------------------
         lieuFormation = [];

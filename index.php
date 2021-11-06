@@ -8,6 +8,16 @@
     <link rel="shortcut icon" href="assets/images/iTeam-$.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/css_additionnels.css">
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+            {
+                $('#inscription').click(function()
+                    {
+                        window.location.href = 'views/inscription.php';
+                    });
+            });
+    </script>
 </head>
 <body>
 <header>
@@ -48,7 +58,7 @@
                                 <button class="btn btn-success">Connecter</button>
                             </div>
                             <div class="col-12 text-right">
-                                <a href="views/inscription.php">s'inscrire</a>
+                                <button class="btn btn-link" type="button" id="inscription">S'inscrire</button>
                             </div>
                         </div>
                     </div>
@@ -59,6 +69,6 @@
         </div>
     </div>
     </form>
-</section>  
+</section>
 </body>
 </html>

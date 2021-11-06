@@ -22,20 +22,30 @@ class ConnectToDb
 class MembreModels extends ConnectToDb
 {
     private $defaultValue = null;
-    
+
     public function __construct(int $nombre)
     {
         $this -> defaultValue = $nombre;
     }
 
-    public function get_prenom_usuel()
+    public function db_get_prenom_usuel(array $donnees)
     {
-        $database = $this -> db_connect();
+        try
+        {
+            $database = $this -> db_connect();
 
-        return $database -> query('SELECT prenom_usuel FROM membre ORDER BY id');
+            $requete = $database -> prepare('SELECT True FROM membre WHERE prenom_usuel = :prenom');
+            $requete -> execute($donnees);
+            return $requete;
+        }
+        catch(Exception $e)
+        {
+            die('Erreur:'.$e -> getMessage());
+        }
+        $database = null;
     }
 
-    public function inserer_information_membre( array $donneesMembre)
+    public function inserer_information_membre(array $donneesMembre)
     {
         $database = $this -> db_connect();
 

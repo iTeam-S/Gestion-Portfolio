@@ -68,30 +68,11 @@ $(document).ready(function()
 
     $("#bouttonCompetence .suivant button").click(function()
     {
-        if($('#icones_categories').val().trim().length === 0)
-        {
-            alert("Veuillez choisir sur les icônes ...!");
-        }
-
-        else if($('#mes_competences').val().trim().length === 0)
-        {
-            alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
-        }
-
-        else if($('#descritpionCompetences').val().trim().length === 0)
-        {
-            alert("Tous ces champs sont obligatoires, veuillez les remplir...!");
-        }
-
-        else
-        {
             icones_categories.push($('#icones_categories').val());
             mes_competences.push($('#mes_competences').val());
             descritpionCompetences.push($('#descritpionCompetences').val());
             $("#competence").hide(1000);
             $("#experience").show(1000);
-
-        }
     });
 
     $("#bouttonCompetence .precedant button").click(function()
@@ -203,35 +184,42 @@ $(document).ready(function()
         
     //-------------------------- LES DONNEES ---------------------------------
 
-    var donnees = {
-        //------------------- formation ---------------------------
-        lieuF: lieuFormation,
-        anneeF: anneeFormation,
-        typeF: typeFormation,
-        descriptionF: descriptionFormation,
-        //-------------------- Competences ------------------------
-        iconeC: icones_categories,
-        competences: mes_competences,
-        descriptionC: descritpionCompetences,
-        //------------------- Experience ------------------------
-        nomE: nomOrganisation,
-        anneeE: anneeExperience,
-        typeE: typeExperience,
-        descriptionE: descriptionExperiences,
-        // ------------------- Distinction ----------------------
-        nomD: organisateurs,
-        anneeD: anneeDistinction,
-        typeD: typeDistinction,
-        descriptionD: descriptionDistinction,
-        rangD: rangDistinction
-    };
-
     $('#register').click(function()
     {
-        // console.log(donnees);
-        $.post( "../controllers/controllers.php", donnees, function(data)
+        var donnees = {
+            //------------------- formation ---------------------------
+            lieuF: lieuFormation,
+            anneeF: anneeFormation,
+            typeF: typeFormation,
+            descriptionF: descriptionFormation,
+            //-------------------- Competences ------------------------
+            iconeC: icones_categories,
+            competences: mes_competences,
+            descriptionC: descritpionCompetences,
+            //------------------- Experience ------------------------
+            nomE: nomOrganisation,
+            anneeE: anneeExperience,
+            typeE: typeExperience,
+            descriptionE: descriptionExperiences,
+            // ------------------- Distinction ----------------------
+            nomD: organisateurs,
+            anneeD: anneeDistinction,
+            typeD: typeDistinction,
+            descriptionD: descriptionDistinction,
+            rangD: rangDistinction
+        };
+
+        $.post( "../controllers/controllers.php", donnees, function(data, status)
         {
-            alert(data);
+            if(status == 'success')
+            {
+                alert('Vos données sont enregistrées...!');
+                window.location.replace('../index.php');
+            }
+            else
+            {
+                alert(data);
+            }
         });
         //------------------- formation ---------------------------
         lieuFormation = [];

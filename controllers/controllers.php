@@ -8,51 +8,54 @@
     if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['prenomUsuel']) AND !empty($_POST['telephonePrimo']) AND !empty($_POST['email'])) 
     {
         $membre = new MembreModels(3);
-        $reponses = $membre -> get_prenom_usuel();
-        while($donnees = $reponses -> fetch())
+        $infos_prenom = array(
+            'prenom' => strip_tags($_POST['prenomUsuel']));
+        $reponse = $membre -> db_get_prenom_usuel($infos_prenom);
+        $donnee = $reponse -> fetch();
+        if(!empty($donnee['TRUE']))
         {
-            if($donnees['prenom_usuel'] == $_POST['prenomUsuel'])
-            {
-                header("Location:../views/erreurs/erreurPrenomUsuel.php");
-            }
+            header("Location:../views/erreurs/erreurPrenomUsuel.php");
         }
-        $_SESSION['prenom'] = $_POST['prenomUsuel'];
 
-        $informations_membre = array(
-            'nom' => strip_tags($_POST['nomPersonne']), 
-            'prenom' => ucwords(strip_tags($_POST['prenomsPersonne'])),
-            'prenom_usuel' => ucwords(strip_tags($_POST['prenomUsuel'])),
-            'user_github' => strip_tags($_POST['lien_github']),
-            'tel1'=> strip_tags($_POST['telephonePrimo']),
-            'tel2' => strip_tags($_POST['telephoneSecondo']),
-            'mail' => strip_tags($_POST['email']),
-            'facebook' => strip_tags($_POST['lien_facebook']),
-            'linkedin' => strip_tags($_POST['lien_linkedin']),
-            'cv' => strip_tags($_POST['lien_cv']),
-            'adresse' => strip_tags($_POST['domicile']),
-            'descriptions' => strip_tags($_POST['descriptionTravail']),
-            'fonction' => strip_tags($_POST['fonction'])
-        );
-        $membre -> inserer_information_membre($informations_membre);
-        unset($membre);
+        else
+        {
+            $_SESSION['prenom'] = $_POST['prenomUsuel'];
 
-        //-------------------------- ID du MEMBRE ----------------------------
-        $id = new IdMembre();
-        $prenomUsuel = array('prenom_usuel' => $_SESSION['prenom']);
-        $id_membre = $id -> get_id_membre($prenomUsuel);
+            $informations_membre = array(
+                'nom' => strip_tags($_POST['nomPersonne']), 
+                'prenom' => ucwords(strip_tags($_POST['prenomsPersonne'])),
+                'prenom_usuel' => ucwords(strip_tags($_POST['prenomUsuel'])),
+                'user_github' => strip_tags($_POST['lien_github']),
+                'tel1'=> strip_tags($_POST['telephonePrimo']),
+                'tel2' => strip_tags($_POST['telephoneSecondo']),
+                'mail' => strip_tags($_POST['email']),
+                'facebook' => strip_tags($_POST['lien_facebook']),
+                'linkedin' => strip_tags($_POST['lien_linkedin']),
+                'cv' => strip_tags($_POST['lien_cv']),
+                'adresse' => strip_tags($_POST['domicile']),
+                'descriptions' => strip_tags($_POST['descriptionTravail']),
+                'fonction' => strip_tags($_POST['fonction'])
+            );
+            $membre -> inserer_information_membre($informations_membre);
+            unset($membre);
 
-        // --------------------------- Fonction -------------------------------
-        $fonction = new FonctionModels(3);
-        $information_fonction = array(
-            'id_membre' => $id_membre,
-            'id_poste' => strip_tags($_POST['poste'])
-        );
-        $fonction -> inserer_information_fonction($information_fonction);
-        unset($fonction);
+            //-------------------------- ID du MEMBRE ----------------------------
+            $id = new IdMembre();
+            $prenomUsuel = array('prenom_usuel' => $_SESSION['prenom']);
+            $id_membre = $id -> get_id_membre($prenomUsuel);
+
+            // --------------------------- Fonction -------------------------------
+            $fonction = new FonctionModels(3);
+            $information_fonction = array(
+                'id_membre' => $id_membre,
+                'id_poste' => strip_tags($_POST['poste'])
+                );
+            $fonction -> inserer_information_fonction($information_fonction);
+            unset($fonction);
+        }
     }
     else
     {
-    //  header("Location:../views/erreurs/erreurMembre.php");
         $id_membre = $_SESSION['id']; 
     }
 
