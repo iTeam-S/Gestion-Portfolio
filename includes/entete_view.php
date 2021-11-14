@@ -8,6 +8,12 @@
     <link rel="shortcut icon" href="../assets/images/iTeam-$.ico" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/css_additionnels.css">
+    <script>
+        $(document).ready(function()
+        {
+            $('')
+        });
+    </script>
 </head>
 <body>
 <header>
