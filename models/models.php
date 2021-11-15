@@ -49,7 +49,7 @@ class MembreModels extends ConnectToDb
     {
         $database = $this -> db_connect();
 
-        $requete = $database -> prepare("INSERT INTO membre(nom, prenom, prenom_usuel, user_github,
+        $requete = $database -> prepare("INSERT INTO membre(nom, prenom, prenom_usuel, user_github, 
             tel1, tel2, mail, facebook, linkedin, cv, adresse, description, fonction)
             VALUES(:nom, :prenom, :prenom_usuel,:user_github, :tel1, :tel2, :mail, 
             :facebook, :linkedin, :cv, :adresse, :descriptions, :fonction)");

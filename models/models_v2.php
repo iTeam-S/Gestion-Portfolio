@@ -35,6 +35,24 @@ class InsertionDB extends ConnexionDB
 		$this -> defaultValue = $nombre;
 	}
 
+	public function verifier_prenom_usuel(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = $database -> prepare('SELECT True FROM membre WHERE prenom_usuel = :prenom');
+			$reponse -> execute($donnees);
+			$data = $reponse -> fetch();
+
+			return $data['TRUE'];
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur le prenom usuel: <br>".$e -> getMessage());
+		}
+	}
+
 	// inserer dans la table membre...
 	public function inserer_membre(array $donnees)
 	{
@@ -54,6 +72,24 @@ class InsertionDB extends ConnexionDB
 		}
 
 		$database = null;
+	}
+
+	public function get_id_db(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = $database -> prepare('SELECT id FROM membre WHERE prenom_usuel = :prenom AND mail = :email');
+			$reponse -> execute($donnees);
+			$data = $reponse -> fetch();
+
+			return $data['id'];
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur l'ID:<br>".$e -> getMessage());
+		}
 	}
 
 	// inserer dans la table 'formations'...
@@ -153,6 +189,37 @@ class InsertionDB extends ConnexionDB
 		catch(PDOException $e)
 		{
 			die("Erreur sur l'insertion des fonctions:<br>".$e -> getMessage());
+		}
+
+		$database = null;
+	}
+}
+
+class Login extends ConnexionDB
+{
+	private $defaultValue = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function authentifier(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+
+			$reponse = $database -> prepare('SELECT True, id FROM membre WHERE (prenom_usuel = :identifiant OR mail = :identifiant) AND password = SHA2(:password, 256)');
+			$reponse -> execute($donnees);
+
+			$data = $reponse -> fetch();
+			return $data;
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur l'authentification:<br>".$e -> getMessage());
 		}
 
 		$database = null;

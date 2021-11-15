@@ -25,19 +25,19 @@ class InfosMembre
 
 	public function set_info_membre(string $nom, string $prenom, string $prenom_usuel, string $user_git, string $tel1, string $tel2, string $mail, string $facebook, string $linkedin, string $cv, $adresse, $description, string $fonction)
 	{
-		$this -> nom = $nom;
-		$this -> prenom = $prenom;
-		$this -> prenom_usuel = $prenom_usuel;
-		$this -> user_git = $user_git;
-		$this -> tel1 = $tel1;
-		$this -> tel2 = $tel2;
-		$this -> mail = $mail;
-		$this -> facebook = $facebook;
-		$this -> linkedin = $linkedin;
-		$this -> cv = $cv;
-		$this -> adresse = $adresse;
-		$this -> description = $description;
-		$this -> fonction = $fonction;
+		$this -> nom = strip_tags($nom);
+		$this -> prenom = ucwords(strip_tags($prenom));
+		$this -> prenom_usuel = ucwords(strip_tags($prenom_usuel));
+		$this -> user_git = strip_tags($user_git);
+		$this -> tel1 = strip_tags($tel1);
+		$this -> tel2 = strip_tags($tel2);
+		$this -> mail = strip_tags($mail);
+		$this -> facebook = strip_tags($facebook);
+		$this -> linkedin = strip_tags($linkedin);
+		$this -> cv = strip_tags($cv);
+		$this -> adresse = strip_tags($adresse);
+		$this -> description = strip_tags($description);
+		$this -> fonction = strip_tags($fonction);
 	}
 
 	public function get_info_membre()
@@ -57,6 +57,13 @@ class InfosMembre
 			'description' => $this -> description,
 			'fonction' => $this -> fonction);
 
+		return $infos;
+	}
+
+	public function get_prenom_usuel()
+	{
+		$infos = array(
+			'prenom' => $this -> prenom_usuel);
 		return $infos;
 	}
 }
@@ -79,10 +86,10 @@ class InfosFormation
 
 	public function set_info_formation(string $lieu, string $annee, string $type, string $description, int $id_membre, int $ordre)
 	{
-		$this -> lieu = $lieu;
-		$this -> annee = $annee;
-		$this -> type = $type;
-		$this -> description = $description;
+		$this -> lieu = strip_tags($lieu);
+		$this -> annee = strip_tags($annee);
+		$this -> type = strip_tags($type);
+		$this -> description = strip_tags($description);
 		$this -> id_membre = $id_membre;
 		$this -> ordre = $ordre;
 	}
@@ -118,8 +125,8 @@ class InfosCompetence
 
 	public function set_info_competence(string $nom, string $liste, int $id_categorie, int $id_membre, int $ordre)
 	{
-		$this -> nom = $nom;
-		$this -> liste = $liste;
+		$this -> nom = strip_tags($nom);
+		$this -> liste = strip_tags($liste);
 		$this -> id_categorie = $id_categorie;
 		$this -> id_membre = $id_membre;
 		$this -> ordre = $ordre;
@@ -155,10 +162,10 @@ class InfosDistinction
 
 	public function set_info_distinction(string $organisateur, string $annee, string $type, string $description, int $id_membre, int $ordre)
 	{
-		$this -> organisateur = $organisateur;
-		$this -> annee = $annee;
-		$this -> type = $type;
-		$this -> description = $description;
+		$this -> organisateur = strip_tags($organisateur);
+		$this -> annee = strip_tags($annee);
+		$this -> type = strip_tags($type);
+		$this -> description = strip_tags($description);
 		$this -> id_membre = $id_membre;
 		$this -> ordre = $ordre;
 	}
@@ -189,14 +196,70 @@ class InfosFonction
 	public function set_info_fonction(int $id_membre, int $poste)
 	{
 		$this -> id_membre = $id_membre;
-		$this -> id_poste = $poste;
+		$this -> id_poste = strip_tags($poste);
 	}
 
-	public function get_info_fonction
+	public function get_info_fonction()
 	{
 		$infos = array(
 			'id_membre' => $this -> id_membre,
 			'id_poste' => $this -> id_poste);
+
+		return $infos;
+	}
+}
+
+class InfosLogin
+{
+	private $defaultValue = null;
+
+	private $identifiant = null;
+	private $password = null;
+
+	public function __construct(int $nombre1)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function set_info_login(string $identifiant, string $password)
+	{
+		$this -> identifiant = strip_tags($identifiant);
+		$this -> password = $password;
+	}
+
+	public function get_info_login()
+	{
+		$infos = array(
+			'identifiant' => $this -> identifiant,
+			'password' => $this -> password);
+
+		return $infos;
+	}
+}
+
+class InfosId
+{
+	private $defaultValue = null;
+
+	private $prenom = null;
+	private $email = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function set_info_id(string $prenom, string $email)
+	{
+		$this -> prenom = strip_tags($prenom);
+		$this -> email = strip_tags($email);
+	}
+
+	public function get_info_id()
+	{
+		$infos = array(
+			'prenom' => $this -> prenom,
+			'email' => $this -> email);
 
 		return $infos;
 	}

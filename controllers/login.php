@@ -1,20 +1,35 @@
 <?php
 session_start();
 include_once('../models/models.php');
-if(!empty($_POST['identifiant']) AND !empty($_POST['password']))
+include_once('controllers_v2.php');
+
+try
 {
-    $login = new Login(3);
-    $login -> set_info(trim(strip_tags($_POST['identifiant'])), trim(strip_tags($_POST['password'])));
-    $reponse = $login -> get_id();
-    $donnee = $reponse -> fetch();
-    if(!empty($donnee['id']))
+    if(!empty($_POST['identifiant']) AND !empty($_POST['password']))
     {
-        $_SESSION['id'] = $donnee['id'];
-        header('Location:../views/ajouter.php');
-    }
-    else
-    {
-        header('Location:../index.php');
+        $login = new Login(3);
+        $info_auth = new InfosLogin(3);
+        $info_auth -> set_info_login($_POST['identifiant'], $_POST['password']);
+
+        $donnees = $login -> authentifier($info_auth -> get_info_login());
+
+        if(!empty($donnees['TRUE']) AND !empty($donnees['id']))
+        {
+            $_SESSION['id'] = $donnees['id'];
+            echo $donnees['TRUE'];
+        }
+
+        else
+        {
+            echo "Identifiant et/ou mot de passe incorrecte...!\nMerci de réessayer !";
+        }
+
+        unset($login);
+        unset($info_auth);
     }
 }
-?>
+
+catch(Exception $e)
+{
+    die("Erreur sur l'authentification:<br>".$e -> getMessage());
+}
