@@ -122,8 +122,6 @@ try
         unset($competence);
     }*/
 
-
-
 }
 
 catch(Exception $e)
