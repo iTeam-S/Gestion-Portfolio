@@ -1,9 +1,7 @@
 <?php
-
 class InfosMembre
 {
 	private $defaultValue = null;
-
 	private $nom = null;
 	private $prenom = null;
 	private $prenom_usuel = null;
@@ -25,7 +23,7 @@ class InfosMembre
 
 	public function set_info_membre(string $nom, string $prenom, string $prenom_usuel, string $user_git, string $tel1, string $tel2, string $mail, string $facebook, string $linkedin, string $cv, $adresse, $description, string $fonction)
 	{
-		$this -> nom = strip_tags($nom);
+		$this -> nom = ucwords(strip_tags($nom));
 		$this -> prenom = ucwords(strip_tags($prenom));
 		$this -> prenom_usuel = ucwords(strip_tags($prenom_usuel));
 		$this -> user_git = strip_tags($user_git);
@@ -55,15 +53,16 @@ class InfosMembre
 			'cv' => $this -> cv, 
 			'adresse' => $this -> adresse,
 			'description' => $this -> description,
-			'fonction' => $this -> fonction);
-
+			'fonction' => $this -> fonction
+		);
 		return $infos;
 	}
 
 	public function get_prenom_usuel()
 	{
 		$infos = array(
-			'prenom' => $this -> prenom_usuel);
+			'prenom' => $this -> prenom_usuel
+		);
 		return $infos;
 	}
 }
@@ -71,7 +70,6 @@ class InfosMembre
 class InfosFormation
 {
 	private $defaultValue = null;
-
 	private $lieu = null;
 	private $annee = null;
 	private $type = null;
@@ -84,7 +82,7 @@ class InfosFormation
 		$this -> defaultValue = $nombre;
 	}
 
-	public function set_info_formation(string $lieu, string $annee, string $type, string $description, int $id_membre, int $ordre)
+	public function set_info_formation(string $lieu, string $annee, string $type, string $description, int $id_membre, int $ordre = 0)
 	{
 		$this -> lieu = strip_tags($lieu);
 		$this -> annee = strip_tags($annee);
@@ -102,8 +100,8 @@ class InfosFormation
 			'type' => $this -> description,
 			'description' => $this -> description,
 			'id_membre' => $this -> id_membre,
-			'ordre' => $this -> ordre);
-
+			'ordre' => $this -> ordre
+		);
 		return $infos;
 	}
 }
@@ -111,7 +109,6 @@ class InfosFormation
 class InfosCompetence
 {
 	private $defaultValue = null;
-
 	private $nom = null;
 	private $liste = null;
 	private $id_categorie = null;
@@ -123,7 +120,7 @@ class InfosCompetence
 		$this -> defaultValue = $nombre;
 	}
 
-	public function set_info_competence(string $nom, string $liste, int $id_categorie, int $id_membre, int $ordre)
+	public function set_info_competence(string $nom, string $liste, int $id_categorie, int $id_membre, int $ordre = 0)
 	{
 		$this -> nom = strip_tags($nom);
 		$this -> liste = strip_tags($liste);
@@ -132,14 +129,54 @@ class InfosCompetence
 		$this -> ordre = $ordre;
 	}
 
-	public function get_info_experience()
+	public function get_info_competence()
 	{
 		$infos = array(
 			'nom' => $this -> nom,
 			'liste' => $this -> liste,
 			'id_categorie' => $this -> id_categorie,
 			'id_membre' => $this -> id_membre,
-			'ordre' => $this -> ordre);
+			'ordre' => $this -> ordre
+		);
+		return $infos;
+	}
+}
+
+class InfosExperience
+{
+	private $defaultValue = null;
+	private $nom = null;
+	private $annee = null;
+	private $type = null;
+	private $description = null;
+	private $id_membre = null;
+	private $ordre = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function set_info_experience(string $nom, string $annee, string $type, string $description, int $id_membre, int $ordre = 0)
+	{
+		$this-> nom = strip_tags($nom);
+		$this -> annee = strip_tags($annee);
+		$this -> type = strip_tags($type);
+		$this -> description = strip_tags($description);
+		$this -> id_membre = $id_membre;
+		$this -> ordre = $ordre;
+	}
+
+	public function get_info_experience()
+	{
+		$infos = array(
+			'nom' => $this -> nom,
+			'annee' => $this -> annee,
+			'type' => $this -> type,
+			'description' => $this -> description,
+			'id_membre' => $this -> id_membre,
+			'ordre' => $this -> ordre
+		);
 		return $infos;
 	}
 }
@@ -147,7 +184,6 @@ class InfosCompetence
 class InfosDistinction
 {
 	private $defaultValue = null;
-
 	private $organisateur = null;
 	private $annee = null;
 	private $type = null;
@@ -178,8 +214,8 @@ class InfosDistinction
 			'type' => $this -> type,
 			'description' => $this -> description,
 			'id_membre' => $this -> id_membre,
-			'ordre' => $this -> ordre);
-
+			'ordre' => $this -> ordre
+		);
 		return $infos;
 	}
 }
@@ -203,8 +239,8 @@ class InfosFonction
 	{
 		$infos = array(
 			'id_membre' => $this -> id_membre,
-			'id_poste' => $this -> id_poste);
-
+			'id_poste' => $this -> id_poste
+		);
 		return $infos;
 	}
 }
@@ -231,8 +267,8 @@ class InfosLogin
 	{
 		$infos = array(
 			'identifiant' => $this -> identifiant,
-			'password' => $this -> password);
-
+			'password' => $this -> password
+		);
 		return $infos;
 	}
 }
@@ -259,8 +295,8 @@ class InfosId
 	{
 		$infos = array(
 			'prenom' => $this -> prenom,
-			'email' => $this -> email);
-
+			'email' => $this -> email
+		);
 		return $infos;
 	}
 }

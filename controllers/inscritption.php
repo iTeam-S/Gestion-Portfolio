@@ -54,20 +54,18 @@ catch(Exception $e)
 
 try
 {
-	$data_formation = new InfosFormation(3);
-
 	$i = 0;
     $lieuFormation = $_POST['lieuF'];
     $anneeFormation = $_POST['anneeF'];
     $typeFormation = $_POST['typeF'];
     $descriptionFormation = $_POST['descriptionF'];
 
+	$data_formation = new InfosFormation(3);
     while($i < count($lieuFormation))
     {
         if(!empty($lieuFormation[$i]) AND !empty($anneeFormation[$i]) AND !empty($typeFormation[$i]))
         {
-            $data_formation -> set_info_formation($lieuFormation[$i], $anneeFormation[$i], $typeFormation[$i], $descriptionFormation[$i], $id_membre, 0);
-
+            $data_formation -> set_info_formation($lieuFormation[$i], $anneeFormation[$i], $typeFormation[$i], $descriptionFormation[$i], $id_membre);
             $insertion -> inserer_formation($data_formation -> get_info_formation());
         }
         $i++;
@@ -87,44 +85,91 @@ catch(Exception $e)
 try
 {
 	if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0)
-	{
-		$data_competence = new InfosCompetence(3);
-	
+	{	
 		$i = 0;
 	    $icones = $_POST['iconeC'];
 	    $competences = $_POST['competences'];
 	    $descriptionCempetence = $_POST['descriptionC'];
+
+		$data_competence = new InfosCompetence(3);
+		while($i < count($icones))
+		{
+			if(!empty($competences[$i]) AND !empty($descriptionCempetence[$i]) AND !empty($icones[$i]))
+			{
+				$data_competence -> set_info_competence($competences[$i], $descriptionCempetence[$i], $icones[$i], $id_membre);
+				$insertion -> inserer_competence($data_competence -> get_info_competence());
+			}
+			$i++;
+		}
+		unset($data_competence);
 	}
-	/*if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0)
-    {
-        $competence = new CompetenceModels(3);
-
-        $i = 0;
-        $icones = $_POST['iconeC'];
-        $competences = $_POST['competences'];
-        $descriptionCempetence = $_POST['descriptionC'];
-
-        while($i < count($icones))
-        {
-            if(!empty($competences[$i]) AND !empty($descriptionCempetence[$i]) AND !empty($icones[$i]))
-            {
-                $information_competence = array(
-                    'nom' => strip_tags($competences[$i]),
-                    'liste' => strip_tags($descriptionCempetence[$i]),
-                    'idCategorie' => strip_tags($icones[$i]),
-                    'idMembre' => $id_membre,
-                    'ordre' => 0
-                );
-                $competence -> inserer_information_competence($information_competence);
-            }
-            $i++;
-        }
-        unset($competence);
-    }*/
-
 }
 
 catch(Exception $e)
 {
 	die("Erreur sur l'insertion de competences:<br>".$e -> getMessage());
 }
+
+
+//----------------------------------- Expérience --------------------------------------
+
+try
+{
+	$i = 0;
+    $nomOrganisation = $_POST['nomE'];
+    $anneeExperience = $_POST['anneeE'];
+    $typeExperience = $_POST['typeE'];
+    $descriptionExperience = $_POST['descriptionE'];
+
+	$data_experience = new InfosExperience(3);
+    while($i < count($nomOrganisation))
+    {
+        if(!empty($nomOrganisation[$i]) AND !empty($anneeExperience[$i]) AND !empty($typeExperience[$i]))
+        {
+			$data_experience > set_info_experience($nomOrganisation[$i], $anneeExperience[$i], $typeExperience[$i], $descriptionExperience[$i], $id_membre);
+			$insertion -> inserer_experience($data_experience -> get_info_experience());
+        }
+        $i++;
+    }
+	unset($data_experience);
+}
+
+catch(Exception $e)
+{
+	die("Erreur sur l'insertion des experiences:<br>".$e -> getMessage());
+}
+
+
+//------------------------------------------------------ Distinction -------------------------------------
+
+try
+{
+	$i = 0;
+    $organisateurs = $_POST['nomD'];
+    $anneeDistinction = $_POST['anneeD'];
+    $typeDistinction = $_POST['typeD'];
+    $descriptionDistinction = $_POST['descriptionD'];
+    $rangDistinction = $_POST['rangD'];
+
+    if(count($organisateurs) > 0 AND count($anneeDistinction) > 0 AND count($typeDistinction) > 0)
+    {
+        $data_distinction = new InfosDistinction(3);
+        while($i < count($organisateurs))
+        {
+            if(!empty($organisateurs[$i]) AND !empty($anneeDistinction[$i]) AND !empty($typeDistinction[$i]))
+            {
+				$data_distinction -> set_info_distinction($organisateurs[$i], $anneeDistinction[$i], $typeDistinction[$i], $descriptionDistinction[$i], $id_membre, (int) $rangDistinction[$i]);
+				$insertion -> inserer_distinction($data_distinction -> get_info_distinction());
+            }
+            $i++;
+        }
+		unset($data_distinction);
+	}
+}
+
+catch(Exception $e)
+{
+	die("Erreur sur l'insertion des distinctions:<br>".$e -> getMessage());
+}
+
+unset($data_id);

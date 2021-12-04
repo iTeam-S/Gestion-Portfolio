@@ -15,7 +15,7 @@ class ConnexionDB
 		{
 			$database = new PDO('mysql:host=localhost; dbname=iTeam-$; charset=utf8', 'root', '',
 				array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-			));
+			);
 			return $database;
 		}
 
@@ -40,10 +40,11 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT True FROM membre WHERE prenom_usuel = :prenom');
+			$reponse = $database -> prepare('SELECT True 
+				FROM membre 
+				WHERE prenom_usuel = :prenom');
 			$reponse -> execute($donnees);
 			$data = $reponse -> fetch();
-
 			return $data['TRUE'];
 		}
 
@@ -60,9 +61,11 @@ class InsertionDB extends ConnexionDB
 		{
 			$database = ConnexionDB::db_connect();
 
-			$requete = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_git, tel1, tel2, mail, facebook, linkedin, cv, adresse, description, fonction)
-				VALUES(:nom, :prenom, :prenom_usuel, :user_git, :tel1, :tel2, :mail, :facebook, :linkedin, :cv, :adresse, :description, :fonction)');
-
+			$requete = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, 
+				user_git, tel1, tel2, mail, facebook, linkedin, cv, 
+				adresse, description, fonction)
+				VALUES(:nom, :prenom, :prenom_usuel, :user_git, :tel1, 
+				:tel2, :mail, :facebook, :linkedin, :cv, :adresse, :description, :fonction)');
 			$requete -> execute($donnees);
 		}
 
@@ -70,7 +73,6 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'insertion des membres:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 
@@ -79,10 +81,12 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT id FROM membre WHERE prenom_usuel = :prenom AND mail = :email');
+			$reponse = $database -> prepare('SELECT id 
+				FROM membre 
+				WHERE prenom_usuel = :prenom 
+				AND mail = :email');
 			$reponse -> execute($donnees);
 			$data = $reponse -> fetch();
-
 			return $data['id'];
 		}
 
@@ -98,10 +102,9 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-
-			$requete = $database -> prepare('INSERT INTO formations(lieu, annee, type, description, id_membre, ordre)
+			$requete = $database -> prepare('INSERT INTO formations(lieu, annee, 
+				type, description, id_membre, ordre)
 				VALUES(:lieu, :annee, :type, :description, :id_membre, :ordre)');
-
 			$requete -> execute($donnees);
 		}
 
@@ -109,7 +112,6 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'insertion des formations:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 
@@ -119,9 +121,9 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-
-			$requete = $database -> prepare('INSERT INTO competences(nom, liste, id_categorie, id_membre, ordre)VALUES(:nom, :liste, :id_categorie, :id_membre, :ordre)');
-
+			$requete = $database -> prepare('INSERT INTO competences(nom, liste, id_categorie, 
+				id_membre, ordre)
+				VALUES(:nom, :liste, :id_categorie, :id_membre, :ordre)');
 			$requete -> execute($donnees);
 		}
 
@@ -129,7 +131,6 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'insertion des competences:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 
@@ -139,10 +140,9 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-
-			$requete = $database -> prepare('INSERT INTO experiences(nom, annee, type, description, id_membre, ordre)
+			$requete = $database -> prepare('INSERT INTO experiences(nom, annee, 
+				type, description, id_membre, ordre)
 				VALUES(:nom, :annee, :type, :description, :id_membre, :ordre)');
-
 			$requete -> execute($donnees);
 		}
 
@@ -150,7 +150,6 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'insertion des expérences:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 
@@ -160,9 +159,9 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-
-			$requete = $database -> prepare('INSERT INTO distinctions(organisateur, annee, type, description, id_membre, ordre)');
-
+			$requete = $database -> prepare('INSERT INTO distinctions(organisateur, annee, 
+				type, description, id_membre, ordre)
+				VALUES(:organisateur, :annee, :type, :description, :id_membre, :ordre)');
 			$requete -> execute($donnees);
 		}
 
@@ -170,7 +169,6 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'insertion des distinctions:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 
@@ -179,10 +177,9 @@ class InsertionDB extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-
-			$requete = $database -> prepare('INSERT INTO fonction(date_debut_fonction, id_membre, id_poste)
+			$requete = $database -> prepare('INSERT INTO fonction(date_debut_fonction, 
+				id_membre, id_poste)
 				VALUES(NOW(), :id_membre, :id_poste)');
-
 			$requete -> execute($donnees);
 		}
 
@@ -190,11 +187,11 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'insertion des fonctions:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 }
 
+// pour le login...
 class Login extends ConnexionDB
 {
 	private $defaultValue = null;
@@ -209,10 +206,11 @@ class Login extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-
-			$reponse = $database -> prepare('SELECT True, id FROM membre WHERE (prenom_usuel = :identifiant OR mail = :identifiant) AND password = SHA2(:password, 256)');
+			$reponse = $database -> prepare('SELECT True, id
+				FROM membre 
+				WHERE (prenom_usuel = :identifiant OR mail = :identifiant) 
+				AND password = SHA2(:password, 256)');
 			$reponse -> execute($donnees);
-
 			$data = $reponse -> fetch();
 			return $data;
 		}
@@ -221,7 +219,6 @@ class Login extends ConnexionDB
 		{
 			die("Erreur sur l'authentification:<br>".$e -> getMessage());
 		}
-
 		$database = null;
 	}
 }
