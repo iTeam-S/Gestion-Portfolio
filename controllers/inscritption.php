@@ -1,13 +1,13 @@
 <?php
 session_start();
-include_once('controllers_v2.php');
+include_once('controllers.php');
 include_once('../models/models.php');
 
-//--------------------------- Membre -----------------------------
-$id_membre = null;
 
+$id_membre = null;
 $insertion = new InsertionDB(3);
 
+//--------------------------------------------- Membre -------------------------------------------
 try
 {
 	if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['prenomUsuel']) AND !empty($_POST['telephonePrimo']) AND !empty($_POST['email'])) 
@@ -25,7 +25,7 @@ try
 
 			$id_membre = $insertion -> get_id_db($data_id -> get_info_id()); // c'est ID membre
 
-			// inserer la focntion d'un individu...
+			// inserer la fonction d'un individu...
 			$fonction = new InfosFonction(3);
 			$fonction -> set_info_fonction($id_membre, $_POST['poste']);
 			$insertion -> inserer_fonction($fonction -> get_info_fonction());
@@ -49,9 +49,7 @@ catch(Exception $e)
 	die("Erreur dans le controlleur sur l'insertion de membre:<br>".$e -> getMessage());
 }
 
-
-//----------------------------------- formation --------------------------
-
+//------------------------------------------ formation ------------------------------------------
 try
 {
 	$i = 0;
@@ -70,7 +68,6 @@ try
         }
         $i++;
     }
-
     unset($data_formation);
 }
 
@@ -79,9 +76,7 @@ catch(Exception $e)
 	die("Erreur sur l'insertion de formation:<br>".$e -> getMessage());
 }
 
-
-// --------------------------- Compétence ---------------------------------
-
+// -------------------------------------------- Compétence ---------------------------------------------
 try
 {
 	if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0)
@@ -110,9 +105,7 @@ catch(Exception $e)
 	die("Erreur sur l'insertion de competences:<br>".$e -> getMessage());
 }
 
-
-//----------------------------------- Expérience --------------------------------------
-
+//---------------------------------------- Expérience -------------------------------------------------
 try
 {
 	$i = 0;
@@ -139,9 +132,7 @@ catch(Exception $e)
 	die("Erreur sur l'insertion des experiences:<br>".$e -> getMessage());
 }
 
-
-//------------------------------------------------------ Distinction -------------------------------------
-
+//------------------------------------------ Distinction ----------------------------------------
 try
 {
 	$i = 0;

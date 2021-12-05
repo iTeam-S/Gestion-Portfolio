@@ -1,196 +1,302 @@
 <?php
-    session_start();
-    include_once('../models/models.php');
-    
-    //------------------------- Membres ------------------------   
-    $id_membre = null;
+class InfosMembre
+{
+	private $defaultValue = null;
+	private $nom = null;
+	private $prenom = null;
+	private $prenom_usuel = null;
+	private $user_git = null;
+	private $tel1 = null;
+	private $tel2 = null;
+	private $mail = null;
+	private $facebook = null;
+	private $linkedin = null;
+	private $cv = null;
+	private $adresse = null;
+	private $description = null;
+	private $fonction = null;
 
-    if(!empty($_POST['nomPersonne']) AND !empty($_POST['prenomsPersonne']) AND !empty($_POST['prenomUsuel']) AND !empty($_POST['telephonePrimo']) AND !empty($_POST['email'])) 
-    {
-        $membre = new MembreModels(3);
-        $infos_prenom = array(
-            'prenom' => strip_tags($_POST['prenomUsuel']));
-        $reponse = $membre -> db_get_prenom_usuel($infos_prenom);
-        $donnee = $reponse -> fetch();
-        if(!empty($donnee['TRUE']))
-        {
-            header("Location:../views/erreurs/erreurPrenomUsuel.php");
-        }
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
 
-        else
-        {
-            $_SESSION['prenom'] = $_POST['prenomUsuel'];
+	public function set_info_membre(string $nom, string $prenom, string $prenom_usuel, string $user_git, string $tel1, string $tel2, string $mail, string $facebook, string $linkedin, string $cv, $adresse, $description, string $fonction)
+	{
+		$this -> nom = ucwords(strip_tags($nom));
+		$this -> prenom = ucwords(strip_tags($prenom));
+		$this -> prenom_usuel = ucwords(strip_tags($prenom_usuel));
+		$this -> user_git = strip_tags($user_git);
+		$this -> tel1 = strip_tags($tel1);
+		$this -> tel2 = strip_tags($tel2);
+		$this -> mail = strip_tags($mail);
+		$this -> facebook = strip_tags($facebook);
+		$this -> linkedin = strip_tags($linkedin);
+		$this -> cv = strip_tags($cv);
+		$this -> adresse = strip_tags($adresse);
+		$this -> description = strip_tags($description);
+		$this -> fonction = strip_tags($fonction);
+	}
 
-            $informations_membre = array(
-                'nom' => strip_tags($_POST['nomPersonne']), 
-                'prenom' => ucwords(strip_tags($_POST['prenomsPersonne'])),
-                'prenom_usuel' => ucwords(strip_tags($_POST['prenomUsuel'])),
-                'user_github' => strip_tags($_POST['lien_github']),
-                'tel1'=> strip_tags($_POST['telephonePrimo']),
-                'tel2' => strip_tags($_POST['telephoneSecondo']),
-                'mail' => strip_tags($_POST['email']),
-                'facebook' => strip_tags($_POST['lien_facebook']),
-                'linkedin' => strip_tags($_POST['lien_linkedin']),
-                'cv' => strip_tags($_POST['lien_cv']),
-                'adresse' => strip_tags($_POST['domicile']),
-                'descriptions' => strip_tags($_POST['descriptionTravail']),
-                'fonction' => strip_tags($_POST['fonction'])
-            );
-            $membre -> inserer_information_membre($informations_membre);
-            unset($membre);
+	public function get_info_membre()
+	{
+		$infos = array(
+			'nom' => $this -> nom,
+			'prenom' => $this -> prenom,
+			'prenom_usuel' => $this -> prenom_usuel,
+			'user_github' => $this -> user_git,
+			'tel1' => $this -> tel1,
+			'tel2' => $this -> tel2,
+			'mail' => $this -> mail,
+			'facebook' => $this -> facebook,
+			'linkedin' => $this -> linkedin,
+			'cv' => $this -> cv, 
+			'adresse' => $this -> adresse,
+			'description' => $this -> description,
+			'fonction' => $this -> fonction
+		);
+		return $infos;
+	}
 
-            //-------------------------- ID du MEMBRE ----------------------------
-            $id = new IdMembre();
-            $prenomUsuel = array('prenom_usuel' => $_SESSION['prenom']);
-            $id_membre = $id -> get_id_membre($prenomUsuel);
+	public function get_prenom_usuel()
+	{
+		$infos = array(
+			'prenom' => $this -> prenom_usuel
+		);
+		return $infos;
+	}
+}
 
-            // --------------------------- Fonction -------------------------------
-            $fonction = new FonctionModels(3);
-            $information_fonction = array(
-                'id_membre' => $id_membre,
-                'id_poste' => strip_tags($_POST['poste'])
-                );
-            $fonction -> inserer_information_fonction($information_fonction);
-            unset($fonction);
-        }
-    }
-    else
-    {
-        $id_membre = $_SESSION['id']; 
-    }
+class InfosFormation
+{
+	private $defaultValue = null;
+	private $lieu = null;
+	private $annee = null;
+	private $type = null;
+	private $description = null;
+	private $id_membre = null;
+	private $ordre = null;
 
-    //--------------------------- Formations -----------------------------
-    $formation = new FormationModels(3);
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
 
-    $i = 0;
-    $lieuFormation = $_POST['lieuF'];
-    $anneeFormation = $_POST['anneeF'];
-    $typeFormation = $_POST['typeF'];
-    $descriptionFormation = $_POST['descriptionF'];
+	public function set_info_formation(string $lieu, string $annee, string $type, string $description, int $id_membre, int $ordre = 0)
+	{
+		$this -> lieu = strip_tags($lieu);
+		$this -> annee = strip_tags($annee);
+		$this -> type = strip_tags($type);
+		$this -> description = strip_tags($description);
+		$this -> id_membre = $id_membre;
+		$this -> ordre = $ordre;
+	}
 
-    while($i < count($lieuFormation))
-    {
-        if(!empty($lieuFormation[$i]) AND !empty($anneeFormation[$i]) AND !empty($typeFormation[$i]))
-        {
-            $information_formation = array(
-                'lieu' => strip_tags($lieuFormation[$i]),
-                'annee' => strip_tags($anneeFormation[$i]),
-                'type' => strip_tags($typeFormation[$i]),
-                'descriptions' => strip_tags($descriptionFormation[$i]),
-                'idMembre' => $id_membre,
-                'ordre' => 0
-            );
-            $formation -> inserer_information_formation($information_formation);
-        }
-        $i++;
-    }
+	public function get_info_formation()
+	{
+		$infos = array(
+			'lieu' => $this -> lieu,
+			'annee' => $this -> annee,
+			'type' => $this -> description,
+			'description' => $this -> description,
+			'id_membre' => $this -> id_membre,
+			'ordre' => $this -> ordre
+		);
+		return $infos;
+	}
+}
 
-    unset($formation);
+class InfosCompetence
+{
+	private $defaultValue = null;
+	private $nom = null;
+	private $liste = null;
+	private $id_categorie = null;
+	private $id_membre = null;
+	private $ordre = null;
 
-    //---------------------------- Competences -------------------------------
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
 
-    if(count($_POST['iconeC']) > 0 AND count($_POST['competences']) > 0)
-    {
-        $competence = new CompetenceModels(3);
+	public function set_info_competence(string $nom, string $liste, int $id_categorie, int $id_membre, int $ordre = 0)
+	{
+		$this -> nom = strip_tags($nom);
+		$this -> liste = strip_tags($liste);
+		$this -> id_categorie = $id_categorie;
+		$this -> id_membre = $id_membre;
+		$this -> ordre = $ordre;
+	}
 
-        $i = 0;
-        $icones = $_POST['iconeC'];
-        $competences = $_POST['competences'];
-        $descriptionCempetence = $_POST['descriptionC'];
+	public function get_info_competence()
+	{
+		$infos = array(
+			'nom' => $this -> nom,
+			'liste' => $this -> liste,
+			'id_categorie' => $this -> id_categorie,
+			'id_membre' => $this -> id_membre,
+			'ordre' => $this -> ordre
+		);
+		return $infos;
+	}
+}
 
-        while($i < count($icones))
-        {
-            if(!empty($competences[$i]) AND !empty($descriptionCempetence[$i]) AND !empty($icones[$i]))
-            {
-                $information_competence = array(
-                    'nom' => strip_tags($competences[$i]),
-                    'liste' => strip_tags($descriptionCempetence[$i]),
-                    'idCategorie' => strip_tags($icones[$i]),
-                    'idMembre' => $id_membre,
-                    'ordre' => 0
-                );
-                $competence -> inserer_information_competence($information_competence);
-            }
-            $i++;
-        }
-        unset($competence);
-    }
+class InfosExperience
+{
+	private $defaultValue = null;
+	private $nom = null;
+	private $annee = null;
+	private $type = null;
+	private $description = null;
+	private $id_membre = null;
+	private $ordre = null;
 
-    // else
-    // {
-    //     header('Location:../views/erreurs/erreurCompetence.php');
-    // }
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
 
-    //---------------------------- Expérience ----------------------------------------
+	public function set_info_experience(string $nom, string $annee, string $type, string $description, int $id_membre, int $ordre = 0)
+	{
+		$this-> nom = strip_tags($nom);
+		$this -> annee = strip_tags($annee);
+		$this -> type = strip_tags($type);
+		$this -> description = strip_tags($description);
+		$this -> id_membre = $id_membre;
+		$this -> ordre = $ordre;
+	}
 
-    $experience = new ExperienceModels(3);
+	public function get_info_experience()
+	{
+		$infos = array(
+			'nom' => $this -> nom,
+			'annee' => $this -> annee,
+			'type' => $this -> type,
+			'description' => $this -> description,
+			'id_membre' => $this -> id_membre,
+			'ordre' => $this -> ordre
+		);
+		return $infos;
+	}
+}
 
-    $i = 0;
-    $nomOrganisation = $_POST['nomE'];
-    $anneeExperience = $_POST['anneeE'];
-    $typeExperience = $_POST['typeE'];
-    $descriptionExperience = $_POST['descriptionE'];
+class InfosDistinction
+{
+	private $defaultValue = null;
+	private $organisateur = null;
+	private $annee = null;
+	private $type = null;
+	private $description = null;
+	private $id_membre = null;
+	private $ordre = null;
 
-    while($i < count($nomOrganisation))
-    {
-        if(!empty($nomOrganisation[$i]) AND !empty($anneeExperience[$i]) AND !empty($typeExperience[$i]))
-        {
-            $information_experience = array(
-                'nom' => strip_tags($nomOrganisation[$i]),
-                'annee' => strip_tags($anneeExperience[$i]),
-                'type' => strip_tags($typeExperience[$i]),
-                'descriptions' => strip_tags($descriptionExperience[$i]),
-                'idMembre' => $id_membre,
-                'ordre' => 0
-            );
-            $experience -> inserer_information_experience($information_experience);
-        }
-        $i++;
-    }
-    unset($experience);
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
 
-    // ------------------------- Distinction -------------------------
+	public function set_info_distinction(string $organisateur, string $annee, string $type, string $description, int $id_membre, int $ordre)
+	{
+		$this -> organisateur = strip_tags($organisateur);
+		$this -> annee = strip_tags($annee);
+		$this -> type = strip_tags($type);
+		$this -> description = strip_tags($description);
+		$this -> id_membre = $id_membre;
+		$this -> ordre = $ordre;
+	}
 
-    $i = 0;
-    $organisateurs = $_POST['nomD'];
-    $anneeDistinction = $_POST['anneeD'];
-    $typeDistinction = $_POST['typeD'];
-    $descriptionDistinction = $_POST['descriptionD'];
-    $rangDistinction = $_POST['rangD'];
-    $ordre = null;
+	public function get_info_distinction()
+	{
+		$infos = array(
+			'organisateur' => $this -> organisateur,
+			'annee' => $this -> annee,
+			'type' => $this -> type,
+			'description' => $this -> description,
+			'id_membre' => $this -> id_membre,
+			'ordre' => $this -> ordre
+		);
+		return $infos;
+	}
+}
 
-    if(count($organisateurs) > 0 AND count($anneeDistinction) > 0 AND count($typeDistinction) > 0)
-    {
-        $distinction = new DistinctionModels(3);
+class InfosFonction
+{
+	private $defaultValue = null;
+	private $id_membre = null;
+	private $id_poste = null;
 
-        while($i < count($organisateurs))
-        {
-            if(!empty($organisateurs[$i]) AND !empty($anneeDistinction) AND !empty($typeDistinction))
-            {
-                if(!empty($rangDistinction[$i]))
-                {
-                    $ordre = strip_tags($rangDistinction[$i]);  
-                }
-                else
-                {
-                    $ordre = 0;
-                }
-                $information_distinction = array(
-                        'organisateur' => strip_tags($organisateurs[$i]),
-                        'annee' => strip_tags($anneeDistinction[$i]),
-                        'types' => strip_tags($typeDistinction[$i]),
-                        'descriptions' => strip_tags($descriptionDistinction[$i]),
-                        'id_membre' => $id_membre,
-                        'ordre' => $ordre
-                    );
-                $distinction -> inserer_information_distinction($information_distinction);
-            }
-            $i++;
-        }
-        unset($distinction);
-    }
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
 
-    unset($id);
-    session_destroy();
-    // header('Location:../index.php');
-?>
+	public function set_info_fonction(int $id_membre, int $poste)
+	{
+		$this -> id_membre = $id_membre;
+		$this -> id_poste = strip_tags($poste);
+	}
+
+	public function get_info_fonction()
+	{
+		$infos = array(
+			'id_membre' => $this -> id_membre,
+			'id_poste' => $this -> id_poste
+		);
+		return $infos;
+	}
+}
+
+class InfosLogin
+{
+	private $defaultValue = null;
+	private $identifiant = null;
+	private $password = null;
+
+	public function __construct(int $nombre1)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function set_info_login(string $identifiant, string $password)
+	{
+		$this -> identifiant = strip_tags($identifiant);
+		$this -> password = $password;
+	}
+
+	public function get_info_login()
+	{
+		$infos = array(
+			'identifiant' => $this -> identifiant,
+			'password' => $this -> password
+		);
+		return $infos;
+	}
+}
+
+class InfosId
+{
+	private $defaultValue = null;
+	private $prenom = null;
+	private $email = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function set_info_id(string $prenom, string $email)
+	{
+		$this -> prenom = strip_tags($prenom);
+		$this -> email = strip_tags($email);
+	}
+
+	public function get_info_id()
+	{
+		$infos = array(
+			'prenom' => $this -> prenom,
+			'email' => $this -> email
+		);
+		return $infos;
+	}
+}

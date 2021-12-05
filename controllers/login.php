@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once('../models/models.php');
-include_once('controllers_v2.php');
+include_once('controllers.php');
 
 try
 {
@@ -23,7 +23,6 @@ try
         {
             echo "Identifiant et/ou mot de passe incorrecte...!\nMerci de réessayer !";
         }
-
         unset($login);
         unset($info_auth);
     }

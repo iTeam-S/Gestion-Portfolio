@@ -40,9 +40,7 @@ $(document).ready(function()
         }
     });
 
-
     //--------------------------------- formation -----------------------------
-
     var lieuFormation = [];
     var anneeFormation = [];
     var typeFormation = [];
@@ -86,7 +84,6 @@ $(document).ready(function()
         $("#formation").hide(1000);
         $("#membre").show(1000);
     });
-
 
     // ---------------------------------- competence ----------------------------------
     var icones_categories = [];
@@ -151,9 +148,7 @@ $(document).ready(function()
         $("#formation").show(1000);
     });
 
-
     //----------------------- Expérience -----------------------------
-
     var nomOrganisation = [];
     var anneeExperience = [];
     var typeExperience = [];
@@ -197,7 +192,6 @@ $(document).ready(function()
     });
         
     // --------------------------- Distinction -------------------------------
-
     var organisateurs = [];
     var anneeDistinction = [];
     var typeDistinction = [];
@@ -246,8 +240,7 @@ $(document).ready(function()
         $('#register').show(1000);
     });
     
-    //-------------------------- LES DONNEES ---------------------------------
-
+    //-------------------------- C'est ici qu'on recupère toutes les données et on va les envoyer. ---------------------------------
     $('#register').click(function()
     {
         var donnees = {
@@ -288,9 +281,8 @@ $(document).ready(function()
             // ------------------------ Poste -----------------------
             poste: $('#poste').val()
         };
-
         console.log(donnees);
-        $.post("../controllers/controllers.php", donnees, function(data,status)
+        $.post("../controllers/inscription.php", donnees, function(data,status)
         {
             if(status == 'success')
             {
@@ -322,7 +314,5 @@ $(document).ready(function()
         typeDistinction = [];
         descriptionDistinction = [];
         rangDistinction = [];
-
-        $('document').load('../index.php');
     });
 });

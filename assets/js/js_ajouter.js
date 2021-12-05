@@ -4,8 +4,8 @@ $(document).ready(function()
     $("#competence").hide();
     $("#distinction").hide();
     $('#register').hide();
-    //--------------------------------- formation -----------------------------
 
+    //--------------------------------- formation -----------------------------
     var lieuFormation = [];
     var anneeFormation = [];
     var typeFormation = [];
@@ -17,7 +17,6 @@ $(document).ready(function()
         anneeFormation.push($('#anneeFormation').val());
         typeFormation.push($('#typeFormation').val());
         descriptionFormation.push($('#descriptionFormation').val());
-
         $('#lieuFormation').val("");
         $('#anneeFormation').val("");
         $('#typeFormation').val("");
@@ -30,7 +29,6 @@ $(document).ready(function()
         anneeFormation.push($('#anneeFormation').val());
         typeFormation.push($('#typeFormation').val());
         descriptionFormation.push($('#descriptionFormation').val());
-
         $("#formation").hide(1000);
         $("#competence").show(1000);
     });
@@ -45,11 +43,9 @@ $(document).ready(function()
         anneeFormation = [];
         typeFormation = [];
         descriptionFormation = [];
-
         $("#formation").hide(1000);
         $("#membre").show(1000);
     });
-
 
     // ---------------------------------- competence ----------------------------------
     var icones_categories = [];
@@ -68,11 +64,11 @@ $(document).ready(function()
 
     $("#bouttonCompetence .suivant button").click(function()
     {
-            icones_categories.push($('#icones_categories').val());
-            mes_competences.push($('#mes_competences').val());
-            descritpionCompetences.push($('#descritpionCompetences').val());
-            $("#competence").hide(1000);
-            $("#experience").show(1000);
+        icones_categories.push($('#icones_categories').val());
+        mes_competences.push($('#mes_competences').val());
+        descritpionCompetences.push($('#descritpionCompetences').val());
+        $("#competence").hide(1000);
+        $("#experience").show(1000);
     });
 
     $("#bouttonCompetence .precedant button").click(function()
@@ -83,14 +79,11 @@ $(document).ready(function()
         icones_categories = [];
         mes_competences = [];
         descritpionCompetences = [];
-
         $("#competence").hide(1000);
         $("#formation").show(1000);
     });
 
-
     //----------------------- Expérience -----------------------------
-
     var nomOrganisation = [];
     var anneeExperience = [];
     var typeExperience = [];
@@ -118,7 +111,6 @@ $(document).ready(function()
             anneeExperience = [];
             typeExperience = [];
             descriptionExperiences = [];
-
             $("#experience").hide(1000);
             $("#competence").show(1000);
     });
@@ -166,7 +158,6 @@ $(document).ready(function()
         typeDistinction = [];
         descriptionDistinction = [];
         rangDistinction = [];
-
         $('#distinction').hide(1000);
         $('#experience').show(1000);
     });
@@ -178,7 +169,6 @@ $(document).ready(function()
         typeDistinction.push($('#typeDistinction').val());
         descriptionDistinction.push($('#descriptionDistinction').val());
         rangDistinction.push($('#rangDistinction').val());
-
         $('#register').show(1000);
     });
         
@@ -209,13 +199,14 @@ $(document).ready(function()
             rangD: rangDistinction
         };
 
-        $.post( "../controllers/controllers.php", donnees, function(data, status)
+        $.post( "../controllers/inscription.php", donnees, function(data, status)
         {
             if(status == 'success')
             {
                 alert('Vos données sont enregistrées...!');
                 window.location.replace('../index.php');
             }
+
             else
             {
                 alert(data);
