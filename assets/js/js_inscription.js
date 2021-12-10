@@ -281,11 +281,12 @@ $(document).ready(function()
             // ------------------------ Poste -----------------------
             poste: $('#poste').val()
         };
-        console.log(donnees);
-        $.post("../controllers/inscription.php", donnees, function(data,status)
+        // console.log(donnees);
+        $.post("../controllers/setters_info.php", donnees, function(data, status)
         {
             if(status == 'success')
             {
+                console.log(donnees);
                 alert('Super ! Vous êtes parmis nous...!');
                 window.location.replace('../index.php');
             }
@@ -295,24 +296,24 @@ $(document).ready(function()
             }
         });
         //------------------- formation ---------------------------
-        lieuFormation = [];
-        anneeFormation = [];
-        typeFormation = [];
-        descriptionFormation = [];
+        // lieuFormation = [];
+        // anneeFormation = [];
+        // typeFormation = [];
+        // descriptionFormation = [];
         //-------------------- Competences ------------------------
-        icones_categories = [];
-        mes_competences = [];
-        descritpionCompetences = [];
+        // icones_categories = [];
+        // mes_competences = [];
+        // descritpionCompetences = [];
         //------------------- Experience ------------------------
-        nomOrganisation = [];
-        anneeExperience = [];
-        typeExperience = [];
-        descriptionExperiences = [];
+        // nomOrganisation = [];
+        // anneeExperience = [];
+        // typeExperience = [];
+        // descriptionExperiences = [];
         // ------------------ Distinction ------------------------
-        organisateurs = [];
-        anneeDistinction = [];
-        typeDistinction = [];
-        descriptionDistinction = [];
-        rangDistinction = [];
+        // organisateurs = [];
+        // anneeDistinction = [];
+        // typeDistinction = [];
+        // descriptionDistinction = [];
+        // rangDistinction = [];
     });
 });

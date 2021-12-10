@@ -199,7 +199,7 @@ $(document).ready(function()
             rangD: rangDistinction
         };
 
-        $.post( "../controllers/inscription.php", donnees, function(data, status)
+        $.post( "../controllers/setters_info.php", donnees, function(data, status)
         {
             if(status == 'success')
             {

@@ -60,17 +60,14 @@ class InsertionDB extends ConnexionDB
 		{
 			$database = ConnexionDB::db_connect();
 
-			$requete = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, 
-				user_git, tel1, tel2, mail, facebook, linkedin, cv, 
-				adresse, description, fonction)
-				VALUES(:nom, :prenom, :prenom_usuel, :user_git, :tel1, 
-				:tel2, :mail, :facebook, :linkedin, :cv, :adresse, :description, :fonction)');
+			$requete = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github, tel1, tel2, mail, facebook, linkedin, cv, adresse, description, fonction)
+				VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, :facebook, :linkedin, :cv, :adresse, :description, :fonction)');
 			$requete -> execute($donnees);
 		}
 
 		catch(PDOException $e)
 		{
-			die("Erreur sur l'insertion des membres:<br>".$e -> getMessage());
+			die("Erreur sur l'insertion des membres ****:<br>".$e -> getMessage());
 		}
 		$database = null;
 	}
@@ -229,4 +226,110 @@ class Personnes extends ConnexionDB
     {
         $this -> defaultValue = $nombre;
     }
+
+	// prendre des données de formations d'une personnnes...
+	public function obtenir_formation(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = $database -> prepare('SELECT f.lieu, f.annee, f.type, f.description
+				FROM formations f JOIN membre m ON f.id_membre = m.id
+				WHERE m.id = :id');
+			$reponse -> execute($donnees);
+			$data = $reponse -> fetch();
+			return $data;
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur la prise des données 'formations' d'une personne...!<br>".$e -> getMessage());
+		}
+		$database = null;
+	}
+
+	// prendre des données de fonction d'une personnes...
+	public function obtenir_fonction(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = prepare('SELECT p.nom FROM poste p 
+				JOIN fonction f ON p.id = f.id_poste 
+				JOIN membre m ON f.id_membre = m.id 
+				WHERE m.id = :id');
+			$reponse -> execute($donnees);
+			$data = $reponse -> fetch(); 
+			return $data['p.nom'];
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur la prise des données 'fonction' d'une personne...!<br>".$e -> getMessage());
+		}
+		$database = null;
+	}
+
+	// prendre des données d'experiences d'une personne...
+	public function obtenir_experience(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = prepare('SELECT e.nom, e.annee, e.type, e.description
+				FROM experiences e JOIN membre m ON e.id_membre = m.id
+				WHERE m.id = :id');
+			$reponse -> execute($donnees);
+			$data = $reponse -> fetch();
+			return $data;
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur la prise des données 'experiences' d'une personne...!<br>".$e -> getMessage());
+		}
+		$database = null;
+	}
+
+	// prendre des données de distinctions d'une personne...
+	public function obtenir_distinction(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = prepare('SELECT d.organisateur, d.annee, d.type, d.description, d.ordre
+				FROM distinctions d JOIN membre m ON d.id_membre = m.id
+				WHERE m.id = :id');
+			$reponse -> execute($donnees);
+			$data = $reponse -> fetch();
+			return $data;
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur la prise des données 'distinctions' d'une personne...!<br>".$e -> getMessage());
+		}
+		$database = null;
+	}
+
+	// prendre des données de competences d'une personne...
+	public function obtenir_competence(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$reponse = prepare('SELECT c.nom, c.liste, c.id_categorie
+				FROM competences c JOIN membre m ON c.id_membre = m.id
+				WHERE m.id = :id');
+			$reponse -> execute($donnees);
+			$data -> fetch();
+			return $data;
+		}
+
+		catch(PDOException $e)
+		{
+			die("Erreur sur la prise des données 'competences' d'une personne...!<br>".$e -> getMessage());
+		}
+		$database = null;
+	}
 }

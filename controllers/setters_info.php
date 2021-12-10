@@ -5,6 +5,8 @@ include_once('../models/models.php');
 
 
 $id_membre = null;
+$reponse = False;
+
 $insertion = new InsertionDB(3);
 
 //--------------------------------------------- Membre -------------------------------------------
@@ -30,7 +32,9 @@ try
 			$fonction -> set_info_fonction($id_membre, $_POST['poste']);
 			$insertion -> inserer_fonction($fonction -> get_info_fonction());
 			unset($fonction);
-		}
+
+			$reponse = True;
+		}		
 
 		else
 		{
@@ -119,7 +123,7 @@ try
     {
         if(!empty($nomOrganisation[$i]) AND !empty($anneeExperience[$i]) AND !empty($typeExperience[$i]))
         {
-			$data_experience > set_info_experience($nomOrganisation[$i], $anneeExperience[$i], $typeExperience[$i], $descriptionExperience[$i], $id_membre);
+			$data_experience -> set_info_experience($nomOrganisation[$i], $anneeExperience[$i], $typeExperience[$i], $descriptionExperience[$i], $id_membre);
 			$insertion -> inserer_experience($data_experience -> get_info_experience());
         }
         $i++;
@@ -142,25 +146,21 @@ try
     $descriptionDistinction = $_POST['descriptionD'];
     $rangDistinction = $_POST['rangD'];
 
-    if(count($organisateurs) > 0 AND count($anneeDistinction) > 0 AND count($typeDistinction) > 0)
-    {
-        $data_distinction = new InfosDistinction(3);
-        while($i < count($organisateurs))
-        {
-            if(!empty($organisateurs[$i]) AND !empty($anneeDistinction[$i]) AND !empty($typeDistinction[$i]))
-            {
-				$data_distinction -> set_info_distinction($organisateurs[$i], $anneeDistinction[$i], $typeDistinction[$i], $descriptionDistinction[$i], $id_membre, (int) $rangDistinction[$i]);
-				$insertion -> inserer_distinction($data_distinction -> get_info_distinction());
-            }
-            $i++;
-        }
-		unset($data_distinction);
+	$data_distinction = new InfosDistinction(3);
+	while($i < count($organisateurs))
+	{
+		if(!empty($organisateurs[$i]) AND !empty($anneeDistinction[$i]) AND !empty($typeDistinction[$i]) AND !empty($rangDistinction[$i]))
+		{
+			$data_distinction -> set_info_distinction($organisateurs[$i], $anneeDistinction[$i], $typeDistinction[$i], $descriptionDistinction[$i], $id_membre, (int) $rangDistinction[$i]);
+			$insertion -> inserer_distinction($data_distinction -> get_info_distinction());
+		}
+		$i++;
 	}
+	unset($data_distinction);
 }
 
 catch(Exception $e)
 {
 	die("Erreur sur l'insertion des distinctions:<br>".$e -> getMessage());
 }
-
 unset($data_id);

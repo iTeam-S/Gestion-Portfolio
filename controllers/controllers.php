@@ -97,7 +97,7 @@ class InfosFormation
 		$infos = array(
 			'lieu' => $this -> lieu,
 			'annee' => $this -> annee,
-			'type' => $this -> description,
+			'type' => $this -> type,
 			'description' => $this -> description,
 			'id_membre' => $this -> id_membre,
 			'ordre' => $this -> ordre

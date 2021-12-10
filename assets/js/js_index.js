@@ -26,7 +26,7 @@ $(document).ready(function()
             {
                 if(data == '1')
                 {
-                    window.location.href = 'ajouter.php';
+                    window.location.href = 'views/ajouter.php';
                 }
                 else
                 {
