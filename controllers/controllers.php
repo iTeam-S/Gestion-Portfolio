@@ -300,3 +300,27 @@ class InfosId
 		return $infos;
 	}
 }
+
+class PersonneId
+{
+	private $defaultValue = null;
+	private $id = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function set_personne_id(int $id)
+	{
+		$this -> id = (int) $id;
+	}
+
+	public function get_personne_id()
+	{
+		$infos = array(
+			'id' => $this -> id
+		);
+		return $infos;
+	}
+}
