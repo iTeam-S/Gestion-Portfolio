@@ -1,10 +1,12 @@
+var informations = [];
 $(document).ready(function()
 {
-    $.get('../../controllers/informations.php', function(data, status)
+    $.get('../controllers/informations.php', function(donnees, status)
     {
         if(status == 'success')
         {
-            $.post('../../views/informations.php', data);
+            informations = donnees;
+            console.log(informations);
         }
     });
 });

@@ -6,7 +6,7 @@ include_once('controllers.php');
 try
 {
     if(!empty($_POST['identifiant']) AND !empty($_POST['password']))
-    {
+    {    
         $login = new Login(3);
         $info_auth = new InfosLogin(3);
         $info_auth -> set_info_login($_POST['identifiant'], $_POST['password']);
@@ -18,7 +18,6 @@ try
             $_SESSION['id'] = $donnees['id'];
             echo $donnees['TRUE'];
         }
-
         else
         {
             echo "Identifiant et/ou mot de passe incorrecte...!\nMerci de réessayer !";
@@ -27,7 +26,6 @@ try
         unset($info_auth);
     }
 }
-
 catch(Exception $e)
 {
     die("Erreur sur l'authentification:<br>".$e -> getMessage());

@@ -27,8 +27,8 @@
 <section>
     <div class="container mt-2">
         <div class="row form-group">
-            <div class="col-12 col-md-4"></div>
-            <div class="col-12 col-md-4 mt-md-3 pb-2 pt-2 rounded border shadow">
+            <div class="col-12 col-md-3"></div>
+            <div class="col-12 col-md-6 mt-md-3 pb-2 pt-2 rounded border shadow">
                 <p class="logo_index font-weight-bold"><img class="logo_iteams shadow" src="assets/images/iteams.jpg" alt="Iteams'logo" width="57" height="57">
                         <span class="ml-3 font-weight-bold">iTeam-$</span></p>
                 <label for="identifiant"><b>Identifiant:</b></label>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4"></div>
+            <div class="col-12 col-md-3"></div>
         </div>
     </div>
 </section>

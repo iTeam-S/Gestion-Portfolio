@@ -50,6 +50,7 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur le prenom usuel: <br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
         $database = null;
 	}
 
@@ -89,6 +90,8 @@ class InsertionDB extends ConnexionDB
 		{
 			die("Erreur sur l'ID:<br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
+		$database = null;
 	}
 
 	// inserer dans la table 'formations'...
@@ -222,7 +225,7 @@ class Personnes extends ConnexionDB
 {
     private $defaultValue = null;
 
-    private function __construct(int $nombre)
+    public function __construct(int $nombre)
     {
         $this -> defaultValue = $nombre;
     }
@@ -233,18 +236,18 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT f.lieu, f.annee, f.type, f.description
-				FROM formations f JOIN membre m ON f.id_membre = m.id
-				WHERE m.id = :id');
+				$reponse = $database -> prepare('SELECT f.lieu, f.annee, f.type, f.description
+					FROM formations f JOIN membre m ON f.id_membre = m.id
+					WHERE m.id = :id');
 			$reponse -> execute($donnees);
-			$data = $reponse -> fetch();
-			return $data;
+			return $reponse;
 		}
 
 		catch(PDOException $e)
 		{
 			die("Erreur sur la prise des données 'formations' d'une personne...!<br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
 		$database = null;
 	}
 
@@ -254,19 +257,19 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = prepare('SELECT p.nom FROM poste p 
+			$reponse = $database -> prepare('SELECT p.nom FROM poste p 
 				JOIN fonction f ON p.id = f.id_poste 
 				JOIN membre m ON f.id_membre = m.id 
 				WHERE m.id = :id');
 			$reponse -> execute($donnees);
-			$data = $reponse -> fetch(); 
-			return $data['p.nom'];
+			return $reponse;
 		}
 
 		catch(PDOException $e)
 		{
 			die("Erreur sur la prise des données 'fonction' d'une personne...!<br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
 		$database = null;
 	}
 
@@ -276,18 +279,18 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = prepare('SELECT e.nom, e.annee, e.type, e.description
+			$reponse = $database -> prepare('SELECT e.nom, e.annee, e.type, e.description
 				FROM experiences e JOIN membre m ON e.id_membre = m.id
 				WHERE m.id = :id');
 			$reponse -> execute($donnees);
-			$data = $reponse -> fetch();
-			return $data;
+			return $reponse;
 		}
 
 		catch(PDOException $e)
 		{
 			die("Erreur sur la prise des données 'experiences' d'une personne...!<br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
 		$database = null;
 	}
 
@@ -297,18 +300,18 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = prepare('SELECT d.organisateur, d.annee, d.type, d.description, d.ordre
+			$reponse = $database -> prepare('SELECT d.organisateur, d.annee, d.type, d.description, d.ordre
 				FROM distinctions d JOIN membre m ON d.id_membre = m.id
 				WHERE m.id = :id');
 			$reponse -> execute($donnees);
-			$data = $reponse -> fetch();
-			return $data;
+			return $reponse;
 		}
 
 		catch(PDOException $e)
 		{
 			die("Erreur sur la prise des données 'distinctions' d'une personne...!<br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
 		$database = null;
 	}
 
@@ -318,18 +321,18 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = prepare('SELECT c.nom, c.liste, c.id_categorie
+			$reponse = $database -> prepare('SELECT c.nom, c.liste, c.id_categorie
 				FROM competences c JOIN membre m ON c.id_membre = m.id
 				WHERE m.id = :id');
 			$reponse -> execute($donnees);
-			$data -> fetch();
-			return $data;
+			return $reponse;
 		}
 
 		catch(PDOException $e)
 		{
 			die("Erreur sur la prise des données 'competences' d'une personne...!<br>".$e -> getMessage());
 		}
+		$reponse -> closeCursor();
 		$database = null;
 	}
 }

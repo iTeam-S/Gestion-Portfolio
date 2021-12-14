@@ -253,7 +253,7 @@ class InfosLogin
 	private $identifiant = null;
 	private $password = null;
 
-	public function __construct(int $nombre1)
+	public function __construct(int $nombre)
 	{
 		$this -> defaultValue = $nombre;
 	}
@@ -313,7 +313,7 @@ class PersonneId
 
 	public function set_personne_id(int $id)
 	{
-		$this -> id = (int) $id;
+		$this -> id = $id;
 	}
 
 	public function get_personne_id()
