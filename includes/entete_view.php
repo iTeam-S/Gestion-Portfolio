@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <nav class="col navbar navbar-expand-md navbar-dark">
-                    <a href="../index.php" class="navbar-brand">
+                    <a href="#" class="navbar-brand">
                         <img class="logo_iteams shadow" src="../assets/images/iteams.jpg" alt="Iteams'logo" width="57" height="57">
                         <span class="nom_iteams ml-3 font-weight-bold">iTeam-$</span> 
                     </a>

@@ -22,11 +22,11 @@ $(document).ready(function()
                 password: $('#password').val()
             };
             
-            $.post('controllers/login.php', donnees, function(data)
+            $.post('http://localhost/Interfaces-portfolio/controllers/login', donnees, function(data)
             {
                 if(data == '1')
                 {
-                    window.location.href = 'views/ajouter.php';
+                    window.location.href = 'views/informations.php';
                 }
                 else
                 {

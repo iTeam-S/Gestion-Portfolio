@@ -282,7 +282,7 @@ $(document).ready(function()
             poste: $('#poste').val()
         };
         // console.log(donnees);
-        $.post("../controllers/setters_info.php", donnees, function(data, status)
+        $.post("http://localhost/Interfaces-portfolio/controllers/setters", donnees, function(data, status)
         {
             if(status == 'success')
             {

@@ -311,7 +311,7 @@ class PersonneId
 		$this -> defaultValue = $nombre;
 	}
 
-	public function set_personne_id(int $id)
+	public function set_personne_id($id)
 	{
 		$this -> id = $id;
 	}
@@ -322,5 +322,22 @@ class PersonneId
 			'id' => $this -> id
 		);
 		return $infos;
+	}
+}
+
+class CreateJSON
+{
+	private $defaultValue = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function sendJSON(array $donnees)
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Content-Type: application/json');
+		echo json_encode($donnees, JSON_FORCE_OBJECT);
 	}
 }
