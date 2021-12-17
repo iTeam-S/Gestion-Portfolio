@@ -1,13 +1,12 @@
 <?php
-session_start();
-include_once('../models/models.php');
-include_once('controllers.php');
-
-try
+function get_infos($person_id)
 {
+    include_once('../models/models.php');
+    include_once('controllers.php');
+
     $information = new Personnes(3);
     $id = new PersonneId(3);
-    $id -> set_personne_id($_SESSION['id']);
+    $id -> set_personne_id($person_id);
     $formation = $information -> obtenir_formation($id -> get_personne_id());
     $fonction = $information -> obtenir_fonction($id -> get_personne_id());
     $experience = $information -> obtenir_experience($id -> get_personne_id());
@@ -26,8 +25,4 @@ try
     unset($json);
     unset($id);
     unset($information);
-}
-catch(Exception $se)
-{
-    die('Erreur:<br>'.$e -> getMessage());
 }

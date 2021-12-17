@@ -16,7 +16,15 @@ try
             break;
 
             case "informations":
-                require_once('./informations.php');
+                require_once('./getters.php');
+                if(!empty($url[1]))
+                {
+                    get_infos($url[1]);
+                }
+                else
+                {
+                    throw new Exception("Aucun ID n'a été pas en demande", 1);
+                }
             break;
 
             default: throw new Exception("Le demande n'est pas validée. Veuillez verifier l'URL...!", 1);

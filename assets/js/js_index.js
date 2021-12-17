@@ -22,7 +22,7 @@ $(document).ready(function()
                 password: $('#password').val()
             };
             
-            $.post('http://localhost/Interfaces-portfolio/controllers/login', donnees, function(data)
+            $.post('/Interfaces-portfolio/controllers/login', donnees, function(data)
             {
                 if(data == '1')
                 {

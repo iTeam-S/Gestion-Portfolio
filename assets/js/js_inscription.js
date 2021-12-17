@@ -282,7 +282,7 @@ $(document).ready(function()
             poste: $('#poste').val()
         };
         // console.log(donnees);
-        $.post("http://localhost/Interfaces-portfolio/controllers/setters", donnees, function(data, status)
+        $.post("/Interfaces-portfolio/controllers/setters", donnees, function(data, status)
         {
             if(status == 'success')
             {

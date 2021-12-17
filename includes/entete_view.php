@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<header>
+<header class="fixed-top">
     <div class="couleur_header">
         <div class="container">
             <div class="row">

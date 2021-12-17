@@ -199,7 +199,7 @@ $(document).ready(function()
             rangD: rangDistinction
         };
 
-        $.post( "http://localhost/Interfaces-portfolio/controllers/setters", donnees, function(data, status)
+        $.post( "/Interfaces-portfolio/controllers/setters", donnees, function(data, status)
         {
             if(status == 'success')
             {
