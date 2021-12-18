@@ -19,7 +19,7 @@ function get_infos($person_id)
     $infos['experience'] = $experience -> fetchAll(PDO::FETCH_ASSOC);
     $infos['distinction'] = $distinction -> fetchAll(PDO::FETCH_ASSOC);
     $infos['competence'] = $competence -> fetchAll(PDO::FETCH_ASSOC);
-
+    
     $json = new CreateJSON(3);
     $json -> sendJSON($infos);
     unset($json);

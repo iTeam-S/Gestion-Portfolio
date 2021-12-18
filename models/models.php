@@ -321,7 +321,7 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT c.nom, c.liste, cc.categorie
+			$reponse = $database -> prepare('SELECT c.nom, c.liste, LOWER(cc.categorie) as categorie
 				FROM competences c 
 				JOIN membre m ON c.id_membre = m.id
 				JOIN categorie_competence cc ON cc.id = c.id_categorie
