@@ -15,24 +15,50 @@ try
                 require_once('./setters.php');
             break;
 
-            case "informations":
+            case "getters":
                 require_once('./getters.php');
                 if(!empty($url[1]))
                 {
-                    get_infos($url[1]);
+                    if(!empty($url[2]))
+                    {
+                        switch($url[1])
+                        {
+                            case "formations":
+                                getFormation($url[2]);
+                            break;
+                            case "fonctions":
+                                getFonction($url[2]);
+                            break;
+                            case "experiences":
+                                getExperience($url[2]);
+                            break;
+                            case "distinctions":
+                                getDistinction($url[2]);
+                            break;
+                            case "competences":
+                                getCompetence($url[2]);
+                            break;
+                            default: throw new Exception("Erreur sur le paramètre passé en URL...!", 404);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Aucun ID n'a été passé sur l'URL...!", 404);
+                        
+                    }
                 }
                 else
                 {
-                    throw new Exception("Aucun ID n'a été pas en demande", 1);
+                    throw new Exception("La demande est invalide. Veuillez verifier l'URL...!", 500);
                 }
             break;
 
-            default: throw new Exception("Le demande n'est pas validée. Veuillez verifier l'URL...!", 1);
+            default: throw new Exception("La demande n'est pas validée. Veuillez verifier l'URL...!", 500);
         }
     }
     else
     {
-        throw new Exception("Erreurs sur la récupération des données...!", 1);
+        throw new Exception("Erreurs sur la récupération des données...!", 300);
     }
 }
 catch(Exception $e)
@@ -42,5 +68,6 @@ catch(Exception $e)
         'message' => $e -> getMessage(),
         'code' => $e -> getCode()
     );
-    print_r($errors);
+    header('Content-Type: application/json');
+    echo json_encode($errors, JSON_FORCE_OBJECT);
 }

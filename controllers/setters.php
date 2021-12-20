@@ -54,30 +54,33 @@ catch(Exception $e)
 }
 
 //------------------------------------------ formation ------------------------------------------
-try
+if(count($_POST['lieuF']) > 0 && count($_POST['anneeF']) > 0)
 {
-	$i = 0;
-    $lieuFormation = $_POST['lieuF'];
-    $anneeFormation = $_POST['anneeF'];
-    $typeFormation = $_POST['typeF'];
-    $descriptionFormation = $_POST['descriptionF'];
+	try
+	{
+		$i = 0;
+		$lieuFormation = $_POST['lieuF'];
+		$anneeFormation = $_POST['anneeF'];
+		$typeFormation = $_POST['typeF'];
+		$descriptionFormation = $_POST['descriptionF'];
 
-	$data_formation = new InfosFormation(3);
-    while($i < count($lieuFormation))
-    {
-        if(!empty($lieuFormation[$i]) AND !empty($anneeFormation[$i]) AND !empty($typeFormation[$i]))
-        {
-            $data_formation -> set_info_formation($lieuFormation[$i], $anneeFormation[$i], $typeFormation[$i], $descriptionFormation[$i], $id_membre);
-            $insertion -> inserer_formation($data_formation -> get_info_formation());
-        }
-        $i++;
-    }
-    unset($data_formation);
-}
+		$data_formation = new InfosFormation(3);
+		while($i < count($lieuFormation))
+		{
+			if(!empty($lieuFormation[$i]) AND !empty($anneeFormation[$i]) AND !empty($typeFormation[$i]))
+			{
+				$data_formation -> set_info_formation($lieuFormation[$i], $anneeFormation[$i], $typeFormation[$i], $descriptionFormation[$i], $id_membre);
+				$insertion -> inserer_formation($data_formation -> get_info_formation());
+			}
+			$i++;
+		}
+		unset($data_formation);
+	}
 
-catch(Exception $e)
-{
-	die("Erreur sur l'insertion de formation:<br>".$e -> getMessage());
+	catch(Exception $e)
+	{
+		die("Erreur sur l'insertion de formation:<br>".$e -> getMessage());
+	}
 }
 
 // -------------------------------------------- Compétence ---------------------------------------------
@@ -109,58 +112,67 @@ catch(Exception $e)
 	die("Erreur sur l'insertion de competences:<br>".$e -> getMessage());
 }
 
+
+
 //---------------------------------------- Expérience -------------------------------------------------
-try
+if(count($_POST['nomE']) > 0 && count($_POST['anneeE']) > 0)
 {
-	$i = 0;
-    $nomOrganisation = $_POST['nomE'];
-    $anneeExperience = $_POST['anneeE'];
-    $typeExperience = $_POST['typeE'];
-    $descriptionExperience = $_POST['descriptionE'];
+	try
+	{
+		$i = 0;
+		$nomOrganisation = $_POST['nomE'];
+		$anneeExperience = $_POST['anneeE'];
+		$typeExperience = $_POST['typeE'];
+		$descriptionExperience = $_POST['descriptionE'];
 
-	$data_experience = new InfosExperience(3);
-    while($i < count($nomOrganisation))
-    {
-        if(!empty($nomOrganisation[$i]) AND !empty($anneeExperience[$i]) AND !empty($typeExperience[$i]))
-        {
-			$data_experience -> set_info_experience($nomOrganisation[$i], $anneeExperience[$i], $typeExperience[$i], $descriptionExperience[$i], $id_membre);
-			$insertion -> inserer_experience($data_experience -> get_info_experience());
-        }
-        $i++;
-    }
-	unset($data_experience);
-}
+		$data_experience = new InfosExperience(3);
+		while($i < count($nomOrganisation))
+		{
+			if(!empty($nomOrganisation[$i]) AND !empty($anneeExperience[$i]) AND !empty($typeExperience[$i]))
+			{
+				$data_experience -> set_info_experience($nomOrganisation[$i], $anneeExperience[$i], $typeExperience[$i], $descriptionExperience[$i], $id_membre);
+				$insertion -> inserer_experience($data_experience -> get_info_experience());
+			}
+			$i++;
+		}
+		unset($data_experience);
+	}
 
-catch(Exception $e)
-{
-	die("Erreur sur l'insertion des experiences:<br>".$e -> getMessage());
+	catch(Exception $e)
+	{
+		die("Erreur sur l'insertion des experiences:<br>".$e -> getMessage());
+	}
 }
 
 //------------------------------------------ Distinction ----------------------------------------
-try
+if(count($_POST['nomD']) > 0 && count($_POST['anneeD']) > 0)
 {
-	$i = 0;
-    $organisateurs = $_POST['nomD'];
-    $anneeDistinction = $_POST['anneeD'];
-    $typeDistinction = $_POST['typeD'];
-    $descriptionDistinction = $_POST['descriptionD'];
-    $rangDistinction = $_POST['rangD'];
-
-	$data_distinction = new InfosDistinction(3);
-	while($i < count($organisateurs))
+	try
 	{
-		if(!empty($organisateurs[$i]) AND !empty($anneeDistinction[$i]) AND !empty($typeDistinction[$i]) AND !empty($rangDistinction[$i]))
+		$i = 0;
+		$organisateurs = $_POST['nomD'];
+		$anneeDistinction = $_POST['anneeD'];
+		$typeDistinction = $_POST['typeD'];
+		$descriptionDistinction = $_POST['descriptionD'];
+		$rangDistinction = $_POST['rangD'];
+
+		$data_distinction = new InfosDistinction(3);
+		while($i < count($organisateurs))
 		{
-			$data_distinction -> set_info_distinction($organisateurs[$i], $anneeDistinction[$i], $typeDistinction[$i], $descriptionDistinction[$i], $id_membre, (int) $rangDistinction[$i]);
-			$insertion -> inserer_distinction($data_distinction -> get_info_distinction());
+			if(!empty($organisateurs[$i]) AND !empty($anneeDistinction[$i]) AND !empty($typeDistinction[$i]) AND !empty($rangDistinction[$i]))
+			{
+				$data_distinction -> set_info_distinction($organisateurs[$i], $anneeDistinction[$i], $typeDistinction[$i], $descriptionDistinction[$i], $id_membre, (int) $rangDistinction[$i]);
+				$insertion -> inserer_distinction($data_distinction -> get_info_distinction());
+			}
+			$i++;
 		}
-		$i++;
+		unset($data_distinction);
 	}
-	unset($data_distinction);
+
+	catch(Exception $e)
+	{
+		die("Erreur sur l'insertion des distinctions:<br>".$e -> getMessage());
+	}
 }
 
-catch(Exception $e)
-{
-	die("Erreur sur l'insertion des distinctions:<br>".$e -> getMessage());
-}
 unset($data_id);
