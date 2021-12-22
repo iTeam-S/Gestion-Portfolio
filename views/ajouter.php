@@ -1,46 +1,41 @@
+<div id="formFormations" class="row form-group rounded border-md shadow text-center">
+    <div class="col-12 col-md-4 pb-1 m-md-3 m-1 ml-md-5 rounded border">
+        <label for="lieuFormation"><b>Lieu:</b></label>
+        <input type="text" id="lieuFormation" 
+            placeholder="lieu de formation ***" class="form-control"><br>
 
-<div class="container mt-2" id="formation">
-<p class="font-weight-bold">Formations:</p>
-    <div class="row form-group rounded border-md shadow text-center">
-        <div class="col-12 col-md-4 pb-1 m-md-3 m-1 ml-md-5 rounded border">
-            <label for="lieuFormation"><b>Lieu:</b></label>
-            <input type="text" id="lieuFormation" 
-                placeholder="lieu de formation ***" class="form-control"><br>
+        <label for="anneeFormation"><b>Année:</b></label><br>
+        <input type="text" id="anneeFormation" 
+            placeholder="Année de formation ***" class="form-control"><br>
 
-            <label for="anneeFormation"><b>Année:</b></label><br>
-            <input type="text" id="anneeFormation" 
-                placeholder="Année de formation ***" class="form-control"><br>
+        <label for="typeFormation"><b>Type:</b></label><br>
+        <input type="text" id="typeFormation" 
+            placeholder="L'intitulé de formation ***" class="form-control"><br>
+    </div>
+    <div class="col-12 col-md-6 pb-1 m-md-3 m-1 rounded border">
+        <label for="descriptionFormation"><b><u>Descriptions:</u></b></label><br>
+        <textarea id="descriptionFormation"  rows="7" 
+            placeholder="Une petite description sur votre formation ... ***" class="form-control">
+        </textarea>
+        <div class="container mt-3 text-center" id="bouttonFormation">
+            <div class="row">
+                <div class="col-4 precedant">
+                    <button type="button" class="btn btn-success"><span title="précèdant"><<<</span></button>
+                </div>
 
-            <label for="typeFormation"><b>Type:</b></label><br>
-            <input type="text" id="typeFormation" 
-                placeholder="L'intitulé de formation ***" class="form-control"><br>
-        </div>
-        <div class="col-12 col-md-6 pb-1 m-md-3 m-1 rounded border">
-            <label for="descriptionFormation"><b><u>Descriptions:</u></b></label><br>
-            <textarea id="descriptionFormation"  rows="7" 
-                placeholder="Une petite description sur votre formation ... ***" class="form-control">
-            </textarea>
-            <div class="container mt-3 text-center" id="bouttonFormation">
-                <div class="row">
-                    <div class="col-4 precedant">
-                        <button type="button" class="btn btn-success"><span title="précèdant"><<<</span></button>
-                    </div>
+                <div class="col-4 ajouter">
+                    <button type="button" class="btn btn-secondary">
+                    <img src="../assets/images/addButton.jpg" id="ajoutIcone" 
+                    width="30" height="25" alt="ajouter" title="Plus d'informations"></button>
+                </div>
 
-                    <div class="col-4 ajouter">
-                        <button type="button" class="btn btn-secondary">
-                        <img src="../assets/images/addButton.jpg" id="ajoutIcone" 
-                        width="30" height="25" alt="ajouter" title="Plus d'informations"></button>
-                    </div>
-
-                    <div class="col-4 suivant">
-                        <button type="button" class="btn btn-success"><span title="suivant">>>></span></button>
-                    </div>
+                <div class="col-4 suivant">
+                    <button type="button" class="btn btn-success"><span title="suivant">>>></span></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
 
 <!------------------------------- Compétence ------------------------------------->
 
