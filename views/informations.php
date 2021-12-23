@@ -17,28 +17,49 @@ require_once('../includes/entete_view.php'); ?>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="formationsModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="formationsModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formationsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                            <h5 class="modal-title" id="formationsModalLabel">Formations:</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <img src="../assets/images/iteams.jpg" class="rounded-circle shadow" alt="iTeam-$" width="70" height="70">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <label for="lieuFormation" class="col-form-label"><b><i>Lieu:</i></b></label>
+                                <input type="text" id="lieuFormation" class="form-control"
+                                    placeholder="lieu de formation ***" required>
+                                
+                                <label for="anneeFormation" class="col-form-label"><b><i>Année:</i></b></label>
+                                <input type="text" id="anneeFormation" class="form-control"
+                                    placeholder="Année de formation ***" required>
+
+                                <label for="typeFormation" class="col-form-label"><b><i>Type:</i></b></label>
+                                <input type="text" id="typeFormation" class="form-control"
+                                    placeholder="L'intitulé de formation ***" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionFormation" class="col-form-label"><b><i>Descriptions:</i></b></label>
+                                <textarea id="descriptionFormation" class="form-control"
+                                    placeholder="Une petite description sur votre formation ... ***"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button id="ajouterFormations" type="button" class="btn btn-success">
+                                <img src="../assets/images/ajouter.png" 
+                                width="30" height="25" alt="ajouter" title="Plus d'informations">
+                            </button>
+                            <button id="sendFormations" type="button" class="btn btn-primary">Enregistrer</button>
                         </div>
                     </div>
                 </div>
@@ -49,39 +70,6 @@ require_once('../includes/entete_view.php'); ?>
         <div class="row">
             <div id="fonctions" class="col-12">
                 <!-- les fonctions de la personne au sein de iTeam-$ -->
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fonctionsModal" data-whatever="@getbootstrap">Ajouter</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="fonctionsModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <hr>
@@ -97,28 +85,49 @@ require_once('../includes/entete_view.php'); ?>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="experiencesModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="experiencesModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="experiencesModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                            <h5 class="modal-title" id="experiencesModalLabel">Éxpériences:</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <img src="../assets/images/iteams.jpg" class="rounded-circle shadow" alt="iTeam-$" width="70" height="70">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <label for="nomOrganisation" class="col-form-label"><b><i>Nom d'organisation:</i></b></label>
+                                <input type="text" id="nomOrganisation" class="form-control"
+                                    placeholder="Entreprise et/ou institut supérieur ***" required>
+                                
+                                <label for="anneeExperience" class="col-form-label"><b><i>Année:</i></b></label>
+                                <input type="text" id="anneeExperience" class="form-control"
+                                    placeholder="Durée d'expérience ***" required>
+
+                                <label for="typeExperience" class="col-form-label"><b><i>Type:</i></b></label>
+                                <input type="text" id="typeExperience" class="form-control"
+                                    placeholder="L'intitulé d'expérience ***" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionExperiences" class="col-form-label"><b><i>Descriptions:</i></b></label>
+                                <textarea id="descriptionExperiences" class="form-control" 
+                                    placeholder="Une petite description sur ce dernier ... ***" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button id="ajouterExperiences" type="button" class="btn btn-success">
+                                <img src="../assets/images/ajouter.png" 
+                                width="30" height="25" alt="ajouter" title="Plus d'informations">
+                            </button>
+                            <button id="sendExperiences" type="button" class="btn btn-primary">Enregistrer</button>
                         </div>
                     </div>
                 </div>
@@ -137,27 +146,52 @@ require_once('../includes/entete_view.php'); ?>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="distinctionsModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="distinctionsModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="distinctionsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                            <h5 class="modal-title" id="distinctionsModalLabel">Distinctions:</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <img src="../assets/images/iteams.jpg" class="rounded-circle shadow" alt="iTeam-$" width="70" height="70">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <label for="organisateurs" class="col-form-label"><b><i>Organisateur(s):</i></b></label>
+                                <input type="text" id="organisateurs" class="form-control"
+                                    placeholder="Le(s) organisteur(s) de l'évènement ***" required>
+                                
+                                <label for="anneeDistinction" class="col-form-label"><b><i>Année:</i></b></label>
+                                <input type="text" id="anneeDistinction" class="form-control"
+                                    placeholder="Moment de l'évènement ***" required>
+
+                                <label for="typeDistinction" class="col-form-label"><b><i>Type:</i></b></label>
+                                <input type="text" id="typeDistinction" class="form-control"
+                                    placeholder="L'évènement que vous avez participé ***" required>
+                                
+                                <label for="rangDistinction"><b><i>Rang / ordre:</i></b></label>
+                                <input type="numbre" id="rangDistinction" class="form-control"
+                                    placeholder="Votre position durant l'évènement ***" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionDistinction" class="col-form-label"><b><i>Discriptions:</i></b></label>
+                                <textarea id="descriptionDistinction" class="form-control"
+                                    placeholder="Une petite description sur l'évènement***" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button id="ajouterDistinctions" type="button" class="btn btn-success">
+                                <img src="../assets/images/ajouter.png" 
+                                width="30" height="25" alt="ajouter" title="Plus d'informations">
+                            </button>
                             <button id="sendDistinctions" type="button" class="btn btn-primary">Enregistrer</button>
                         </div>
                     </div>
@@ -178,16 +212,23 @@ require_once('../includes/entete_view.php'); ?>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="competencesModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="competencesModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="competencesModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Compétences:</h5>
+                            <h5 class="modal-title" id="competencesModalLabel">Compétences:</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <img src="../assets/images/iteams.jpg" class="rounded-circle shadow" alt="iTeam-$" width="70" height="70">
+                                    </div>
+                                </div>
+                            </div>
                             <!-- les différentes icônes -->
                             <div class="container">
                                 <div class="row">
@@ -231,15 +272,18 @@ require_once('../includes/entete_view.php'); ?>
                                     placeholder="Votre compétence ***" required>
                             </div>
                             <div class="form-group">
-                                <label for="descritpionCompetences" class="col-form-label">Descriptions:</label>
+                                <label for="descritpionCompetences" class="col-form-label"><b><i>Descriptions:</i></b></label>
                                 <textarea id="descritpionCompetences" class="form-control" 
-                                    placeholder="Une petite description sur ce dernier ... ***" required>
-                                </textarea>
+                                    placeholder="Une petite description sur ce dernier ... ***" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button id="sendFormations" type="button" class="btn btn-primary">Enregistrer</button>
+                            <button id="ajouterCompetences" type="button" class="btn btn-success">
+                                <img src="../assets/images/ajouter.png" 
+                                width="30" height="25" alt="ajouter" title="Plus d'informations">
+                            </button>
+                            <button id="sendCompetences" type="button" class="btn btn-primary">Enregistrer</button>
                         </div>
                     </div>
                 </div>

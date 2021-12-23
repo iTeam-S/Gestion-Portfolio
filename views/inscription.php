@@ -1,8 +1,7 @@
 <?php include_once('../includes/entete_view.php'); ?>
 
-<section>
-<form method="post">
-    <div class="container mt-2" id="membre">
+<section class="pt-5 mt-4">
+    <div class="container mt-3" id="membre">
     <p class="font-weight-bold">Indentité:</p>
         <div class="row form-group">
 
@@ -81,7 +80,6 @@
     <br>
 
     <!--------------------------------------------------formation---------------------------------------------------------->
-
     <div class="container mt-2" id="formation">
     <p class="font-weight-bold">Formations:</p>
         <div class="row form-group rounded border-lg shadow text-center">
@@ -125,7 +123,6 @@
     </div>
 
     <!--------------------------------------------------------- Compétence ----------------------------------------------------------->
-
     <div class="container mt-md-1 mt-1" id="competence">
         <div class="row">
             <div class="col-12 col-md-6">
@@ -224,7 +221,6 @@
     <br>
 
     <!------------------------------------------ experience --------------------------------------> 
-
     <div class="container mt-2" id="experience">
         <p class="font-weight-bold">Expériences:</p>
         <div class="row form-group row text-center shadow rounded mb-3 p-1">
@@ -266,7 +262,6 @@
     </div>
 
     <!---------------------------------- Distinctions ------------------------------------->
-
     <div class="container mt-2" id="distinction">
     <p class="font-weight-bold">Évènements distinctifs:</p>
         <div class="row form-group row text-center shadow rounded mb-3 p-1">
@@ -316,9 +311,7 @@
         </div>
     </div>
 <!------------------------------------------------*******------------------------------------------------>
-</form>
 </section>
-<br>
 <br>
 <?php include_once('../includes/pied_view.php'); ?>
 <script type="text/javascript" src="../assets/js/jquery.js"></script>

@@ -56,6 +56,7 @@ $(document).ready(function()
         $('#lieuFormation').val("");
         $('#anneeFormation').val("");
         $('#typeFormation').val("");
+        $('#descriptionFormation').val("");
     });
 
     $("#bouttonFormation .suivant button").click(function()
