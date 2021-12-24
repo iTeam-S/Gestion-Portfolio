@@ -338,3 +338,91 @@ class Personnes extends ConnexionDB
 		$database = null;
 	}
 }
+class Update extends ConnexionDB
+{
+	private $defaultValue = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function updateFormations(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('UPDATE formations 
+				SET lieu = :lieu, annee = :annee, type = :types, description = :descriptions
+				WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("Erreur sur la mise à jours des données dans la table 'formations' ...!<br>:".$e -> getMessage());
+		}
+	}
+
+	public function updateFonctions(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('UPDATE fonctions
+				SET id_poste = :poste WHERE id_membre = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("Erreurs sur la mise à jours des données dans la table 'fonction' ...!<br>:".$e -> getMessage());
+		}
+	}
+
+	public function updateExperiences(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('UPDATE experiences
+				SET nom = :nom, annee = :annee, type = :types, description = :descriptions
+				WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("Erreurs sur la mise à jours des données dans la table 'experiences' ...!<br>:".$e -> getMessage());
+		}
+	}
+
+	public function updateDistinctions(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('UPDATE distinctions
+				SET organisateur = :organisateur, annee = :annee, type = :types, description = :descriptions
+				WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("Erreurs sur la mise à jours des données dans la table 'distinctions' ...!<br>:".$e -> getMessage());
+		}
+	}
+
+	public function updateCompetences(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('UPDATE competences
+				SET nom = :nom, liste = :liste, id_categorie = :categorie
+				WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("Erreurs sur la mise à jours des données dans la table 'competences' ...!<br>:".$e -> getMessage());
+		}
+	}
+}
