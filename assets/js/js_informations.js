@@ -1,5 +1,4 @@
-$(document).ready(function()
-{
+$(document).ready(function(){
     $('#formations').load('show.php #formationsToShow');
     $('#fonctions').load('show.php #fonctionsToShow');
     $('#experiences').load('show.php #experiencesToShow');
@@ -12,8 +11,7 @@ $(document).ready(function()
     var typeFormation = [];
     var descriptionFormation = [];
 
-    $("#ajouterFormations").click(function()
-    {
+    $("#ajouterFormations").click(function(){
         if($('#lieuFormation').val().trim().length !== 0 && $('#anneeFormation').val().trim().length !== 0 && $('#typeFormation').val().trim().length !== 0){
             lieuFormation.push($('#lieuFormation').val());
             anneeFormation.push($('#anneeFormation').val());
@@ -69,8 +67,7 @@ $(document).ready(function()
     var typeExperience = [];
     var descriptionExperiences = [];
 
-    $("#ajouterExperiences").click(function()
-    {
+    $("#ajouterExperiences").click(function(){
         if($('#nomOrganisation').val().trim().length !== 0 && $('#nomOrganisation').val().trim().length !== 0 && $('#typeExperience').val().length !== 0){
             nomOrganisation.push($('#nomOrganisation').val());
             anneeExperience.push($('#anneeExperience').val());
@@ -127,8 +124,7 @@ $(document).ready(function()
     var descriptionDistinction = [];
     var rangDistinction = [];
 
-    $('#ajouterDistinctions').click(function()
-    {
+    $('#ajouterDistinctions').click(function(){
         if($('#organisateurs').val().trim().length !== 0 && $('#anneeDistinction').val().trim().length !== 0 && $('#typeDistinction').val().trim().length !== 0 && $('#rangDistinction').val().trim().length !== 0){
             organisateurs.push($('#organisateurs').val());
             anneeDistinction.push($('#anneeDistinction').val());
@@ -179,8 +175,7 @@ $(document).ready(function()
     var mes_competences = [];
     var descritpionCompetences = [];
 
-    $('#ajouterCompetences').click(function()
-    {
+    $('#ajouterCompetences').click(function(){
         if($('#icones_categories').val().trim().length !== 0 && $('#mes_competences').val().trim().length !== 0 && $('#descritpionCompetences').val().trim().length !== 0){
             icones_categories.push($('#icones_categories').val());
             mes_competences.push($('#mes_competences').val());

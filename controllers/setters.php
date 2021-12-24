@@ -5,7 +5,6 @@ include_once('../models/models.php');
 
 
 $id_membre = null;
-$reponse = False;
 
 $insertion = new InsertionDB(3);
 
@@ -32,8 +31,6 @@ try
 			$fonction -> set_info_fonction($id_membre, $_POST['poste']);
 			$insertion -> inserer_fonction($fonction -> get_info_fonction());
 			unset($fonction);
-
-			$reponse = True;
 		}		
 
 		else
@@ -41,13 +38,11 @@ try
 			header("Location:../views/erreurs/erreurPrenomUsuel.php");
 		}
 	}
-
 	else
 	{
 		$id_membre = $_SESSION['id'];
 	}
 }
-
 catch(Exception $e)
 {
 	die("Erreur dans le controlleur sur l'insertion de membre:<br>".$e -> getMessage());
@@ -76,7 +71,6 @@ if(count($_POST['lieuF']) > 0 && count($_POST['anneeF']) > 0)
 		}
 		unset($data_formation);
 	}
-
 	catch(Exception $e)
 	{
 		die("Erreur sur l'insertion de formation:<br>".$e -> getMessage());
@@ -106,12 +100,10 @@ try
 		unset($data_competence);
 	}
 }
-
 catch(Exception $e)
 {
 	die("Erreur sur l'insertion de competences:<br>".$e -> getMessage());
 }
-
 
 
 //---------------------------------------- Expérience -------------------------------------------------
@@ -137,7 +129,6 @@ if(count($_POST['nomE']) > 0 && count($_POST['anneeE']) > 0)
 		}
 		unset($data_experience);
 	}
-
 	catch(Exception $e)
 	{
 		die("Erreur sur l'insertion des experiences:<br>".$e -> getMessage());
@@ -168,7 +159,6 @@ if(count($_POST['nomD']) > 0 && count($_POST['anneeD']) > 0)
 		}
 		unset($data_distinction);
 	}
-
 	catch(Exception $e)
 	{
 		die("Erreur sur l'insertion des distinctions:<br>".$e -> getMessage());

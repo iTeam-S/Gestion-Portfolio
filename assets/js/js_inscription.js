@@ -7,36 +7,13 @@ $(document).ready(function()
     $('#register').hide();
 
     $("#bouttonMembre button").click(function()
-    {   
-        if($('#nomPersonne').val().trim().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        }
-
-        else if($('#prenomsPersonne').val().trim().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        }
-
-        else if($('#prenomUsuel').val().trim().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        }
-
-        else if($('#telephonePrimo').val().trim().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        }
-
-        else if($('#email').val().trim().length === 0)
-        {
-            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email. Merci !");
-        }
-
-        else
-        {
+    {
+        if($('#nomPersonne').val().trim().length !== 0 && $('#prenomsPersonne').val().trim().length !== 0 && $('#prenomUsuel').val().trim().length !== 0 && $('#telephonePrimo').val().trim().length !== 0 && $('#email').val().trim().length !== 0){
             $("#membre").hide(1000);
             $("#formation").show(1000);
+        }
+        else{
+            alert("Veuillez remplir les champs obligatoires: nom, prenoms, telephone et adresse email.\nMerci !");
         }
     });
 
@@ -296,25 +273,5 @@ $(document).ready(function()
                 alert(data);
             }
         });
-        //------------------- formation ---------------------------
-        // lieuFormation = [];
-        // anneeFormation = [];
-        // typeFormation = [];
-        // descriptionFormation = [];
-        //-------------------- Competences ------------------------
-        // icones_categories = [];
-        // mes_competences = [];
-        // descritpionCompetences = [];
-        //------------------- Experience ------------------------
-        // nomOrganisation = [];
-        // anneeExperience = [];
-        // typeExperience = [];
-        // descriptionExperiences = [];
-        // ------------------ Distinction ------------------------
-        // organisateurs = [];
-        // anneeDistinction = [];
-        // typeDistinction = [];
-        // descriptionDistinction = [];
-        // rangDistinction = [];
     });
 });

@@ -36,9 +36,23 @@
                         placeholder="Votre email ou votre prenom usuel ***" class="form-control" required><br>
 
                 <label for="password"><b>Mot de passe:</b></label>
+                <div class="input-group mb-3">
                     <input type="password" id="password"
-                        placeholder="Mot de passe ***" class="form-control" required><br>
+                        placeholder="Mot de passe ***" class="form-control" required>
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="show_password">
+                            <img id="image_key" src="assets/images/hide.webp" alt="key" width="21" height="21">
+                        </button>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
 
+                        </div>
+                    </div>
+                </div>
+                        
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-12">

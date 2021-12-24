@@ -1,38 +1,38 @@
-$(document).ready(function()
-{
-    $('#inscription').click(function()
-        {
+$(document).ready(function(){
+    $('#inscription').click(function(){
             window.location.href = 'views/inscription.php';
-        });
+    });
 
-    $('#connecter').click(function()
-    {
-        if($('#identifiant').val().trim().length === 0)
-        {
-            alert("Veuillez remplir l'identifiant...!\nMerci...!");
+        // ******************* for hiding or showing the password ********************
+    $('#show_password').click(function(){
+        if($('#password').prop('type') === 'password'){
+            $('#password').prop('type', 'text');
+            $('#image_key').attr('src', 'assets/images/show.png');
         }
-        else if($('#password').val().trim().length === 0)
-        {
-            alert("Veuillez entrer votre mot de passe...!\nMerci...!");
+        else{
+            $('#password').prop('type', 'password');
+            $('#image_key').attr('src', 'assets/images/hide.webp');
         }
-        else
-        {
+    });
+
+    $('#connecter').click(function(){
+        if($('#identifiant').val().trim().length !== 0 && $('#password').val().trim().length !== 0){
             let donnees = {
                 identifiant: $('#identifiant').val(),
                 password: $('#password').val()
             };
-            
             $.post('/Interfaces-portfolio/controllers/login', donnees, function(data)
             {
-                if(data == '1')
-                {
+                if(data == '1'){
                     window.location.href = 'views/informations.php';
                 }
-                else
-                {
+                else{
                     alert(data);
                 }
             });
+        }
+        else{
+            alert("Veuillez entrer votre mot de passe...!\nMerci...!");
         }
     });
 });
