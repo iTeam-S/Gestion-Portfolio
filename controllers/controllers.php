@@ -341,3 +341,192 @@ class CreateJSON
 		echo json_encode($donnees, JSON_FORCE_OBJECT);
 	}
 }
+
+class FormationsUpdate
+{
+	private $defaultValue = null;
+	private $lieu = null;
+	private $annee = null;
+	private $types = null;
+	private $descriptions = null;
+	private $id = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function setFormationsUpdate(string $lieu, string $annee, string $types, string $descriptions, int $id)
+	{
+		$this -> lieu = $lieu;
+		$this -> annee = $annee;
+		$this -> types = $types;
+		$this -> descriptions = $descriptions;
+		$this -> id = $id;
+	}
+
+	public function getFormationsUpdate()
+	{
+		$infos = array(
+			'lieu' => $this -> lieu,
+			'annee' => $this -> annee,
+			'types' => $this -> types,
+			'descriptions' => $this -> descriptions,
+			'id' => $this -> id
+		);
+		return $infos;
+	}
+}
+
+class FonctionsUpdate
+{
+	private $defaultValue = null;
+	private $poste = null;
+	private $id = null;
+	
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function setFonctionsUpdate(int $poste, int $id)
+	{
+		$this -> poste = $poste;
+		$this -> id = $id;
+	}
+
+	public function getFonctionsUpdate()
+	{
+		$infos = array(
+			'poste' => $this -> poste,
+			'id' => $this -> id
+		);
+		return $infos;
+	}
+}
+
+class ExperiencesUpdate
+{
+	private $defaultValue = null;
+	private $nom = null;
+	private $annee = null;
+	private $types = null;
+	private $descriptions = null;
+	private $id = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = null;
+	}
+
+	public function setExperiencesUpdate(string $nom, string $annee, string $types, string $descriptions, int $id)
+	{
+		$this -> nom = $nom;
+		$this -> annee = $annee;
+		$this -> types = $types;
+		$this -> descriptions = $descriptions;
+		$this -> id = $id;
+	}
+
+	public function getExperiencesUpdate()
+	{
+		$infos = array(
+			'nom' => $this -> nom,
+			'annee' => $this -> annee,
+			'types' => $this -> types,
+			'descriptions' => $this -> descriptions,
+			'id' => $this -> id
+		);
+		return $infos;
+	}
+}
+
+class DistinctionsUpdate
+{
+	private $defaultValue = null;
+	private $organisateur = null;
+	private $annee = null;
+	private $types = null;
+	private $descriptions = null;
+	private $id = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function setDistinctionsUpdate(string $organisateur, string $annee, string $types, string $descriptions, int $id)
+	{
+		$this -> organisateur = $organisateur;
+		$this -> annee = $annee;
+		$this -> types = $types;
+		$this -> descriptions = $descriptions;
+		$this -> id = $id;
+	}
+
+	public function getDistinctionsUpdate()
+	{
+		$infos = array(
+			'organisateur' => $this -> organisateur,
+			'annee' => $this -> annee,
+			'types' => $this -> types,
+			'descriptions' => $this -> descriptions,
+			'id' => $this -> id
+		);
+		return $infos;
+	}
+}
+
+class CompetencesUpdate
+{
+	private $defaultValue = null;
+	private $nom = null;
+	private $liste = null;
+	private $id_categorie = null;
+	private $id = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function setCompetencesUpdate(string $nom, string $liste, int $id_categorie, int $id)
+	{
+		$this -> nom = $nom;
+		$this -> liste = $liste;
+		$this -> id_categorie = $id_categorie;
+		$this -> id = $id;
+	}
+
+	public function getCompetencesUpdate()
+	{
+		$infos = array(
+			'nom' => $this -> nom,
+			'liste' => $this -> liste,
+			'id_categerie' => $this -> id_categorie,
+			'id' => $this -> id
+		);
+		return $infos;
+	}
+}
+
+class InformationsSuppression
+{
+	private $defaultValue = null;
+	private $id = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function setId(int $id)
+	{
+		$this -> id = $id;
+	}
+
+	public function getId()
+	{
+		return array('id' => $this -> id);
+	}
+}

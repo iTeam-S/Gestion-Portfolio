@@ -236,7 +236,7 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-				$reponse = $database -> prepare('SELECT f.lieu, f.annee, f.type, f.description
+				$reponse = $database -> prepare('SELECT f.id, f.lieu, f.annee, f.type, f.description
 					FROM formations f JOIN membre m ON f.id_membre = m.id
 					WHERE m.id = :id');
 			$reponse -> execute($donnees);
@@ -279,7 +279,7 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT e.nom, e.annee, e.type, e.description
+			$reponse = $database -> prepare('SELECT e.id, e.nom, e.annee, e.type, e.description
 				FROM experiences e JOIN membre m ON e.id_membre = m.id
 				WHERE m.id = :id');
 			$reponse -> execute($donnees);
@@ -300,7 +300,7 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT d.organisateur, d.annee, d.type, d.description, d.ordre
+			$reponse = $database -> prepare('SELECT d.id, d.organisateur, d.annee, d.type, d.description, d.ordre
 				FROM distinctions d JOIN membre m ON d.id_membre = m.id
 				WHERE m.id = :id');
 			$reponse -> execute($donnees);
@@ -321,7 +321,7 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT c.nom, c.liste, LOWER(cc.categorie) as categorie
+			$reponse = $database -> prepare('SELECT c.id, c.nom, c.liste, LOWER(cc.categorie) as categorie
 				FROM competences c 
 				JOIN membre m ON c.id_membre = m.id
 				JOIN categorie_competence cc ON cc.id = c.id_categorie
@@ -338,6 +338,7 @@ class Personnes extends ConnexionDB
 		$database = null;
 	}
 }
+
 class Update extends ConnexionDB
 {
 	private $defaultValue = null;
@@ -423,6 +424,72 @@ class Update extends ConnexionDB
 		catch(PDOException $e)
 		{
 			die("Erreurs sur la mise à jours des données dans la table 'competences' ...!<br>:".$e -> getMessage());
+		}
+	}
+}
+
+class Suppression extends ConnexionDB
+{
+	private $defaultValue = null;
+
+	public function __construct(int $nombre)
+	{
+		$this -> defaultValue = $nombre;
+	}
+
+	public function deleteFormations(array $donnees)
+	{
+		try
+		{
+			$database = Connexion::db_connect();
+			$requete = $database -> prepare('DELETE FROM formations WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("La suppression dans la table 'formations' n'a pas pu être effectuer !<br>".$e -> getMessage());
+		}
+	}
+
+	public function deleteExperiences(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('DELETE FROM experiences WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("La suppression dans la table 'experiences' n'a pas pu être effectuer !<br>".$e -> getMessage());
+		}
+	}
+
+	public function deleteDistinctions(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('DELETE FROM distinctions WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException  $e)
+		{
+			die("La suppression dans la table 'distinctions' n'a pas pu être effectuer !<br>".$e -> getMessage());
+		}
+	}
+
+	public function deleteCompetences(array $donnees)
+	{
+		try
+		{
+			$database = ConnexionDB::db_connect();
+			$requete = $database -> prepare('DELETE FROM competences WHERE id = :id');
+			$requete -> execute($donnees);
+		}
+		catch(PDOException $e)
+		{
+			die("La suppression dans la table 'competences' n'a pas pu être effectuer !<br>".$e -> getMessage());
 		}
 	}
 }

@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('#inscription').click(function(){
-            window.location.href = 'views/inscription.php';
+        window.location.href = 'views/inscription.php';
     });
 
         // ******************* for hiding or showing the password ********************
