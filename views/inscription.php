@@ -1,4 +1,4 @@
-<?php include_once('../includes/entete_view.php'); ?>
+<?php include_once('../includes/entete.php'); ?>
 <section class="pt-5 mt-4">
     <div class="container mt-3" id="membre">
     <p class="font-weight-bold">Indentité:</p>
@@ -283,7 +283,7 @@
     </div>
 </section>
 <br>
-<?php include_once('../includes/pied_view.php'); ?>
+<?php include_once('../includes/pied.php'); ?>
 <script type="text/javascript" src="../assets/js/jquery.js"></script>
 <script type="text/javascript" src="../assets/js/popper.js"></script>
 <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>

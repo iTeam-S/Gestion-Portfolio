@@ -1,6 +1,33 @@
 <?php
-session_start();    
-?>
+session_start();?>
+<!-- les fonctions d'une personne -->
+<div id="fonctionsToShow">
+    <p class="mt-3">Ma fonction:</p>
+    <?php 
+        $fonctions = json_decode(file_get_contents('http://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/fonctions/'.$_SESSION['id']), true);
+    ?>
+    <table class="table table-bordered table-hover shadow">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center" scope="col">Fonction</th>
+                <th class="text-center text-warning rounded" scope="col">Modifier</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($fonctions as $fonction):?>
+                <tr>
+                    <td><?= $fonction['nom']?></td>
+                    <td class="text-center rounded bg-light shadow">
+                        <button class="btn btn-warning" type="button">
+                            <img src="../assets/images/modifier.png" alt="modifier" width="30" height="30">
+                        </button> 
+                    </td>  
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</div>
+
 <!-- les formations qui vont s'afficher -->
 <div id="formationsToShow">
     <p class="mt-3">Mes formations:</p>
@@ -36,40 +63,6 @@ session_start();
                     </button>
                 </td> 
             </tr>
-            <?php endforeach;?>
-        </tbody>
-    </table>
-</div>
-
-<!-- les fonctions d'une personne -->
-<div id="fonctionsToShow">
-    <p class="mt-3">Ma fonction:</p>
-    <?php 
-        $fonctions = json_decode(file_get_contents('http://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/fonctions/'.$_SESSION['id']), true);
-    ?>
-    <table class="table table-bordered table-hover shadow">
-        <thead class="thead-light">
-            <tr>
-                <th class="text-center" scope="col">Fonction</th>
-                <th class="text-center text-warning rounded" scope="col">Modifier</th>
-                <th class="text-center text-danger rounded" scope="col">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($fonctions as $fonction):?>
-                <tr>
-                    <td><?= $fonction['nom']?></td>
-                    <td class="text-center rounded bg-light shadow">
-                        <button class="btn btn-warning" type="button">
-                            <img src="../assets/images/modifier.png" alt="modifier" width="30" height="30">
-                        </button> 
-                    </td>  
-                    <td class="text-center rounded bg-light shadow">
-                        <button class="btn btn-danger" type="button">
-                            <img src="../assets/images/supprimer.png" alt="supprimer" width="30" height="30">
-                        </button>
-                    </td> 
-                </tr>
             <?php endforeach;?>
         </tbody>
     </table>
@@ -195,5 +188,3 @@ session_start();
         </tbody>
     </table>
 </div>
-<script type="text/javascript" src="../assets/js/jquery.js"></script>
-<script type="text/javascript" src="../assets/js/js_show.js"></script>

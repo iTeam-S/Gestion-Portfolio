@@ -11,8 +11,16 @@ try
                 require_once('./login.php');
             break;
 
-            case "setters":
-                require_once('./setters.php');
+            case "adding":
+                require_once('./adding.php');
+            break;
+            
+            case "deletes":
+                require_once('./deletes.php');
+            break;
+
+            case "updates":
+                require_once('./updates.php');
             break;
 
             case "getters":
@@ -43,8 +51,7 @@ try
                     }
                     else
                     {
-                        throw new Exception("Aucun ID n'a été passé sur l'URL...!", 404);
-                        
+                        throw new Exception("Aucun ID n'a été passé sur l'URL...!", 404);   
                     }
                 }
                 else

@@ -313,7 +313,7 @@ class PersonneId
 
 	public function set_personne_id($id)
 	{
-		$this -> id = $id;
+		$this -> id = strip_tags($id);
 	}
 
 	public function get_personne_id()
@@ -358,11 +358,11 @@ class FormationsUpdate
 
 	public function setFormationsUpdate(string $lieu, string $annee, string $types, string $descriptions, int $id)
 	{
-		$this -> lieu = $lieu;
-		$this -> annee = $annee;
-		$this -> types = $types;
-		$this -> descriptions = $descriptions;
-		$this -> id = $id;
+		$this -> lieu = strip_tags($lieu);
+		$this -> annee = strip_tags($annee);
+		$this -> types = strip_tags($types);
+		$this -> descriptions = strip_tags($descriptions);
+		$this -> id = strip_tags($id);
 	}
 
 	public function getFormationsUpdate()
@@ -391,8 +391,8 @@ class FonctionsUpdate
 
 	public function setFonctionsUpdate(int $poste, int $id)
 	{
-		$this -> poste = $poste;
-		$this -> id = $id;
+		$this -> poste = strip_tags($poste);
+		$this -> id = strip_tags($id);
 	}
 
 	public function getFonctionsUpdate()
@@ -421,11 +421,11 @@ class ExperiencesUpdate
 
 	public function setExperiencesUpdate(string $nom, string $annee, string $types, string $descriptions, int $id)
 	{
-		$this -> nom = $nom;
-		$this -> annee = $annee;
-		$this -> types = $types;
-		$this -> descriptions = $descriptions;
-		$this -> id = $id;
+		$this -> nom = strip_tags($nom);
+		$this -> annee = strip_tags($annee);
+		$this -> types = strip_tags($types);
+		$this -> descriptions = strip_tags($descriptions);
+		$this -> id = strip_tags($id);
 	}
 
 	public function getExperiencesUpdate()
@@ -448,6 +448,7 @@ class DistinctionsUpdate
 	private $annee = null;
 	private $types = null;
 	private $descriptions = null;
+	private $ordre = null;
 	private $id = null;
 
 	public function __construct(int $nombre)
@@ -455,13 +456,21 @@ class DistinctionsUpdate
 		$this -> defaultValue = $nombre;
 	}
 
-	public function setDistinctionsUpdate(string $organisateur, string $annee, string $types, string $descriptions, int $id)
+	public function setDistinctionsUpdate(string $organisateur, string $annee, string $types, string $descriptions, int $ordre, int $id)
 	{
-		$this -> organisateur = $organisateur;
-		$this -> annee = $annee;
-		$this -> types = $types;
-		$this -> descriptions = $descriptions;
-		$this -> id = $id;
+		$this -> organisateur = strip_tags($organisateur);
+		$this -> annee = strip_tags($annee);
+		$this -> types = strip_tags($types);
+		$this -> descriptions = strip_tags($descriptions);
+		$this -> id = strip_tags($id);
+		if(!empty(trim($ordre)))
+		{
+			$this -> ordre = strip_tags($ordre);
+		}
+		else
+		{
+			$this -> ordre = 0;
+		}
 	}
 
 	public function getDistinctionsUpdate()
@@ -471,6 +480,7 @@ class DistinctionsUpdate
 			'annee' => $this -> annee,
 			'types' => $this -> types,
 			'descriptions' => $this -> descriptions,
+			'ordre' => $this -> ordre,
 			'id' => $this -> id
 		);
 		return $infos;
@@ -492,10 +502,10 @@ class CompetencesUpdate
 
 	public function setCompetencesUpdate(string $nom, string $liste, int $id_categorie, int $id)
 	{
-		$this -> nom = $nom;
-		$this -> liste = $liste;
-		$this -> id_categorie = $id_categorie;
-		$this -> id = $id;
+		$this -> nom = strip_tags($nom);
+		$this -> liste = strip_tags($liste);
+		$this -> id_categorie = strip_tags($id_categorie);
+		$this -> id = strip_tags($id);
 	}
 
 	public function getCompetencesUpdate()
@@ -522,7 +532,7 @@ class InformationsSuppression
 
 	public function setId(int $id)
 	{
-		$this -> id = $id;
+		$this -> id = strip_tags($id);
 	}
 
 	public function getId()

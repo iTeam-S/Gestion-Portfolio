@@ -1,10 +1,4 @@
 $(document).ready(function(){
-    $('#formations').load('show.php #formationsToShow');
-    $('#fonctions').load('show.php #fonctionsToShow');
-    $('#experiences').load('show.php #experiencesToShow');
-    $('#distinctions').load('show.php #distinctionsToShow');
-    $('#competences').load('show.php #competencesToShow');
-
     // ******************** les informations pour les formations *********************
     var lieuFormation = [];
     var anneeFormation = [];
@@ -40,7 +34,7 @@ $(document).ready(function(){
                 typeF: typeFormation,
                 descriptionF: descriptionFormation
             };
-            $.post('/Interfaces-portfolio/controllers/setters', donnees, function(data, status){
+            $.post('/Interfaces-portfolio/controllers/adding', donnees, function(data, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -49,7 +43,11 @@ $(document).ready(function(){
                     anneeFormation = [];
                     typeFormation = [];
                     descriptionFormation = [];
-                    $('#formations').load('show.php #formationsToShow');
+                    $('#lieuFormation').val("");
+                    $('#anneeFormation').val("");
+                    $('#typeFormation').val("");
+                    $('#descriptionFormation').val("");
+                    $('#formationsToShow').load('informations.php #formationsToShow');
                 }
                 else{
                     console.log(data);
@@ -96,7 +94,7 @@ $(document).ready(function(){
                 typeE: typeExperience,
                 descriptionE: descriptionExperiences
             };
-            $.post('Interfaces-portfolio/controllers/setters', donnees, function(data, status){
+            $.post('Interfaces-portfolio/controllers/adding', donnees, function(data, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -105,7 +103,11 @@ $(document).ready(function(){
                     anneeExperience = [];
                     typeExperience = [];
                     descriptionExperiences = [];
-                    $('#experiences').load('show.php #experiencesToShow');
+                    $('#nomOrganisation').val("");
+                    $('#anneeExperience').val("");
+                    $('#typeExperience').val("");
+                    $('#descriptionExperiences').val("");
+                    $('#experiencesToShow').load('informations.php #experiencesToShow');
                 }
                 else{
                     console.log(data);
@@ -117,6 +119,7 @@ $(document).ready(function(){
         }
     });
 
+    
     // ************************** les informations pour les distinctions *******************************
     var organisateurs = [];
     var anneeDistinction = [];
@@ -151,7 +154,7 @@ $(document).ready(function(){
                 descriptionD: descriptionDistinction,
                 rangD: rangDistinction
             };
-            $.post('Interfaces-portfolio/controllers/setters', donnees, function(data, status){
+            $.post('Interfaces-portfolio/controllers/adding', donnees, function(data, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -161,7 +164,12 @@ $(document).ready(function(){
                     typeDistinction = [];
                     descriptionDistinction = [];
                     rangDistinction = [];
-                    $('#distinctions').load('show.php #distinctionsToShow');
+                    $('#organisateurs').val("");
+                    $('#anneeDistinction').val("");
+                    $('#typeDistinction').val("");
+                    $('#descriptionDistinction').val("");
+                    $('#rangDistinction').val("");
+                    $('#distinctionsToShow').load('informations.php #distinctionsToShow');
                 }
             });
         }
@@ -196,7 +204,7 @@ $(document).ready(function(){
                 competences: mes_competences,
                 descriptionC: descritpionCompetences
             };
-            $.post('Interfaces-portfolio/controllers/setters', donnees, function(sata, status){
+            $.post('Interfaces-portfolio/controllers/adding', donnees, function(sata, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -204,7 +212,10 @@ $(document).ready(function(){
                     icones_categories = [];
                     mes_competences = [];
                     descritpionCompetences = [];
-                    $('#competences').load('show.php #competencesToShow');
+                    $('#icones_categories').val("0");
+                    $('#mes_competences').val("");
+                    $('#descritpionCompetences').val("");
+                    $('#competencesToShow').load('informations.php #competencesToShow');
                 }
             });
         }

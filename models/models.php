@@ -257,7 +257,7 @@ class Personnes extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$reponse = $database -> prepare('SELECT p.nom FROM poste p 
+			$reponse = $database -> prepare('SELECT f.id, p.nom FROM poste p 
 				JOIN fonction f ON p.id = f.id_poste 
 				JOIN membre m ON f.id_membre = m.id 
 				WHERE m.id = :id');
@@ -369,8 +369,8 @@ class Update extends ConnexionDB
 		try
 		{
 			$database = ConnexionDB::db_connect();
-			$requete = $database -> prepare('UPDATE fonctions
-				SET id_poste = :poste WHERE id_membre = :id');
+			$requete = $database -> prepare('UPDATE fonction
+				SET id_poste = :poste WHERE id = :id');
 			$requete -> execute($donnees);
 		}
 		catch(PDOException $e)
@@ -401,7 +401,7 @@ class Update extends ConnexionDB
 		{
 			$database = ConnexionDB::db_connect();
 			$requete = $database -> prepare('UPDATE distinctions
-				SET organisateur = :organisateur, annee = :annee, type = :types, description = :descriptions
+				SET organisateur = :organisateur, annee = :annee, type = :types, description = :descriptions, ordre = :ordre
 				WHERE id = :id');
 			$requete -> execute($donnees);
 		}
@@ -441,7 +441,7 @@ class Suppression extends ConnexionDB
 	{
 		try
 		{
-			$database = Connexion::db_connect();
+			$database = ConnexionDB::db_connect();
 			$requete = $database -> prepare('DELETE FROM formations WHERE id = :id');
 			$requete -> execute($donnees);
 		}

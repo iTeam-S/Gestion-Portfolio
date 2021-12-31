@@ -32,7 +32,7 @@ $(document).ready(function(){
             });
         }
         else{
-            alert("Veuillez entrer votre mot de passe...!\nMerci...!");
+            alert("Veuillez entrer votre identifiant et votre mot de passe...!\n\t\t\tMerci...!");
         }
     });
 });
