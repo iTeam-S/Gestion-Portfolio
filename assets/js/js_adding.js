@@ -47,7 +47,7 @@ $(document).ready(function(){
                     $('#anneeFormation').val("");
                     $('#typeFormation').val("");
                     $('#descriptionFormation').val("");
-                    $('#formationsToShow').load('informations.php #formationsToShow');
+                    $('#formationsToShow').load('#formationsToShow');
                 }
                 else{
                     console.log(data);
@@ -107,7 +107,7 @@ $(document).ready(function(){
                     $('#anneeExperience').val("");
                     $('#typeExperience').val("");
                     $('#descriptionExperiences').val("");
-                    $('#experiencesToShow').load('informations.php #experiencesToShow');
+                    $('#experiencesToShow').load('#experiencesToShow');
                 }
                 else{
                     console.log(data);
@@ -169,7 +169,7 @@ $(document).ready(function(){
                     $('#typeDistinction').val("");
                     $('#descriptionDistinction').val("");
                     $('#rangDistinction').val("");
-                    $('#distinctionsToShow').load('informations.php #distinctionsToShow');
+                    $('#distinctionsToShow').load('#distinctionsToShow');
                 }
             });
         }
@@ -215,7 +215,7 @@ $(document).ready(function(){
                     $('#icones_categories').val("0");
                     $('#mes_competences').val("");
                     $('#descritpionCompetences').val("");
-                    $('#competencesToShow').load('informations.php #competencesToShow');
+                    $('#competencesToShow').load('#competencesToShow');
                 }
             });
         }

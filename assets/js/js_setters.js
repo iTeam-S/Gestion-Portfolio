@@ -34,7 +34,7 @@ $(document).ready(function(){
         $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
-                $('#formationsToShow').load('informations.php #formationsToShow');
+                $('#formationsToShow').load('#formationsToShow');
                 $('#updateFormations').hide();
             }
             else{
@@ -74,7 +74,7 @@ $(document).ready(function(){
         $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
             if(status == 'success' && data == '1'){
                 console.log(status);
-                $('#experiencesToShow').load('informations.php #experiencesToShow');
+                $('#experiencesToShow').load('#experiencesToShow');
                 $('#updateExperiences').hide();
             }
             else{
@@ -116,7 +116,7 @@ $(document).ready(function(){
         $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
-                $('#distinctionsToShow').load('informations.php #distinctionsToShow');
+                $('#distinctionsToShow').load('#distinctionsToShow');
                 $('#updateDistinctions').hide();
             }
             else{
@@ -154,7 +154,7 @@ $(document).ready(function(){
             };
             $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
                 if(status == "success" && data == '1'){
-                    $('#competencesToShow').load('informations.php #competencesToShow');
+                    $('#competencesToShow').load('#competencesToShow');
                     $('#updateCompetences').hide();
                 }
                 else{
@@ -190,7 +190,7 @@ $(document).ready(function(){
             console.log(donnees);
             $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
                 if(status == 'success' && data == '1'){
-                    $('#fonctionsToShow').load('informations.php #fonctionsToShow');
+                    $('#fonctionsToShow').load('#fonctionsToShow');
                     $('#fonctionsModal').modal('hide');
                 }
                 else{
