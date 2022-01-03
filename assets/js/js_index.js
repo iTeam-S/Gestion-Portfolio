@@ -21,7 +21,7 @@ $(document).ready(function(){
                 identifiant: $('#identifiant').val(),
                 password: $('#password').val()
             };
-            $.post('/Interfaces-portfolio/controllers/login', donnees, function(data)
+            $.post('/controllers/login', donnees, function(data)
             {
                 if(data == '1'){
                     window.location.href = 'views/informations.php';

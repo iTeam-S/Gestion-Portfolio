@@ -260,7 +260,7 @@ $(document).ready(function()
             poste: $('#poste').val()
         };
         // console.log(donnees);
-        $.post("/Interfaces-portfolio/controllers/adding", donnees, function(data, status)
+        $.post("/controllers/adding", donnees, function(data, status)
         {
             if(status == 'success')
             {

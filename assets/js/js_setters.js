@@ -31,7 +31,7 @@ $(document).ready(function(){
             descriptionUpdateFormations: $('#descriptionUpdateFormations').val(),
             idFormationsUpdate: idUpdateFormations
         };
-        $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
+        $.post('/controllers/updates', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
                 $('#formationsToShow').load('informations.php #formationsToShow');
@@ -71,7 +71,7 @@ $(document).ready(function(){
             descriptionUpdateExperiences: $('#descriptionUpdateExperiences').val(),
             idExperiencesUpdate: idUpdateExperiences
         };
-        $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
+        $.post('/controllers/updates', donnees, function(data, status){
             if(status == 'success' && data == '1'){
                 console.log(status);
                 $('#experiencesToShow').load('informations.php #experiencesToShow');
@@ -113,7 +113,7 @@ $(document).ready(function(){
             ordreUpdateDistinctions: $('#ordreUpdateDistinctions').val(),
             idDistinctionsUpdate: idUpdateDistinctions
         };
-        $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
+        $.post('/controllers/updates', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
                 $('#distinctionsToShow').load('informations.php #distinctionsToShow');
@@ -152,7 +152,7 @@ $(document).ready(function(){
                 categorie: $('#iconeUpdateCompetences').val(),
                 idCompetencesUpdate: idUpdateCompetences
             };
-            $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
+            $.post('/controllers/updates', donnees, function(data, status){
                 if(status == "success" && data == '1'){
                     $('#competencesToShow').load('informations.php #competencesToShow');
                     $('#updateCompetences').hide();
@@ -188,7 +188,7 @@ $(document).ready(function(){
                 idFonctionsUpdate: idUpdateFonctions
             };
             console.log(donnees);
-            $.post('/Interfaces-portfolio/controllers/updates', donnees, function(data, status){
+            $.post('/controllers/updates', donnees, function(data, status){
                 if(status == 'success' && data == '1'){
                     $('#fonctionsToShow').load('informations.php #fonctionsToShow');
                     $('#fonctionsModal').modal('hide');
@@ -216,7 +216,7 @@ $(document).ready(function(){
         let donnees = {
             dataFormations: idSupprimerFormations[1]
         };
-        $.post('/Interfaces-portfolio/controllers/deletes', donnees, function(data, status){
+        $.post('/controllers/deletes', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
             }
@@ -235,7 +235,7 @@ $(document).ready(function(){
         let donnees = {
             dataExperiences: idSupprimerExperiences[1]
         };
-        $.post('/Interfaces-portfolio/controllers/deletes', donnees, function(data, status){
+        $.post('/controllers/deletes', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
             }
@@ -254,7 +254,7 @@ $(document).ready(function(){
         let donnees = {
             dataDistinctions: idSupprimerDistinctions[1]
         };
-        $.post('/Interfaces-portfolio/controllers/deletes', donnees, function(data, status){
+        $.post('/controllers/deletes', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
             }
@@ -273,7 +273,7 @@ $(document).ready(function(){
         let donnees = {
             dataCompetences: idSupprimerCompetences
         };
-        $.post('/Interfaces-portfolio/controllers/deletes', donnees, function(data, status){
+        $.post('/controllers/deletes', donnees, function(data, status){
             if(status == "success" && data == '1'){
                 console.log(status);
             }

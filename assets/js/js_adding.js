@@ -34,7 +34,7 @@ $(document).ready(function(){
                 typeF: typeFormation,
                 descriptionF: descriptionFormation
             };
-            $.post('/Interfaces-portfolio/controllers/adding', donnees, function(data, status){
+            $.post('/controllers/adding', donnees, function(data, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -94,7 +94,7 @@ $(document).ready(function(){
                 typeE: typeExperience,
                 descriptionE: descriptionExperiences
             };
-            $.post('Interfaces-portfolio/controllers/adding', donnees, function(data, status){
+            $.post('/controllers/adding', donnees, function(data, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -154,7 +154,7 @@ $(document).ready(function(){
                 descriptionD: descriptionDistinction,
                 rangD: rangDistinction
             };
-            $.post('Interfaces-portfolio/controllers/adding', donnees, function(data, status){
+            $.post('/controllers/adding', donnees, function(data, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');
@@ -204,7 +204,7 @@ $(document).ready(function(){
                 competences: mes_competences,
                 descriptionC: descritpionCompetences
             };
-            $.post('Interfaces-portfolio/controllers/adding', donnees, function(sata, status){
+            $.post('/controllers/adding', donnees, function(sata, status){
                 if(status == "success"){
                     console.log(donnees);
                     alert('Sauvegarder avec succès !!!');

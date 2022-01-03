@@ -14,7 +14,7 @@ if(!empty($_SESSION['id']))
                 <div id="fonctionsToShow">
                     <p class="mt-3">Ma fonction:</p>
                     <?php 
-                        $fonctions = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/fonctions/'.$_SESSION['id']), true);
+                        $fonctions = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/controllers/getters/fonctions/'.$_SESSION['id']), true);
                     ?>
                     <table class="table table-bordered table-hover shadow">
                         <thead class="thead-light">
@@ -87,7 +87,7 @@ if(!empty($_SESSION['id']))
                 <div id="formationsToShow">
                     <p class="mt-3">Mes formations:</p>
                     <?php 
-                        $formations = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/formations/'.$_SESSION["id"]), true);
+                        $formations = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/controllers/getters/formations/'.$_SESSION["id"]), true);
                     ?>
                     <table class="table table-bordered table-hover shadow">
                         <thead class="thead-light">
@@ -218,7 +218,7 @@ if(!empty($_SESSION['id']))
                 <div id="experiencesToShow">
                     <p class="mt-3">Mes expériences:</p>
                     <?php 
-                        $experiences = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/experiences/'.$_SESSION['id']), true);
+                        $experiences = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/controllers/getters/experiences/'.$_SESSION['id']), true);
                     ?>
                     <table class="table table-bordered table-hover shadow rounded">
                         <thead class="thead-light">
@@ -348,7 +348,7 @@ if(!empty($_SESSION['id']))
                 <div id="distinctionsToShow">
                     <p class="mt-3">Mes distinctions:</p>
                     <?php 
-                        $distinctions = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/distinctions/'.$_SESSION['id']), true);
+                        $distinctions = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/controllers/getters/distinctions/'.$_SESSION['id']), true);
                     ?>
                     <table class="table table-bordered table-hover shadow rounded">
                         <thead class="thead-light">
@@ -486,7 +486,7 @@ if(!empty($_SESSION['id']))
                 <!-- les competences d'une personne -->
                 <div id="competencesToShow">
                     <?php 
-                        $competences = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/Interfaces-portfolio/controllers/getters/competences/'.$_SESSION['id']), true);
+                        $competences = json_decode(file_get_contents((isset($_SERVER['HTTPS'])?"https":"http").'://'.$_SERVER['SERVER_NAME'].'/controllers/getters/competences/'.$_SESSION['id']), true);
                     ?>
                     <p class="mt-3">Mes competences:</p>
                     <table class="table table-bordered table-hover shadow">
