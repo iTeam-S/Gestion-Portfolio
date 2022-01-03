@@ -12,7 +12,7 @@ class ConnexionDB
 	{
 		try
 		{
-			$database = new PDO('mysql:host=iteam-s.mg; dbname=ITEAMS; charset=utf8', 'lahatra', '__Lhtr21__',
+			$database = new PDO('mysql:host=; dbname=; charset=utf8', '', '',
 				array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 			);
 			return $database;
