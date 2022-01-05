@@ -27,7 +27,7 @@ $(document).ready(function(){
                     window.location.href = 'views/informations.php';
                 }
                 else{
-                    console.log(data);
+                    alert(data);
                 }
             });
         }
