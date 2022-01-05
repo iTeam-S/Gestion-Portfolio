@@ -21,13 +21,13 @@ $(document).ready(function(){
                 identifiant: $('#identifiant').val(),
                 password: $('#password').val()
             };
-            $.post('/controllers/login', donnees, function(data)
+            $.post('/controllers/index.php?demande=login', donnees, function(data)
             {
                 if(data == '1'){
                     window.location.href = 'views/informations.php';
                 }
                 else{
-                    alert(data);
+                    console.log(data);
                 }
             });
         }

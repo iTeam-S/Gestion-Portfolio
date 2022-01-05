@@ -6,9 +6,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 try
 {
-    if(!empty($_GET['requete']))
+    if(!empty($_GET['demande']))
     {
-        $url = explode("/", filter_var($_GET['requete']), FILTER_SANITIZE_URL);
+        $url = explode("/", filter_var($_GET['demande']), FILTER_SANITIZE_URL);
 
         switch($url[0])
         {

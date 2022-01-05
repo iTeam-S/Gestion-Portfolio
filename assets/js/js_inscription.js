@@ -260,7 +260,7 @@ $(document).ready(function()
             poste: $('#poste').val()
         };
         // console.log(donnees);
-        $.post("/controllers/adding", donnees, function(data, status)
+        $.post("/controllers/index.php?demande=adding", donnees, function(data, status)
         {
             if(status == 'success')
             {
@@ -271,7 +271,7 @@ $(document).ready(function()
             else
             {
                 alert(data);
-            }
+            }   
         });
     });
 });
