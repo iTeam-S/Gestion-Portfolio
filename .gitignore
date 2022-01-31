@@ -1,1 +1,3 @@
 ITEAMS.sql
+.gitignore
+api/models/models_.php
