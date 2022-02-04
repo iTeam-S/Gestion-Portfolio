@@ -86,6 +86,36 @@ class Membre extends Database {
         }
         $database = null;
     }
+
+    public function updateMembre(array $donnees) {
+        try {
+            $database = Database::db_connect();
+            $demande = $database -> prepare('');
+        }
+        catch(PDOException $e) {
+            $database -> rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: la mise n'a pas été effectuer !".$e -> getMessage()
+            ]));
+        }
+    }
+
+    public function deleteMembre(array $donnees) {
+        try {
+            $database = Database::db_connect();
+            $demande = $database -> prepare('DELETE FROM membre WHERE id = :identifiant');
+            $demande -> execute($donnees);
+            $database -> commit();
+        }
+        catch(PDOException $e) {
+            $database -> rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: la suppression n'a pas été effectuer !".$e -> getMessage()
+            ]));
+        }
+    }
 }
 
 class Formations extends Database {
