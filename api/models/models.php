@@ -38,7 +38,7 @@ class Membre extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Membre Tout' !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
         $database = null;
     }
@@ -62,7 +62,7 @@ class Membre extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Membre' !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
         $database = null;
     }
@@ -82,7 +82,7 @@ class Membre extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu ajouter 'Membre' !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
         $database = null;
     }
@@ -90,14 +90,21 @@ class Membre extends Database {
     public function updateMembre(array $donnees) {
         try {
             $database = Database::db_connect();
-            $demande = $database -> prepare('');
+            $demande = $database -> prepare("UPDATE membre 
+                SET user_github = :github, tel1 = :phone1,
+                tel2 = :phone2, mail = :mail, facebook = :facebook
+                linkedin = :linkedin, adresse = :adresse, 
+                `description` = :'description', `function` = :'fonction'
+            ");
+            $demande -> execute($donnees);
+            $database -> commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: la mise n'a pas été effectuer !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
     }
 
@@ -113,7 +120,7 @@ class Membre extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: la suppression n'a pas été effectuer !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
     }
 }
@@ -136,7 +143,7 @@ class Formations extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Formations Tout' !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
         $database = null;
     }
@@ -160,7 +167,7 @@ class Formations extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Formations' !".$e -> getMessage()
-            ]));
+            ], JSON_FORCE_OBJECT));
         }
         $database = null;
     }
@@ -259,6 +266,36 @@ class Fonction extends Database {
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
+        }
+    }
+
+    public function addFonction(array $donnees) {
+        try {
+            $database = Database::db_connect();
+            $demande = $database -> prepare("INSERT INTO fonction(id_membre, id_poste)
+                VALUES(:idMembre, idPoste)
+            ");
+            $demande -> execute($donnees);
+        }
+        catch(PDOException $e) {
+            $database -> rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreu: on a pas pu ajouter de fonction !".$e -> getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+    }
+
+    public function update(array $donnees) {
+        try {
+
+        }
+        catch(PDOException $e) {
+            $database -> rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreu: on a pas pu mettre à jours fonction !".$e -> getMessage()
+            ], JSON_FORCE_OBJECT));   
         }
     }
 }
