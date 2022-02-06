@@ -56,7 +56,7 @@
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-12">
-                            <button id="connecter" type="button" class="btn btn-success">Se connecter</button>
+                            <button id="connecter" type="button" class="btn btn-success">Se connecter</a></button>
                         </div>
                         <div class="col-12 text-right">
                             <button id="inscription" type="button" class="btn btn-link">S'inscrire</button>

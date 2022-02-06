@@ -25,14 +25,18 @@
 					</button>
 					<div id="navbarContent" class="collapse navbar-collapse">
 						<ul class="navbar-nav">
-							<li class="nav-item active">
+							<li class="nav-item active if id=1">
 								<a href="inscription.php" class="nav-link">Inscription</a>
-							</li>			
-							<li class="nav-item">
-								<a href="../index.php" class="nav-link"> Mise à jour</a>
-							</li>						
+							</li>										
 						</ul>
 					</div>
+                    <di>
+                        <ul class="navbar-nav">
+                            <li>
+					            <a href="../includes/logout.php" class="nav-link">Logout</a>	
+                            </li>
+                        </ul>						
+                    </div>
                 </nav>
             </div>
         </div>
