@@ -27,8 +27,8 @@ class Membre extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> query('SELECT id, nom, prenom, prenom_usuel, user_github, 
-                 user_github_pic, tel1, tel2, mail, date_d_adhesion, date_exclusion, 
-                 facebook, linkedin, actif, cv, adresse, "description", fonction, pdc, dark
+                 user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
+                 "description", fonction, pdc, dark
                 FROM membre');
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
@@ -48,8 +48,8 @@ class Membre extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
-                 user_github_pic, tel1, tel2, mail, date_d_adhesion, date_exclusion, 
-                 facebook, linkedin, actif, cv, adresse, "description", fonction, pdc, dark
+                  user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
+                  "description", fonction, pdc, dark
                 FROM membre 
                 WHERE id = :identifiant 
                 OR (prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))');
@@ -104,6 +104,25 @@ class Membre extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: la mise n'a pas été effectuer !".$e -> getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+    }
+
+    public function updateMembrePassword(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('UPDATE membre
+                SET "password"=SHA2(:keyword, 256)
+                WHERE id=:identifiant
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu mettre à jours le mot de passe !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
