@@ -150,7 +150,7 @@ class Formations extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> query('SELECT f.id, f.lieu, f.annee, f.type, 
-                 f.description, f.id_membre, m.prenom_usuel
+                 f.description, f.id_membre, f.ordre, m.prenom_usuel
                 FROM formations f
                 JOIN membre m ON f.id_membre = m.id
                 GROUP BY f.id_membre ASC');
@@ -171,7 +171,7 @@ class Formations extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT f.id, f.lieu, f.annee, f.type, 
-                f.description, f.id_membre, m.prenom_usuel
+                f.description, f.id_membre, f.ordre m.prenom_usuel
                 FROM formations f
                 JOIN membre m ON f.id_membre = m.id
                 GROUP BY f.id ASC
@@ -215,7 +215,7 @@ class Formations extends Database {
             $database = Database::db_connect();
             $demande = $database -> prepare('UPDATE formations
                 SET lieu = :lieu, annee = :annee, "type" = :types, 
-                "description" = :descriptions, id_membre = :id_membre, ordre = :ordre
+                "description" = :descriptions, id_membre = :id_membre
                 WHERE id = :id');
             $demande -> execute($donnees);
             $database -> commit();
@@ -273,10 +273,10 @@ class Fonction extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT f.id, f.date_debut_fonction, f.id_membre,
-                 m.prenom_usuel, f.id_poste, p.nom
+                 m.prenom_usuel, f.id_poste, p.nom, p.categorie
                 FROM fonction f
                 JOIN membre m ON f.id_membre = m.id
-                JOIN poste p ON p.id = f.id_poste
+                JOIN poste p ON f.id_poste=p.id 
                 WHERE m.id = :identifiant 
                 OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
@@ -296,7 +296,7 @@ class Fonction extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare("INSERT INTO fonction(id_membre, id_poste)
-                VALUES(:idMembre, idPoste)
+                VALUES(:id_membre, id_poste)
             ");
             $demande -> execute($donnees);
             $database->commit();
@@ -453,7 +453,7 @@ class Distinctions extends Database {
     public function getAllDistinctions():array {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('SELECT d.id, d.organisateur, d.annee, d.type, 
+            $demande=$database->query('SELECT d.id, d.organisateur, d.annee, d.type, 
                  d.description, d.id_membre, d.ordre, m.prenom_usuel
                 FROM distinctions d
                 JOIN membre m ON d.id_membre=m.id
@@ -548,6 +548,116 @@ class Distinctions extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu supprimer 'distinctions' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+    }
+}
+
+class Competences extends Database {
+
+    public function getAllCompetences():array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->query('SELECT c.id, c.nom, c.liste, 
+                 c.id_categorie, cc.nom as categorie, cc.icone,
+                 c.id_membre, c.ordre, m.prenom_usuel
+                FROM competences c
+                JOIN membre m ON c.id_membre=m.id
+                JOIN categorie_competence cc ON c.id_categorie=cc.id
+            ');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'competences tout' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function getCompetences(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT c.id, c.nom, c.liste, 
+            c.id_categorie, cc.nom as categorie, cc.icone,
+            c.id_membre, c.ordre, m.prenom_usuel
+           FROM competences c
+           JOIN membre m ON c.id_membre=m.id
+           JOIN categorie_competence cc ON c.id_categorie=cc.id
+                WHERE m.id = :identifiant 
+                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+            ');
+            $demande->execute($donnees);
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'competences' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function addCompetences(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('INSERT INTO competences(nom, liste, id_categorie,
+                 id_membre, ordre)
+                VALUES(:nom, :liste, :id_categorie, :id_membre, :ordre)
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu ajouter 'competences' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function updateCompetences(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('UPDATE competences
+                SET nom=:nom, liste=:liste, id_categorie=:id_categorie
+                WHERE id=:identifiant
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {    
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu mettre à jour 'competences' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function deleteCompetences(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('DELETE FROM competences
+                WHERE id=:identifiant
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu supprimer 'competences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
