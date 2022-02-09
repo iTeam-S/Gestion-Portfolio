@@ -346,15 +346,15 @@ class Fonction extends Database {
     }
 }
 
-class Competences extends Database {
+class Experiences extends Database {
 
-    public function getAllCompetences():array {
+    public function getAllExperiences():array {
         try {
             $database=Database::db_connect();
-            $demande=$database->query('SELECT c.id, c.nom, c.annee, c.type, c.description,
-                 c.id_membre, m.prenom_usuel
-                FROM competences c
-                JOIN membre m ON c.id_membre=m.id
+            $demande=$database->query('SELECT e.id, e.nom, e.annee, e.type, e.description,
+                 e.id_membre, e.ordre, m.prenom_usuel
+                FROM experiences e
+                JOIN membre m ON e.id_membre=m.id
             ');
             $reponses=$demande->fetchAll(PDO::ASSOC);
             $demande->closeCursor();
@@ -363,18 +363,18 @@ class Competences extends Database {
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'competences Tout'".$e->getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Experiences Tout'".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
 
-    public function getCompetences(array $donnees):array {
+    public function getExperiences(array $donnees):array {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('SELECT c.id, c.nom, c.annee, c.type, c.description, c.ordre
-                 c.id_membre, m.prenom_usuel
-                FROM competences c
-                JOIN membre m ON c.id_membre=m.id
+            $demande=$database->prepare('SELECT e.id, e.nom, e.annee, e.type, e.description, 
+                 e.id_membre, e.ordre, m.prenom_usuel
+                FROM experiences e
+                JOIN membre m ON e.id_membre=m.id
                 WHERE m.id = :identifiant 
                 OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
@@ -386,15 +386,15 @@ class Competences extends Database {
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'competence'!".$e->getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'experiences'!".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
 
-    public function addCompetences(array $donnees) {
+    public function addExperiences(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('INSERT INTO competences(nom, annee, "type", "description", id_membre, ordre)
+            $demande=$database->prepare('INSERT INTO experiences(nom, annee, "type", "description", id_membre, ordre)
                 VALUES(:nom, :annee, :"type", :"description", :id_membre, :ordre)
             ');
             $demande->execute($donnees);
@@ -404,15 +404,15 @@ class Competences extends Database {
             $database->rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu ajouter 'competences' !".$e->getMessage()
+                'message' => "Erreur: nous n'avons pas pu ajouter 'experiences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
 
-    public function updateCompetences(array $donnees) {
+    public function updateExperiences(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('UPDATE competences
+            $demande=$database->prepare('UPDATE experiences
                 SET nom=:nom, annee=:annee, "type"=:"type", 
                 "description"=:"description", id_membre=:id_membre
                 WHERE id=:identifiant
@@ -424,15 +424,15 @@ class Competences extends Database {
             $database->rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu mettre à jour 'competences' !".$e->getMessage()
+                'message' => "Erreur: nous n'avons pas pu mettre à jour 'experiences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
 
-    public function deleteCompetences(array $donnees) {
+    public function deleteExperiences(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('DELETE FROM competences
+            $demande=$database->prepare('DELETE FROM experiences
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
@@ -442,7 +442,112 @@ class Competences extends Database {
             $database->rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu supprimer 'competences' !".$e->getMessage()
+                'message' => "Erreur: nous n'avons pas pu supprimer 'experiences' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+    }
+}
+
+class Distinctions extends Database {
+
+    public function getAllDistinctions():array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT d.id, d.organisateur, d.annee, d.type, 
+                 d.description, d.id_membre, d.ordre, m.prenom_usuel
+                FROM distinctions d
+                JOIN membre m ON d.id_membre=m.id
+            ');
+            $reponses=$demande->fetchAll(PDO::ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'distinctions Tout' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function getDistinctions(array $donnees):array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT d.id, d.organisateur, d.annee, d.type, 
+                 d.description, d.id_membre, d.ordre, m.prenom_usuel
+                FROM distinctions d
+                JOIN membre m ON d.id_membre=m.id
+                WHERE m.id = :identifiant 
+                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+            ');
+            $demande->execute($donnees);
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'distinctions' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function addDistinctions(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('INSERT INTO distinctions(organisateur, annee, "type", 
+                 "descriptions", id_membre, ordre)
+                VALUES(:organisateur, :annee, :"type",  :"description", :id_membre, :ordre)
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu ajouter 'distinctions' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function updateDistinctions(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('UPDATE distinctions
+                SET organisateur=:organisateur, annee=:annee, "type"=:"type",
+                 "description"=:"description", ordre=:ordre
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu mettre à jour 'distinctions' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+    }
+
+    public function deleteDistinctions(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('DELETE FROM distinctions 
+                WHERE id=:identifiant
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu supprimer 'distinctions' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
