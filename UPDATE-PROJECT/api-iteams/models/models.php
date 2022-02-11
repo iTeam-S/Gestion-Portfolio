@@ -875,6 +875,14 @@ class Login extends Database {
     public function authentifier(array $donnees):array {
         try {
             $database=Database::db_connect();
+            $demande=$database->prepare('SELECT True, id, prenom_usuel
+                FROM membre
+                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND "password"=:"password"
+            ');
+            $demande->execute($donnees);
+            $reponses->fetch(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
