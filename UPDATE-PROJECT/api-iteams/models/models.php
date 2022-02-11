@@ -106,6 +106,7 @@ class Membre extends Database {
                 'message' => "Erreur: la mise n'a pas été effectuer !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function updateMembrePassword(array $donnees) {
@@ -125,6 +126,7 @@ class Membre extends Database {
                 'message' => "Erreur: nous n'avons pas pu mettre à jours le mot de passe !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function deleteMembre(array $donnees) {
@@ -141,6 +143,7 @@ class Membre extends Database {
                 'message' => "Erreur: la suppression n'a pas été effectuer !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 }
 
@@ -227,6 +230,7 @@ class Formations extends Database {
                 'message' => "Erreur: nous n'avons pas pu effectuer des mises à jours !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function deleteFormations(array $donnees) {
@@ -244,6 +248,7 @@ class Formations extends Database {
                 'message' => "Erreur: nous n'avons pas pu effectuer de suppression !".$e -> getMessage()            
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 }
 
@@ -267,6 +272,7 @@ class Fonction extends Database {
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function getFonction(array $donnees):array {
@@ -290,6 +296,7 @@ class Fonction extends Database {
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function addFonction(array $donnees) {
@@ -308,6 +315,7 @@ class Fonction extends Database {
                 'message' => "Erreu: on a pas pu ajouter de fonction !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function updateFonction(array $donnees) {
@@ -327,6 +335,7 @@ class Fonction extends Database {
                 'message' => "Erreu: on a pas pu mettre à jours 'fonction' !".$e -> getMessage()
             ], JSON_FORCE_OBJECT));   
         }
+        $database=null;
     }
 
     public function deleteFonction(array $donnees) {
@@ -343,6 +352,7 @@ class Fonction extends Database {
                 'message' => "Erreur: nous n'avons pas pu supprimer 'fonction' !"
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 }
 
@@ -366,6 +376,7 @@ class Experiences extends Database {
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Experiences Tout'".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function getExperiences(array $donnees):array {
@@ -389,6 +400,7 @@ class Experiences extends Database {
                 'message' => "Erreur: nous n'avons pas pu obtenir 'experiences'!".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function addExperiences(array $donnees) {
@@ -407,6 +419,7 @@ class Experiences extends Database {
                 'message' => "Erreur: nous n'avons pas pu ajouter 'experiences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function updateExperiences(array $donnees) {
@@ -427,6 +440,7 @@ class Experiences extends Database {
                 'message' => "Erreur: nous n'avons pas pu mettre à jour 'experiences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function deleteExperiences(array $donnees) {
@@ -445,6 +459,7 @@ class Experiences extends Database {
                 'message' => "Erreur: nous n'avons pas pu supprimer 'experiences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 }
 
@@ -532,6 +547,7 @@ class Distinctions extends Database {
                 'message' => "Erreur: nous n'avons pas pu mettre à jour 'distinctions' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 
     public function deleteDistinctions(array $donnees) {
@@ -550,6 +566,7 @@ class Distinctions extends Database {
                 'message' => "Erreur: nous n'avons pas pu supprimer 'distinctions' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
     }
 }
 
@@ -660,5 +677,112 @@ class Competences extends Database {
                 'message' => "Erreur: nous n'avons pas pu supprimer 'competences' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
+        $database=null;
+    }
+}
+
+class Projets extends Database {
+    
+    public function getAllProjets():array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->query('SELECT p.id, p.nom, p.description, p.lien,
+                 p.pdc, p.id_membre, p.ordre, m.prenom_usuel
+                FROM projets p
+                JOIN membre m ON p.id_membre=m.id
+            ');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'projets tout' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function getProjets(array $donnees):array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT p.id, p.nom, p.description, p.lien,
+                 p.pdc, p.id_membre, p.ordre, m.prenom_usuel
+                FROM projets p
+                JOIN membre m ON p.id_membre=m.id
+                WHERE m.id = :identifiant 
+                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                ');
+            $demande->execute($donnees);
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCorsor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'projets' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function addProjets(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('INSERT INTO projets(nom, "description", lien,
+                 pdc, id_membre, ordre)
+                VALUES(:nom, :"description", :lien, :pdc, :id_membre, :ordre)');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu ajouter 'projets' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function updateProjets(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('UPDATE projets
+                SET nom=:nom, "description"=:"description", lien=:lien,
+                 pdc=:pdc, ordre=:ordre
+                WHERE id=:identifiant
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu mettre à jour 'projets' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function deleteProjets(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('DELETE FROM projets 
+            WHERE id=:identifiant');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu supprimer 'projets' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
     }
 }
