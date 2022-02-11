@@ -786,3 +786,102 @@ class Projets extends Database {
         $database=null;
     }
 }
+
+class Autres extends Database {
+
+    public function getAllAutres():array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->query('SELECT a.id, a.nom, a.lien, a.id_membre
+                FROM autres a
+                JOIN membre m ON a.id_membre=m.id
+            ');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'autres tout' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function getAutres(array $donnees):array {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT a.id, a.nom, a.lien, a.id_membre
+                FROM autres a
+                JOIN membre m ON a.id_membre=m.id
+                WHERE m.id=:identifiant');
+            $demande->execute($donnees);
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir 'autres' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function addAutres(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('INSERT INTO autres(nom, lien, id_membre)
+                VALUES(:nom, :lien, :id_membre)
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu ajouter 'autres' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    public function updateAutres(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('UPDATE autres
+                SET nom=:nom, lien=:lien
+                WHERE id=:identifiant
+            ');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu mettre à jour 'autres' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+}
+
+class Login extends Database {
+
+    public function authentifier(array $donnees):array {
+        try {
+            $database=Database::db_connect();
+        }
+        catch(PDOException $e) {
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu les informations d'authentification !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+}
