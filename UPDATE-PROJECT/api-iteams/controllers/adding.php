@@ -29,4 +29,23 @@ class ControllerAdd {
         } 
         else throw new Exception("Erreur: un des paramètres requis est vide 'add membre' !");
     }
+
+    public function formations(string $lieu, string $annee, string $type,
+     string $description, string $id_membre) {
+        if(!empty(trim($lieu)) && !empty(trim($annee)) && !empty(trim($type))
+         && !empty(trim($description)) && !empty(trim($id_membre))) {
+            $infos=[
+                'lieu' => strip_tags(trim($lieu)),
+                'annee' => strip_tags(trim($annee)),
+                'type' => strip_tags(trim($type)),
+                'description' => strip_tags($description),
+                'id_membre' => strip_tags(trim($description))
+            ];
+            $add=new Formations();
+            $add->addFormations($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'add formations' !");        
+    }
 }

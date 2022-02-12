@@ -199,7 +199,7 @@ class Formations extends Database {
             $database = Database::db_connect();
             $demande = $database -> prepare('INSERT INTO formations(lieu, annee, "type", "description",
                  id_membre, ordre)
-                VALUES(:lieu, :annee, :types, :descriptions, :id_membre, :ordre)');
+                VALUES(:lieu, :annee, :"type", :"description", :id_membre, 0)');
             $demande -> execute($donnees);
             $database -> commit();
         }
