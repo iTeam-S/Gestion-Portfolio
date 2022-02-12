@@ -128,7 +128,7 @@ class ControllerAdd {
                 'nom' => strip_tags(trim($nom)),
                 'description' => strip_tags(trim($description)),
                 'lien' => strip_tags(trim($lien)),
-                'pdc' => strip_tags(trim($lien)),
+                'pdc' => strip_tags(trim($pdc)),
                 'id_membre' => strip_tags(trim($id_membre)),
                 'ordre' => strip_tags(trim($ordre))
             ];
@@ -138,5 +138,20 @@ class ControllerAdd {
             echo '1';
         }
         else throw new Exception("Erreur: un des paramètre est vide pour 'add projets' !");        
+    }
+
+    public function autres(string $nom, string $lien, int $id_membre) {
+        if(!empty(trim($nom)) && !empty(trim($lien)) && !empty(trim($id_membre))) {
+            $infos=[
+                'nom' => strip_tags(trim($nom)),
+                'lien' => strip_tags(trim($lien)),
+                'id_membre' => strip_tags(triù($id_membre))
+            ];
+            $add=new Autres();
+            $add->addAutres($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'add autres' !");
     }
 }
