@@ -407,7 +407,7 @@ class Experiences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('INSERT INTO experiences(nom, annee, "type", "description", id_membre, ordre)
-                VALUES(:nom, :annee, :"type", :"description", :id_membre, :ordre)
+                VALUES(:nom, :annee, :"type", :"description", :id_membre, 0)
             ');
             $demande->execute($donnees);
             $database->commit();

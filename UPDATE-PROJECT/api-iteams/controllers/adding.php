@@ -31,7 +31,7 @@ class ControllerAdd {
     }
 
     public function formations(string $lieu, string $annee, string $type,
-     string $description, string $id_membre) {
+     string $description, int $id_membre) {
         if(!empty(trim($lieu)) && !empty(trim($annee)) && !empty(trim($type))
          && !empty(trim($description)) && !empty(trim($id_membre))) {
             $infos=[
@@ -49,7 +49,7 @@ class ControllerAdd {
         else throw new Exception("Erreur: un des paramètres est vide pour 'add formations' !");        
     }
 
-    public function fonction(string $id_membre, string $id_poste) {
+    public function fonction(int $id_membre, int $id_poste) {
         if(!empty((trim($id_membre))) && preg_match("#[1-7]#", trim($id_poste))) {
             $infos=[
                 'id_membre' => strip_tags($id_membre),
@@ -61,5 +61,24 @@ class ControllerAdd {
             echo '1';
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'add fonction' !");
+    }
+
+    public function experiences(string $nom, string $annee, string $type, 
+     string $description, int $id_membre) {
+        if(!empty(trim($nom)) && !empty(trim($annee)) && !empty(trim($type))
+         && !empty(trim($id_membre))){
+            $infos=[
+                'nom' => strip_tags(trim($nom)),
+                'annee' => strip_tags(trim($annee)),
+                'type' => strip_tags(trim($type)),
+                'description' => strip_tags($description),
+                'id_membre' => strip_tags(trim($id_membre))
+            ];
+            $add=new Experiences();
+            $add->addExperiences($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'add experiences' !");
     }
 }
