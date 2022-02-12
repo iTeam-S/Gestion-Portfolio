@@ -101,4 +101,22 @@ class ControllerAdd {
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'add distinctions' !");        
     }
+
+    public function competences(string $nom, string $liste, string $id_categorie,
+     string $id_membre) {
+        if(!empty(trim($nom)) && !empty(trim($liste)) 
+         && !empty(trim($id_categorie)) && !empty(trim($id_membre))) {
+            $infos=[
+                'nom' => strip_tags(trim($nom)),
+                'liste' => strip_tags(trim($liste)),
+                'id_categorie' => strip_tags(trim($id_categorie)),
+                'id_membre' => strip_tags(trim($id_membre))
+            ];
+            $add=new Competences();
+            $add->addCompetences($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'add competences'!");        
+    }
 }

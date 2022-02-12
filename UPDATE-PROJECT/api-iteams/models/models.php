@@ -626,7 +626,7 @@ class Competences extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('INSERT INTO competences(nom, liste, id_categorie,
                  id_membre, ordre)
-                VALUES(:nom, :liste, :id_categorie, :id_membre, :ordre)
+                VALUES(:nom, :liste, :id_categorie, :id_membre, 0)
             ');
             $demande->execute($donnees);
             $database->commit();
