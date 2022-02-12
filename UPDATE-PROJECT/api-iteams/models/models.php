@@ -67,13 +67,13 @@ class Membre extends Database {
         $database = null;
     }
 
-    public function addMembres(array $donnees) {
+    public function addMembre(array $donnees) {
         try {
             $database = Database::db_connect();
-            $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github,
-                 tel1, tel2, mail, facebook, linkedin, cv, adresse, "description", fonction)
-                VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, :facebook, 
-                 :linkedin, :cv, :adresse, :descriptions, :fonction)');
+            $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
+                 tel1, tel2, mail, actif, adresse, "password", dark)
+                VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, 
+                 1, :adresse, SHA2("iTeam-$", 256), 0)');
             $demande -> execute($donnees);
             $database -> commit();
         }
