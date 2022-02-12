@@ -146,4 +146,25 @@ class ControllerGet {
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'projets' !");
     }
+
+    // ************************* AUTRES *********************
+    public function autresAll() {
+        $get=new Autres();
+        $resultats=$get->getAllAutres();
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    }
+
+    public function autres(string $identifiant) {
+        if(!empty(trim($identifiant))) {
+            $infos=[
+                'identifiant' => strip_tags($identifiant)
+            ];
+            $get=new Autres();
+            $resultats=$get->getAutres($infos);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'autres' !");
+    }
 }
