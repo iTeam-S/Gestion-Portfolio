@@ -102,8 +102,8 @@ class ControllerAdd {
         else throw new Exception("Erreur: un des paramètres est vide pour 'add distinctions' !");        
     }
 
-    public function competences(string $nom, string $liste, string $id_categorie,
-     string $id_membre) {
+    public function competences(string $nom, string $liste, int $id_categorie,
+     int $id_membre) {
         if(!empty(trim($nom)) && !empty(trim($liste)) 
          && !empty(trim($id_categorie)) && !empty(trim($id_membre))) {
             $infos=[
@@ -118,5 +118,25 @@ class ControllerAdd {
             echo '1';
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'add competences'!");        
+    }
+
+    public function projets(string $nom, string $description, string $lien, 
+     string $pdc, int $id_membre, int $ordre=0) {
+        if(!empty(trim($nom)) && !empty(trim($description)) && !empty(trim($lien))
+         && !empty(trim($pdc)) && !empty(trim($id_membre)) && !empty(trim($ordre))) {
+            $infos=[
+                'nom' => strip_tags(trim($nom)),
+                'description' => strip_tags(trim($description)),
+                'lien' => strip_tags(trim($lien)),
+                'pdc' => strip_tags(trim($lien)),
+                'id_membre' => strip_tags(trim($id_membre)),
+                'ordre' => strip_tags(trim($ordre))
+            ];
+            $add=new Projets();
+            $add->addProjets($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètre est vide pour 'add projets' !");        
     }
 }
