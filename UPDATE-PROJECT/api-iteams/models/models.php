@@ -303,7 +303,7 @@ class Fonction extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare("INSERT INTO fonction(id_membre, id_poste)
-                VALUES(:id_membre, id_poste)
+                VALUES(:id_membre, :id_poste)
             ");
             $demande -> execute($donnees);
             $database->commit();

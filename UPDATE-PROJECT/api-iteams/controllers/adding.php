@@ -48,4 +48,18 @@ class ControllerAdd {
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'add formations' !");        
     }
+
+    public function fonction(string $id_membre, string $id_poste) {
+        if(!empty((trim($id_membre))) && preg_match("#[1-7]#", trim($id_poste))) {
+            $infos=[
+                'id_membre' => strip_tags($id_membre),
+                'id_poste' =>strip_tags(trim($id_poste))
+            ];
+            $add=new Fonction();
+            $add->addFonction($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'add fonction' !");
+    }
 }
