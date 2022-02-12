@@ -52,7 +52,7 @@ class Membre extends Database {
                   "description", fonction, pdc, dark
                 FROM membre 
                 WHERE id = :identifiant 
-                OR (prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))');
+                OR (prenom_usue LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))');
             $demande -> execute($donnees);
             $reponses = $demande -> fetch(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
@@ -179,7 +179,7 @@ class Formations extends Database {
                 JOIN membre m ON f.id_membre = m.id
                 GROUP BY f.id ASC
                 WHERE m.id = :identifiant 
-                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande -> execute($donnees);
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
@@ -284,7 +284,7 @@ class Fonction extends Database {
                 JOIN membre m ON f.id_membre = m.id
                 JOIN poste p ON f.id_poste=p.id 
                 WHERE m.id = :identifiant 
-                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::ASSOC);
             $demande->closeCursor();
@@ -387,7 +387,7 @@ class Experiences extends Database {
                 FROM experiences e
                 JOIN membre m ON e.id_membre=m.id
                 WHERE m.id = :identifiant 
-                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
@@ -494,7 +494,7 @@ class Distinctions extends Database {
                 FROM distinctions d
                 JOIN membre m ON d.id_membre=m.id
                 WHERE m.id = :identifiant 
-                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
@@ -605,7 +605,7 @@ class Competences extends Database {
            JOIN membre m ON c.id_membre=m.id
            JOIN categorie_competence cc ON c.id_categorie=cc.id
                 WHERE m.id = :identifiant 
-                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
@@ -712,7 +712,7 @@ class Projets extends Database {
                 FROM projets p
                 JOIN membre m ON p.id_membre=m.id
                 WHERE m.id = :identifiant 
-                OR (m.prenom_usuel = :identifiant OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
                 ');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
@@ -815,7 +815,9 @@ class Autres extends Database {
             $demande=$database->prepare('SELECT a.id, a.nom, a.lien, a.id_membre
                 FROM autres a
                 JOIN membre m ON a.id_membre=m.id
-                WHERE m.id=:identifiant');
+                WHERE m.id=:identifiant
+                OR (m.prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                ');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -877,7 +879,7 @@ class Login extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT True, id, prenom_usuel
                 FROM membre
-                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND "password"=:"password"
+                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND "password"=SHA2(:"password", 256)
             ');
             $demande->execute($donnees);
             $reponses->fetch(PDO::FETCH_ASSOC);
