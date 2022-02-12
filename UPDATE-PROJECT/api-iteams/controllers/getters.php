@@ -125,4 +125,25 @@ class ControllerGet {
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'competences' !");
     }
+
+    // ********************** PROJETS *********************
+    public function projetsAll() {
+        $get=new Projets();
+        $resultats=$get->getAllProjets();
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    }
+
+    public function projets(string $identifiant) {
+        if(!empty(trim($identifiant))) {
+            $infos=[
+                'identifiant' => strip_tags($identifiant)
+            ];
+            $get=new Projets();
+            $resultats=$get->getProjets($infos);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'projets' !");
+    }
 }
