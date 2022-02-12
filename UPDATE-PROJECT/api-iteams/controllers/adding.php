@@ -81,4 +81,24 @@ class ControllerAdd {
         }
         else throw new Exception("Erreur: un des paramètres est vide pour 'add experiences' !");
     }
+
+    public function distinctions(string $organisateur, string $annee,
+     string $type, string $description, string $id_membre, int $ordre=0) {
+        if(!empty(trim($organisateur)) && !empty(trim($annee)) && !empty(trim($type))
+         &&  !empty(trim($id_membre))) {
+            $infos=[
+                'organisateur' => strip_tags(trim($organisateur)),
+                'annee' => strip_tags(trim($annee)),
+                'type' => strip_tags(trim($type)),
+                'description' => strip_tags(trim($description)),
+                'id_membre' => strip_tags(trim($id_membre)),
+                'ordre' => strip_tags(trim($ordre))
+            ];
+            $add=new Distinctions();
+            $add->addDistinctions($infos);
+            unset($add);
+            echo '1';
+        }
+        else throw new Exception("Erreur: un des paramètres est vide pour 'add distinctions' !");        
+    }
 }
