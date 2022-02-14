@@ -91,10 +91,11 @@ class Membre extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare("UPDATE membre 
-                SET user_github = :github, tel1 = :phone1,
-                tel2 = :phone2, mail = :mail, facebook = :facebook
+                SET user_github = :user_github, tel1 = :tel1,
+                tel2 = :tel2, mail = :mail, facebook = :facebook
                 linkedin = :linkedin, adresse = :adresse, 
-                `description` = :'description', `function` = :'fonction'
+                `description` = :'description', fonction = :fonction
+                WHERE id=:identifiant
             ");
             $demande -> execute($donnees);
             $database -> commit();
