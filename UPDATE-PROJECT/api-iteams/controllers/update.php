@@ -22,4 +22,14 @@ class ControllerUpdate {
         echo '1';
     }
 
+    public function membrePassword(string $keyword, int $identifiant) {
+        $infos=[
+            'keyword' => $keyword,
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $update=new Membre();
+        $update->updateMembrePassword($infos);
+        unset($update);
+        echo '1';
+    }
 }
