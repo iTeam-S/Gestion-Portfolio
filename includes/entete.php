@@ -23,14 +23,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
    						<span class="navbar-toggler-icon"></span>
 					</button>
-					<div id="navbarContent" class="collapse navbar-collapse">
-						<ul class="navbar-nav">
-							<li class="nav-item active if id=1">
-								<a href="inscription.php" class="nav-link">Inscription</a>
-							</li>										
-						</ul>
-					</div>
-                    <di>
+                    <div>
                         <ul class="navbar-nav">
                             <li>
 					            <a href="../includes/logout.php" class="nav-link">Logout</a>	
