@@ -32,4 +32,20 @@ class ControllerUpdate {
         unset($update);
         echo '1';
     }
+
+    public function formations(string $lieu, string $annee, string $type,
+     string $description, int $id_membre, int $identifiant) {
+        $infos=[
+            'lieu' => strip_tags(trim($lieu)),
+            'annee' => strip_tags(trim($annee)),
+            'type' => strip_tags(trim($type)),
+            'description' => strip_tags(trim($description)),
+            'id_membre' => strip_tags(trim($id_membre)),
+            'identifiant' => strip_tags($identifiant) 
+        ];
+        $update=new Formations();
+        $update->updateFormations($infos);
+        unset($infos);
+        echo '1';
+    }
 }
