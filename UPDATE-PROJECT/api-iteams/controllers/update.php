@@ -34,13 +34,12 @@ class ControllerUpdate {
     }
 
     public function formations(string $lieu, string $annee, string $type,
-     string $description, int $id_membre, int $identifiant) {
+     string $description, int $identifiant) {
         $infos=[
             'lieu' => strip_tags(trim($lieu)),
             'annee' => strip_tags(trim($annee)),
             'type' => strip_tags(trim($type)),
             'description' => strip_tags(trim($description)),
-            'id_membre' => strip_tags(trim($id_membre)),
             'identifiant' => strip_tags($identifiant) 
         ];
         $update=new Formations();
@@ -61,10 +60,42 @@ class ControllerUpdate {
     }
 
     public function experiences(string $nom, string $annee, string $type,
-     string $description, int $id_membre, int $identifiant) {
+     string $description, int $identifiant) {
         $infos=[
             'nom' => strip_tags(trim($nom)),
-            'annee' => strip_tags()
-        ]
+            'annee' => strip_tags(trim($annee)),
+            'type' => strip_tags(trim($type)),
+            'description' => strip_tags(trim($description)),
+            'identifiant' => strip_tags($identifiant)
+        ];
+        $update=new Experiences();
+        $update->updateExperiences($infos);
+        unset($update);
+        echo '1';
+    }
+
+    public function distinctions(string $organisateur, string $annee,
+     string $type, string $description, int $ordre, int $identifiant) {
+        $infos=[
+            'organisateur' => strip_tags(trim($organisateur)),
+            'annee' => strip_tags(trim($annee)),
+            'type' => strip_tags(trim($type)),
+            'description' => strip_tags(trim($description)),
+            'ordre' => strip_tags(trim($ordre)),
+            'identifiant' => strip_tags($identifiant)
+        ];
+        $update=new Distinctions();
+        $update->updateDistinctions($infos);
+        unset($update);
+        echo '1';
+    }
+
+    public function competences(string $nom, string $liste, int $id_categorie) {
+        $infos=[
+            'nom' => strip_tags(trim($nom)),
+            'liste' => strip_tags(trim($liste)),
+            'id_categorie' => strip_tags($id_categorie)
+        ];
+        
     }
 }

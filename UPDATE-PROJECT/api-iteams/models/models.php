@@ -219,7 +219,7 @@ class Formations extends Database {
             $database = Database::db_connect();
             $demande = $database -> prepare('UPDATE formations
                 SET lieu = :lieu, annee = :annee, "type" = :types, 
-                "description" = :"description", id_membre = :id_membre
+                "description" = :"description"
                 WHERE id = :identifiant');
             $demande -> execute($donnees);
             $database -> commit();
@@ -428,7 +428,7 @@ class Experiences extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE experiences
                 SET nom=:nom, annee=:annee, "type"=:"type", 
-                "description"=:"description", id_membre=:id_membre
+                "description"=:"description"
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
@@ -537,6 +537,7 @@ class Distinctions extends Database {
             $demande=$database->prepare('UPDATE distinctions
                 SET organisateur=:organisateur, annee=:annee, "type"=:"type",
                  "description"=:"description", ordre=:ordre
+                WHERE id=:identifiant
             ');
             $demande->execute($donnees);
             $database->commit();
