@@ -48,4 +48,23 @@ class ControllerUpdate {
         unset($infos);
         echo '1';
     }
+
+    public function fonction(int $id_poste, int $identifiant) {
+        $infos=[
+            'id_poste' => strip_tags($id_poste),
+            'identifiant' => strip_tags($identifiant)
+        ];
+        $update=new Fonction();
+        $update->updateFonction($infos);
+        unset($update);
+        echo '1';
+    }
+
+    public function experiences(string $nom, string $annee, string $type,
+     string $description, int $id_membre, int $identifiant) {
+        $infos=[
+            'nom' => strip_tags(trim($nom)),
+            'annee' => strip_tags()
+        ]
+    }
 }
