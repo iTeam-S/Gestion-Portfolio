@@ -118,4 +118,16 @@ class ControllerUpdate {
         unset($update);
         echo '1';
     }
+
+    public function autres(string $nom, string $lien, int $identifiant) {
+        $infos=[
+            'nom' => strip_tags(trim($nom)),
+            'lien' => strip_tags(trim($lien)),
+            'identifiant' => strip_tags($identifiant)
+        ];
+        $update=new Autres();
+        $update->updateAutres($infos);
+        unset($update);
+        echo '1';
+    }
 }
