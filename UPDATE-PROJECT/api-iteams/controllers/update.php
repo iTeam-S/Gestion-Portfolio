@@ -96,6 +96,9 @@ class ControllerUpdate {
             'liste' => strip_tags(trim($liste)),
             'id_categorie' => strip_tags($id_categorie)
         ];
-        
+        $update=new Competences();
+        $update->updateCompetences($infos);
+        unset($update);
+        echo '1';
     }
 }
