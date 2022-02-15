@@ -90,14 +90,31 @@ class ControllerUpdate {
         echo '1';
     }
 
-    public function competences(string $nom, string $liste, int $id_categorie) {
+    public function competences(string $nom, string $liste, int $id_categorie, int $identifiant) {
         $infos=[
             'nom' => strip_tags(trim($nom)),
             'liste' => strip_tags(trim($liste)),
-            'id_categorie' => strip_tags($id_categorie)
+            'id_categorie' => strip_tags($id_categorie),
+            'identifiant' => strip_tags($identifiant)
         ];
         $update=new Competences();
         $update->updateCompetences($infos);
+        unset($update);
+        echo '1';
+    }
+
+    public function projets(string $nom, string $description, string $lien,
+     string $pdc, int $ordre, int $identifiant) {
+        $infos=[
+            'nom' => strip_tags(trim($nom)),
+            'description' => strip_tags(trim($description)),
+            'lien' => strip_tags(trim($lien)),
+            'pdc' => strip_tags(trim($pdc)),
+            'ordre' => strip_tags($ordre),
+            'identifiant' => strip_tags($identifiant)
+        ];
+        $update=new Projets();
+        $update->updateProjets($infos);
         unset($update);
         echo '1';
     }
