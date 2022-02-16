@@ -20,4 +20,14 @@ class ControllerDelete {
         unset($delete);
         echo '1';
     }
+
+    public function fonction(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Fonction();
+        $delete->deleteFonction($infos);
+        unset($delete);
+        echo '1';
+    }
 }
