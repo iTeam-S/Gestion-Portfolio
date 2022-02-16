@@ -70,4 +70,14 @@ class ControllerDelete {
         unset($delete);
         echo '1';
     }
+
+    public function autres(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Autres();
+        $delete->deleteAutres($infos);
+        unset($delete);
+        echo '1';
+    }
 }
