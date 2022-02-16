@@ -60,4 +60,14 @@ class ControllerDelete {
         unset($delete);
         echo '1';
     }
+
+    public function projets(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Projets();
+        $delete->deleteProjets($infos);
+        unset($delete);
+        echo '1';
+    }
 }
