@@ -40,5 +40,14 @@ class ControllerDelete {
         unset($delete);
         echo '1';
     }
-    
+
+    public function distinctions(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Distinctions();
+        $delete->deleteDistinctions($infos);
+        unset($delete);
+        echo '1';
+    }
 }
