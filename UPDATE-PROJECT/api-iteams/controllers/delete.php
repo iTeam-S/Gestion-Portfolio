@@ -2,14 +2,22 @@
 class ControllerDelete {
 
     public function membre(int $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags(trim($identifiant))
-            ];
-            $delete=new Membre();
-            $delete->deleteMembre($infos);
-            unset($delete);
-            echo '1';
-        }
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Membre();
+        $delete->deleteMembre($infos);
+        unset($delete);
+        echo '1';
+    }
+
+    public function formations(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Formations();
+        $delete->deleteFormations($infos);
+        unset($delete);
+        echo '1';
     }
 }
