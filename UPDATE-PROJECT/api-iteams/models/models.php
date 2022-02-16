@@ -133,7 +133,8 @@ class Membre extends Database {
     public function deleteMembre(array $donnees) {
         try {
             $database = Database::db_connect();
-            $demande = $database -> prepare('DELETE FROM membre WHERE id = :identifiant');
+            $demande = $database -> prepare('DELETE FROM membre 
+                WHERE id = :identifiant');
             $demande -> execute($donnees);
             $database -> commit();
         }
@@ -868,6 +869,24 @@ class Autres extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreur: nous n'avons pas pu mettre à jour 'autres' !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+    
+    public function deleteAutres(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare('DELETE FROM autres 
+                WHERE id=:identifiant');
+            $demande->execute($donnees);
+            $database->commit();
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu supprimer 'autres' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
