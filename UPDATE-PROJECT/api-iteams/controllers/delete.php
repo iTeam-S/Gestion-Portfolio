@@ -50,4 +50,14 @@ class ControllerDelete {
         unset($delete);
         echo '1';
     }
+
+    public function competences(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Competences();
+        $delete->deleteCompetences($infos);
+        unset($delete);
+        echo '1';
+    }
 }
