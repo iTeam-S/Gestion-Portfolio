@@ -30,4 +30,15 @@ class ControllerDelete {
         unset($delete);
         echo '1';
     }
+
+    public function experiences(int $identifiant) {
+        $infos=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+        $delete=new Experiences();
+        $delete->deleteExperiences($infos);
+        unset($delete);
+        echo '1';
+    }
+    
 }
