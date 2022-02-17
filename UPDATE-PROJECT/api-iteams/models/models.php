@@ -52,7 +52,7 @@ class Membre extends Database {
                   "description", fonction, pdc, dark
                 FROM membre 
                 WHERE id = :identifiant 
-                OR (prenom_usue LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))');
+                OR (prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))');
             $demande -> execute($donnees);
             $reponses = $demande -> fetch(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
