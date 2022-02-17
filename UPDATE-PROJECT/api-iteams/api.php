@@ -47,11 +47,18 @@ try {
                                     elseif(trim($url[2]) === '*') $get->membreAll();
                                     else $get->membre();
                                 }
-                                else throw new Exception("Erreur: veuillez precisez 'membre get' !");
+                                else throw new Exception("Erreur: veuillez preciser 'membre get' !");
                             break;
 
                             case 'formations':
-
+                                if(!empty(trim($url[2]))) {
+                                    if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
+                                        throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
+                                    }
+                                    elseif(trim($url[2]) === '*') $get->formationsAll();
+                                    else $get->formations();
+                                }
+                                else throw new Exception("Erreur: veuillez preciser 'formations get' !");
                             break;
 
                             case 'fonction':
@@ -79,6 +86,7 @@ try {
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
+                        unset($get);
                     }
                     else throw new Exception("Erreur: Veuillez precisez la demande 'get' !");
                 break;
