@@ -95,7 +95,14 @@ try {
                             break;
 
                             case 'competences':
-                            
+                                if(!empty(trim($url[2]))) {
+                                    if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
+                                        throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
+                                    }
+                                    elseif(trim($url[2]) === '*') $get->competencesAll();
+                                    else $get->competences();
+                                }
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
 
                             case 'projets':
