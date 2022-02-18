@@ -73,7 +73,14 @@ try {
                             break;
 
                             case 'experiences':
-                                
+                                if(!empty(trim($url[2]))) {
+                                    if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
+                                        throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
+                                    }
+                                    elseif(trim($url[2]) === '*') $get->experiencesAll();
+                                    else $get->experiences();
+                                }
+                                else throw new Exception("Erreur: veuillez preciser 'fonction get' !");
                             break;
 
                             case 'distinctions':
