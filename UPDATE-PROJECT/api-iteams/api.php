@@ -117,7 +117,14 @@ try {
                             break;
 
                             case 'autres':
-
+                                if(!empty(trim($url[2]))) {
+                                    if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
+                                        throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
+                                    }
+                                    elseif(trim($url[2]) === '*') $get->autresAll();
+                                    else $get->autres();
+                                }
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
