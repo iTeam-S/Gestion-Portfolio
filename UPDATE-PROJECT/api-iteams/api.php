@@ -47,7 +47,7 @@ try {
                                     elseif(trim($url[2]) === '*') $get->membreAll();
                                     else $get->membre();
                                 }
-                                else throw new Exception("Erreur: veuillez preciser 'membre get' !");
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
 
                             case 'formations':
@@ -58,7 +58,7 @@ try {
                                     elseif(trim($url[2]) === '*') $get->formationsAll();
                                     else $get->formations();
                                 }
-                                else throw new Exception("Erreur: veuillez preciser 'formations get' !");
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
 
                             case 'fonction':
@@ -69,7 +69,7 @@ try {
                                     elseif(trim($url[2]) === '*') $get->fonctionAll();
                                     else $get->fonction();
                                 }
-                                else throw new Exception("Erreur: veuillez preciser 'fonction get' !");
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
 
                             case 'experiences':
@@ -80,11 +80,18 @@ try {
                                     elseif(trim($url[2]) === '*') $get->experiencesAll();
                                     else $get->experiences();
                                 }
-                                else throw new Exception("Erreur: veuillez preciser 'fonction get' !");
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
 
                             case 'distinctions':
-                            
+                                if(!empty(trim($url[2]))) {
+                                    if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
+                                        throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
+                                    }
+                                    elseif(trim($url[2]) === '*') $get->distinctionsAll();
+                                    else $get->distinctions();
+                                }
+                                else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
 
                             case 'competences':
