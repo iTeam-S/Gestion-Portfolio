@@ -144,7 +144,8 @@ try {
                             break;
 
                             case 'formations':
-                            
+                                $add->formations($_POST['lieu'], $_POST['annee'], $_POST['type'],
+                                 $_POST['description'], $_POST['id_membre']);
                             break;
 
                             case 'fonction':
