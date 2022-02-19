@@ -173,7 +173,7 @@ try {
                             break;
 
                             case 'autres':
-
+                                $add->autres($_POST['nom'], $_POST['lien'], $_POST['id_membre']);
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
