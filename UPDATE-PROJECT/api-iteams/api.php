@@ -158,7 +158,8 @@ try {
                             break;
 
                             case 'distinctions':
-
+                                $add->distinctions($_POST['organisateur'], $_POST['annee'], $_POST['type'],
+                                 $_POST['description'], $_POST['id_membre'], $_POST['id_poste']);
                             break;
 
                             case 'competences':
