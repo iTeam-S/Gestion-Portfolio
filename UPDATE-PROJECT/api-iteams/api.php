@@ -168,7 +168,8 @@ try {
                             break;
 
                             case 'projets':
-
+                                $add->projets($_POST['nom'], $_POST['description'], $_POST['lien'],
+                                 $_POST['pdc'], $_POST['id_membre'], $_POST['ordre']);
                             break;
 
                             case 'autres':
