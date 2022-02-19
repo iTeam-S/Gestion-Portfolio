@@ -130,11 +130,51 @@ try {
                         }
                         unset($get);
                     }
-                    else throw new Exception("Erreur: Veuillez precisez la demande 'get' !");
+                    else throw new Exception("Erreur: Veuillez precisez la demande $url[0] !");
                 break;
 
                 case 'add':
+                    if(!empty(tirm($url[1]))) {
+                        $add=ControllerAdd();
+                        switch($url[1]) {
+                            case 'membre':
+                                $add->membre($_POST['nom'], $_POST['prenom'], $_POST['prenom_usuel'],
+                                 $_POST['user_github'], $_POST['tel1'], $_POST['tel2'], $_POST['mail'], 
+                                 $_POST['adresse']);
+                            break;
 
+                            case 'formations':
+                            
+                            break;
+
+                            case 'fonction':
+
+                            break;
+
+                            case 'experiences':
+
+                            break;
+
+                            case 'distinctions':
+
+                            break;
+
+                            case 'competences':
+
+                            break;
+
+                            case 'projets':
+
+                            break;
+
+                            case 'autres':
+
+                            break;
+                            default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
+                        }
+                        unset($add);
+                    }
+                    else throw new Exception("Erreur: Veuillez precisez la demande $url[0] !");
                 break;
 
                 case 'update':
