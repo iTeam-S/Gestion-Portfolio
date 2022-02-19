@@ -149,7 +149,7 @@ try {
                             break;
 
                             case 'fonction':
-
+                                $add->fonction($_POST['id_membre'], $_POST['id_poste']);
                             break;
 
                             case 'experiences':
