@@ -163,7 +163,8 @@ try {
                             break;
 
                             case 'competences':
-
+                                $add->competences($_POST['nom'], $_POST['liste'], $_POST['id_categorie'], 
+                                 $_POST['id_membre']);
                             break;
 
                             case 'projets':
