@@ -153,7 +153,8 @@ try {
                             break;
 
                             case 'experiences':
-
+                                $add->experiences($_POST['nom'], $_POST['annee'], $_POST['type'], 
+                                 $_POST['description'], $_POST['id_membre']);
                             break;
 
                             case 'distinctions':
