@@ -193,7 +193,7 @@ try {
                             break;
 
                             case 'keyword':
-
+                                $update->membrePassword($_POST['keyword'], $_POST['identifiant']);
                             break;
                             
                             case 'formations':
