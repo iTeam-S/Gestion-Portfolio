@@ -183,7 +183,51 @@ try {
                 break;
 
                 case 'update':
+                    if(!empty(trim($url[1]))) {
+                        $update=ControllerUpdate();
+                        switch($url[1]) {
+                            case 'membre':
+                                $update->membre($_POST['user_github'], $_POST['tel1'], $_POST['tel2'],
+                                 $_POST['mail'], $_POST['facebook'], $_POST['linkedin'], $_POST['$adresse'], 
+                                 $_POST['description'], $_POST['fonction'], $_POST['identifiant']);
+                            break;
 
+                            case 'keyword':
+
+                            break;
+                            
+                            case 'formations':
+                                
+                            break;
+
+                            case 'fonction':
+                                
+                            break;
+
+                            case 'experiences':
+                                
+                            break;  
+
+                            case 'distinctions':
+                                
+                            break;
+
+                            case 'competences':
+                                
+                            break;
+
+                            case 'projets':
+                                
+                            break;
+
+                            case 'autres':
+                                
+                            break;
+                            default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
+                        }
+                        unset($update);
+                    }
+                    else throw new Exception("Erreur: Veuillez precisez la demande $url[0] !");
                 break;
 
                 case 'delete':

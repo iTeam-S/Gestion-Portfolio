@@ -3,7 +3,7 @@ class ControllerUpdate {
     
     public function membre(string $user_github, string $tel1, string $tel2,
      string $mail, string $facebook, string $linkedin, string $adresse,
-     string $description, string $function, int $identifiant) {
+     string $description, string $fonction, int $identifiant) {
         $infos=[
             'user_github' => strip_tags(trim($user_github)),
             'tel1' => strip_tags(trim($tel1)),
