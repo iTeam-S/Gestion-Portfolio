@@ -45,7 +45,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->membreAll();
-                                    else $get->membre();
+                                    else $get->membre($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -56,7 +56,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->formationsAll();
-                                    else $get->formations();
+                                    else $get->formations($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -67,7 +67,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->fonctionAll();
-                                    else $get->fonction();
+                                    else $get->fonction($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -78,7 +78,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->experiencesAll();
-                                    else $get->experiences();
+                                    else $get->experiences($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -89,7 +89,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->distinctionsAll();
-                                    else $get->distinctions();
+                                    else $get->distinctions($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -100,7 +100,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->competencesAll();
-                                    else $get->competences();
+                                    else $get->competences($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -111,7 +111,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->projetsAll();
-                                    else $get->projets();
+                                    else $get->projets($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -122,7 +122,7 @@ try {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif(trim($url[2]) === '*') $get->autresAll();
-                                    else $get->autres();
+                                    else $get->autres($url[2]);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;

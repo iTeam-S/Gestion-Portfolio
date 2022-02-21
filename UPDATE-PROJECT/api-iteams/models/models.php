@@ -54,7 +54,7 @@ class Membre extends Database {
                 WHERE id = :identifiant 
                 OR (prenom_usuel LIKE %:identifiant% OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))');
             $demande -> execute($donnees);
-            $reponses = $demande -> fetch(PDO::FETCH_ASSOC);
+            $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
             return $reponses;
         }
