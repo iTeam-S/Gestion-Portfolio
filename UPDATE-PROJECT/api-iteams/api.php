@@ -197,31 +197,36 @@ try {
                             break;
                             
                             case 'formations':
-                                
+                                $update->formations($_POST['lieu'], $_POST['annee'], $_POST['type'],
+                                 $_POST['description'], $_POST['identifiant']);
                             break;
 
                             case 'fonction':
-                                
+                                $update->fonction($_POST['id_poste'], $_POST['identifiant']);
                             break;
 
                             case 'experiences':
-                                
+                                $update->experiences($_POST['nom'], $_POST['annee'], $_POST['type'],
+                                $_POST['description'], $_POST['identifiant']);
                             break;  
 
                             case 'distinctions':
-                                
+                                $update->distinctions($_POST['organisateur'], $_POST['annee'], $_POST['type'],
+                                $_POST['description'], $_POST['ordre'], $_POST['identifiant']);
                             break;
 
                             case 'competences':
-                                
+                                $update->competences($_POST['nom'], $_POST['liste'], $_POST['id_categorie'], 
+                                 $_POST['identifiant']);
                             break;
 
                             case 'projets':
-                                
+                                $update->projets($_POST['nom'], $_POST['description'], $_POST['lien'],
+                                $_POST['pdc'], $_POST['ordre'], $_POST['identifiant']);
                             break;
 
                             case 'autres':
-                                
+                                $update->autres($_POST['nom'], $_POST['lien'], $_POST['identifiant']);
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
