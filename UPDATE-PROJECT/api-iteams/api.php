@@ -236,7 +236,44 @@ try {
                 break;
 
                 case 'delete':
-                
+                    if(!empty(trim($url[1]))) {
+                        $delete=new ControllerDelete();
+                        switch($url[1]) {
+                            case 'membre':
+                                $delete->membre($_POST['identifiant']);
+                            break;
+
+                            case 'formations':
+                                $delete->formations($_POST['identifiant']);
+                            break;
+
+                            case 'fonction':
+                                $delete->fonction($_POST['identifiant']);
+                            break;
+
+                            case 'experiences':
+                                $delete->experiences($_POST['identifiant']);
+                            break;
+
+                            case 'distinctions':
+                                $delete->distinctions($_POST['identifiant']);
+                            break;
+
+                            case 'competences':
+                                $delete->competences($_POST['identifiant']);
+                            break;
+
+                            case 'projets':
+                                $delete->projets($_POST['identifiant']);
+                            break;
+
+                            case 'autres':
+                                $delete->autres($_POST['identifiant']);
+                            break;
+                            default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
+                        }
+                    }
+                    else throw new Exception("Erreur: Veuillez precisez la demande $url[0] !");
                 break;
 
                 default: throw new Exception("Erreur: la demande est introuvale !");
