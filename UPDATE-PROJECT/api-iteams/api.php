@@ -20,13 +20,13 @@ try {
                 // ********************** LOGIN *********************
                 case 'login':
                     if(!empty(trim($url[1]))) {
-                        $login=ControllerLogin($_POST['identifiant'], $_POST['password']);
+                        $login=ControllerLogin();
                         switch($url[1]) {
                             case 'api-login':
-                                $login->apiLogin();
+                                $login->apiLogin($_POST['identifiant'], $_POST['password']);
                             break;
                             case 'session-login':
-                                $login->sessionLogin();
+                                $login->sessionLogin($_POST['identifiant'], $_POST['password']);
                             break;
                             default: throw new Exception("Erreur: la methode d'authentification n'existe pas !");
                         }
