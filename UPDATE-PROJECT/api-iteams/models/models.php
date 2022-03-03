@@ -1,9 +1,9 @@
 <?php
 abstract class Database {
-    private $host = 'iteam-s.mg';
-    private $database = 'ITEAMS';
-    private $user = 'lahatra';
-    private $password = '__Lhtr21__';
+    private $host = '';
+    private $database = '';
+    private $user = '';
+    private $password = '';
 
     protected function db_connect():object {
         try {
