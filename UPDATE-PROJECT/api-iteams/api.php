@@ -20,7 +20,7 @@ try {
                 // ********************** LOGIN *********************
                 case 'login':
                     if(!empty(trim($url[1]))) {
-                        $login=ControllerLogin();
+                        $login=new ControllerLogin();
                         switch($url[1]) {
                             case 'api-login':
                                 $login->apiLogin($_POST['identifiant'], $_POST['password']);
@@ -40,7 +40,7 @@ try {
 
                 case 'get':
                     if(!empty(trim($url[1]))) {
-                        $get=ControllerGet();
+                        $get=new ControllerGet();
                         switch($url[1]) {
                             case 'membre':
                                 if(!empty(trim($url[2]))) {
@@ -138,7 +138,7 @@ try {
 
                 case 'add':
                     if(!empty(tirm($url[1]))) {
-                        $add=ControllerAdd();
+                        $add=new ControllerAdd();
                         switch($url[1]) {
                             case 'membre':
                                 $add->membre($_POST['nom'], $_POST['prenom'], $_POST['prenom_usuel'],
@@ -187,7 +187,7 @@ try {
 
                 case 'update':
                     if(!empty(trim($url[1]))) {
-                        $update=ControllerUpdate();
+                        $update=new ControllerUpdate();
                         switch($url[1]) {
                             case 'membre':
                                 $update->membre($_POST['user_github'], $_POST['tel1'], $_POST['tel2'],
