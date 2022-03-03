@@ -28,6 +28,9 @@ try {
                             case 'session-login':
                                 $login->sessionLogin($_POST['identifiant'], $_POST['password']);
                             break;
+                            case 'getSession':
+                                $login->getSession();
+                            break;
                             default: throw new Exception("Erreur: la methode d'authentification n'existe pas !");
                         }
                         unset($login);

@@ -23,9 +23,17 @@ class ControllerLogin {
             $login=new Login();
             $resultats=$login->authentifier($infos);
             unset($login);
-            $_SESSION['informations']=$resultats;
+            $_SESSION['TRUE']=$resultats['TRUE'];
+            $_SESSION['id']=$resultats['id'];
+            $_SESSION['prenom_usuel']=$resultats['prenom_usuel'];
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
         }
         else throw new Exception("Erreur: un des paramètres est vide pour l'authentification !");
+    }
+
+    public function getSession() {
+        if(!empty($_SESSION)) {
+            print_r(json_encode($_SESSION, JSON_FORCE_OBJECT));
+        }
     }
 }
