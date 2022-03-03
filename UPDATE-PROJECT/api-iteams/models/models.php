@@ -1,9 +1,9 @@
 <?php
 abstract class Database {
-    private $host = '';
-    private $database = '';
-    private $user = '';
-    private $password = '';
+    private $host = 'localhost';
+    private $database = 'ITEAMS';
+    private $user = 'jitiy';
+    private $password = '01Lah_tr*@ro0t/*';
 
     protected function db_connect():object {
         try {
@@ -67,15 +67,31 @@ class Membre extends Database {
         $database = null;
     }
 
-    public function addMembre(array $donnees) {
+    protected function verifyMembre(array $donnees) {
+        $database=Database::db_connect();
+        $demande=$database->prepare('SELECT True FROM membre
+            WHERE prenom_usuel=:prenom_usuel OR user_github=:user_github
+             OR mail=:mail');
+        $demande->execute($donnees);
+        $reponses=$demande->fetch(PDO::FETCH_ASSOC);
+        $demande->closeCursor();
+        if(empty($reponses)) $reponses['TRUE']=0;
+        return $reponses['TRUE'];
+    }
+
+    public function addMembre(array $donnees, array $verify) {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
-                 tel1, tel2, mail, actif, adresse, "password", dark)
-                VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, 
-                 1, :adresse, SHA2("iTeam-$", 256), 0)');
-            $demande -> execute($donnees);
-            $database -> commit();
+            if($this->verifyMembre($verify) === 1) {
+                $database = Database::db_connect();
+                $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
+                     tel1, tel2, mail, actif, adresse, "password", dark)
+                    VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, 
+                     1, :adresse, SHA2("iTeam-$", 256), 0)');
+                $demande -> execute($donnees);
+                $status = 1;
+            }
+            else $status = 0;
+            return $status;
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -98,7 +114,6 @@ class Membre extends Database {
                 WHERE id=:identifiant
             ");
             $demande -> execute($donnees);
-            $database -> commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -118,7 +133,6 @@ class Membre extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -136,7 +150,6 @@ class Membre extends Database {
             $demande = $database -> prepare('DELETE FROM membre 
                 WHERE id = :identifiant');
             $demande -> execute($donnees);
-            $database -> commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -203,7 +216,6 @@ class Formations extends Database {
                  id_membre, ordre)
                 VALUES(:lieu, :annee, :"type", :"description", :id_membre, 0)');
             $demande -> execute($donnees);
-            $database -> commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -223,7 +235,6 @@ class Formations extends Database {
                 "description" = :"description"
                 WHERE id = :identifiant');
             $demande -> execute($donnees);
-            $database -> commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -241,7 +252,6 @@ class Formations extends Database {
             $demande = $database -> prepare('DELETE FROM formations
                 WHERE id = :id');
             $demande -> execute($donnees);
-            $database -> commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -308,7 +318,6 @@ class Fonction extends Database {
                 VALUES(:id_membre, :id_poste)
             ");
             $demande -> execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -328,7 +337,6 @@ class Fonction extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database -> rollBack();
@@ -345,7 +353,6 @@ class Fonction extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('DELETE FROM fonction WHERE id=:identifiant');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -412,7 +419,6 @@ class Experiences extends Database {
                 VALUES(:nom, :annee, :"type", :"description", :id_membre, 0)
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -433,7 +439,6 @@ class Experiences extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -452,7 +457,6 @@ class Experiences extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -520,7 +524,6 @@ class Distinctions extends Database {
                 VALUES(:organisateur, :annee, :"type",  :"description", :id_membre, :ordre)
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -541,7 +544,6 @@ class Distinctions extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -560,7 +562,6 @@ class Distinctions extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -632,7 +633,6 @@ class Competences extends Database {
                 VALUES(:nom, :liste, :id_categorie, :id_membre, 0)
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -652,7 +652,6 @@ class Competences extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {    
             $database->rollBack();
@@ -671,7 +670,6 @@ class Competences extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -738,7 +736,6 @@ class Projets extends Database {
                  pdc, id_membre, ordre)
                 VALUES(:nom, :"description", :lien, :pdc, :id_membre, :ordre)');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -759,7 +756,6 @@ class Projets extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -777,7 +773,6 @@ class Projets extends Database {
             $demande=$database->prepare('DELETE FROM projets 
             WHERE id=:identifiant');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -842,7 +837,6 @@ class Autres extends Database {
                 VALUES(:nom, :lien, :id_membre)
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -862,7 +856,6 @@ class Autres extends Database {
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();
@@ -880,7 +873,6 @@ class Autres extends Database {
             $demande=$database->prepare('DELETE FROM autres 
                 WHERE id=:identifiant');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();

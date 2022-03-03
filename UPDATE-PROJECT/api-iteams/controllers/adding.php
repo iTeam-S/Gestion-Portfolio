@@ -19,9 +19,9 @@ class ControllerAdd {
                         'mail' => strip_tags(trim($mail)),
                         'adresse' => strip_tags(trim($adresse))
                     ];
-                    $add->addMembre($infos);
+                    $data = $add->addMembre($infos);
                     unset($add);
-                    echo '1';
+                    echo $data;
                 }
                 else throw new Exception("erreur: adresse email invalide !");
             }
