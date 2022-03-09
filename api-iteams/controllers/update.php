@@ -16,10 +16,10 @@ class ControllerUpdate {
             'fonction' => strip_tags(trim($fonction)),
             'identifiant' => strip_tags(trim($identifiant))
         ];
-        $update=new Membre();
+        $update=new Membre;
         $update->updateMembre($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function membrePassword(string $keyword, int $identifiant) {
@@ -27,10 +27,10 @@ class ControllerUpdate {
             'keyword' => $keyword,
             'identifiant' => strip_tags(trim($identifiant))
         ];
-        $update=new Membre();
+        $update=new Membre;
         $update->updateMembrePassword($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function formations(string $lieu, string $annee, string $type,
@@ -42,10 +42,10 @@ class ControllerUpdate {
             'description' => strip_tags(trim($description)),
             'identifiant' => strip_tags($identifiant) 
         ];
-        $update=new Formations();
+        $update=new Formations;
         $update->updateFormations($infos);
         unset($infos);
-        echo '1';
+        echo 1;
     }
 
     public function fonction(int $id_poste, int $identifiant) {
@@ -53,10 +53,10 @@ class ControllerUpdate {
             'id_poste' => strip_tags($id_poste),
             'identifiant' => strip_tags($identifiant)
         ];
-        $update=new Fonction();
+        $update=new Fonction;
         $update->updateFonction($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function experiences(string $nom, string $annee, string $type,
@@ -68,10 +68,10 @@ class ControllerUpdate {
             'description' => strip_tags(trim($description)),
             'identifiant' => strip_tags($identifiant)
         ];
-        $update=new Experiences();
+        $update=new Experiences;
         $update->updateExperiences($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function distinctions(string $organisateur, string $annee,
@@ -84,10 +84,10 @@ class ControllerUpdate {
             'ordre' => strip_tags(trim($ordre)),
             'identifiant' => strip_tags($identifiant)
         ];
-        $update=new Distinctions();
+        $update=new Distinctions;
         $update->updateDistinctions($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function competences(string $nom, string $liste, int $id_categorie, int $identifiant) {
@@ -97,10 +97,10 @@ class ControllerUpdate {
             'id_categorie' => strip_tags($id_categorie),
             'identifiant' => strip_tags($identifiant)
         ];
-        $update=new Competences();
+        $update=new Competences;
         $update->updateCompetences($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function projets(string $nom, string $description, string $lien,
@@ -113,10 +113,10 @@ class ControllerUpdate {
             'ordre' => strip_tags($ordre),
             'identifiant' => strip_tags($identifiant)
         ];
-        $update=new Projets();
+        $update=new Projets;
         $update->updateProjets($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 
     public function autres(string $nom, string $lien, int $identifiant) {
@@ -125,9 +125,9 @@ class ControllerUpdate {
             'lien' => strip_tags(trim($lien)),
             'identifiant' => strip_tags($identifiant)
         ];
-        $update=new Autres();
+        $update=new Autres;
         $update->updateAutres($infos);
         unset($update);
-        echo '1';
+        echo 1;
     }
 }

@@ -2,7 +2,7 @@
 class ControllerGet {
     // *********************** MEMBRES ************************
     public function membreAll() {
-        $get=new Membre();
+        $get=new Membre;
         $resultats=$get->getAllMembre();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -13,7 +13,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' =>strip_tags($identifiant)
             ];
-            $get=new Membre();
+            $get=new Membre;
             $resultats=$get->getMembre($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -23,7 +23,7 @@ class ControllerGet {
 
     // ******************* FORMATIONS **************************
     public function formationsAll() {
-        $get=new Formations();
+        $get=new Formations;
         $resultats=$get->getAllFormations();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -34,7 +34,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Formations();
+            $get=new Formations;
             $resultats=$get->getFormations($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -44,7 +44,7 @@ class ControllerGet {
 
     // ********************** FONCTION ********************
     public function fonctionAll() {
-        $get=new Fonction();
+        $get=new Fonction;
         $resultats=$get->getAllFonction();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -55,7 +55,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Fonction();
+            $get=new Fonction;
             $resultats=$get->getFonction($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -65,7 +65,7 @@ class ControllerGet {
 
     // *********************** EXPERIENCES ********************
     public function experiencesAll() {
-        $get=new Experiences();
+        $get=new Experiences;
         $resultats=$get->getAllExperiences();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -76,7 +76,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Experiences();
+            $get=new Experiences;
             $resultats=$get->getExperiences($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -86,7 +86,7 @@ class ControllerGet {
 
     // *************************** DISTINCTIONS **********************
     public function distinctionsAll() {
-        $get=new Distinctions();
+        $get=new Distinctions;
         $resultats=$get->getAllDistinctions();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -97,7 +97,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Distinctions();
+            $get=new Distinctions;
             $resultats=$get->getDistinctions($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -107,7 +107,7 @@ class ControllerGet {
 
     // ************************ COMPETENCES ********************
     public function competencesAll() {
-        $get=new Competences();
+        $get=new Competences;
         $resultats=$get->getAllCompetences();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -118,7 +118,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Competences();
+            $get=new Competences;
             $resultats=$get->getCompetences($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -128,7 +128,7 @@ class ControllerGet {
 
     // ********************** PROJETS *********************
     public function projetsAll() {
-        $get=new Projets();
+        $get=new Projets;
         $resultats=$get->getAllProjets();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -139,7 +139,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Projets();
+            $get=new Projets;
             $resultats=$get->getProjets($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -149,7 +149,7 @@ class ControllerGet {
 
     // ************************* AUTRES *********************
     public function autresAll() {
-        $get=new Autres();
+        $get=new Autres;
         $resultats=$get->getAllAutres();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
@@ -160,7 +160,7 @@ class ControllerGet {
             $infos=[
                 'identifiant' => strip_tags($identifiant)
             ];
-            $get=new Autres();
+            $get=new Autres;
             $resultats=$get->getAutres($infos);
             unset($get);
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
