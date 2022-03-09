@@ -20,13 +20,13 @@ try {
                 // ********************** LOGIN *********************
                 case 'login':
                     if(!empty(trim($url[1]))) {
-                        $login=new ControllerLogin();
+                        $login=new ControllerLogin($_POST['identifiant'], $_POST['password']);
                         switch($url[1]) {
                             case 'api-login':
-                                $login->apiLogin($_POST['identifiant'], $_POST['password']);
+                                $login->apiLogin();
                             break;
                             case 'session-login':
-                                $login->sessionLogin($_POST['identifiant'], $_POST['password']);
+                                $login->sessionLogin();
                             break;
                             case 'getSession':
                                 $login->getSession();

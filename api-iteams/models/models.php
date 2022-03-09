@@ -1,14 +1,18 @@
 <?php
 abstract class Database {
-    private $host = '';
-    private $database = '';
-    private $user = '';
-    private $password = '';
+    
+    public function __construct() {
+        $lahatra=json_decode(file_get_contents('./models/db.json'));
+        $this->host = $lahatra->host;
+        $this->dbname = $lahatra->dbname;
+        $this->user = $lahatra->user;
+        $this->password = $lahatra->password;
+    }
 
     protected function db_connect():object {
         try {
-            return new PDO('mysql:host='.$this->host.'; dbname='.$this -> database.'; charset=utf8', 
-                $this -> user, $this -> password,
+            return new PDO("mysql:host=$this->host; dbname=$this->dbname; charset=utf8", 
+                $this->user, $this->password,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
         }
@@ -28,7 +32,7 @@ class Membre extends Database {
             $database = Database::db_connect();
             $demande = $database -> query('SELECT id, nom, prenom, prenom_usuel, user_github, 
                  user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
-                 "description", fonction, pdc, dark
+                 `description`, fonction, pdc, dark
                 FROM membre WHERE actif = 1');
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
@@ -49,7 +53,7 @@ class Membre extends Database {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
                   user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
-                  "description", fonction, pdc, dark
+                  `description`, fonction, pdc, dark
                 FROM membre 
                 WHERE actif = 1 AND (id = :identifiant 
                 OR (prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))
@@ -85,7 +89,7 @@ class Membre extends Database {
             if($this->verifyMembre($verify) === 1) {
                 $database = Database::db_connect();
                 $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
-                     tel1, tel2, mail, actif, adresse, "password", dark)
+                     tel1, tel2, mail, actif, adresse, `password`, dark)
                     VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, 
                      1, :adresse, SHA2("iTeam-$", 256), 0)');
                 $demande -> execute($donnees);
@@ -111,7 +115,7 @@ class Membre extends Database {
                 SET user_github = :user_github, tel1 = :tel1,
                 tel2 = :tel2, mail = :mail, facebook = :facebook
                 linkedin = :linkedin, adresse = :adresse, 
-                `description` = :'description', fonction = :fonction
+                `description` = :description, fonction = :fonction
                 WHERE id=:identifiant
             ");
             $demande -> execute($donnees);
@@ -213,9 +217,9 @@ class Formations extends Database {
     public function addFormations(array $donnees) {
         try {
             $database = Database::db_connect();
-            $demande = $database -> prepare('INSERT INTO formations(lieu, annee, "type", "description",
+            $demande = $database -> prepare('INSERT INTO formations(lieu, annee, `type`, `description`,
                  id_membre, ordre)
-                VALUES(:lieu, :annee, :"type", :"description", :id_membre, 0)');
+                VALUES(:lieu, :annee, :type, :description, :id_membre, 0)');
             $demande -> execute($donnees);
         }
         catch(PDOException $e) {
@@ -232,8 +236,8 @@ class Formations extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('UPDATE formations
-                SET lieu = :lieu, annee = :annee, "type" = :types, 
-                "description" = :"description"
+                SET lieu = :lieu, annee = :annee, `type` = :type, 
+                `description` = :description
                 WHERE id = :identifiant');
             $demande -> execute($donnees);
         }
@@ -416,8 +420,8 @@ class Experiences extends Database {
     public function addExperiences(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('INSERT INTO experiences(nom, annee, "type", "description", id_membre, ordre)
-                VALUES(:nom, :annee, :"type", :"description", :id_membre, 0)
+            $demande=$database->prepare('INSERT INTO experiences(nom, annee, `type`, `description`, id_membre, ordre)
+                VALUES(:nom, :annee, :type, :description, :id_membre, 0)
             ');
             $demande->execute($donnees);
         }
@@ -435,8 +439,8 @@ class Experiences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE experiences
-                SET nom=:nom, annee=:annee, "type"=:"type", 
-                "description"=:"description"
+                SET nom=:nom, annee=:annee, `type`=:type, 
+                `description`=:description
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
@@ -520,9 +524,9 @@ class Distinctions extends Database {
     public function addDistinctions(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('INSERT INTO distinctions(organisateur, annee, "type", 
-                 "descriptions", id_membre, ordre)
-                VALUES(:organisateur, :annee, :"type",  :"description", :id_membre, :ordre)
+            $demande=$database->prepare('INSERT INTO distinctions(organisateur, annee, `type`, 
+                 `description`, id_membre, ordre)
+                VALUES(:organisateur, :annee, :type,  :description, :id_membre, :ordre)
             ');
             $demande->execute($donnees);
         }
@@ -541,7 +545,7 @@ class Distinctions extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE distinctions
                 SET organisateur=:organisateur, annee=:annee, "type"=:"type",
-                 "description"=:"description", ordre=:ordre
+                 `description`=:description, ordre=:ordre
                 WHERE id=:identifiant
             ');
             $demande->execute($donnees);
@@ -604,11 +608,11 @@ class Competences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT c.id, c.nom, c.liste, 
-            c.id_categorie, cc.nom as categorie, cc.icone,
-            c.id_membre, c.ordre, m.prenom_usuel
-           FROM competences c
-           JOIN membre m ON c.id_membre=m.id
-           JOIN categorie_competence cc ON c.id_categorie=cc.id
+                    c.id_categorie, cc.nom as categorie, cc.icone,
+                    c.id_membre, c.ordre, m.prenom_usuel
+                FROM competences c
+                JOIN membre m ON c.id_membre=m.id
+                JOIN categorie_competence cc ON c.id_categorie=cc.id
                 WHERE m.id = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
@@ -733,9 +737,9 @@ class Projets extends Database {
     public function addProjets(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('INSERT INTO projets(nom, "description", lien,
+            $demande=$database->prepare('INSERT INTO projets(nom, `description`, lien,
                  pdc, id_membre, ordre)
-                VALUES(:nom, :"description", :lien, :pdc, :id_membre, :ordre)');
+                VALUES(:nom, :description, :lien, :pdc, :id_membre, :ordre)');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -752,7 +756,7 @@ class Projets extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE projets
-                SET nom=:nom, "description"=:"description", lien=:lien,
+                SET nom=:nom, `description`=:description, lien=:lien,
                  pdc=:pdc, ordre=:ordre
                 WHERE id=:identifiant
             ');
@@ -888,15 +892,15 @@ class Autres extends Database {
 
 class Login extends Database {
 
-    public function authentifier(array $donnees):array {
+    public function authentifier(array $donnees) {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT True, id, prenom_usuel
                 FROM membre
-                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND "password"=SHA2(:"password", 256)
+                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND `password`=SHA2(:password, 256)
             ');
             $demande->execute($donnees);
-            $reponses->fetch(PDO::FETCH_ASSOC);
+            $reponses=$demande->fetch(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
         }
