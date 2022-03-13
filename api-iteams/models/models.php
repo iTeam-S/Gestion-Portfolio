@@ -198,7 +198,7 @@ class Formations extends Database {
                 FROM formations f
                 JOIN membre m ON f.id_membre = m.id
                 GROUP BY f.id ASC
-                WHERE m.id = :identifiant 
+                WHERE f.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande -> execute($donnees);
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
@@ -300,7 +300,7 @@ class Fonction extends Database {
                 FROM fonction f
                 JOIN membre m ON f.id_membre = m.id
                 JOIN poste p ON f.id_poste=p.id 
-                WHERE m.id = :identifiant 
+                WHERE f.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::ASSOC);
@@ -400,7 +400,7 @@ class Experiences extends Database {
                  e.id_membre, e.ordre, m.prenom_usuel
                 FROM experiences e
                 JOIN membre m ON e.id_membre=m.id
-                WHERE m.id = :identifiant 
+                WHERE e.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
             $demande->execute($donnees);
@@ -504,7 +504,7 @@ class Distinctions extends Database {
                  d.description, d.id_membre, d.ordre, m.prenom_usuel
                 FROM distinctions d
                 JOIN membre m ON d.id_membre=m.id
-                WHERE m.id = :identifiant 
+                WHERE d.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
             $demande->execute($donnees);
@@ -613,7 +613,7 @@ class Competences extends Database {
                 FROM competences c
                 JOIN membre m ON c.id_membre=m.id
                 JOIN categorie_competence cc ON c.id_categorie=cc.id
-                WHERE m.id = :identifiant 
+                WHERE c.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
             ');
             $demande->execute($donnees);
@@ -717,7 +717,7 @@ class Projets extends Database {
                  p.pdc, p.id_membre, p.ordre, m.prenom_usuel
                 FROM projets p
                 JOIN membre m ON p.id_membre=m.id
-                WHERE m.id = :identifiant 
+                WHERE p.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
                 ');
             $demande->execute($donnees);
@@ -818,7 +818,7 @@ class Autres extends Database {
             $demande=$database->prepare('SELECT a.id, a.nom, a.lien, a.id_membre
                 FROM autres a
                 JOIN membre m ON a.id_membre=m.id
-                WHERE m.id=:identifiant
+                WHERE a.id_membre=:identifiant
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
                 ');
             $demande->execute($donnees);

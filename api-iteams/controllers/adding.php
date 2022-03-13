@@ -6,7 +6,8 @@ class ControllerAdd {
         if(!empty(trim($nom)) && !empty(trim($prenom)) && !empty(trim($prenom_usuel))
          && !empty(trim($user_github)) && !empty(trim($tel1)) && !empty(trim($mail))
          && !empty(trim($adresse))) {
-            if(preg_match("#^([0-9 +]{12})$#", $tel1) && preg_match("#^([0-9 +]{12})$#", $tel2)){
+            if(preg_match("#^(+261|03)[2348]([0-9]{7})$#", $tel1)){
+                $tel2=(preg_match("#^(+261|03)[2348]([0-9]{7})$#", $tel2) ? $tel2 : "");
                 if(preg_match("#^[a-zA-Z0-9_+.-]+@[a-z]{2, 7}\.[a-z]{2, 4}#", $mail)) {
                     $add=new Membre;
                     $infos=[

@@ -1,5 +1,12 @@
 <?php
 class ControllerGet {
+
+    public function __construct(string $identifiant) {
+        $this->data=[
+            'identifiant' => strip_tags(trim($identifiant))
+        ];
+    }
+
     // *********************** MEMBRES ************************
     public function membreAll() {
         $get=new Membre;
@@ -8,17 +15,11 @@ class ControllerGet {
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
-    public function membre(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' =>strip_tags($identifiant)
-            ];
-            $get=new Membre;
-            $resultats=$get->getMembre($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètres est vide pour 'membre' !");
+    public function membre() {
+        $get=new Membre;
+        $resultats=$get->getMembre($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // ******************* FORMATIONS **************************
@@ -30,16 +31,10 @@ class ControllerGet {
     }
 
     public function formations(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Formations;
-            $resultats=$get->getFormations($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètre est vide pour 'formations' !");
+        $get=new Formations;
+        $resultats=$get->getFormations($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // ********************** FONCTION ********************
@@ -51,16 +46,10 @@ class ControllerGet {
     }
 
     public function fonction(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Fonction;
-            $resultats=$get->getFonction($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètre est vide pour 'fonction' !"); 
+        $get=new Fonction;
+        $resultats=$get->getFonction($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // *********************** EXPERIENCES ********************
@@ -72,16 +61,10 @@ class ControllerGet {
     }
 
     public function experiences(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Experiences;
-            $resultats=$get->getExperiences($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètres est vide pour 'experiences' !");   
+        $get=new Experiences;
+        $resultats=$get->getExperiences($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // *************************** DISTINCTIONS **********************
@@ -93,16 +76,10 @@ class ControllerGet {
     }
 
     public function distinctions(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Distinctions;
-            $resultats=$get->getDistinctions($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètre est vide pour 'distinctions' !");
+        $get=new Distinctions;
+        $resultats=$get->getDistinctions($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // ************************ COMPETENCES ********************
@@ -114,16 +91,10 @@ class ControllerGet {
     }
 
     public function competences(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Competences;
-            $resultats=$get->getCompetences($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètres est vide pour 'competences' !");
+        $get=new Competences;
+        $resultats=$get->getCompetences($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // ********************** PROJETS *********************
@@ -135,16 +106,10 @@ class ControllerGet {
     }
 
     public function projets(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Projets;
-            $resultats=$get->getProjets($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètres est vide pour 'projets' !");
+        $get=new Projets;
+        $resultats=$get->getProjets($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
     // ************************* AUTRES *********************
@@ -156,15 +121,9 @@ class ControllerGet {
     }
 
     public function autres(string $identifiant) {
-        if(!empty(trim($identifiant))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant)
-            ];
-            $get=new Autres;
-            $resultats=$get->getAutres($infos);
-            unset($get);
-            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-        }
-        else throw new Exception("Erreur: un des paramètres est vide pour 'autres' !");
+        $get=new Autres;
+        $resultats=$get->getAutres($this->data);
+        unset($get);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 }
