@@ -130,14 +130,28 @@ class Membre extends Database {
         $database=null;
     }
 
+    private function verifyPassword(arry $donnees): bool {
+        $database=Database::db_connect();
+        $demande=$database->prepare('SELECT True FROM membres
+            WHERE `password`=SHA2(:keyword, 256) AND id=:identifiant');
+        $demande->execute($donnees);
+        $reponses=$demande->fetch(PDO::FETCH_ASSOC);
+        return $reponses['TRUE'];
+    }
+
     public function updateMembrePassword(array $donnees) {
         try {
-            $database=Database::db_connect();
-            $demande=$database->prepare('UPDATE membre
-                SET "password"=SHA2(:keyword, 256)
-                WHERE id=:identifiant
-            ');
-            $demande->execute($donnees);
+            $status = 0;
+            if($this->verifyPassword($donnees)) {
+                $database=Database::db_connect();
+                $demande=$database->prepare('UPDATE membre
+                    SET `password`=SHA2(:keyword, 256)
+                    WHERE id=:identifiant
+                ');
+                $demande->execute($donnees);
+                $status = 1;
+            }
+            return $status;
         }
         catch(PDOException $e) {
             $database->rollBack();
