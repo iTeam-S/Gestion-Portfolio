@@ -72,7 +72,7 @@ class Membre extends Database {
         $database = null;
     }
 
-    protected function verifyMembre(array $donnees) {
+    private function verifyMembre(array $donnees):int {
         $database=Database::db_connect();
         $demande=$database->prepare('SELECT True FROM membre
             WHERE prenom_usuel=:prenom_usuel OR user_github=:user_github
@@ -80,13 +80,13 @@ class Membre extends Database {
         $demande->execute($donnees);
         $reponses=$demande->fetch(PDO::FETCH_ASSOC);
         $demande->closeCursor();
-        if(empty($reponses)) $reponses['TRUE']=0;
-        return $reponses['TRUE'];
+        return (!empty($reponses) ? 1 : 0);
     }
 
-    public function addMembre(array $donnees, array $verify) {
+    public function addMembre(array $donnees, array $verify):int {
         try {
-            if($this->verifyMembre($verify) === 1) {
+            $status = 0;
+            if($this->verifyMembre($verify) === 0) {
                 $database = Database::db_connect();
                 $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
                      tel1, tel2, mail, actif, adresse, `password`, dark)
@@ -95,7 +95,6 @@ class Membre extends Database {
                 $demande -> execute($donnees);
                 $status = 1;
             }
-            else $status = 0;
             return $status;
         }
         catch(PDOException $e) {
@@ -130,19 +129,19 @@ class Membre extends Database {
         $database=null;
     }
 
-    private function verifyPassword(arry $donnees): bool {
+    private function verifyPassword(arry $donnees):int {
         $database=Database::db_connect();
         $demande=$database->prepare('SELECT True FROM membres
             WHERE `password`=SHA2(:keyword, 256) AND id=:identifiant');
         $demande->execute($donnees);
         $reponses=$demande->fetch(PDO::FETCH_ASSOC);
-        return $reponses['TRUE'];
+        return (!empty($reponses) ? 1 : 0);
     }
 
-    public function updateMembrePassword(array $donnees) {
+    public function updateMembrePassword(array $donnees, array $verify):int {
         try {
             $status = 0;
-            if($this->verifyPassword($donnees)) {
+            if($this->verifyPassword($verify)) {
                 $database=Database::db_connect();
                 $demande=$database->prepare('UPDATE membre
                     SET `password`=SHA2(:keyword, 256)
