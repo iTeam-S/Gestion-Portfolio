@@ -2,16 +2,16 @@
 class ControllerLogin {
     private array $data;
 
-    public function __construct(string $identifiant, string $password) {
-        if(!empty(trim($identifiant)) && !empty(trim($password))) {
-            $infos=[
-                'identifiant' => strip_tags($identifiant),
-                'password' => $password
-            ];
-            $this->data = $infos;
-        }
-        else throw new Exception("Erreur: un des paramètres est vide pour l'authentification !");
-    }
+    // public function __construct(string $identifiant, string $password) {
+    //     if(!empty(trim($identifiant)) && !empty(trim($password))) {
+    //         $infos=[
+    //             'identifiant' => strip_tags($identifiant),
+    //             'password' => $password
+    //         ];
+    //         $this->data = $infos;
+    //     }
+    //     else throw new Exception("Erreur: un des paramètres est vide pour l'authentification !");
+    // }
 
      public function apiLogin() {
         $login=new Login();

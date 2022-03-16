@@ -141,7 +141,7 @@ class Membre extends Database {
     public function updateMembrePassword(array $donnees, array $verify):int {
         try {
             $status = 0;
-            if($this->verifyPassword($verify)) {
+            if($this->verifyPassword($verify) === 1) {
                 $database=Database::db_connect();
                 $demande=$database->prepare('UPDATE membre
                     SET `password`=SHA2(:keyword, 256)
@@ -203,7 +203,7 @@ class Formations extends Database {
         $database = null;
     }
 // ********************** PRENDRE UNE FORMATION ***********************
-    public function getFormations(array $donnees) {
+    public function getFormations(array $donnees):array {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT f.id, f.lieu, f.annee, f.type, 
@@ -267,7 +267,7 @@ class Formations extends Database {
     public function deleteFormations(array $donnees) {
         try {
             $database = Database::db_connect();
-            $demande = $database -> prepare('DELETE FROM formations
+            $demande = $database->prepare('DELETE FROM formations
                 WHERE id = :id');
             $demande -> execute($donnees);
         }
@@ -305,7 +305,7 @@ class Fonction extends Database {
         $database=null;
     }
 
-    public function getFonction(array $donnees) {
+    public function getFonction(array $donnees):array {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT f.id, f.date_debut_fonction, f.id_membre,
@@ -406,7 +406,7 @@ class Experiences extends Database {
         $database=null;
     }
 
-    public function getExperiences(array $donnees) {
+    public function getExperiences(array $donnees):array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT e.id, e.nom, e.annee, e.type, e.description, 
@@ -510,7 +510,7 @@ class Distinctions extends Database {
         $database=null;
     }
 
-    public function getDistinctions(array $donnees) {
+    public function getDistinctions(array $donnees):array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT d.id, d.organisateur, d.annee, d.type, 
@@ -617,7 +617,7 @@ class Competences extends Database {
         $database=null;
     }
 
-    public function getCompetences(array $donnees) {
+    public function getCompetences(array $donnees):array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT c.id, c.nom, c.liste, 
