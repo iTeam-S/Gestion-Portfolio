@@ -7,6 +7,9 @@
 - La mise à jours du côté front-end est en cours de développement, qui, lui, est développé avec le framework `Angular JS`. 
 
 ### Concernant l'API: 
+   Avant tout, veuillez créer un fichier `db.json` dans le dossier `models`.
+      Dans db.json: `{ "host": "<nom de l'hote", "dbname": "<nom de la base de données>", "user": "<nom d'utilisateur>", "password": "<mot de passe de l'user>" }`
+
 - Authentification: `http(s)://<nom_de_domaine>/api-iteams/api.php?demande=login/session-login` accompagne des donnees d'authentification (identifiant et mot de passe) et qui fournira après une session. Mais, on peut s'authentifier à d'autres application en utilisant l'api (pour les membres) en utilisant l'URL: 
  `http(s)://<nom_de_domaine>/api-iteams/api.php?demande=login/api-login`
 - Pour avoir la liste des membres: 
