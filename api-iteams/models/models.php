@@ -908,7 +908,7 @@ class Login extends Database {
     public function authentifier(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('SELECT True, id, prenom_usuel, email
+            $demande=$database->prepare('SELECT True, id, prenom_usuel, mail
                 FROM membre
                 WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND `password`=SHA2(:password, 256)
             ');

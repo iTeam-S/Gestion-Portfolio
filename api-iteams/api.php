@@ -1,6 +1,6 @@
 <?php
 session_start();
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Max-Age: 3600");
@@ -11,7 +11,7 @@ require_once './controllers/getters.php';
 require_once './controllers/adding.php';
 require_once './controllers/update.php';
 require_once './controllers/delete.php';
-require_once './conrollers/jwt.php';
+require_once './controllers/jwt.php';
 require_once './controllers/jwt-secret.php';
 
 try {
@@ -27,8 +27,8 @@ try {
                             case 'api-login':
                                 $login->apiLogin($_POST['identifiant'], $_POST['password']);
                             break;
-                            case 'session-login':
-                                $login->tokenLogin($_POST['identifiant'], $_POST['password'], LAHATRA);
+                            case 'token-login':
+                                $login->tokenLogin("Lahatra", "iTeam-$", LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la methode d'authentification n'existe pas !");
                         }

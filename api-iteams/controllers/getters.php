@@ -1,85 +1,154 @@
 <?php
 class ControllerGet {
 
-    public function __construct(string $identifiant) {
-        $this->data=[
-            'identifiant' => strip_tags(trim($identifiant))
-        ];
-    }
-
     // *********************** MEMBRES ************************
-    public function membreAll() {
-        $get=new Membre;
-        $resultats=$get->getAllMembre();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function membreAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Membre;
+            $resultats=$get->getAllMembre();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT MEMBRE. Merci !");
     }
 
-    public function membre() {
-        $get=new Membre;
-        $resultats=$get->getMembre($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function membre(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees = [
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Membre;
+            $resultats=$get->getMembre($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide MEMBRE. Merci !");
     }
 
     // ******************* FORMATIONS **************************
-    public function formationsAll() {
-        $get=new Formations;
-        $resultats=$get->getAllFormations();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function formationsAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Formations;
+            $resultats=$get->getAllFormations();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT FORMATIONS. Merci !");
     }
 
-    public function formations(string $identifiant) {
-        $get=new Formations;
-        $resultats=$get->getFormations($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function formations(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees = [
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Formations;
+            $resultats=$get->getFormations($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide FORMATIONS. Merci !");
     }
 
     // ********************** FONCTION ********************
-    public function fonctionAll() {
-        $get=new Fonction;
-        $resultats=$get->getAllFonction();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function fonctionAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Fonction;
+            $resultats=$get->getAllFonction();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT FONCTION. Merci !");
     }
 
-    public function fonction(string $identifiant) {
-        $get=new Fonction;
-        $resultats=$get->getFonction($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function fonction(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees = [
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Fonction;
+            $resultats=$get->getFonction($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide FONCTION. Merci !");
     }
 
     // *********************** EXPERIENCES ********************
-    public function experiencesAll() {
-        $get=new Experiences;
-        $resultats=$get->getAllExperiences();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function experiencesAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Experiences;
+            $resultats=$get->getAllExperiences();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT EXPERIENCES. Merci !");
     }
 
-    public function experiences(string $identifiant) {
-        $get=new Experiences;
-        $resultats=$get->getExperiences($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function experiences(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees = [
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Experiences;
+            $resultats=$get->getExperiences($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide EXPERIENCES. Merci !");
     }
 
     // *************************** DISTINCTIONS **********************
-    public function distinctionsAll() {
-        $get=new Distinctions;
-        $resultats=$get->getAllDistinctions();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function distinctionsAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Distinctions;
+            $resultats=$get->getAllDistinctions();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT DISTINCTIONS. Merci !");
     }
 
-    public function distinctions(string $identifiant) {
-        $get=new Distinctions;
-        $resultats=$get->getDistinctions($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function distinctions(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees=[
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Distinctions;
+            $resultats=$get->getDistinctions($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide DISTINCTIONS. Merci !");
     }
 
     // ************************ COMPETENCES ********************
