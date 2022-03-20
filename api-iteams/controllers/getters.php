@@ -152,47 +152,93 @@ class ControllerGet {
     }
 
     // ************************ COMPETENCES ********************
-    public function competencesAll() {
-        $get=new Competences;
-        $resultats=$get->getAllCompetences();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function competencesAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($jwt)) {
+            $get=new Competences;
+            $resultats=$get->getAllCompetences();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT COMPETENCES. Merci !");
     }
 
-    public function competences(string $identifiant) {
-        $get=new Competences;
-        $resultats=$get->getCompetences($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function competences(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees=[
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Competences;
+            $resultats=$get->getCompetences($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide COMPETENCES. Merci !");
+        
     }
 
     // ********************** PROJETS *********************
-    public function projetsAll() {
-        $get=new Projets;
-        $resultats=$get->getAllProjets();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function projetsAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Projets;
+            $resultats=$get->getAllProjets();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT PROJETS. Merci !"); 
     }
 
-    public function projets(string $identifiant) {
-        $get=new Projets;
-        $resultats=$get->getProjets($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function projets(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $donnees=[
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Projets;
+            $resultats=$get->getProjets($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide PROJETS. Merci !");
     }
 
     // ************************* AUTRES *********************
-    public function autresAll() {
-        $get=new Autres;
-        $resultats=$get->getAllAutres();
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function autresAll(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($jwt);
+        if(!empty($token)) {
+            $get=new Autres;
+            $resultats=$get->getAllAutres();
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide TOUT AUTRES");
     }
 
-    public function autres(string $identifiant) {
-        $get=new Autres;
-        $resultats=$get->getAutres($this->data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function autres(string $secret) {
+        $jwt = new JWT;
+        $token = $jwt->isValidToken($secret);
+        unset($token);
+        if(!empty($token)) {
+            $donnees=[
+                'identifiant' => strip_tags(trim($token['prenom_usuel']))
+            ];
+            $get=new Autres;
+            $resultats=$get->getAutres($donnees);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
+        else throw new Exception("Erreur: token invalide AUTRES. Merci !");
     }
 }
