@@ -14,6 +14,7 @@ require_once './controllers/delete.php';
 require_once './controllers/jwt.php';
 require_once './controllers/jwt-secret.php';
 
+
 try {
     if(!empty(trim($_GET['demande']))) {
         $url=explode('/', filter_var(strip_tags(trim($_GET['demande'])).'/'), FILTER_SANITIZE_URL);
@@ -39,15 +40,15 @@ try {
 
                 case 'get':
                     if(!empty(trim($url[1]))) {
-                        $get=new ControllerGet();
+                        $get=new ControllerGet;
                         switch($url[1]) {
                             case 'membre':
                                 if(!empty(trim($url[2]))) {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->membreAll();
-                                    else $get->membre($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->membreAll(LAHATRA);
+                                    else $get->membre(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -57,8 +58,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->formationsAll();
-                                    else $get->formations($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->formationsAll(LAHATRA);
+                                    else $get->formations(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -68,8 +69,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->fonctionAll();
-                                    else $get->fonction($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->fonctionAll(LAHATRA);
+                                    else $get->fonction(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -79,8 +80,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->experiencesAll();
-                                    else $get->experiences($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->experiencesAll(LAHATRA);
+                                    else $get->experiences(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -90,8 +91,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->distinctionsAll();
-                                    else $get->distinctions($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->distinctionsAll(LAHATRA);
+                                    else $get->distinctions(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -101,8 +102,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->competencesAll();
-                                    else $get->competences($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->competencesAll(LAHATRA);
+                                    else $get->competences(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -112,8 +113,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->projetsAll();
-                                    else $get->projets($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->projetsAll(LAHATRA);
+                                    else $get->projets(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;
@@ -123,8 +124,8 @@ try {
                                     if(preg_match("#[\\\/+.&é\"'()è`_^£\$ù%§!~,<>?-]#", trim($url[2]))) {
                                         throw new Exception("Erreur: la demande $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
-                                    elseif(trim($url[2]) === '*') $get->autresAll();
-                                    else $get->autres($url[2]);
+                                    elseif(trim($url[2]) === '*') $get->autresAll(LAHATRA);
+                                    else $get->autres(LAHATRA);
                                 }
                                 else throw new Exception("Erreur: veuillez preciser '$url[1] $url[0]' !");
                             break;

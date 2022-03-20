@@ -32,7 +32,7 @@ class JWT {
             $resultats = [
                 'id' => $donnees['id'],
                 'prenom_usuel' => $donnees['prenom_usuel'],
-                'email' => $donnees['email']
+                'mail' => $donnees['mail']
             ];
         }
         else {
@@ -77,7 +77,7 @@ class JWT {
         $verifyToken = $this->generateToken($header, $payload, $secret, 0);
 
         if($token === $verifyToken) {
-            $reponses = $this->getPayloadInfos($payload);
+            $reponses = $this->getInfoPayload($payload);
         }
         else {
             throw new Exception("Erreur: permission non accordée !");
