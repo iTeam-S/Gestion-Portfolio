@@ -18,12 +18,12 @@ class JWT {
     }
 
     private function getHeader(string $token) {
-        $tableau=explode('.', $token);
+        $tableau=explode('.', !empty($token)?$token:".");
         return json_decode(base64_decode(str_replace(['-', '_', ''], ['+', '/', '='], $tableau[0])), true);
     }
 
     private function getPayload(string $token) {
-        $tableau=explode('.', $token);
+        $tableau=explode('.', !empty($token)?$token:".");
         return json_decode(base64_decode(str_replace(['-', '_', ''], ['+', '/', '='], $tableau[1])), true);
     }
 
@@ -60,7 +60,7 @@ class JWT {
             throw new Exception("Erreur: permission non accordée !");
             exit;
         }
-        return $token;
+        return !empty($token) ? $token: "";
     }
 
     public function isValidToken(string $secret) {
@@ -80,6 +80,7 @@ class JWT {
             $reponses = $this->getInfoPayload($payload);
         }
         else {
+            http_response_code(402);
             throw new Exception("Erreur: permission non accordée !");
             exit;
         }
