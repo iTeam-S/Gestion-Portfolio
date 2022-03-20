@@ -9,7 +9,7 @@ abstract class Database {
         $this->password = $lahatra->password;
     }
 
-    protected function db_connect():object {
+    protected function db_connect(): object | string {
         try {
             return new PDO("mysql:host=$this->host; dbname=$this->dbname; charset=utf8", 
                 $this->user, $this->password,
@@ -48,7 +48,7 @@ class Membre extends Database {
     }
 
     // ***************************** PRENDRE LES INFORMATIONS D'UNE MEMBRE ************************
-    public function getMembre(array $donnees) {
+    public function getMembre(array $donnees): array | bool {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
@@ -182,7 +182,7 @@ class Membre extends Database {
 
 class Formations extends Database {
     // ******************** PRENDRE TOUTES LES FORMTIONS **********************
-    public function getAllFormations():array {
+    public function getAllFormations(): array {
         try {
             $database = Database::db_connect();
             $demande = $database -> query('SELECT f.id, f.lieu, f.annee, f.type, 
@@ -203,7 +203,7 @@ class Formations extends Database {
         $database = null;
     }
 // ********************** PRENDRE UNE FORMATION ***********************
-    public function getFormations(array $donnees):array {
+    public function getFormations(array $donnees): array {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT f.id, f.lieu, f.annee, f.type, 
@@ -284,7 +284,7 @@ class Formations extends Database {
 
 class Fonction extends Database {
     // ************************ PRENDRE TOUTES LES FONCTIONS DES PERSONNES, C'EST ITEAM-$ ***************************
-    public function getAllFonction():array {
+    public function getAllFonction(): array {
         try {
             $database = Database::db_connect();
             $demande = $database -> query('SELECT f.id, f.date_debut_fonction, f.id_membre,
@@ -305,7 +305,7 @@ class Fonction extends Database {
         $database=null;
     }
 
-    public function getFonction(array $donnees):array {
+    public function getFonction(array $donnees): array | bool {
         try {
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT f.id, f.date_debut_fonction, f.id_membre,
@@ -316,7 +316,7 @@ class Fonction extends Database {
                 WHERE f.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
-            $reponses=$demande->fetchAll(PDO::ASSOC);
+            $reponses=$demande->fetch(PDO::ASSOC);
             $demande->closeCursor();
             return $reponses;
         }
@@ -385,7 +385,7 @@ class Fonction extends Database {
 
 class Experiences extends Database {
 
-    public function getAllExperiences():array {
+    public function getAllExperiences(): array {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT e.id, e.nom, e.annee, e.type, e.description,
@@ -406,7 +406,7 @@ class Experiences extends Database {
         $database=null;
     }
 
-    public function getExperiences(array $donnees):array {
+    public function getExperiences(array $donnees): array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT e.id, e.nom, e.annee, e.type, e.description, 
@@ -489,7 +489,7 @@ class Experiences extends Database {
 
 class Distinctions extends Database {
 
-    public function getAllDistinctions():array {
+    public function getAllDistinctions(): array {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT d.id, d.organisateur, d.annee, d.type, 
@@ -510,7 +510,7 @@ class Distinctions extends Database {
         $database=null;
     }
 
-    public function getDistinctions(array $donnees):array {
+    public function getDistinctions(array $donnees): array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT d.id, d.organisateur, d.annee, d.type, 
@@ -594,7 +594,7 @@ class Distinctions extends Database {
 
 class Competences extends Database {
 
-    public function getAllCompetences():array {
+    public function getAllCompetences(): array {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT c.id, c.nom, c.liste, 
@@ -617,7 +617,7 @@ class Competences extends Database {
         $database=null;
     }
 
-    public function getCompetences(array $donnees):array {
+    public function getCompetences(array $donnees): array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT c.id, c.nom, c.liste, 
@@ -702,7 +702,7 @@ class Competences extends Database {
 
 class Projets extends Database {
     
-    public function getAllProjets():array {
+    public function getAllProjets(): array {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT p.id, p.nom, p.description, p.lien,
@@ -723,7 +723,7 @@ class Projets extends Database {
         $database=null;
     }
 
-    public function getProjets(array $donnees):array {
+    public function getProjets(array $donnees): array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT p.id, p.nom, p.description, p.lien,
@@ -805,7 +805,7 @@ class Projets extends Database {
 
 class Autres extends Database {
 
-    public function getAllAutres():array {
+    public function getAllAutres(): array {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT a.id, a.nom, a.lien, a.id_membre
@@ -825,7 +825,7 @@ class Autres extends Database {
         $database=null;
     }
 
-    public function getAutres(array $donnees):array {
+    public function getAutres(array $donnees): array {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT a.id, a.nom, a.lien, a.id_membre
@@ -908,7 +908,7 @@ class Login extends Database {
     public function authentifier(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('SELECT True, id, prenom_usuel
+            $demande=$database->prepare('SELECT True, id, prenom_usuel, email
                 FROM membre
                 WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND `password`=SHA2(:password, 256)
             ');

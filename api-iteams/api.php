@@ -5,12 +5,14 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Max-Age: 3600");
 
-require_once 'models/models.php';
-require_once 'controllers/login.php';
-require_once 'controllers/getters.php';
-require_once 'controllers/adding.php';
-require_once 'controllers/update.php';
-require_once 'controllers/delete.php';
+require_once './models/models.php';
+require_once './controllers/login.php';
+require_once './controllers/getters.php';
+require_once './controllers/adding.php';
+require_once './controllers/update.php';
+require_once './controllers/delete.php';
+require_once './conrollers/jwt.php';
+require_once './controllers/jwt-secret.php';
 
 try {
     if(!empty(trim($_GET['demande']))) {
@@ -20,16 +22,13 @@ try {
                 // ********************** LOGIN *********************
                 case 'login':
                     if(!empty(trim($url[1]))) {
-                        $login=new ControllerLogin($_POST['identifiant'], $_POST['password']);
+                        $login=new ControllerLogin;
                         switch($url[1]) {
                             case 'api-login':
-                                $login->apiLogin();
+                                $login->apiLogin($_POST['identifiant'], $_POST['password']);
                             break;
                             case 'session-login':
-                                $login->sessionLogin();
-                            break;
-                            case 'getSession':
-                                $login->getSession();
+                                $login->tokenLogin($_POST['identifiant'], $_POST['password'], LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la methode d'authentification n'existe pas !");
                         }
