@@ -71,7 +71,7 @@ class ControllerUpdate {
         else throw new Exception("Erreur: token invalide UPDATE FORMATIONS. Merci !");
     }
 
-    public function fonction(int $id_poste, int $identifiant) {
+    public function fonction(int $id_poste, int $identifiant, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);

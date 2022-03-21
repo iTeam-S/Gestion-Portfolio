@@ -148,35 +148,34 @@ try {
 
                             case 'formations':
                                 $add->formations($_POST['lieu'], $_POST['annee'], $_POST['type'],
-                                 $_POST['description'], $_POST['id_membre']);
+                                 $_POST['description'], LAHATRA);
                             break;
 
                             case 'fonction':
-                                $add->fonction($_POST['id_membre'], $_POST['id_poste']);
+                                $add->fonction($_POST['id_poste'], LAHATRA);
                             break;
 
                             case 'experiences':
                                 $add->experiences($_POST['nom'], $_POST['annee'], $_POST['type'], 
-                                 $_POST['description'], $_POST['id_membre']);
+                                 $_POST['description'], LAHATRA);
                             break;
 
                             case 'distinctions':
                                 $add->distinctions($_POST['organisateur'], $_POST['annee'], $_POST['type'],
-                                 $_POST['description'], $_POST['id_membre'], $_POST['id_poste']);
+                                 $_POST['description'], $_POST['id_poste'], LAHATRA);
                             break;
 
                             case 'competences':
-                                $add->competences($_POST['nom'], $_POST['liste'], $_POST['id_categorie'], 
-                                 $_POST['id_membre']);
+                                $add->competences($_POST['nom'], $_POST['liste'], $_POST['id_categorie'], LAHATRA);
                             break;
 
                             case 'projets':
                                 $add->projets($_POST['nom'], $_POST['description'], $_POST['lien'],
-                                 $_POST['pdc'], $_POST['id_membre'], $_POST['ordre']);
+                                 $_POST['pdc'], $_POST['ordre'], LAHATRA);
                             break;
 
                             case 'autres':
-                                $add->autres($_POST['nom'], $_POST['lien'], $_POST['id_membre']);
+                                $add->autres($_POST['nom'], $_POST['lien'], LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
@@ -192,44 +191,44 @@ try {
                             case 'membre':
                                 $update->membre($_POST['user_github'], $_POST['tel1'], $_POST['tel2'],
                                  $_POST['mail'], $_POST['facebook'], $_POST['linkedin'], $_POST['$adresse'], 
-                                 $_POST['description'], $_POST['fonction'], $_POST['identifiant']);
+                                 $_POST['description'], $_POST['fonction'], LAHATRA);
                             break;
 
                             case 'keyword':
-                                $update->membrePassword($_POST['keyword'], $_POST['identifiant']);
+                                $update->membrePassword($_POST['lastKeyword'], $_POST['newKeyword'], LAHATRA);
                             break;
                             
                             case 'formations':
                                 $update->formations($_POST['lieu'], $_POST['annee'], $_POST['type'],
-                                 $_POST['description'], $_POST['identifiant']);
+                                 $_POST['description'], $_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'fonction':
-                                $update->fonction($_POST['id_poste'], $_POST['identifiant']);
+                                $update->fonction($_POST['id_poste'], $_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'experiences':
                                 $update->experiences($_POST['nom'], $_POST['annee'], $_POST['type'],
-                                $_POST['description'], $_POST['identifiant']);
+                                $_POST['description'], $_POST['identifiant'], LAHATRA);
                             break;  
 
                             case 'distinctions':
                                 $update->distinctions($_POST['organisateur'], $_POST['annee'], $_POST['type'],
-                                $_POST['description'], $_POST['ordre'], $_POST['identifiant']);
+                                $_POST['description'], $_POST['ordre'], $_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'competences':
                                 $update->competences($_POST['nom'], $_POST['liste'], $_POST['id_categorie'], 
-                                 $_POST['identifiant']);
+                                 $_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'projets':
                                 $update->projets($_POST['nom'], $_POST['description'], $_POST['lien'],
-                                $_POST['pdc'], $_POST['ordre'], $_POST['identifiant']);
+                                $_POST['pdc'], $_POST['ordre'], $_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'autres':
-                                $update->autres($_POST['nom'], $_POST['lien'], $_POST['identifiant']);
+                                $update->autres($_POST['nom'], $_POST['lien'], $_POST['identifiant'], LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
@@ -243,35 +242,35 @@ try {
                         $delete=new ControllerDelete();
                         switch($url[1]) {
                             case 'membre':
-                                $delete->membre($_POST['identifiant']);
+                                $delete->membre($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'formations':
-                                $delete->formations($_POST['identifiant']);
+                                $delete->formations($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'fonction':
-                                $delete->fonction($_POST['identifiant']);
+                                $delete->fonction($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'experiences':
-                                $delete->experiences($_POST['identifiant']);
+                                $delete->experiences($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'distinctions':
-                                $delete->distinctions($_POST['identifiant']);
+                                $delete->distinctions($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'competences':
-                                $delete->competences($_POST['identifiant']);
+                                $delete->competences($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'projets':
-                                $delete->projets($_POST['identifiant']);
+                                $delete->projets($_POST['identifiant'], LAHATRA);
                             break;
 
                             case 'autres':
-                                $delete->autres($_POST['identifiant']);
+                                $delete->autres($_POST['identifiant'], LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la demande $url[0]/$url[1] est introuvable !");
                         }
