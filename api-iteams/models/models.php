@@ -19,7 +19,7 @@ abstract class Database {
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: connexion à la base de données !".$e -> getMessage()
+                'message' => "Erreur: connexion à la base de données !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
     }
@@ -30,46 +30,45 @@ class Membre extends Database {
     public function getAllMembre():array {
         try {
             $database = Database::db_connect();
-            $demande = $database -> query('SELECT id, nom, prenom, prenom_usuel, user_github, 
+            $demande = $database->query('SELECT id, nom, prenom, prenom_usuel, user_github, 
                  user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
                  `description`, fonction, pdc, dark
-                FROM membre WHERE actif = 1');
-            $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
-            $demande -> closeCursor();
+                FROM membre WHERE actif=1');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'Membre Tout' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Membre Tout' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
-        $database = null;
+        $database=null;
     }
 
     // ***************************** PRENDRE LES INFORMATIONS D'UNE MEMBRE ************************
     public function getMembre(array $donnees): array | bool {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
                   user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
                   `description`, fonction, pdc, dark
                 FROM membre 
-                WHERE actif = 1 AND (id = :identifiant 
-                OR (prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(prenom_usuel))
-                    )');
-            $demande -> execute($donnees);
-            $reponses = $demande -> fetch(PDO::FETCH_ASSOC);
-            $demande -> closeCursor();
+                WHERE actif=1 AND (id=:identifiant 
+                OR (prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(prenom_usuel)))');
+            $demande->execute($donnees);
+            $reponses=$demande->fetch(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'Membre' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Membre' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
-        $database = null;
+        $database=null;
     }
 
     private function verifyMembre(array $donnees):int {
@@ -85,15 +84,15 @@ class Membre extends Database {
 
     public function addMembre(array $donnees, array $verify):int {
         try {
-            $status = 0;
+            $status=0;
             if($this->verifyMembre($verify) === 0) {
-                $database = Database::db_connect();
-                $demande = $database -> prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
+                $database=Database::db_connect();
+                $demande=$database->prepare('INSERT INTO membre(nom, prenom, prenom_usuel, user_github
                      tel1, tel2, mail, actif, adresse, `password`, dark)
                     VALUES(:nom, :prenom, :prenom_usuel, :user_github, :tel1, :tel2, :mail, 
                      1, :adresse, SHA2("iTeam-$", 256), 0)');
-                $demande -> execute($donnees);
-                $status = 1;
+                $demande->execute($donnees);
+                $status=1;
             }
             return $status;
         }
@@ -101,35 +100,34 @@ class Membre extends Database {
             $database -> rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu ajouter 'Membre' !".$e -> getMessage()
-            ], JSON_FORCE_OBJECT));
-        }
-        $database = null;
-    }
-
-    public function updateMembre(array $donnees) {
-        try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare("UPDATE membre 
-                SET user_github = :user_github, tel1 = :tel1,
-                tel2 = :tel2, mail = :mail, facebook = :facebook
-                linkedin = :linkedin, adresse = :adresse, 
-                `description` = :description, fonction = :fonction
-                WHERE id=:identifiant
-            ");
-            $demande -> execute($donnees);
-        }
-        catch(PDOException $e) {
-            $database -> rollBack();
-            print_r(json_encode([
-                'status' => false,
-                'message' => "Erreur: la mise n'a pas été effectuer !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu ajouter 'Membre' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
     }
 
-    private function verifyPassword(arry $donnees):int {
+    public function updateMembre(array $donnees) {
+        try {
+            $database=Database::db_connect();
+            $demande=$database->prepare("UPDATE membre 
+                SET user_github = :user_github, tel1 = :tel1,
+                tel2 = :tel2, mail = :mail, facebook = :facebook
+                linkedin = :linkedin, adresse = :adresse, 
+                `description` = :description, fonction = :fonction
+                WHERE id=:identifiant");
+            $demande->execute($donnees);
+        }
+        catch(PDOException $e) {
+            $database->rollBack();
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: la mise n'a pas été effectuer !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database=null;
+    }
+
+    private function verifyPassword(array $donnees):int {
         $database=Database::db_connect();
         $demande=$database->prepare('SELECT True FROM membres
             WHERE `password`=SHA2(:keyword, 256) AND id=:identifiant');
@@ -145,10 +143,9 @@ class Membre extends Database {
                 $database=Database::db_connect();
                 $demande=$database->prepare('UPDATE membre
                     SET `password`=SHA2(:keyword, 256)
-                    WHERE id=:identifiant
-                ');
+                    WHERE id=:identifiant');
                 $demande->execute($donnees);
-                $status = 1;
+                $status=1;
             }
             return $status;
         }
@@ -164,16 +161,16 @@ class Membre extends Database {
 
     public function deleteMembre(array $donnees) {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('DELETE FROM membre 
-                WHERE id = :identifiant');
-            $demande -> execute($donnees);
+            $database=Database::db_connect();
+            $demande=$database->prepare('DELETE FROM membre 
+                WHERE id=:identifiant');
+            $demande->execute($donnees);
         }
         catch(PDOException $e) {
-            $database -> rollBack();
+            $database->rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: la suppression n'a pas été effectuer !".$e -> getMessage()
+                'message' => "Erreur: la suppression n'a pas été effectuer !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
@@ -184,20 +181,20 @@ class Formations extends Database {
     // ******************** PRENDRE TOUTES LES FORMTIONS **********************
     public function getAllFormations(): array {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> query('SELECT f.id, f.lieu, f.annee, f.type, 
+            $database=Database::db_connect();
+            $demande=$database->query('SELECT f.id, f.lieu, f.annee, f.type, 
                  f.description, f.id_membre, f.ordre, m.prenom_usuel
                 FROM formations f
                 JOIN membre m ON f.id_membre = m.id
                 GROUP BY f.id_membre ASC');
-            $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
-            $demande -> closeCursor();
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'Formations Tout' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Formations Tout' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database = null;
@@ -205,23 +202,23 @@ class Formations extends Database {
 // ********************** PRENDRE UNE FORMATION ***********************
     public function getFormations(array $donnees): array {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('SELECT f.id, f.lieu, f.annee, f.type, 
-                f.description, f.id_membre, f.ordre m.prenom_usuel
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT f.id, f.lieu, f.annee, f.type, 
+                 f.description, f.id_membre, f.ordre m.prenom_usuel
                 FROM formations f
-                JOIN membre m ON f.id_membre = m.id
+                JOIN membre m ON f.id_membre=m.id
                 GROUP BY f.id ASC
-                WHERE f.id_membre = :identifiant 
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
-            $demande -> execute($donnees);
-            $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
-            $demande -> closeCursor();
+                WHERE f.id_membre=:identifiant 
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))');
+            $demande->execute($donnees);
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'Formations' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Formations' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database = null;
@@ -229,17 +226,17 @@ class Formations extends Database {
 
     public function addFormations(array $donnees) {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('INSERT INTO formations(lieu, annee, `type`, `description`,
+            $database=Database::db_connect();
+            $demande=$database->prepare('INSERT INTO formations(lieu, annee, `type`, `description`,
                  id_membre, ordre)
                 VALUES(:lieu, :annee, :type, :description, :id_membre, 0)');
-            $demande -> execute($donnees);
+            $demande->execute($donnees);
         }
         catch(PDOException $e) {
-            $database -> rollBack();
+            $database->rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu ajouter 'Formations' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu ajouter 'Formations' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database = null;
@@ -247,18 +244,18 @@ class Formations extends Database {
 
     public function updateFormations(array $donnees) {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('UPDATE formations
-                SET lieu = :lieu, annee = :annee, `type` = :type, 
-                `description` = :description
-                WHERE id = :identifiant');
-            $demande -> execute($donnees);
+            $database=Database::db_connect();
+            $demande=$database->prepare('UPDATE formations
+                SET lieu=:lieu, annee=:annee, `type`=:type, 
+                `description`=:description
+                WHERE id=:id AND id_membre=:id_membre');
+            $demande->execute($donnees);
         }
         catch(PDOException $e) {
             $database -> rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu effectuer des mises à jours !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu effectuer des mises à jours !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
@@ -266,16 +263,16 @@ class Formations extends Database {
 
     public function deleteFormations(array $donnees) {
         try {
-            $database = Database::db_connect();
-            $demande = $database->prepare('DELETE FROM formations
-                WHERE id = :id');
-            $demande -> execute($donnees);
+            $database=Database::db_connect();
+            $demande=$database->prepare('DELETE FROM formations
+                WHERE id=:id AND id_membre=:id_membre');
+            $demande->execute($donnees);
         }
         catch(PDOException $e) {
-            $database -> rollBack();
+            $database->rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu effectuer de suppression !".$e -> getMessage()            
+                'message' => "Erreur: nous n'avons pas pu effectuer de suppression !".$e->getMessage()            
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
@@ -286,20 +283,20 @@ class Fonction extends Database {
     // ************************ PRENDRE TOUTES LES FONCTIONS DES PERSONNES, C'EST ITEAM-$ ***************************
     public function getAllFonction(): array {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> query('SELECT f.id, f.date_debut_fonction, f.id_membre,
+            $database=Database::db_connect();
+            $demande=$database->query('SELECT f.id, f.date_debut_fonction, f.id_membre,
                  m.prenom_usuel, f.id_poste, p.nom
                 FROM fonction f
-                JOIN membre m ON f.id_membre = m.id
-                JOIN poste p ON p.id = f.id_poste');
-            $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
-            $demande -> closeCursor();
+                JOIN membre m ON f.id_membre=m.id
+                JOIN poste p ON p.id=f.id_poste');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
+            $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
@@ -307,41 +304,56 @@ class Fonction extends Database {
 
     public function getFonction(array $donnees): array | bool {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare('SELECT f.id, f.date_debut_fonction, f.id_membre,
+            $database=Database::db_connect();
+            $demande=$database->prepare('SELECT f.id, f.date_debut_fonction, f.id_membre,
                  m.prenom_usuel, f.id_poste, p.nom, p.categorie
                 FROM fonction f
-                JOIN membre m ON f.id_membre = m.id
+                JOIN membre m ON f.id_membre=m.id
                 JOIN poste p ON f.id_poste=p.id 
-                WHERE f.id_membre = :identifiant 
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
+                WHERE f.id_membre=:identifiant 
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
-            $reponses=$demande->fetch(PDO::ASSOC);
+            $reponses=$demande->fetch(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e -> getMessage()
+                'message' => "Erreur: nous n'avons pas pu obtenir 'Fonction Tout' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
     }
 
-    public function addFonction(array $donnees) {
+    private function verifyFonction(array $donnees): int {
+        $database=Database::db_connect();
+        $demande=$database->prepare('SELECT True FROM fonction
+            WHERE id_membre=:id_membre');
+        $demande->execute($donnees);
+        $reponses=$demande->fetch(PDO::FETCH_ASSOC);
+        $demande->closeCursor();
+        return (!empty($reponses)? 1 : 0);
+    }
+
+    public function addFonction(array $donnees, array $verify): int {
         try {
-            $database = Database::db_connect();
-            $demande = $database -> prepare("INSERT INTO fonction(id_membre, id_poste)
-                VALUES(:id_membre, :id_poste)
-            ");
-            $demande -> execute($donnees);
+            $status=0;
+            if($this->verifyFonction($verify) === 0) {
+                $database=Database::db_connect();
+                $demande=$database->prepare("INSERT INTO fonction(id_membre, id_poste)
+                    VALUES(:id_membre, :id_poste)
+                ");
+                $demande->execute($donnees);
+                $status=1;
+            }
+            return $status;
         }
         catch(PDOException $e) {
             $database -> rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreu: on a pas pu ajouter de fonction !".$e -> getMessage()
+                'message' => "Erreu: on a pas pu ajouter de fonction !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
         $database=null;
@@ -352,15 +364,14 @@ class Fonction extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE fonction
                 SET id_poste=:poste
-                WHERE id=:identifiant
-            ');
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
             $database -> rollBack();
             print_r(json_encode([
                 'status' => false,
-                'message' => "Erreu: on a pas pu mettre à jours 'fonction' !".$e -> getMessage()
+                'message' => "Erreu: on a pas pu mettre à jours 'fonction' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));   
         }
         $database=null;
@@ -369,7 +380,8 @@ class Fonction extends Database {
     public function deleteFonction(array $donnees) {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('DELETE FROM fonction WHERE id=:identifiant');
+            $demande=$database->prepare('DELETE FROM fonction 
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -391,9 +403,8 @@ class Experiences extends Database {
             $demande=$database->query('SELECT e.id, e.nom, e.annee, e.type, e.description,
                  e.id_membre, e.ordre, m.prenom_usuel
                 FROM experiences e
-                JOIN membre m ON e.id_membre=m.id
-            ');
-            $reponses=$demande->fetchAll(PDO::ASSOC);
+                JOIN membre m ON e.id_membre=m.id');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
         }
@@ -413,9 +424,8 @@ class Experiences extends Database {
                  e.id_membre, e.ordre, m.prenom_usuel
                 FROM experiences e
                 JOIN membre m ON e.id_membre=m.id
-                WHERE e.id_membre = :identifiant 
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-            ');
+                WHERE e.id_membre=:identifiant 
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -434,8 +444,7 @@ class Experiences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('INSERT INTO experiences(nom, annee, `type`, `description`, id_membre, ordre)
-                VALUES(:nom, :annee, :type, :description, :id_membre, 0)
-            ');
+                VALUES(:nom, :annee, :type, :description, :id_membre, 0)');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -454,8 +463,7 @@ class Experiences extends Database {
             $demande=$database->prepare('UPDATE experiences
                 SET nom=:nom, annee=:annee, `type`=:type, 
                 `description`=:description
-                WHERE id=:identifiant
-            ');
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -472,8 +480,7 @@ class Experiences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('DELETE FROM experiences
-                WHERE id=:identifiant
-            ');
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -495,9 +502,8 @@ class Distinctions extends Database {
             $demande=$database->query('SELECT d.id, d.organisateur, d.annee, d.type, 
                  d.description, d.id_membre, d.ordre, m.prenom_usuel
                 FROM distinctions d
-                JOIN membre m ON d.id_membre=m.id
-            ');
-            $reponses=$demande->fetchAll(PDO::ASSOC);
+                JOIN membre m ON d.id_membre=m.id');
+            $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
         }
@@ -559,8 +565,7 @@ class Distinctions extends Database {
             $demande=$database->prepare('UPDATE distinctions
                 SET organisateur=:organisateur, annee=:annee, "type"=:"type",
                  `description`=:description, ordre=:ordre
-                WHERE id=:identifiant
-            ');
+                 WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -577,8 +582,7 @@ class Distinctions extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('DELETE FROM distinctions 
-                WHERE id=:identifiant
-            ');
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -667,7 +671,7 @@ class Competences extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE competences
                 SET nom=:nom, liste=:liste, id_categorie=:id_categorie
-                WHERE id=:identifiant
+                WHERE id=:id AND id_membre=:id_membre
             ');
             $demande->execute($donnees);
         }
@@ -685,7 +689,7 @@ class Competences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('DELETE FROM competences
-                WHERE id=:identifiant
+                WHERE id=:id AND id_membre=:id_membre
             ');
             $demande->execute($donnees);
         }
@@ -771,7 +775,7 @@ class Projets extends Database {
             $demande=$database->prepare('UPDATE projets
                 SET nom=:nom, `description`=:description, lien=:lien,
                  pdc=:pdc, ordre=:ordre
-                WHERE id=:identifiant
+                WHERE id=:id AND id_membre=:id_membre
             ');
             $demande->execute($donnees);
         }
@@ -789,7 +793,7 @@ class Projets extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('DELETE FROM projets 
-            WHERE id=:identifiant');
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -810,8 +814,7 @@ class Autres extends Database {
             $database=Database::db_connect();
             $demande=$database->query('SELECT a.id, a.nom, a.lien, a.id_membre
                 FROM autres a
-                JOIN membre m ON a.id_membre=m.id
-            ');
+                JOIN membre m ON a.id_membre=m.id');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -832,8 +835,7 @@ class Autres extends Database {
                 FROM autres a
                 JOIN membre m ON a.id_membre=m.id
                 WHERE a.id_membre=:identifiant
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-                ');
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -852,8 +854,7 @@ class Autres extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('INSERT INTO autres(nom, lien, id_membre)
-                VALUES(:nom, :lien, :id_membre)
-            ');
+                VALUES(:nom, :lien, :id_membre)');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {
@@ -871,7 +872,7 @@ class Autres extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE autres
                 SET nom=:nom, lien=:lien
-                WHERE id=:identifiant
+                WHERE id=:id AND id_membre=:id_membre
             ');
             $demande->execute($donnees);
         }
@@ -889,7 +890,7 @@ class Autres extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('DELETE FROM autres 
-                WHERE id=:identifiant');
+                WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }
         catch(PDOException $e) {

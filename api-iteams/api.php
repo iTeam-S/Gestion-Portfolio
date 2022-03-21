@@ -29,7 +29,7 @@ try {
                                 $login->apiLogin($_POST['identifiant'], $_POST['password']);
                             break;
                             case 'token-login':
-                                $login->tokenLogin("Lahatra", "iTeam-$", LAHATRA);
+                                $login->tokenLogin($_POST['identifiant'], $_POST['password'], LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la methode d'authentification n'existe pas !");
                         }
