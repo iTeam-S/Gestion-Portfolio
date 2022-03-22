@@ -287,7 +287,7 @@ try {
 }
 catch(Exception $e) {
     print_r(json_encode([
-        'success' => false,
+        'status' => false,
         'message' => $e->getMessage()
     ], JSON_FORCE_OBJECT));
 }
