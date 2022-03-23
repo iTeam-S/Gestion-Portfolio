@@ -1,0 +1,55 @@
+#titreLogin, label {
+    color: #057885;
+}
+
+#connecter {
+    color: #057885;
+    border: 1px outset #057885;
+    transition: 0.3s;
+}
+
+#identifiant, #password {
+    transition: scale 0.3s;
+}
+
+#identifiant:hover, #password:hover {
+    scale: 1.03;
+    box-shadow: 2px 2px 2px #05788548,
+                -2px -2px 2px #05788548;
+}
+
+#connecter:hover {
+    color: white;
+    background: #057885;
+}
+
+#lahatra i {
+    color: #057885;
+    transition: scale 0.3s;
+}
+
+#lahatra i:hover {
+    scale: 1.07;
+}
+
+.login {
+    background: linear-gradient(#057885de, #057885d7, #057885);
+    border-radius: 3rem;
+}
+
+#formulaireLogin {
+    border-radius: 3rem;
+    background: white;
+}
+
+#titre {
+    color: #057885;
+}
+
+#imageLogin {
+    transition: scale 0.7s;
+}
+
+#imageLogin:hover {
+    scale: 1.01;
+}

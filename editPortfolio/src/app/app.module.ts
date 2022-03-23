@@ -5,11 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { InscrirePageComponent } from './inscrire-page/inscrire-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    InscrirePageComponent
   ],
   imports: [
     BrowserModule,

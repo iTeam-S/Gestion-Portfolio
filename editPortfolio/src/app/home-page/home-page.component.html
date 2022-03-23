@@ -1,7 +1,70 @@
-<div class="container m-4">
-    <div class="row justify-content-center align-content-center">
-        <div class="col-5">
-            
+<div class="container mt-md-5 mt-1">
+    <div class="row login p-1">
+        <div class="col-md-6 col-12 p-2 d-flex justify-content-center align-content-center">
+            <img src="assets/images/login.svg" alt="" class="img-fluid" id="imageLogin">
+        </div>
+        <div class="col-md-6 col-12 p-3 shadow" id="formulaireLogin">
+            <div class="text-center d-flex justify-content-center align-items-center">
+                <div class="fs-2 ms-2 me-2" id="titre">Portfolio</div>
+                <img src="assets/images/iTeam-$.png" alt="" class="img-fluid" height="70" width="70">
+            </div>
+            <form [formGroup]="loginForm" class="form-group m-md-4">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control rounded-pill ps-4" id="identifiant" 
+                        placeholder="Votre identifiant" formControlName="identifiant" required>
+                    <label for="identifiant" class="form-label ms-2">
+                        <i class="fa-solid fa-address-card"></i> Votre identifiant:</label>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control rounded-pill ps-4" id="password" 
+                        placeholder="Votre mot de passe" formControlName="password" required>
+                    <label for="password" class="form-label ms-2">
+                        <i class="fa-solid fa-unlock"></i> Votre mot de passe:</label>
+                </div>
+                <div class="form-check ms-3">
+                    <input class="form-check-input" type="checkbox" id="checkboxLogin">
+                    <label class="form-check-label" for="checkboxLogin">
+                        <span class="text-secondary">Afficher le mot de passe.</span>
+                    </label>
+                </div>
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col-12 text-center">
+                            <button type="submit" (click)="onSubmitLogin()"
+                             class="btn rounded-pill" id="connecter">se connecter</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-12 text-start">
+                        <button type="button" class="btn btn-link rounded-pill">S'inscrire</button>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="button" class="btn btn-link rounded-pill">Mot de passe oublié ?</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-3 mb-md-3">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center" id="lahatra">
+                        <a href="#" target="_blank" class="ps-2 pe-2">
+                            <i class="fa-solid fa-globe fa-2x"></i>
+                        </a>
+                        <a href="#" target="_blank" class="ps-2 pe-2">
+                            <i class="fa-brands fa-github fa-2x"></i>
+                        </a>
+                        <a href="#" target="_blank" class="ps-2 pe-2">
+                            <i class="fa-brands fa-facebook fa-2x"></i>
+                        </a>
+                        <a href="#" target="_blank" class="ps-2 pe-2">
+                            <i class="fa-solid fa-envelope-open-text fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
