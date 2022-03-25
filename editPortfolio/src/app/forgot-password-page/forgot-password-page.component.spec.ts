@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InscrirePageComponent } from './inscrire-page.component';
+import { ForgotPasswordPageComponent } from './forgot-password-page.component';
 
-describe('InscrirePageComponent', () => {
-  let component: InscrirePageComponent;
-  let fixture: ComponentFixture<InscrirePageComponent>;
+describe('ForgotPasswordPageComponent', () => {
+  let component: ForgotPasswordPageComponent;
+  let fixture: ComponentFixture<ForgotPasswordPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InscrirePageComponent ]
+      declarations: [ ForgotPasswordPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InscrirePageComponent);
+    fixture = TestBed.createComponent(ForgotPasswordPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

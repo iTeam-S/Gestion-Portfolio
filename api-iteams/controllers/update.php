@@ -2,8 +2,8 @@
 class ControllerUpdate {
     
     public function membre(string $user_github, string $tel1, string $tel2,
-     string $mail, string $facebook, string $linkedin, string $adresse,
-     string $description, string $fonction, string $secret) {
+     string $mail, string $facebook, string $linkedin, string $cv, string $adresse,
+     string $description, string $fonction, string $pdc, string $dark, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
@@ -15,9 +15,12 @@ class ControllerUpdate {
                 'mail' => strip_tags(trim($mail)),
                 'facebook' => strip_tags(trim($facebook)),
                 'linkedin' => strip_tags(trim($linkedin)),
+                'cv' => strip_tags(trim($cv)),
                 'adresse' => strip_tags(trim($adresse)),
                 'description' => strip_tags(trim($description)),
                 'fonction' => strip_tags(trim($fonction)),
+                'pdc' => strip_tags(trim($pdc)),
+                'dark' => strip_tags(trim($dark)),
                 'identifiant' => strip_tags(trim($token['id']))
             ];
             $update=new Membre;

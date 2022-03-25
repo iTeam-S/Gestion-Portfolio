@@ -5,20 +5,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
-import { InscrirePageComponent } from './inscrire-page/inscrire-page.component';
+import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './interceptors';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    InscrirePageComponent
+    ForgotPasswordPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

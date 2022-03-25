@@ -31,7 +31,7 @@ class Membre extends Database {
         try {
             $database = Database::db_connect();
             $demande = $database->query('SELECT id, nom, prenom, prenom_usuel, user_github, 
-                 user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
+                 user_github_pic, tel1, tel2, mail, DATE_FORMAT(date_d_adhesion, "%d %b %Y") AS date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
                  `description`, fonction, pdc, dark
                 FROM membre WHERE actif=1');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ class Membre extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
-                  user_github_pic, tel1, tel2, mail, date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
+                  user_github_pic, tel1, tel2, mail, DATE_FORMAT(date_d_adhesion, "%d %b %Y") AS date_d_adhesion, facebook, linkedin, cv, adresse, 
                   `description`, fonction, pdc, dark
                 FROM membre 
                 WHERE actif=1 AND (id=:identifiant 
@@ -112,8 +112,9 @@ class Membre extends Database {
             $demande=$database->prepare("UPDATE membre 
                 SET user_github = :user_github, tel1 = :tel1,
                 tel2 = :tel2, mail = :mail, facebook = :facebook
-                linkedin = :linkedin, adresse = :adresse, 
-                `description` = :description, fonction = :fonction
+                linkedin = :linkedin, cv = :cv, adresse = :adresse, 
+                `description` = :description, fonction = :fonction, 
+                pdc = :pdc, dark = :dark 
                 WHERE id=:identifiant");
             $demande->execute($donnees);
         }
@@ -911,7 +912,7 @@ class Login extends Database {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT True, id, prenom_usuel, mail
                 FROM membre
-                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND `password`=SHA2(:password, 256)
+                WHERE (mail=:identifiant OR prenom_usuel=:identifiant) AND password=SHA2(:password, 256)
             ');
             $demande->execute($donnees);
             $reponses=$demande->fetch(PDO::FETCH_ASSOC);
