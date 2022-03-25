@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+
+
+nav {
+    background: linear-gradient(#057885ee, #057885, #057885ec);
+}
+
+.edit {
+    font-family: 'Tangerine', cursive;
+}
+
+.portfolio {
+    color: #057885;
+}
+
+#deconnexion {
+    border: 1px outset white;
+    color: white;
+    transition: scale 0.5s;
+}
+
+#deconnexion:hover {
+    background: white;
+    color: #057885;
+    scale: 1.03;
+}
+
+#portfolio {
+    color: white;
+    font-size: 1.3rem;
+    font-family: 'Tangerine', cursive;
+    transition: scale 0.4s;
+}
+
+#portfolio:hover {
+    scale: 1.03;
+}
+
+@media only screen and (max-width: 767px) {
+    nav ul li {
+        color: #057885;
+    }
+    #portfolio {
+        color: #057885;
+    }
+
+    #deconnexion {
+        border: 1px outset #057885;
+        color: #057885;
+        transition: scale 0.5s;
+        margin-top: 10%;
+    }
+
+    #deconnexion:hover {
+        background: #057885;
+        color: white;
+        scale: 1.03;
+    }
+
+    .offcanvasAddStyle {
+        width: 95%;
+        border-top-right-radius: 2.5rem;
+    }
+}

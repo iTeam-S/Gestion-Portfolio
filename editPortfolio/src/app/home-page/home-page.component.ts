@@ -36,7 +36,7 @@ export class HomePageComponent implements OnInit {
       (reponses) => {
         if(reponses !== false && reponses.TRUE === 1) {
           this.auth.setToken(reponses.token);
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('edit');
         }
         else {
           this.erreur = "Identifiant et/ou mot de passe incorrect(s). Merci !"

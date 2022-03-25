@@ -1,0 +1,34 @@
+<header>
+    <nav class="navbar navbar-dark navbar-expand-md rounded-bottom shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center">
+                <img src="assets/images/iteam-s.png" alt="" class="img-fluid shadow rounded-3" width="50" height="50">
+                <span class="fs-1 ms-3 edit">Edit-portfolio</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" 
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start offcanvasAddStyle" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title d-flex align-items-center" id="offcanvasNavbarLabel">
+                        <img src="assets/images/iteam-s.png" alt="" class="img-fluid" width="50" height="50">
+                        <span class="fs-4 ms-3 portfolio edit">Edit-portfolio</span>
+                    </h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="me-auto"></div>
+                    <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3 text-center">
+                        <li class="nav-item ms-3">
+                            <a class="nav-link fs-2" id="portfolio" aria-current="page" href="#">Portfolio</a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a class="btn fw-bold rounded-pill shadow" (change)="onDeconnexion()" id="deconnexion" href="#">Se deconnecter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

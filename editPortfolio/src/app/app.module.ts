@@ -8,12 +8,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors';
+import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.component';
+import { MenuPortfolioComponent } from './menu-portfolio/menu-portfolio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    ForgotPasswordPageComponent
+    ForgotPasswordPageComponent,
+    EditPortfolioComponent,
+    MenuPortfolioComponent
   ],
   imports: [
     BrowserModule,
