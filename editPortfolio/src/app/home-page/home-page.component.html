@@ -35,6 +35,7 @@
                         <span class="text-secondary">Afficher le mot de passe.</span>
                     </label>
                 </div>
+                <div *ngIf="erreur" [ngClass]="{'text-danger': erreur}">{{ erreur }}</div>
                 <div class="container">
                     <div class="row mt-4">
                         <div class="col-12 text-center">

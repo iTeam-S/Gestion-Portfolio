@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 
@@ -13,10 +13,12 @@ export class HomePageComponent implements OnInit {
 
   loginForm!: FormGroup;
   inputPasswordType!: string;
+  erreur!: string;
 
   constructor(private formBuilder: FormBuilder, 
-      private auth: AuthService) { }
-
+      private auth: AuthService,
+      private router: Router) { }
+    
   ngOnInit(): void {
     this.inputPasswordType = "password";
     this.loginForm = this.formBuilder.group({
@@ -30,8 +32,17 @@ export class HomePageComponent implements OnInit {
   }
 
   onSubmitLogin(): void {
-    this.auth.authentifier(this.loginForm.value).pipe(
-      tap((data) => console.log(data))
-    ).subscribe();
+    this.auth.authentifier(this.loginForm.value).subscribe(
+      (reponses) => {
+        if(reponses !== false && reponses.TRUE === 1) {
+          this.auth.setToken(reponses.token);
+          this.router.navigateByUrl('');
+        }
+        else {
+          this.erreur = "Identifiant et/ou mot de passe incorrect(s). Merci !"
+          console.log("Erreur:" + reponses);
+        }
+      },
+    )
   }
 }

@@ -13,11 +13,18 @@ export class AuthService {
 
     private token!: string;
 
+    setToken(token: string) {
+        this.token = token;
+    }
+
     getToken() {
         return this.token;
     }
 
     authentifier(donnees: { identifiant: string, password: string }): Observable<any> {
-        return this.http.post<any>('http://localhost:3000/api-iteams/api.php?demande=login/token-login', donnees);
+        const data = new FormData();
+        data.append('identifiant', donnees.identifiant);
+        data.append('password', donnees.password);
+        return this.http.post<any>('http://localhost:3000/api-iteams/api.php?demande=login/token-login', data);
     }
 }

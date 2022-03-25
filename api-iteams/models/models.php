@@ -33,7 +33,8 @@ class Membre extends Database {
             $demande = $database->query('SELECT id, nom, prenom, prenom_usuel, user_github, 
                  user_github_pic, tel1, tel2, mail, DATE_FORMAT(date_d_adhesion, "%d %b %Y") AS date_d_adhesion, facebook, linkedin, actif, cv, adresse, 
                  `description`, fonction, pdc, dark
-                FROM membre WHERE actif=1');
+                FROM membre WHERE actif=1
+                ORDER BY id ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -187,7 +188,7 @@ class Formations extends Database {
                  f.description, f.id_membre, f.ordre, m.prenom_usuel
                 FROM formations f
                 JOIN membre m ON f.id_membre = m.id
-                GROUP BY f.id_membre ASC');
+                ORDER BY f.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -205,12 +206,12 @@ class Formations extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT f.id, f.lieu, f.annee, f.type, 
-                 f.description, f.id_membre, f.ordre m.prenom_usuel
+                 f.description, f.id_membre, f.ordre, m.prenom_usuel
                 FROM formations f
                 JOIN membre m ON f.id_membre=m.id
-                GROUP BY f.id ASC
                 WHERE f.id_membre=:identifiant 
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))');
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))
+                ORDER BY f.id DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -222,7 +223,7 @@ class Formations extends Database {
                 'message' => "Erreur: nous n'avons pas pu obtenir 'Formations' !".$e->getMessage()
             ], JSON_FORCE_OBJECT));
         }
-        $database = null;
+        // $database = null;
     }
 
     public function addFormations(array $donnees) {
@@ -286,10 +287,11 @@ class Fonction extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT f.id, f.date_debut_fonction, f.id_membre,
-                 m.prenom_usuel, f.id_poste, p.nom
+                 m.prenom_usuel, f.id_poste, p.nom, p.categorie
                 FROM fonction f
                 JOIN membre m ON f.id_membre=m.id
-                JOIN poste p ON p.id=f.id_poste');
+                JOIN poste p ON p.id=f.id_poste
+                ORDER BY f.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -312,7 +314,8 @@ class Fonction extends Database {
                 JOIN membre m ON f.id_membre=m.id
                 JOIN poste p ON f.id_poste=p.id 
                 WHERE f.id_membre=:identifiant 
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))');
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))
+                ORDER BY f.id');
             $demande->execute($donnees);
             $reponses=$demande->fetch(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -404,7 +407,8 @@ class Experiences extends Database {
             $demande=$database->query('SELECT e.id, e.nom, e.annee, e.type, e.description,
                  e.id_membre, e.ordre, m.prenom_usuel
                 FROM experiences e
-                JOIN membre m ON e.id_membre=m.id');
+                JOIN membre m ON e.id_membre=m.id
+                ORDER BY e.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -426,7 +430,8 @@ class Experiences extends Database {
                 FROM experiences e
                 JOIN membre m ON e.id_membre=m.id
                 WHERE e.id_membre=:identifiant 
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))');
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant)=SOUNDEX(m.prenom_usuel))
+                ORDER BY e.id DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -503,7 +508,8 @@ class Distinctions extends Database {
             $demande=$database->query('SELECT d.id, d.organisateur, d.annee, d.type, 
                  d.description, d.id_membre, d.ordre, m.prenom_usuel
                 FROM distinctions d
-                JOIN membre m ON d.id_membre=m.id');
+                JOIN membre m ON d.id_membre=m.id
+                ORDER BY d.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -526,7 +532,7 @@ class Distinctions extends Database {
                 JOIN membre m ON d.id_membre=m.id
                 WHERE d.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-            ');
+                ORDER BY d.id DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -603,12 +609,12 @@ class Competences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->query('SELECT c.id, c.nom, c.liste, 
-                 c.id_categorie, cc.nom as categorie, cc.icone,
+                 c.id_categorie, cc.categorie, cc.icone,
                  c.id_membre, c.ordre, m.prenom_usuel
                 FROM competences c
                 JOIN membre m ON c.id_membre=m.id
                 JOIN categorie_competence cc ON c.id_categorie=cc.id
-            ');
+                ORDER BY c.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -626,14 +632,14 @@ class Competences extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT c.id, c.nom, c.liste, 
-                    c.id_categorie, cc.nom as categorie, cc.icone,
+                    c.id_categorie, cc.categorie, cc.icone,
                     c.id_membre, c.ordre, m.prenom_usuel
                 FROM competences c
                 JOIN membre m ON c.id_membre=m.id
                 JOIN categorie_competence cc ON c.id_categorie=cc.id
                 WHERE c.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-            ');
+                ORDER BY c.id DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -714,7 +720,7 @@ class Projets extends Database {
                  p.pdc, p.id_membre, p.ordre, m.prenom_usuel
                 FROM projets p
                 JOIN membre m ON p.id_membre=m.id
-            ');
+                ORDER BY p.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -737,7 +743,7 @@ class Projets extends Database {
                 JOIN membre m ON p.id_membre=m.id
                 WHERE p.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-                ');
+                ORDER BY p.id DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCorsor();
@@ -815,7 +821,8 @@ class Autres extends Database {
             $database=Database::db_connect();
             $demande=$database->query('SELECT a.id, a.nom, a.lien, a.id_membre
                 FROM autres a
-                JOIN membre m ON a.id_membre=m.id');
+                JOIN membre m ON a.id_membre=m.id
+                ORDER BY a.id_membre ASC');
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
             return $reponses;
@@ -836,7 +843,8 @@ class Autres extends Database {
                 FROM autres a
                 JOIN membre m ON a.id_membre=m.id
                 WHERE a.id_membre=:identifiant
-                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))');
+                OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
+                ORDER BY a.id DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();

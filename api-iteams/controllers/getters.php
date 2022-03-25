@@ -156,7 +156,7 @@ class ControllerGet {
         $jwt = new JWT;
         $token = $jwt->isValidToken($secret);
         unset($jwt);
-        if(!empty($jwt)) {
+        if(!empty($token)) {
             $get=new Competences;
             $resultats=$get->getAllCompetences();
             unset($get);

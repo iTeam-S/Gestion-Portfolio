@@ -15,7 +15,7 @@ class ControllerLogin {
         else throw new Exception("Erreur: les données d'authentifications sont vides. Merci !");
     }
 
-    public function tokenLogin($identifiant, $password, string $secret) {
+    public function tokenLogin(string $identifiant, string $password, string $secret) {
         if(!empty(trim($identifiant)) && !empty(trim($password))) {
             $infos=[
                 'identifiant' => strip_tags($identifiant),
