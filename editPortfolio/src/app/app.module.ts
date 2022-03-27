@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors';
 import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.component';
 import { MenuPortfolioComponent } from './menu-portfolio/menu-portfolio.component';
+import { MembreSectionComponent } from './membre-section/membre-section.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MenuPortfolioComponent } from './menu-portfolio/menu-portfolio.componen
     HomePageComponent,
     ForgotPasswordPageComponent,
     EditPortfolioComponent,
-    MenuPortfolioComponent
+    MenuPortfolioComponent,
+    MembreSectionComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ class ControllerUpdate {
     
     public function membre(string $user_github, string $tel1, string $tel2,
      string $mail, string $facebook, string $linkedin, string $cv, string $adresse,
-     string $description, string $fonction, string $pdc, string $dark, string $secret) {
+     string $description, string $fonction, string $pdc, int $dark, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);

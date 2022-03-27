@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { Membre } from '../models/edit-portfolio.model';
 
 @Component({
   selector: 'app-menu-portfolio',
@@ -8,15 +8,14 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./menu-portfolio.component.scss']
 })
 export class MenuPortfolioComponent implements OnInit {
-
-  constructor(private router: Router,
-    private auth: AuthService) { }
+  @Input() membre!: Membre;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onDeconnexion(): void {
-    this.auth.setToken("");
+    localStorage.removeItem('lahatra-iTeam-$');
     this.router.navigateByUrl('/');
   }
 }

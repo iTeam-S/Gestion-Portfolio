@@ -35,7 +35,7 @@ export class HomePageComponent implements OnInit {
     this.auth.authentifier(this.loginForm.value).subscribe(
       (reponses) => {
         if(reponses !== false && reponses.TRUE === 1) {
-          this.auth.setToken(reponses.token);
+          localStorage.setItem('lahatra-iTeam-$', reponses.token);
           this.router.navigateByUrl('edit');
         }
         else {

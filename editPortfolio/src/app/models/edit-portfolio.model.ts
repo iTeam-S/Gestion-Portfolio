@@ -16,5 +16,20 @@ export class Membre {
     description?: string;
     fonction?: string;
     pdc?: string;
-    dark?: string;
+    dark?: number;
+}
+
+export class MembreUpdate {
+    user_github!: string;
+    tel1!: string;
+    tel2!: string;
+    mail!: string;
+    facebook!: string;
+    linkedin!: string;
+    cv!:string;
+    adresse!: string;
+    description!: string;
+    fonction!: string;
+    pdc!: string;
+    dark!:string;
 }

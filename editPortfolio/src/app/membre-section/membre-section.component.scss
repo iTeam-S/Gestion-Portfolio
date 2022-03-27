@@ -1,0 +1,58 @@
+.title {
+   font-family: 'Tangerine', cursive;
+   color: white;
+}
+
+#pdp {
+    transition: scale 0.4s;
+}
+
+#pdp:hover {
+    scale: 1.02;
+}
+
+ul li {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+ul li i {
+    color: #057885cb;
+}
+
+ul li a {
+    text-decoration: none;
+}
+
+.infos {
+    border-bottom-right-radius: 1.7rem;
+    border-top-right-radius: 1.7rem;
+    background: linear-gradient(#057885cb, #057885e2, #057885);
+}
+
+.generality {
+    border-radius: 2rem;
+    border-radius: 2rem;
+    background: #f6f8f8;
+}
+
+label, .modal-title {
+    color: #057885;
+}
+
+#textarea {
+    height: 221px;
+}
+
+@media only screen and (max-width: 767px) {
+    .infos {
+        border-radius: 1.7rem;
+        border-radius: 1.7rem;
+    }
+
+    #textarea {
+        height: 150px;
+    }
+}

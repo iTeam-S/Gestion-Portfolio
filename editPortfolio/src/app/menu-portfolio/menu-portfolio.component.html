@@ -21,10 +21,11 @@
                     <div class="me-auto"></div>
                     <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3 text-center">
                         <li class="nav-item ms-3">
-                            <a class="nav-link fs-2" id="portfolio" aria-current="page" href="#">Portfolio</a>
+                            <a class="nav-link fs-2" id="portfolio" aria-current="page"
+                             [href]="'https://portfolio.iteam-s.mg/?u='+membre.prenom_usuel" target="_blank">Portfolio</a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="btn fw-bold rounded-pill shadow" (change)="onDeconnexion()" id="deconnexion" href="#">Se deconnecter</a>
+                            <a class="btn fw-bold rounded-pill shadow" (click)="onDeconnexion()" id="deconnexion">Se deconnecter</a>
                         </li>
                     </ul>
                 </div>

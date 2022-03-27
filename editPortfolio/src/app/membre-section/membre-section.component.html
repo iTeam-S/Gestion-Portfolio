@@ -1,0 +1,168 @@
+<div class="mt-5 p-md-4 p-3"></div>
+<div class="container shadow generality" *ngIf="membre$|async as membre">
+    <div class="row border border-3 p-1 generality justify-content-center align-items-center">
+        <div class="col-md-4 p-1 d-flex flex-column align-items-center justify-content-center">
+            <img [src]="membre.user_github_pic" class="img-fluid border border-3 rounded-circle" id="pdp">
+            <figure *ngIf="membre.description">
+                <figcaption class="blockquote-footer">
+                    {{ membre.description }}, <cite title="Source Title">{{ membre.prenom_usuel}}</cite>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="col-md-8 d-flex justify-content-center align-items-center p-2 infos">
+            <div class="d-flex align-items-center flex-column">
+                <h5 class="title fs-1 text-center">{{ membre.nom }} {{ membre.prenom }}</h5>
+                <p class="fw-bold fs-4 text-center">Bonjour, je me nomme {{ membre.prenom_usuel }} <br *ngIf="membre.fonction">
+                    <span *ngIf="membre.fonction">, {{ membre.fonction }}</span>. Merci ! 😊</p>
+                <ul class="border border-3 p-2 generality shadow">
+                    <li class="m-2 me-3">
+                        <i class="fa-solid fa-phone me-2"></i> {{ membre.tel1 }}
+                    </li>
+                    <li *ngIf="membre.tel2" class="m-2 me-3">
+                        <i class="fa-solid fa-phone me-2"></i> {{ membre.tel2 }}
+                    </li>
+                    <li class="m-2 me-3">
+                        <i class="fa-solid fa-location-dot me-2"></i> {{ membre.adresse }}
+                    </li>
+                    <li *ngIf="membre.user_github" class="m-2 me-3">
+                        <i class="fa-brands fa-github me-2"></i> 
+                        <a [href]="'https://www.github.com/'+membre.user_github">
+                            {{ membre.user_github }}
+                        </a>
+                    </li>
+                    <li class="m-2 me-3">
+                        <i class="fa-solid fa-envelopes-bulk me-2"></i> 
+                        <a [href]="'mailto:'+membre.mail">
+                            {{ membre.mail }}
+                        </a>
+                    </li>
+                    <li *ngIf="membre.linkedin" class="m-2 me-3">
+                        <i class="fa-brands fa-linkedin me-2"></i>
+                        <a [href]="'https://www.linkedin.com/in'+membre.linkedin">
+                            https://www.linkedin.com/in{{ membre.linkedin }}
+                        </a>
+                    </li>
+                    <li *ngIf="membre.facebook" class="m-2 me-3">
+                        <i class="fa-brands fa-facebook me-2"></i>
+                        <a [href]="'https://www.facebook.com'+membre.facebook" class="text-link">
+                            https://www.facebook.com{{ membre.facebook }}
+                        </a>
+                    </li>
+                    <li *ngIf="membre.cv" class="m-2 me-3">
+                        <i class="fa-solid fa-link me-2"></i>
+                        <a [href]="membre.cv" class="me-2"> Télécharger mon C.V</a>
+                    </li>
+                    <li *ngIf="membre.pdc" class="m-2 me-3">
+                        <i class="fa-solid fa-link me-2"></i> PDC: <span class="text-muted">{{ membre.pdc }}</span>
+                    </li>
+                    <li class="m-2 me-3">
+                        <i class="fa-solid fa-eye-dropper me-2"></i> Dark: {{ membre.dark }}
+                    </li>
+                    <li class="d-flex justify-content-end m-2">
+                        <i class="fa-solid fa-pen-to-square text-secondary" type="button"
+                            data-bs-toggle="modal" data-bs-target="#updateMembre" 
+                            data-bs-whatever="@getbootstrap" (click)="onUpdate()"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateMembre" tabindex="-1" aria-labelledby="updateMembreLabel" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="updateMembreLabel">Modifier mes informations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <form [formGroup]="membreUpdate" class="form-group row">
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="tel1" 
+                                    placeholder="N° de téléphone (1) ***" formControlName="tel1">
+                                <label for="tel1" class="form-label ms-2">
+                                    <i class="fa-solid fa-phone me-2"></i> N° de téléphone (1):</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="tel2" 
+                                    placeholder="N° de téléphone (2) ***" formControlName="tel2">
+                                <label for="tel2" class="form-label ms-2">
+                                    <i class="fa-solid fa-phone me-2"></i> N° de téléphone (2):</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="adresse" 
+                                    placeholder="Adresse ***" formControlName="adresse">
+                                <label for="facebook" class="form-label ms-2">
+                                    <i class="fa-brands fa-facebook me-2"></i> Adresse:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="user_github" 
+                                    placeholder="Username sur github ***" formControlName="user_github">
+                                <label for="user_github" class="form-label ms-2">
+                                    <i class="fa-brands fa-github me-2"></i> Username sur github:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="mail" 
+                                    placeholder="Adresse email ***" formControlName="mail">
+                                <label for="mail" class="form-label ms-2">
+                                    <i class="fa-solid fa-envelopes-bulk me-2"></i> Adresse email:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="facebook" 
+                                    placeholder="Facebook ***" formControlName="facebook">
+                                <label for="facebook" class="form-label ms-2">
+                                    <i class="fa-brands fa-facebook me-2"></i> Facebook:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="linkedin" 
+                                    placeholder="Linkedin ***" formControlName="linkedin">
+                                <label for="linkedin" class="form-label ms-2">
+                                    <i class="fa-brands fa-linkedin me-2"></i> Linkedin:</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="cv" 
+                                    placeholder="C.V ***" formControlName="cv">
+                                <label for="cv" class="form-label ms-2">
+                                    <i class="fa-solid fa-link me-2"></i> C.V:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="fonction" 
+                                    placeholder="Fonction ***" formControlName="fonction">
+                                <label for="fonction" class="form-label ms-2">
+                                    <i class="fa-brands fa-whmcs"></i> Fonction:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control rounded-pill ps-4" id="pdc" 
+                                    placeholder="PDC ***" formControlName="pdc">
+                                <label for="pdc" class="form-label ms-2">
+                                    <i class="fa-solid fa-link me-2"></i> PDC:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <select id="dark" formControlName="dark" placeholder="Dark ***" 
+                                    class="form-control rounded-pill ps-4">
+                                    <option value="1">1</option>
+                                    <option value="0">0</option>
+                                </select>
+                                <label for="dark" class="form-label ms-2">
+                                    <i class="fa-solid fa-eye-dropper me-2"></i> Dark:</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <textarea type="text" class="form-control ps-4" id="description"
+                                    placeholder="Description ***" formControlName="description" id="textarea"></textarea>
+                                <label for="fonction" class="form-label ms-2">
+                                    <i class="fa-solid fa-comment-dots"></i> Description:</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="onMembreUpdate()" [disabled]="membreUpdate.invalid">Enregister</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

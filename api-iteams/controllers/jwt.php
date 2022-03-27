@@ -60,7 +60,7 @@ class JWT {
             throw new Exception("Erreur: permission non accordée !");
             exit;
         }
-        return !empty($token) ? $token: "";
+        return !empty($token) ? $token : "";
     }
 
     public function isValidToken(string $secret) {

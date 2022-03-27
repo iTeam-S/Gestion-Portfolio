@@ -1,8 +1,12 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Origin: *");   
+header("Content-Type: application/json; charset=UTF-8");    
+header("Access-Control-Allow-Methods: POST, DELETE, PUT, GET, OPTIONS, PATCH");    
+header("Access-Control-Max-Age: 3600");    
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header('Access-Control-Allow-Credentials: true');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') return 0;
+
 
 require_once './models/models.php';
 require_once './controllers/login.php';
@@ -189,8 +193,8 @@ try {
                         switch($url[1]) {
                             case 'membre':
                                 $update->membre($_POST['user_github'], $_POST['tel1'], $_POST['tel2'],
-                                 $_POST['mail'], $_POST['facebook'], $_POST['linkedin'], $_POST['$adresse'], 
-                                 $_POST['description'], $_POST['fonction'], LAHATRA);
+                                 $_POST['mail'], $_POST['facebook'], $_POST['linkedin'], $_POST['cv'], $_POST['adresse'], 
+                                 $_POST['description'], $_POST['fonction'], $_POST['pdc'], $_POST['dark'], LAHATRA);
                             break;
 
                             case 'keyword':
