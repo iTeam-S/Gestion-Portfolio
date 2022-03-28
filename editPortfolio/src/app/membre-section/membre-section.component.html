@@ -66,8 +66,8 @@
                             data-bs-toggle="modal" data-bs-target="#updateMembre" 
                             data-bs-whatever="@getbootstrap" (click)="onUpdate()"></i>
 
-                        <i class="fa-solid fa-key ms-2" type="button"
-                            data-bs-toggle="modal" data-bs-target="#updateMembre" 
+                        <i class="fa-solid fa-key ms-2 text-secondary" type="button"
+                            data-bs-toggle="modal" data-bs-target="#updatePassword" 
                             data-bs-whatever="@getbootstrap" (click)="onUpdatePassword()"></i>
                     </li>
                 </ul>
@@ -181,34 +181,41 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title fs-4 fw-bold" id="updatePasswordLabel">Modifier mon mot de passe</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" (click)="onPutNullFormKey()" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form [formGroup]="passwordUpdate" class="form-group">
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="lastPassword" 
+                            <input [type]="inputPasswordType" class="form-control rounded-pill ps-4" id="lastPassword" 
                                 placeholder="Ancien mot de passe ***" formControlName="lastPassword">
                             <label for="lastPassword" class="form-label ms-2">
                                 <i class="fa-solid fa-key me-2"></i> Ancien mot de passe:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="newPassword" 
+                            <input [type]="inputPasswordType" class="form-control rounded-pill ps-4" id="newPassword" 
                                 placeholder="Nouveau mot de passe***" formControlName="newPassword">
                             <label for="newPassword" class="form-label ms-2">
                                 <i class="fa-solid fa-lock me-2"></i> Nouveau mot de passe:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="confirmPassword" 
+                            <input [type]="inputPasswordType" class="form-control rounded-pill ps-4" id="confirmPassword" 
                                 placeholder="Confirmation ***" formControlName="confirmPassword">
                             <label for="confirmPassword" class="form-label ms-2">
                                 <i class="fa-solid fa-lock me-2"></i> Confirmation:</label>
                         </div>
+                        <div class="form-check ms-3">
+                            <input class="form-check-input" type="checkbox" 
+                                id="checkboxLogin" (change)="onShowPassword($event)">
+                            <label class="form-check-label" for="checkboxLogin">
+                                <span class="text-secondary">Afficher le mot de passe.</span>
+                            </label>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" (click)="onPutNullFormKey()" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" [attr.data-bs-dismiss]="attrHideChangePassword" 
-                        (click)="onPasswordUpdate()" [disabled]="membreUpdate.invalid">Enregister</button>
+                        (click)="onPasswordUpdate()" [disabled]="passwordUpdate.invalid">Enregister</button>
                 </div>
             </div>
         </div>

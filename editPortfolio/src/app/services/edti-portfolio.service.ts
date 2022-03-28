@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Membre, MembreUpdate } from '../models/edit-portfolio.model';
+import { Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
 
 
 @Injectable({
@@ -38,5 +38,12 @@ export class EditPortfolioService implements OnInit {
         donnees.append('pdc', data.pdc);
         donnees.append('dark', data.dark);
         return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/membre', donnees);
+    }
+
+    updatePassword(data: PasswordUpdate): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('lastKeyword', data.lastPassword);
+        donnees.append('newKeyword', data.newPassword);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/keyword', donnees);
     }
 }

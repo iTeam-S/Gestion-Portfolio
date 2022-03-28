@@ -131,14 +131,14 @@ class Membre extends Database {
 
     private function verifyPassword(array $donnees):int {
         $database=Database::db_connect();
-        $demande=$database->prepare('SELECT True FROM membres
+        $demande=$database->prepare('SELECT True FROM membre
             WHERE `password`=SHA2(:keyword, 256) AND id=:identifiant');
         $demande->execute($donnees);
         $reponses=$demande->fetch(PDO::FETCH_ASSOC);
         return (!empty($reponses) ? 1 : 0);
     }
 
-    public function updateMembrePassword(array $donnees, array $verify):int {
+    public function updateMembrePassword(array $donnees, array $verify):int  {
         try {
             $status = 0;
             if($this->verifyPassword($verify) === 1) {

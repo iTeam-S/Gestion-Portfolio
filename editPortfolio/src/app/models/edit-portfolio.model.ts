@@ -33,3 +33,9 @@ export class MembreUpdate {
     pdc!: string;
     dark!:string;
 }
+
+export class PasswordUpdate {
+    lastPassword!: string;
+    newPassword!: string;
+    confirmPassword!: string;
+}

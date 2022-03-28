@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Membre } from '../models/edit-portfolio.model';
+import { Membre, PasswordUpdate } from '../models/edit-portfolio.model';
 import { EditPortfolioService } from '../services/edti-portfolio.service';
 import { Observable, tap } from 'rxjs';
 declare var window: any;
@@ -23,6 +23,7 @@ export class MembreSectionComponent implements OnInit {
   iconeToast!: any;
   titreToast!: string | null;
   messageToast!: string | null;
+  inputPasswordType!: string;
 
   constructor(private formBuilter: FormBuilder,
       private edit: EditPortfolioService) { }
@@ -57,6 +58,7 @@ export class MembreSectionComponent implements OnInit {
     this.iconeToast = null;
     this.titreToast = null;
     this.messageToast = null;
+    this.inputPasswordType = 'password';
   }
 
   // *************************** MODIFIER INFORMATIONS ***********************
@@ -94,7 +96,7 @@ export class MembreSectionComponent implements OnInit {
           this.messageToast = 'Modifié avec succès. Merci !';
         }
         else {
-          this.iconeToast = "fa-solid fa-check me-2";
+          this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
           this.titreToast = 'Erreur';
           this.messageToast = 'La modification n\'a pas été effectuée.';
         }
@@ -109,7 +111,44 @@ export class MembreSectionComponent implements OnInit {
     this.attrHideChangePassword = "modal";
   }
 
+  onPutNullFormKey(): void {
+    this.passwordUpdate = this.formBuilter.group({
+      lastPassword: [null, [Validators.required]],
+      newPassword: [null, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8)]]
+    });
+  }
+
+  onShowPassword(event:any): void {
+    event.target.checked ? this.inputPasswordType = "text" : this.inputPasswordType = "password";
+  }
+
   onPasswordUpdate(): void {
-    
+    let toast = new window.bootstrap.Toast(document.getElementById('liveToast'));
+    const donnees:PasswordUpdate = this.passwordUpdate.value;
+    if(donnees.newPassword !== donnees.confirmPassword) {
+      this.onPutNullFormKey();
+      this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
+      this.titreToast = 'Erreur';
+      this.messageToast = 'Veuillez bien confirmer votre mot de passe. Merci !';
+      toast.show();
+    }
+    else {
+      this.edit.updatePassword(donnees).pipe(
+        tap((reponses) => {
+          if(reponses === 1) {
+            this.iconeToast = "fa-solid fa-check me-2";
+            this.titreToast = 'Mot de passe';
+            this.messageToast = 'Modifié avec succès. Merci !';
+          }
+          else {
+            this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
+            this.titreToast = 'Erreur';
+            this.messageToast = 'Désolé, l\'ancien mot de passe n\'existe pas !';
+          }
+          toast.show();
+        })
+      ).subscribe()
+    }
   }
 }
