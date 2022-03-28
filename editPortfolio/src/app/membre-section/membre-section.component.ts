@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Membre } from '../models/edit-portfolio.model';
 import { EditPortfolioService } from '../services/edti-portfolio.service';
 import { Observable, tap } from 'rxjs';
-import { Router } from '@angular/router';
+declare var window: any;
 
 
 @Component({
@@ -15,8 +15,14 @@ export class MembreSectionComponent implements OnInit {
   membre!:Membre;
   membre$!: Observable<Membre>;
   membreUpdate!: FormGroup;
+  passwordUpdate!: FormGroup;
   regexTel: RegExp = /^(\+261|0)3[2-4][0-9]{7}$/;
   regexMail: RegExp = /^[a-zA-Z0-9.+*?_-]+@[a-zA-Z0-9]{2,7}\.[a-zA-Z0-9]{2,4}$/;
+  attrHide!: string;
+  attrHideChangePassword!: string;
+  iconeToast!: any;
+  titreToast!: string | null;
+  messageToast!: string | null;
 
   constructor(private formBuilter: FormBuilder,
       private edit: EditPortfolioService) { }
@@ -25,9 +31,10 @@ export class MembreSectionComponent implements OnInit {
     this.membre$ = this.edit.getMembre().pipe(
       tap((reponses) => this.membre = reponses)
     );
+    
     this.membreUpdate = this.formBuilter.group({
       user_github: [null],
-      tel1: [null, [Validators.required, Validators.pattern(this.regexTel)]],
+      tel1: [null],
       tel2: [null],
       mail: [null],
       facebook: [null],
@@ -39,8 +46,20 @@ export class MembreSectionComponent implements OnInit {
       pdc: [null],
       dark: [null]
     });
+    this.passwordUpdate = this.formBuilter.group({
+      lastPassword: [null, [Validators.required]],
+      newPassword: [null, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8)]]
+    });
+    
+    this.attrHide = "";
+    this.attrHideChangePassword = "";
+    this.iconeToast = null;
+    this.titreToast = null;
+    this.messageToast = null;
   }
 
+  // *************************** MODIFIER INFORMATIONS ***********************
   onUpdate(): void {
     this.membreUpdate = this.formBuilter.group({
       user_github: [this.membre.user_github, [Validators.required]],
@@ -56,17 +75,41 @@ export class MembreSectionComponent implements OnInit {
       pdc: [this.membre.pdc],
       dark: [this.membre.dark, [Validators.required]]
     });
+    this.attrHide = "modal";
   }
 
-  onMembreUpdate() {
+  onMembreUpdate(): void {
+    this.attrHide = "";
+    let toast = new window.bootstrap.Toast(document.getElementById('liveToast'));
     this.edit.updateMembre(this.membreUpdate.value).pipe(
       tap((reponses) => {
         if(reponses === 1) {
-          // this.membre$ = this.edit.getMembre();
-          // this.router.navigateByUrl('edit');
-          console.log(reponses);
+          setTimeout(() => {
+            this.membre$ = this.edit.getMembre().pipe(
+              tap((reponses) => this.membre = reponses)
+            );
+          }, 1000);
+          this.iconeToast = "fa-solid fa-check me-2";
+          this.titreToast = 'Informations';
+          this.messageToast = 'Modifié avec succès. Merci !';
         }
+        else {
+          this.iconeToast = "fa-solid fa-check me-2";
+          this.titreToast = 'Erreur';
+          this.messageToast = 'La modification n\'a pas été effectuée.';
+        }
+        toast.show();
+        console.log(reponses);
       })
     ).subscribe();
+  }
+
+  // ******************** MODIFIER PASSWORD ***********************
+  onUpdatePassword(): void {
+    this.attrHideChangePassword = "modal";
+  }
+
+  onPasswordUpdate(): void {
+    
   }
 }

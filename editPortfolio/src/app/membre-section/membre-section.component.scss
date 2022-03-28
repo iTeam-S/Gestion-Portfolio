@@ -11,6 +11,10 @@
     scale: 1.02;
 }
 
+.description {
+    color: white;
+}
+
 ul li {
     list-style-type: none;
     display: flex;
@@ -24,6 +28,7 @@ ul li i {
 
 ul li a {
     text-decoration: none;
+    // color: #6c757d !important;
 }
 
 .infos {
