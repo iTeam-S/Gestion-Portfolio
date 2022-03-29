@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { Fonction } from '../models/edit-portfolio.model';
 import { EditPortfolioService } from '../services/edti-portfolio.service';
 declare var window: any;
@@ -13,7 +13,6 @@ declare var window: any;
 export class FonctionSectionComponent implements OnInit {
 
   fonction!: Fonction;
-  fonction$!: Observable<Fonction>;
   fonctionUpdate!: FormGroup;
   attrHideFonction!: string;
   regexIdPoste: RegExp = /(1|[3-9])/;
@@ -25,11 +24,10 @@ export class FonctionSectionComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.fonction$ = this.edit.getFonction().pipe(
-      tap((reponses) => {
-        this.fonction = reponses;
-      })
-    );
+    this.edit.getFonction().pipe(
+      tap((reponses) => this.fonction = reponses)
+    ).subscribe();
+
     this.fonctionUpdate = this.formBuilder.group({
       id_poste: [null]
     });
@@ -52,13 +50,9 @@ export class FonctionSectionComponent implements OnInit {
     this.edit.updateFonction(donnees).pipe(
       tap((reponses) => {
         if(reponses === 1) {
-          setTimeout(() => {
-            this.fonction$ = this.edit.getFonction().pipe(
-              tap((reponses) => {
-                this.fonction = reponses;
-              })
-            );
-          }, 1000);
+            this.edit.getFonction().pipe(
+              tap((reponses) => this.fonction = reponses)
+            ).subscribe();
           this.iconeToast = "fa-solid fa-check me-2";
           this.titreToast = 'Fonction';
           this.messageToast = 'Modifié avec succès. Merci !';

@@ -1,5 +1,5 @@
 <div class="m-2 m-md-2 p-2 p-md-2"></div>
-<div class="container-fluid" *ngIf="fonction$|async as fonction">
+<div class="container-fluid" *ngIf="fonction">
     <div class="row border rounded-3 bg-light justify-content-around p-2">
         <div class="col-12 border rounded-3 shadow text-center titre">
             <div class="fs-1">Fonction</div>
@@ -19,6 +19,7 @@
                 data-bs-whatever="@getbootstrap"></i>
         </div>
     </div>
+    
     <!-- ***************** MODAL POUR CHANGER FONCTION ********************* MODAL POUR CHANGER FONCTION ************ -->
     <div class="modal fade" id="updateFonction" tabindex="-1" aria-labelledby="updateFonctionLabel" 
         data-bs-backdrop="static" aria-hidden="true">
