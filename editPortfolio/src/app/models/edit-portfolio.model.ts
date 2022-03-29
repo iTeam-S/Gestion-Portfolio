@@ -80,3 +80,14 @@ export class FormationsAdd {
     type!: string;
     description!: string;
 }
+
+export class Experiences {
+    id!: number;
+    nom!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+    id_membre!: number;
+    ordre!: number;
+    prenom_usuel!: string;
+}

@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Fonction, FonctionUpdate, Formations, FormationsAdd, FormationsUpdate, Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
+import { Experiences, Fonction, FonctionUpdate, Formations, FormationsAdd, 
+    FormationsUpdate, Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
 
 
 @Injectable({
@@ -89,5 +90,10 @@ export class EditPortfolioService implements OnInit {
         const donnees = new FormData();
         donnees.append('identifiant', id);
         return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/formations', donnees);
+    }
+
+    // ************************ EXPERIENCES *********************** EXPERIENCES *************************
+    getExperiences(): Observable<Experiences[]> {
+        return this.http.get<Experiences[]>('http://localhost:3000/api-iteams/api.php?demande=get/experiences/1');
     }
 }

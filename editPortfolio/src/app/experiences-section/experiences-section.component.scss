@@ -12,15 +12,15 @@ ul li {
     list-style-type: none;
 }
 
-ul li i, #updateFormationsLabel, label {
+ul li i, #updateExperiencesLabel, label {
     color: #057885;
 }
 
-.carteFormations {
+.carteExperience {
     transition: scale 0.7s;
 }
 
-.carteFormations:hover {
+.carteExperience:hover {
     scale: 1.03;
 }
 

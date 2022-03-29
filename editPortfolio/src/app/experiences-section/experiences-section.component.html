@@ -1,0 +1,46 @@
+<div class="m-2 m-md-2 p-2 p-md-2"></div>
+<div class="container-fluid">
+    <div class="row border rounded-3 bg-light justify-content-center p-2">
+        <div class="col-12 border rounded-3 shadow text-center titre">
+            <div class="fs-1">Expériences</div>
+        </div>
+        <div class="container m-2">
+            <div class="row row-cols-1 row-cols-md-4 g-4 ms-md-4 me-md-4">
+                <div class="col d-flex justify-content-center flex-column" *ngFor="let experience of experiences">
+                    <div class="card h-100 rounded-3 p-2 shadow carteExperience">
+                        <div class="">
+                            <h5 class="card-title text-center titreCarte fw-bold">{{ experience.type }}</h5>
+                            <ul class="card-text">
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-brands fa-whmcs me-2"></i> <u>Organisme</u>: </span> {{ experience.nom }}</li>
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                    <i class="fa-solid fa-calendar-days me-2"></i> <u>Année</u>: </span> {{ experience.annee }}</li>
+                                <li *ngIf="experience.description" class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-comment-dots me-2"></i> <u>Description</u>: </span> {{ experience.description }}</li>
+                            </ul>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0">
+                            <i class=" fa-solid fa-pen-to-square text-secondary me-3 me-md-4 stylo" type="button"
+                                data-bs-toggle="modal" data-bs-target="#" (click)="onUpdate(experience)"
+                                data-bs-whatever="@getbootstrap"></i>
+                            <i class="fa-solid fa-trash-can text-secondary me-2 stylo" type="button"
+                                (click)="onDelete(experience.id)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 rounded-3 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-link ajouter border rounded-3"
+                            data-bs-toggle="modal" data-bs-target="#"
+                            data-bs-whatever="@getbootstrap">
+                            <i class="fa-solid fa-plus fs-2 rounded-circle p-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

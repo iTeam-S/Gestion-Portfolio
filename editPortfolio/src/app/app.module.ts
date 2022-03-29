@@ -13,6 +13,7 @@ import { MenuPortfolioComponent } from './menu-portfolio/menu-portfolio.componen
 import { MembreSectionComponent } from './membre-section/membre-section.component';
 import { FonctionSectionComponent } from './fonction-section/fonction-section.component';
 import { FormationsSectionComponent } from './formations-section/formations-section.component';
+import { ExperiencesSectionComponent } from './experiences-section/experiences-section.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormationsSectionComponent } from './formations-section/formations-sect
     MenuPortfolioComponent,
     MembreSectionComponent,
     FonctionSectionComponent,
-    FormationsSectionComponent
+    FormationsSectionComponent,
+    ExperiencesSectionComponent
   ],
   imports: [
     BrowserModule,
