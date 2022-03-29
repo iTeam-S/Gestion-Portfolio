@@ -13,7 +13,6 @@ declare var window: any;
 })
 export class MembreSectionComponent implements OnInit {
   membre!:Membre;
-  membre$!: Observable<Membre>;
   membreUpdate!: FormGroup;
   passwordUpdate!: FormGroup;
   regexTel: RegExp = /^(\+261|0)3[2-4][0-9]{7}$/;
@@ -30,9 +29,9 @@ export class MembreSectionComponent implements OnInit {
       private edit: EditPortfolioService) { }
 
   ngOnInit(): void {
-    this.membre$ = this.edit.getMembre().pipe(
+    this.edit.getMembre().pipe(
       tap((reponses) => this.membre = reponses)
-    );
+    ).subscribe();
     
     this.membreUpdate = this.formBuilter.group({
       user_github: [null],
@@ -87,11 +86,9 @@ export class MembreSectionComponent implements OnInit {
     this.edit.updateMembre(this.membreUpdate.value).pipe(
       tap((reponses) => {
         if(reponses === 1) {
-          setTimeout(() => {
-            this.membre$ = this.edit.getMembre().pipe(
+            this.edit.getMembre().pipe(
               tap((reponses) => this.membre = reponses)
-            );
-          }, 1000);
+            ).subscribe();
           this.iconeToast = "fa-solid fa-check me-2";
           this.titreToast = 'Informations';
           this.messageToast = 'Modifié avec succès. Merci !';
