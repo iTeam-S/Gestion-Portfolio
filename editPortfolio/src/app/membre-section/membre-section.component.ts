@@ -18,6 +18,7 @@ export class MembreSectionComponent implements OnInit {
   passwordUpdate!: FormGroup;
   regexTel: RegExp = /^(\+261|0)3[2-4][0-9]{7}$/;
   regexMail: RegExp = /^[a-zA-Z0-9.+*?_-]+@[a-zA-Z0-9]{2,7}\.[a-zA-Z0-9]{2,4}$/;
+  regexDark: RegExp = /[0-1]/;
   attrHide!: string;
   attrHideChangePassword!: string;
   iconeToast!: any;
@@ -75,7 +76,7 @@ export class MembreSectionComponent implements OnInit {
       description: [this.membre.description],
       fonction: [this.membre.fonction],
       pdc: [this.membre.pdc],
-      dark: [this.membre.dark, [Validators.required]]
+      dark: [this.membre.dark, [Validators.required, Validators.pattern(this.regexDark)]]
     });
     this.attrHide = "modal";
   }
@@ -90,7 +91,7 @@ export class MembreSectionComponent implements OnInit {
             this.membre$ = this.edit.getMembre().pipe(
               tap((reponses) => this.membre = reponses)
             );
-          }, 500);
+          }, 1000);
           this.iconeToast = "fa-solid fa-check me-2";
           this.titreToast = 'Informations';
           this.messageToast = 'Modifié avec succès. Merci !';
@@ -101,7 +102,6 @@ export class MembreSectionComponent implements OnInit {
           this.messageToast = 'La modification n\'a pas été effectuée.';
         }
         toast.show();
-        console.log(reponses);
       })
     ).subscribe();
   }

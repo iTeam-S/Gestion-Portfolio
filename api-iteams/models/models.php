@@ -367,7 +367,7 @@ class Fonction extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE fonction
-                SET id_poste=:poste
+                SET id_poste=:id_poste
                 WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
         }

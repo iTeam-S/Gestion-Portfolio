@@ -49,3 +49,8 @@ export class Fonction {
     nom!: string;
     categorie!: string;
 }
+
+export class FonctionUpdate {
+    id_poste!: string;
+    id!: string;
+}

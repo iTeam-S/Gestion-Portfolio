@@ -1,12 +1,3 @@
-
-
-// .fonction {
-//     // background: linear-gradient(#057885);
-  
-//     background: linear-gradient(135deg, #057885 10%, #05788585);
-      
-// }
-
 .titre {
     font-family: 'Tangerine', cursive;
     background: #057885;
@@ -15,4 +6,12 @@
 
 .lahatra {
     color: #057885;
+}
+
+.stylo {
+    transition: scale 0.3s;
+}
+
+.stylo:hover {
+    scale: 1.1;
 }

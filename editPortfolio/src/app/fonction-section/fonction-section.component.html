@@ -13,5 +13,58 @@
         <div class="col-12 col-md-6 text-center">
             <img src="assets/images/fonction.svg" class="img-fluid" width="250" height="250">
         </div>
+        <div class="col-12 text-end">
+            <i class="fa-solid fa-pen-to-square text-secondary me-2 stylo" type="button"
+                data-bs-toggle="modal" data-bs-target="#updateFonction" (click)="onUpdate()"
+                data-bs-whatever="@getbootstrap"></i>
+        </div>
+    </div>
+    <!-- ***************** MODAL POUR CHANGER FONCTION ********************* MODAL POUR CHANGER FONCTION ************ -->
+    <div class="modal fade" id="updateFonction" tabindex="-1" aria-labelledby="updateFonctionLabel" 
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="updateFonctionLabel">Modifier mon mot de passe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="fonctionUpdate" class="form-group">
+                        <div class="form-floating mb-4">
+                            <select id="id_poste" formControlName="id_poste" placeholder="Mon poste ***" 
+                                class="form-control rounded-pill ps-4">
+                                <option value="1">Responsable Équipe</option>
+                                <option value="3">Relation Projet</option>
+                                <option value="4">Communication Digitale</option>
+                                <option value="5">Développeur</option>
+                                <option value="6">Lead</option>
+                                <option value="7">Chargé Administration</option>
+                                <option value="8">Consultant Administration</option>
+                                <option value="9">Chargé Juridique</option>
+                            </select>
+                            <label for="id_poste" class="form-label ms-2">
+                                <i class="fa-brands fa-whmcs me-2"></i> Mon poste:</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" [attr.data-bs-dismiss]="attrHideFonction" 
+                        (click)="onFonctionUpdate(fonction.id)" [disabled]="fonctionUpdate.invalid">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ********************* MESSAGE DE SUCCÈSS ET D'ERREUR ****************** -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastFonction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                <strong class="me-auto"><i [class]="iconeToast"></i> {{ titreToast }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-center" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                {{ messageToast }}</div>
+        </div>
     </div>
 </div>
