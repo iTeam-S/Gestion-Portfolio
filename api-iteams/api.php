@@ -140,7 +140,7 @@ try {
                 break;
 
                 case 'add':
-                    if(!empty(tirm($url[1]))) {
+                    if(!empty(trim($url[1]))) {
                         $add=new ControllerAdd();
                         switch($url[1]) {
                             case 'membre':

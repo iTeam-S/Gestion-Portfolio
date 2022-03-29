@@ -37,23 +37,21 @@ class ControllerAdd {
         else throw new Exception("Erreur: un des paramètres requis est vide 'add membre' !");
     }
 
-    public function formations(array $lieu, array $annee, array $type, array $description, string $secret) {
+    public function formations(string $lieu, string $annee, string $type, string $description, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
             if(!empty($lieu) && !empty($annee) && !empty($type)) {
                 $add=new Formations;
-                for($i=0; $i<count($lieu); $i++) {
-                    $infos=[
-                        'lieu' => strip_tags(trim($lieu[$i])),
-                        'annee' => strip_tags(trim($annee[$i])),
-                        'type' => strip_tags(trim($type[$i])),
-                        'description' => strip_tags($description[$i]),
-                        'id_membre' => strip_tags(trim($token['id']))
-                    ];
-                    $add->addFormations($infos);
-                }
+                $infos=[
+                    'lieu' => strip_tags(trim($lieu)),
+                    'annee' => strip_tags(trim($annee)),
+                    'type' => strip_tags(trim($type)),
+                    'description' => strip_tags($description),
+                    'id_membre' => strip_tags(trim($token['id']))
+                ];
+                $add->addFormations($infos);
                 unset($add);
                 echo 1;
             }
@@ -85,23 +83,21 @@ class ControllerAdd {
         else throw new Exception("Erreur: token invalide ADD FONCTION. Merci !");
     }
 
-    public function experiences(array $nom, array $annee, array $type, array $description, string $secret) {
+    public function experiences(string $nom, string $annee, string $type, string $description, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
             if(!empty($nom) && !empty($annee) && !empty($type)){
                 $add=new Experiences;
-                for($i=0; $i<count($nom); $i++) {
-                    $infos=[
-                        'nom' => strip_tags(trim($nom[$i])),
-                        'annee' => strip_tags(trim($annee[$i])),
-                        'type' => strip_tags(trim($type[$i])),
-                        'description' => strip_tags($description[$i]),
-                        'id_membre' => strip_tags(trim($token['id']))
-                    ];
-                    $add->addExperiences($infos);
-                }
+                $infos=[
+                    'nom' => strip_tags(trim($nom)),
+                    'annee' => strip_tags(trim($annee)),
+                    'type' => strip_tags(trim($type)),
+                    'description' => strip_tags($description),
+                    'id_membre' => strip_tags(trim($token['id']))
+                ];
+                $add->addExperiences($infos);
                 unset($add);
                 echo 1;
             }
@@ -110,26 +106,24 @@ class ControllerAdd {
         else throw new Exception("Erreur: token invalide ADD EXPERIENCES. Merci !");
     }
 
-    public function distinctions(array $organisateur, array $annee, 
-        array $type, array $description, array $ordre, string $secret) {
+    public function distinctions(string $organisateur, string $annee, 
+        string $type, string $description, string $ordre, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
             if(!empty($organisateur) && !empty($annee) && !empty($type)) {
                 $add=new Distinctions;
-                for($i=0; $i<count($organisateur); $i++) {
-                    if(empty($ordre[$i])) $ordre[$i]=0;
-                    $infos=[
-                        'organisateur' => strip_tags(trim($organisateur[$i])),
-                        'annee' => strip_tags(trim($annee[$i])),
-                        'type' => strip_tags(trim($type[$i])),
-                        'description' => strip_tags(trim($description[$i])),
-                        'id_membre' => strip_tags(trim($token['id'])),
-                        'ordre' => strip_tags(trim($ordre[$i]))
-                    ];
-                    $add->addDistinctions($infos);
-                }
+                if(empty($ordre)) $ordre=0;
+                $infos=[
+                    'organisateur' => strip_tags(trim($organisateur)),
+                    'annee' => strip_tags(trim($annee)),
+                    'type' => strip_tags(trim($type)),
+                    'description' => strip_tags(trim($description)),
+                    'id_membre' => strip_tags(trim($token['id'])),
+                    'ordre' => strip_tags(trim($ordre))
+                ];
+                $add->addDistinctions($infos);
                 unset($add);
                 echo 1;
             }
@@ -138,22 +132,20 @@ class ControllerAdd {
         else throw new Exception("Erreur: token invalide ADD DISTINCTIONS. Merci !");           
     }
 
-    public function competences(array $nom, array $liste, array $id_categorie, string $secret) {
+    public function competences(string $nom, string $liste, string $id_categorie, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
             if(!empty($nom) && !empty($liste) && !empty($id_categorie)) {
                 $add=new Competences;
-                for($i=0; $i<count($nom); $i++) {
-                    $infos=[
-                        'nom' => strip_tags(trim($nom[$i])),
-                        'liste' => strip_tags(trim($liste[$i])),
-                        'id_categorie' => strip_tags(trim($id_categorie[$i])),
-                        'id_membre' => strip_tags(trim($token['id']))
-                    ];
-                    $add->addCompetences($infos);
-                }
+                $infos=[
+                    'nom' => strip_tags(trim($nom)),
+                    'liste' => strip_tags(trim($liste)),
+                    'id_categorie' => strip_tags(trim($id_categorie)),
+                    'id_membre' => strip_tags(trim($token['id']))
+                ];
+                $add->addCompetences($infos);
                 unset($add);
                 echo 1;
             }
@@ -162,25 +154,23 @@ class ControllerAdd {
         else throw new Exception("Erreur: token invalide ADD COMPETENCES. Merci !");
     }
 
-    public function projets(array $nom, array $description, array $lien, array $pdc, array $ordre, string $secret) {
+    public function projets(string $nom, string $description, string $lien, string $pdc, string $ordre, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
             if(!empty($nom) && !empty($description) && !empty($lien) && !empty($pdc) && !empty($ordre)) {
                $add=new Projets;
-               for($i=0; $i<count($nom); $i++) {
-                   if(empty($ordre[$i])) $ordre[$i]=0;
-                   $infos=[
-                       'nom' => strip_tags(trim($nom[$i])),
-                       'description' => strip_tags(trim($description[$i])),
-                       'lien' => strip_tags(trim($lien[$i])),
-                       'pdc' => strip_tags(trim($pdc[$i])),
-                       'id_membre' => strip_tags(trim($token['id'])),
-                       'ordre' => strip_tags(trim($ordre[$i]))
-                   ];
-                   $add->addProjets($infos);
-               }
+                if(empty($ordre)) $ordre=0;
+                $infos=[
+                    'nom' => strip_tags(trim($nom)),
+                    'description' => strip_tags(trim($description)),
+                    'lien' => strip_tags(trim($lien)),
+                    'pdc' => strip_tags(trim($pdc)),
+                    'id_membre' => strip_tags(trim($token['id'])),
+                    'ordre' => strip_tags(trim($ordre))
+                ];
+                $add->addProjets($infos);
                unset($add);
                echo 1;
            }
@@ -189,21 +179,19 @@ class ControllerAdd {
         else throw new Exception("Erreur: token invalide ADD PROJETS. Merci !"); 
     }
 
-    public function autres(array $nom, array $lien, string $secret) {
+    public function autres(string $nom, string $lien, string $secret) {
         $jwt=new JWT;
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
             if(!empty($nom) && !empty($lien)) {
                 $add=new Autres;
-                for($i=0; $i<count($nom); $i++) {
-                    $infos=[
-                        'nom' => strip_tags(trim($nom[$i])),
-                        'lien' => strip_tags(trim($lien[$i])),
-                        'id_membre' => strip_tags(trim($token['id']))
-                    ];
-                    $add->addAutres($infos);
-                }
+                $infos=[
+                    'nom' => strip_tags(trim($nom)),
+                    'lien' => strip_tags(trim($lien)),
+                    'id_membre' => strip_tags(trim($token['id']))
+                ];
+                $add->addAutres($infos);
                 unset($add);
                 echo 1;
             }

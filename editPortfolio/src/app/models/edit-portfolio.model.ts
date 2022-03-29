@@ -73,3 +73,10 @@ export class FormationsUpdate {
     type!: string;
     description!: string;
 }
+
+export class FormationsAdd {
+    lieu!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+}

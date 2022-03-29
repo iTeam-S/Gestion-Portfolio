@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Fonction, FonctionUpdate, Formations, FormationsUpdate, Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
+import { Fonction, FonctionUpdate, Formations, FormationsAdd, FormationsUpdate, Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
 
 
 @Injectable({
@@ -64,6 +64,15 @@ export class EditPortfolioService implements OnInit {
     // *********************** FORMATIONS ************************* FORMATIONS ****************************
     getFormations(): Observable<Formations[]> {
         return this.http.get<Formations[]>('http://localhost:3000/api-iteams/api.php?demande=get/formations/1');
+    }
+
+    addFormations(data: FormationsAdd): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('lieu', data.lieu);
+        donnees.append('annee', data.annee);
+        donnees.append('type', data.type);
+        donnees.append('description', data.description);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=add/formations', donnees)
     }
 
     updateFormations(data: FormationsUpdate): Observable<any> {

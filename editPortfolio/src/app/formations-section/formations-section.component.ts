@@ -14,6 +14,7 @@ export class FormationsSectionComponent implements OnInit {
   formations!: Formations[];
   formation!: Formations;
   formationsUpdate!: FormGroup;
+  formationsAdd!: FormGroup;
   idFormation!: number;
   iconeToast!: any;
   titreToast!: string | null;
@@ -36,6 +37,13 @@ export class FormationsSectionComponent implements OnInit {
       description: [null]
     });
 
+    this.formationsAdd = this.formBuilder.group({
+      lieu: [null, [Validators.required]],
+      annee: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      description: [null]
+    });
+
     this.iconeToast = null;
     this.titreToast = null;
     this.messageToast = null;
@@ -51,9 +59,35 @@ export class FormationsSectionComponent implements OnInit {
     this.idFormation = formation.id;
   }
 
-  onDelete(id: number) {
+  onDelete(id: number): void {
     let toast = new window.bootstrap.Toast(document.getElementById('liveToastFormations'));
     this.edit.deleteFormations(id.toString()).pipe(
+      tap((reponses) => {
+        if(reponses === 1) {
+          this.edit.getFormations().pipe(
+            tap((reponses) => {
+              this.formations = Object.values(reponses);
+            })
+          ).subscribe();
+          this.iconeToast = "fa-solid fa-check me-2";
+          this.titreToast = 'Formation';
+          this.messageToast = 'Supprimée avec succès. Merci !';
+        }
+        else {
+          this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
+          this.titreToast = 'Erreur';
+          this.messageToast = 'La suppression n\'a pas été effectuée.';
+        }
+        toast.show();
+      })
+    ).subscribe();
+  }
+
+  onFormationsUpdate(): void {
+    let toast = new window.bootstrap.Toast(document.getElementById('liveToastFormations'));
+    const id = this.idFormation;
+    const donnees = {...this.formationsUpdate.value, id};
+    this.edit.updateFormations(donnees).pipe(
       tap((reponses) => {
         if(reponses === 1) {
           this.edit.getFormations().pipe(
@@ -75,11 +109,9 @@ export class FormationsSectionComponent implements OnInit {
     ).subscribe();
   }
 
-  onFormationsUpdate() {
+  onFormationsAdd(): void {
     let toast = new window.bootstrap.Toast(document.getElementById('liveToastFormations'));
-    const id = this.idFormation;
-    const donnees = {...this.formationsUpdate.value, id};
-    this.edit.updateFormations(donnees).pipe(
+    this.edit.addFormations(this.formationsAdd.value).pipe(
       tap((reponses) => {
         if(reponses === 1) {
           this.edit.getFormations().pipe(
@@ -89,12 +121,12 @@ export class FormationsSectionComponent implements OnInit {
           ).subscribe();
           this.iconeToast = "fa-solid fa-check me-2";
           this.titreToast = 'Formation';
-          this.messageToast = 'Modifié avec succès. Merci !';
+          this.messageToast = 'Ajouter avec succès. Merci !';
         }
         else {
           this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
           this.titreToast = 'Erreur';
-          this.messageToast = 'La modification n\'a pas été effectuée.';
+          this.messageToast = 'L\'ajout n\'a pas été effectuée.';
         }
         toast.show();
       })
