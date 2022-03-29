@@ -62,11 +62,11 @@
                         <i class="fa-solid fa-calendar-days me-2"></i> Date d'adhésion: {{ membre.date_d_adhesion }}
                     </li>
                     <li class="d-flex justify-content-end m-2">
-                        <i class="fa-solid fa-pen-to-square text-secondary me-2" type="button"
+                        <i class="fa-solid fa-pen-to-square text-secondary me-2" id="stylo" type="button"
                             data-bs-toggle="modal" data-bs-target="#updateMembre" 
                             data-bs-whatever="@getbootstrap" (click)="onUpdate()"></i>
 
-                        <i class="fa-solid fa-key ms-2 text-secondary" type="button"
+                        <i class="fa-solid fa-key ms-2 text-secondary" type="button" id="cle"
                             data-bs-toggle="modal" data-bs-target="#updatePassword" 
                             data-bs-whatever="@getbootstrap" (click)="onUpdatePassword()"></i>
                     </li>
@@ -168,7 +168,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" [attr.data-bs-dismiss]="attrHide" (click)="onMembreUpdate()" [disabled]="membreUpdate.invalid">Enregister</button>
+                    <button type="button" class="btn btn-primary" [attr.data-bs-dismiss]="attrHide" 
+                        (click)="onMembreUpdate()" [disabled]="membreUpdate.invalid">Enregistrer</button>
                 </div>
             </div>
         </div>
@@ -215,7 +216,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" (click)="onPutNullFormKey()" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" [attr.data-bs-dismiss]="attrHideChangePassword" 
-                        (click)="onPasswordUpdate()" [disabled]="passwordUpdate.invalid">Enregister</button>
+                        (click)="onPasswordUpdate()" [disabled]="passwordUpdate.invalid">Enregistrer</button>
                 </div>
             </div>
         </div>

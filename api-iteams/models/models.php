@@ -286,7 +286,7 @@ class Fonction extends Database {
     public function getAllFonction(): array {
         try {
             $database=Database::db_connect();
-            $demande=$database->query('SELECT f.id, f.date_debut_fonction, f.id_membre,
+            $demande=$database->query('SELECT f.id, DATE_FORMAT(f.date_debut_fonction, "%d %b %Y") AS dates, f.id_membre,
                  m.prenom_usuel, f.id_poste, p.nom, p.categorie
                 FROM fonction f
                 JOIN membre m ON f.id_membre=m.id
@@ -308,7 +308,7 @@ class Fonction extends Database {
     public function getFonction(array $donnees): array | bool {
         try {
             $database=Database::db_connect();
-            $demande=$database->prepare('SELECT f.id, f.date_debut_fonction, f.id_membre,
+            $demande=$database->prepare('SELECT f.id, DATE_FORMAT(f.date_debut_fonction, "%d %b %Y") AS dates, f.id_membre,
                  m.prenom_usuel, f.id_poste, p.nom, p.categorie
                 FROM fonction f
                 JOIN membre m ON f.id_membre=m.id
@@ -376,7 +376,7 @@ class Fonction extends Database {
             print_r(json_encode([
                 'status' => false,
                 'message' => "Erreu: on a pas pu mettre à jours 'fonction' !".$e->getMessage()
-            ], JSON_FORCE_OBJECT));   
+            ], JSON_FORCE_OBJECT));
         }
         $database=null;
     }

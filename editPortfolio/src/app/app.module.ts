@@ -11,6 +11,7 @@ import { httpInterceptorProviders } from './interceptors';
 import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.component';
 import { MenuPortfolioComponent } from './menu-portfolio/menu-portfolio.component';
 import { MembreSectionComponent } from './membre-section/membre-section.component';
+import { FonctionSectionComponent } from './fonction-section/fonction-section.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MembreSectionComponent } from './membre-section/membre-section.componen
     ForgotPasswordPageComponent,
     EditPortfolioComponent,
     MenuPortfolioComponent,
-    MembreSectionComponent
+    MembreSectionComponent,
+    FonctionSectionComponent
   ],
   imports: [
     BrowserModule,

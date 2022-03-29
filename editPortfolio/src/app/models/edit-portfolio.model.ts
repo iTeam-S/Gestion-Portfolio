@@ -39,3 +39,13 @@ export class PasswordUpdate {
     newPassword!: string;
     confirmPassword!: string;
 }
+
+export class Fonction {
+    id!: number;
+    date!: string;
+    id_membre!: number;
+    prenom_usuel!: string;
+    id_poste!:number;
+    nom!: string;
+    categorie!: string;
+}

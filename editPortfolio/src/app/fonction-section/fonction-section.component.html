@@ -1,0 +1,17 @@
+<div class="m-2 m-md-2 p-2 p-md-2"></div>
+<div class="container-fluid" *ngIf="fonction$|async as fonction">
+    <div class="row border rounded-3 bg-light justify-content-around p-2">
+        <div class="col-12 border rounded-3 shadow text-center titre">
+            <div class="fs-1">Fonction</div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+            <div class="">
+                <p class="fs-2 fw-bold">{{ fonction.prenom_usuel }}, <br> {{ fonction.nom }} chez <span class="lahatra">iTeam-$ Community</span></p>
+                <p class="fs-5 fw-bold"><u>Catégorie</u>: <span class="lahatra">{{ fonction.categorie }}</span></p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 text-center">
+            <img src="assets/images/fonction.svg" class="img-fluid" width="250" height="250">
+        </div>
+    </div>
+</div>

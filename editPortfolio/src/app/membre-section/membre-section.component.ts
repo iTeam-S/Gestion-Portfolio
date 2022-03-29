@@ -90,7 +90,7 @@ export class MembreSectionComponent implements OnInit {
             this.membre$ = this.edit.getMembre().pipe(
               tap((reponses) => this.membre = reponses)
             );
-          }, 1000);
+          }, 500);
           this.iconeToast = "fa-solid fa-check me-2";
           this.titreToast = 'Informations';
           this.messageToast = 'Modifié avec succès. Merci !';
