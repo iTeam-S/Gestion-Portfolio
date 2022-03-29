@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Experiences, Fonction, FonctionUpdate, Formations, FormationsAdd, 
+import { Experiences, ExperiencesAdd, ExperiencesUpdate, Fonction, FonctionUpdate, Formations, FormationsAdd, 
     FormationsUpdate, Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
 
 
@@ -95,5 +95,30 @@ export class EditPortfolioService implements OnInit {
     // ************************ EXPERIENCES *********************** EXPERIENCES *************************
     getExperiences(): Observable<Experiences[]> {
         return this.http.get<Experiences[]>('http://localhost:3000/api-iteams/api.php?demande=get/experiences/1');
+    }
+
+    addExperiences(data: ExperiencesAdd): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('annee', data.annee);
+        donnees.append('type', data.type);
+        donnees.append('description', data.description);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=add/experiences', donnees);
+    }
+
+    updateExperiences(data: ExperiencesUpdate): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('annee', data.annee);
+        donnees.append('type', data.type);
+        donnees.append('description', data.description);
+        donnees.append('identifiant', data.id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/experiences', donnees);
+    }
+
+    deleteExperiences(id: string): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('identifiant', id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/experiences', donnees);
     }
 }

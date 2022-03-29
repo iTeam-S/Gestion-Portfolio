@@ -24,7 +24,7 @@
                         </div>
                         <div class="position-absolute bottom-0 end-0">
                             <i class=" fa-solid fa-pen-to-square text-secondary me-3 me-md-4 stylo" type="button"
-                                data-bs-toggle="modal" data-bs-target="#" (click)="onUpdate(experience)"
+                                data-bs-toggle="modal" data-bs-target="#updateExperiences" (click)="onUpdate(experience)"
                                 data-bs-whatever="@getbootstrap"></i>
                             <i class="fa-solid fa-trash-can text-secondary me-2 stylo" type="button"
                                 (click)="onDelete(experience.id)"></i>
@@ -34,13 +34,117 @@
                 <div class="col">
                     <div class="card h-100 rounded-3 d-flex justify-content-center align-items-center">
                         <button class="btn btn-link ajouter border rounded-3"
-                            data-bs-toggle="modal" data-bs-target="#"
+                            data-bs-toggle="modal" data-bs-target="#ajouterExperiences"
                             data-bs-whatever="@getbootstrap">
                             <i class="fa-solid fa-plus fs-2 rounded-circle p-2"></i>
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- *********************** MODAL POUR MODIFIER EXPERIENCES *********************** -->
+    <div class="modal fade" id="updateExperiences" tabindex="-1" aria-labelledby="updateExperiencesLabel" 
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="updateExperiencesLabel">Modifier l'expérience</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="experiencesUpdate" class="form-group">
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="organisme" 
+                                placeholder="Organisme ***" formControlName="nom">
+                            <label for="organisme" class="form-label ms-2">
+                                <i class="fa-brands fa-whmcs me-2"></i> Organisme:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="anneeExperiences" 
+                                placeholder="Année ***" formControlName="annee">
+                            <label for="anneeExperiences" class="form-label ms-2">
+                                <i class="fa-solid fa-calendar-days me-2"></i> Année:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="typeExpériences" 
+                                placeholder="Type ***" formControlName="type">
+                            <label for="typeExpériences" class="form-label ms-2">
+                                <i class="fa-solid fa-comment me-2"></i> Type:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-3 ps-4" id="description" 
+                                placeholder="Description ***" formControlName="description" style="height: 113px;"></textarea>
+                            <label for="type" class="form-label ms-2">
+                                <i class="fa-solid fa-comment-dots me-2"></i> Description:</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="onExperiencesUpdate()" [disabled]="experiencesUpdate.invalid">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *********************** AJOUTER EXPERIENCES *********************** AJOUTER EXPERIENCES -->
+    <div class="modal fade" id="ajouterExperiences" tabindex="-1" aria-labelledby="ajouterExperiencesLabel" 
+    data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-4 fw-bold" id="ajouterExperiencesLabel">Ajouter de l'expérience</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="experiencesAdd" class="form-group">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control rounded-pill ps-4" id="organisme" 
+                            placeholder="Organisme ***" formControlName="nom">
+                        <label for="organisme" class="form-label ms-2">
+                            <i class="fa-brands fa-whmcs me-2"></i> Organisme:</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control rounded-pill ps-4" id="anneeExperiences" 
+                            placeholder="Année ***" formControlName="annee">
+                        <label for="anneeExperiences" class="form-label ms-2">
+                            <i class="fa-solid fa-calendar-days me-2"></i> Année:</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control rounded-pill ps-4" id="typeExpériences" 
+                            placeholder="Type ***" formControlName="type">
+                        <label for="typeExpériences" class="form-label ms-2">
+                            <i class="fa-solid fa-comment me-2"></i> Type:</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <textarea type="text" class="form-control rounded-3 ps-4" id="description" 
+                            placeholder="Description ***" formControlName="description" style="height: 113px;"></textarea>
+                        <label for="type" class="form-label ms-2">
+                            <i class="fa-solid fa-comment-dots me-2"></i> Description:</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="onExperiencesAdd()" [disabled]="experiencesAdd.invalid">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- ************************** MESSAGE ********************* MESSAGE ********************** -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastExperiences" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                <strong class="me-auto"><i [class]="iconeToast"></i> {{ titreToast }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-center" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                {{ messageToast }}</div>
         </div>
     </div>
 </div>

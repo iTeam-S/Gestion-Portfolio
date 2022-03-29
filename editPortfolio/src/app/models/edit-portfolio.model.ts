@@ -91,3 +91,18 @@ export class Experiences {
     ordre!: number;
     prenom_usuel!: string;
 }
+
+export class ExperiencesUpdate {
+    nom!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+    id!: string;
+}
+
+export class ExperiencesAdd {
+    nom!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+}
