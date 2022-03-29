@@ -85,4 +85,16 @@
             </div>
         </div>
     </div>
+
+    <!-- ********************* MESSSAGE MODIFICATION ********************* -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastFormations" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                <strong class="me-auto"><i [class]="iconeToast"></i> {{ titreToast }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-center" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                {{ messageToast }}</div>
+        </div>
+    </div>
 </div>

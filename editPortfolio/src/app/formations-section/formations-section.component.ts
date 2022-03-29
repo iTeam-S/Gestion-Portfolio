@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { Formations } from '../models/edit-portfolio.model';
 import { EditPortfolioService } from '../services/edti-portfolio.service';
+declare var window: any;
 
 @Component({
   selector: 'app-formations-section',
@@ -14,6 +15,9 @@ export class FormationsSectionComponent implements OnInit {
   formation!: Formations;
   formationsUpdate!: FormGroup;
   idFormation!: number;
+  iconeToast!: any;
+  titreToast!: string | null;
+  messageToast!: string | null;
 
   constructor(private edit: EditPortfolioService,
       private formBuilder: FormBuilder) { }
@@ -22,7 +26,6 @@ export class FormationsSectionComponent implements OnInit {
     this.edit.getFormations().pipe(
       tap((reponses) => {
         this.formations = Object.values(reponses);
-        // console.table(this.formations);
       })
     ).subscribe();
 
@@ -32,6 +35,10 @@ export class FormationsSectionComponent implements OnInit {
       type: [null],
       description: [null]
     });
+
+    this.iconeToast = null;
+    this.titreToast = null;
+    this.messageToast = null;
   }
 
   onUpdate(formation: Formations): void {
@@ -45,8 +52,28 @@ export class FormationsSectionComponent implements OnInit {
   }
 
   onFormationsUpdate() {
+    let toast = new window.bootstrap.Toast(document.getElementById('liveToastFormations'));
     const id = this.idFormation;
-    const donnees = {...this.formationsUpdate.value, id}
-    console.table(donnees);
+    const donnees = {...this.formationsUpdate.value, id};
+    this.edit.updateFormations(donnees).pipe(
+      tap((reponses) => {
+        if(reponses === 1) {
+          this.edit.getFormations().pipe(
+            tap((reponses) => {
+              this.formations = Object.values(reponses);
+            })
+          ).subscribe();
+          this.iconeToast = "fa-solid fa-check me-2";
+          this.titreToast = 'Formation';
+          this.messageToast = 'Modifié avec succès. Merci !';
+        }
+        else {
+          this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
+          this.titreToast = 'Erreur';
+          this.messageToast = 'La modification n\'a pas été effectuée.';
+        }
+        toast.show();
+      })
+    ).subscribe();
   }
 }

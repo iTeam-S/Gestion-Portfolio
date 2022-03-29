@@ -67,9 +67,9 @@ class ControllerUpdate {
                 'id_membre' => strip_tags(trim($token['id'])) 
             ];
             $update=new Formations;
-            $reponses = $update->updateFormations($infos);
-            unset($infos);
-            echo $reponses;
+            $update->updateFormations($infos);
+            unset($update);
+            echo 1;
         }
         else throw new Exception("Erreur: token invalide UPDATE FORMATIONS. Merci !");
     }

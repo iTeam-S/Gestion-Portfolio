@@ -65,3 +65,11 @@ export class Formations {
     ordre!: number;
     prenom_usuel!: string;
 }
+
+export class FormationsUpdate {
+    id!: string;
+    lieu!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+}
