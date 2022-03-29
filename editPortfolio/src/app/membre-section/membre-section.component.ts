@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Membre, PasswordUpdate } from '../models/edit-portfolio.model';
 import { EditPortfolioService } from '../services/edti-portfolio.service';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 declare var window: any;
 
 

@@ -51,6 +51,30 @@ export class FormationsSectionComponent implements OnInit {
     this.idFormation = formation.id;
   }
 
+  onDelete(id: number) {
+    let toast = new window.bootstrap.Toast(document.getElementById('liveToastFormations'));
+    this.edit.deleteFormations(id.toString()).pipe(
+      tap((reponses) => {
+        if(reponses === 1) {
+          this.edit.getFormations().pipe(
+            tap((reponses) => {
+              this.formations = Object.values(reponses);
+            })
+          ).subscribe();
+          this.iconeToast = "fa-solid fa-check me-2";
+          this.titreToast = 'Formation';
+          this.messageToast = 'Modifié avec succès. Merci !';
+        }
+        else {
+          this.iconeToast = "fa-solid fa-triangle-exclamation me-2";
+          this.titreToast = 'Erreur';
+          this.messageToast = 'La modification n\'a pas été effectuée.';
+        }
+        toast.show();
+      })
+    ).subscribe();
+  }
+
   onFormationsUpdate() {
     let toast = new window.bootstrap.Toast(document.getElementById('liveToastFormations'));
     const id = this.idFormation;

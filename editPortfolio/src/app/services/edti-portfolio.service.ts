@@ -75,4 +75,10 @@ export class EditPortfolioService implements OnInit {
         donnees.append('identifiant', data.id);
         return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/formations', donnees);
     }
+
+    deleteFormations(id: string): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('identifiant', id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/formations', donnees);
+    }
 }

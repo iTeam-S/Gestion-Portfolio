@@ -23,15 +23,17 @@
                             </ul>
                         </div>
                         <div class="position-absolute bottom-0 end-0">
-                            <i class=" fa-solid fa-pen-to-square text-secondary me-2 stylo" type="button"
+                            <i class=" fa-solid fa-pen-to-square text-secondary me-3 me-md-4 stylo" type="button"
                                 data-bs-toggle="modal" data-bs-target="#updateFormations" (click)="onUpdate(formation)"
                                 data-bs-whatever="@getbootstrap"></i>
+                            <i class="fa-solid fa-trash-can text-secondary me-2 stylo" type="button"
+                                (click)="onDelete(formation.id)"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card h-100 rounded-3 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-link">
+                        <button class="btn btn-link ajouter">
                             <i class="fa-solid fa-plus fs-2 rounded-circle p-2 shadow"></i>
                         </button>
                     </div>
@@ -86,7 +88,10 @@
         </div>
     </div>
 
-    <!-- ********************* MESSSAGE MODIFICATION ********************* -->
+    <!-- ********************** AJOUTER FORMATION ******************** AJOUTER FORMATION ******************** -->
+
+
+    <!-- ********************* MESSSAGE MODIFICATION ***************** MESSAGE MODIFICATION ***************** -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToastFormations" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
