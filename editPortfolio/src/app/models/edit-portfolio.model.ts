@@ -54,3 +54,14 @@ export class FonctionUpdate {
     id_poste!: string;
     id!: string;
 }
+
+export class Formations {
+    id!:number;
+    lieu!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+    id_membre!: string;
+    ordre!: number;
+    prenom_usuel!: string;
+}

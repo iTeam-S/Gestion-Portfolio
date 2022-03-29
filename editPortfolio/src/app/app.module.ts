@@ -12,6 +12,7 @@ import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.componen
 import { MenuPortfolioComponent } from './menu-portfolio/menu-portfolio.component';
 import { MembreSectionComponent } from './membre-section/membre-section.component';
 import { FonctionSectionComponent } from './fonction-section/fonction-section.component';
+import { FormationsSectionComponent } from './formations-section/formations-section.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FonctionSectionComponent } from './fonction-section/fonction-section.co
     EditPortfolioComponent,
     MenuPortfolioComponent,
     MembreSectionComponent,
-    FonctionSectionComponent
+    FonctionSectionComponent,
+    FormationsSectionComponent
   ],
   imports: [
     BrowserModule,
