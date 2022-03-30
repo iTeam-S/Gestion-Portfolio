@@ -106,3 +106,28 @@ export class ExperiencesAdd {
     type!: string;
     description!: string;
 }
+
+export class Competences {
+    id!: number;
+    nom!: string;
+    liste!: string;
+    id_categorie!: number;
+    categorie!: string;
+    icone!: string;
+    id_membre!: number;
+    ordre!: number;
+    prenom_usuel!: string;
+}
+
+export class CompetencesAdd {
+    nom!: string;
+    liste!: string;
+    id_categorie!: string;
+}
+
+export class CompetencesUpdate {
+    nom!: string;
+    liste!: string;
+    id_categorie!: string;
+    id!: string;
+}

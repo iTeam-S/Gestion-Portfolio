@@ -1,17 +1,3 @@
-.titre {
-    font-family: 'Tangerine', cursive;
-    background: #057885;
-    color: white;
-}
-
-.titreCarte {
-    color: #057885;
-}
-
-ul li {
-    list-style-type: none;
-}
-
 ul li i, #updateExperiencesLabel, #ajouterExperiencesLabel, label {
     color: #057885;
 }
@@ -22,20 +8,4 @@ ul li i, #updateExperiencesLabel, #ajouterExperiencesLabel, label {
 
 .carteExperience:hover {
     scale: 1.03;
-}
-
-.stylo {
-    transition: scale 0.3s;
-}
-
-.stylo:hover {
-    scale: 1.1;
-}
-
-.ajouter {
-    transition: scale 0.5s;
-}
-
-.ajouter:hover {
-    scale: 1.1;
 }

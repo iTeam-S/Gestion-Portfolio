@@ -1,0 +1,12 @@
+ul li i, #updateCompetencesLabel, #ajouterCompetencesLabel, label {
+    color: #057885;
+}
+
+.carteCompetence {
+    transition: scale 0.7s;
+}
+
+.carteCompetence:hover {
+    scale: 1.03;
+}
+

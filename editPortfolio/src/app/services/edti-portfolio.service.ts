@@ -2,8 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Experiences, ExperiencesAdd, ExperiencesUpdate, Fonction, FonctionUpdate, Formations, FormationsAdd, 
-    FormationsUpdate, Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
+import { Competences, CompetencesAdd, CompetencesUpdate, 
+    Experiences, ExperiencesAdd, ExperiencesUpdate, 
+    Fonction, FonctionUpdate, 
+    Formations, FormationsAdd, FormationsUpdate, 
+    Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
 
 
 @Injectable({
@@ -120,5 +123,33 @@ export class EditPortfolioService implements OnInit {
         const donnees = new FormData();
         donnees.append('identifiant', id);
         return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/experiences', donnees);
+    }
+
+    // ********************* COMPETENCES ******************* COMPETENCES **********************
+    getCompetences(): Observable<Competences[]> {
+        return this.http.get<Competences[]>('http://localhost:3000/api-iteams/api.php?demande=get/competences/1');
+    }
+
+    addCompetences(data: CompetencesAdd): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('liste', data.liste);
+        donnees.append('id_categorie', data.id_categorie);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=add/competences', donnees);
+    }
+
+    updateCompetences(data: CompetencesUpdate): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('liste', data.liste);
+        donnees.append('id_categorie', data.id_categorie);
+        donnees.append('identifiant', data.id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/competences', donnees);
+    }
+
+    deleteCompetences(id: string): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('identifiant', id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/competences', donnees);
     }
 }

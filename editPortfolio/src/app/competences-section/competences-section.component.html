@@ -1,0 +1,151 @@
+<div class="m-2 m-md-2 p-2 p-md-2"></div>
+<div class="container-fluid">
+    <div class="row border rounded-3 bg-light justify-content-center p-2">
+        <div class="col-12 border rounded-3 shadow text-center titre">
+            <div class="fs-1">Compétences</div>
+        </div>
+        <div class="container m-2">
+            <div class="row row-cols-1 row-cols-md-4 g-4 ms-md-4 me-md-4">
+                <div class="col d-flex justify-content-center flex-column" *ngFor="let competence of competences">
+                    <div class="card h-100 rounded-3 p-2 shadow carteCompetence">
+                        <div class="">
+                            <h5 class="card-title text-center titreCarte fw-bold">{{ competence.nom | titlecase }}</h5>
+                            <ul class="card-text">
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-clipboard-list me-2"></i> <u>Catégorie</u>: </span> {{ competence.categorie }}</li>
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-at me-2"></i> <u>Icône</u>: </span> <i [class]="'fa-solid fa-'+competence.icone"></i></li>
+                                <li *ngIf="competence.liste" class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-brain me-2"></i> <u>Liste</u>: </span> {{ competence.liste }}</li>
+                            </ul>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0">
+                            <i class=" fa-solid fa-pen-to-square text-secondary me-3 me-md-4 stylo" type="button"
+                                data-bs-toggle="modal" data-bs-target="#updateCompetences" (click)="onUpdate(competence)"
+                                data-bs-whatever="@getbootstrap"></i>
+                            <i class="fa-solid fa-trash-can text-secondary me-2 stylo" type="button"
+                                (click)="onDelete(competence.id)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 rounded-3 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-link ajouter border rounded-3"
+                            data-bs-toggle="modal" data-bs-target="#ajouterCompetences"
+                            data-bs-whatever="@getbootstrap">
+                            <i class="fa-solid fa-plus fs-2 rounded-circle p-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *********************** MODAL POUR MODIFIER EXPERIENCES *********************** -->
+    <div class="modal fade" id="updateCompetences" tabindex="-1" aria-labelledby="updateCompetencesLabel" 
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="updateCompetencesLabel">Modifier le compétence</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="competencesUpdate" class="form-group">
+                        <div class="form-floating mb-4">
+                            <select id="categorieCompetences" formControlName="id_categorie" placeholder="Catégorie ***" 
+                                class="form-control rounded-pill ps-4">
+                                <option value="1"><i class="fa-solid fa-mobile me-2"></i> Mobile</option>
+                                <option value="2"><i class="fa-solid fa-laptop me-2"></i> Laptop</option>
+                                <option value="3"><i class="fa-solid fa-pencil me-2"></i> Stylo</option>
+                                <option value="4"><i class="fa-solid fa-layer-group me-2"></i> Layers</option>
+                                <option value="5"><i class="fa-solid fa-shield me-2"></i> Shield</option>
+                                <option value="6"><i class="fa-solid fa-gear me-2"></i> Paramètre</option>
+                            </select>
+                            <label for="categorieCompetences" class="form-label ms-2">
+                                <i class="fa-solid fa-clipboard-list me-2"></i> Catégorie:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="nomCompetences"
+                                placeholder="Nom ***" formControlName="nom">
+                            <label for="nomCompetences" class="form-label ms-2">
+                                <i class="fa-solid fa-at me-2"></i> Nom:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-pill ps-4" id="listeCompetences" 
+                                placeholder="Liste ***" formControlName="liste"></textarea>
+                            <label for="listeCompetences" class="form-label ms-2">
+                                <i class="fa-solid fa-brain me-2"></i> Liste:</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="onCompetencesUpdate()" [disabled]="competencesUpdate.invalid">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ************************* AJOUTER DE COMPETENCES *************** AJOUTER DE COMPETENCES -->
+    <div class="modal fade" id="ajouterCompetences" tabindex="-1" aria-labelledby="ajouterCompetencesLabel" 
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="ajouterCompetencesLabel">Modifier le compétence</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="competencesAdd" class="form-group">
+                        <div class="form-floating mb-4">
+                            <select id="categorieCompetencesA" formControlName="id_categorie" placeholder="Catégorie ***" 
+                                class="form-control rounded-pill ps-4">
+                                <option value="1"><i class="fa-solid fa-mobile me-2"></i> Mobile</option>
+                                <option value="2"><i class="fa-solid fa-laptop me-2"></i> Laptop</option>
+                                <option value="3"><i class="fa-solid fa-pencil me-2"></i> Stylo</option>
+                                <option value="4"><i class="fa-solid fa-layer-group me-2"></i> Layers</option>
+                                <option value="5"><i class="fa-solid fa-shield me-2"></i> Shield</option>
+                                <option value="6"><i class="fa-solid fa-gear me-2"></i> Paramètre</option>
+                            </select>
+                            <label for="categorieCompetencesA" class="form-label ms-2">
+                                <i class="fa-solid fa-clipboard-list me-2"></i> Catégorie:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="nomCompetencesA"
+                                placeholder="Nom ***" formControlName="nom">
+                            <label for="nomCompetencesA" class="form-label ms-2">
+                                <i class="fa-solid fa-at me-2"></i> Nom:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-pill ps-4" id="listeCompetencesA" 
+                                placeholder="Liste ***" formControlName="liste"></textarea>
+                            <label for="listeCompetencesA" class="form-label ms-2">
+                                <i class="fa-solid fa-brain me-2"></i> Liste:</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="onCompetencesAdd()" [disabled]="competencesAdd.invalid">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************************** MESSAGE ********************* MESSAGE ********************** -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastCompetences" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                <strong class="me-auto"><i [class]="iconeToast"></i> {{ titreToast }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-center" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                {{ messageToast }}</div>
+        </div>
+    </div>
+</div>
