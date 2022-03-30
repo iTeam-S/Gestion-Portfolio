@@ -131,3 +131,31 @@ export class CompetencesUpdate {
     id_categorie!: string;
     id!: string;
 }
+
+export class Distinctions {
+    id!: number;
+    organisateur!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+    id_membre!: number;
+    ordre!: number;
+    prenom_usuel!: string;
+}
+
+export class DistinctionsUpdate {
+    id!: string;
+    organisateur!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+    ordre!: string;
+}
+
+export class DistinctionsAdd {
+    organisateur!: string;
+    annee!: string;
+    type!: string;
+    description!: string;
+    ordre!: string;
+}

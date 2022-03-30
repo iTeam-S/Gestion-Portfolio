@@ -532,7 +532,7 @@ class Distinctions extends Database {
                 JOIN membre m ON d.id_membre=m.id
                 WHERE d.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-                ORDER BY d.id DESC');
+                ORDER BY d.ordre DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -570,7 +570,7 @@ class Distinctions extends Database {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('UPDATE distinctions
-                SET organisateur=:organisateur, annee=:annee, "type"=:"type",
+                SET organisateur=:organisateur, annee=:annee, `type`=:type,
                  `description`=:description, ordre=:ordre
                  WHERE id=:id AND id_membre=:id_membre');
             $demande->execute($donnees);
@@ -743,7 +743,7 @@ class Projets extends Database {
                 JOIN membre m ON p.id_membre=m.id
                 WHERE p.id_membre = :identifiant 
                 OR (m.prenom_usuel LIKE "%:identifiant%" OR SOUNDEX(:identifiant) = SOUNDEX(m.prenom_usuel))
-                ORDER BY p.id DESC');
+                ORDER BY p.ordre DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCorsor();

@@ -7,7 +7,7 @@
         <div class="container m-2">
             <div class="row row-cols-1 row-cols-md-4 g-4 ms-md-4 me-md-4">
                 <div class="col d-flex justify-content-center flex-column" *ngFor="let competence of competences">
-                    <div class="card h-100 rounded-3 p-2 shadow carteCompetence">
+                    <div class="card h-100 rounded-3 p-2 shadow carte">
                         <div class="">
                             <h5 class="card-title text-center titreCarte fw-bold">{{ competence.nom | titlecase }}</h5>
                             <ul class="card-text">
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <!-- *********************** MODAL POUR MODIFIER EXPERIENCES *********************** -->
+    <!-- *********************** MODAL POUR MODIFIER COMPETENTES *********************** -->
     <div class="modal fade" id="updateCompetences" tabindex="-1" aria-labelledby="updateCompetencesLabel" 
         data-bs-backdrop="static" aria-hidden="true">
         <div class="modal-dialog">
@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-floating mb-4">
                             <textarea type="text" class="form-control rounded-pill ps-4" id="listeCompetences" 
-                                placeholder="Liste ***" formControlName="liste"></textarea>
+                                placeholder="Liste ***" formControlName="liste" style="height: 113px;"></textarea>
                             <label for="listeCompetences" class="form-label ms-2">
                                 <i class="fa-solid fa-brain me-2"></i> Liste:</label>
                         </div>
@@ -97,7 +97,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-4 fw-bold" id="ajouterCompetencesLabel">Modifier le compétence</h5>
+                    <h5 class="modal-title fs-4 fw-bold" id="ajouterCompetencesLabel">Ajouter de compétences</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

@@ -15,6 +15,7 @@ import { FonctionSectionComponent } from './fonction-section/fonction-section.co
 import { FormationsSectionComponent } from './formations-section/formations-section.component';
 import { ExperiencesSectionComponent } from './experiences-section/experiences-section.component';
 import { CompetencesSectionComponent } from './competences-section/competences-section.component';
+import { DistinctionsSectionComponent } from './distinctions-section/distinctions-section.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CompetencesSectionComponent } from './competences-section/competences-s
     FonctionSectionComponent,
     FormationsSectionComponent,
     ExperiencesSectionComponent,
-    CompetencesSectionComponent
+    CompetencesSectionComponent,
+    DistinctionsSectionComponent
   ],
   imports: [
     BrowserModule,

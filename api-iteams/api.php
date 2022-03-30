@@ -165,7 +165,7 @@ try {
 
                             case 'distinctions':
                                 $add->distinctions($_POST['organisateur'], $_POST['annee'], $_POST['type'],
-                                 $_POST['description'], $_POST['id_poste'], LAHATRA);
+                                 $_POST['description'], $_POST['ordre'], LAHATRA);
                             break;
 
                             case 'competences':

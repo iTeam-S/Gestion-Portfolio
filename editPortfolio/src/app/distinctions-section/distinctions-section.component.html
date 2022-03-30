@@ -2,39 +2,43 @@
 <div class="container-fluid">
     <div class="row border rounded-3 bg-light justify-content-center p-2">
         <div class="col-12 border rounded-3 shadow text-center titre">
-            <div class="fs-1">Expériences</div>
+            <div class="fs-1">Distinctions</div>
         </div>
         <div class="container m-2">
             <div class="row row-cols-1 row-cols-md-4 g-4 ms-md-4 me-md-4">
-                <div class="col d-flex justify-content-center flex-column" *ngFor="let experience of experiences">
+                <div class="col d-flex justify-content-center flex-column" *ngFor="let distinction of distinctions">
                     <div class="card h-100 rounded-3 p-2 shadow carte">
                         <div class="">
-                            <h5 class="card-title text-center titreCarte fw-bold">{{ experience.type }}</h5>
+                            <h5 class="card-title text-center titreCarte fw-bold">{{ distinction.type }}</h5>
                             <ul class="card-text">
                                 <li class="p-2">
                                     <span class="fw-bold">
-                                        <i class="fa-brands fa-whmcs me-2"></i> <u>Organisme</u>: </span> {{ experience.nom }}</li>
+                                        <i class="fa-brands fa-whmcs me-2"></i> <u>Organisateur</u>: </span> {{ distinction.organisateur }}</li>
                                 <li class="p-2">
                                     <span class="fw-bold">
-                                    <i class="fa-solid fa-calendar-days me-2"></i> <u>Année</u>: </span> {{ experience.annee }}</li>
-                                <li *ngIf="experience.description" class="p-2">
+                                    <i class="fa-solid fa-calendar-days me-2"></i> <u>Année</u>: </span> {{ distinction.annee }}</li>
+                                <li *ngIf="distinction.description" class="p-2">
                                     <span class="fw-bold">
-                                        <i class="fa-solid fa-comment-dots me-2"></i> <u>Description</u>: </span> {{ experience.description }}</li>
+                                        <i class="fa-solid fa-comment-dots me-2"></i> <u>Description</u>: </span> {{ distinction.description }}</li>
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-arrow-up-wide-short me-2"></i> <u>Ordre</u>: </span> <span> {{ distinction.ordre }}</span>
+                                </li>
                             </ul>
                         </div>
                         <div class="position-absolute bottom-0 end-0">
                             <i class=" fa-solid fa-pen-to-square text-secondary me-3 me-md-4 stylo" type="button"
-                                data-bs-toggle="modal" data-bs-target="#updateExperiences" (click)="onUpdate(experience)"
+                                data-bs-toggle="modal" data-bs-target="#updateDistinctions" (click)="onUpdate(distinction)"
                                 data-bs-whatever="@getbootstrap"></i>
                             <i class="fa-solid fa-trash-can text-secondary me-2 stylo" type="button"
-                                (click)="onDelete(experience.id)"></i>
+                                (click)="onDelete(distinction.id)"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card h-100 rounded-3 d-flex justify-content-center align-items-center">
                         <button class="btn btn-link ajouter border rounded-3"
-                            data-bs-toggle="modal" data-bs-target="#ajouterExperiences"
+                            data-bs-toggle="modal" data-bs-target="#ajouterDistinctions"
                             data-bs-whatever="@getbootstrap">
                             <i class="fa-solid fa-plus fs-2 rounded-circle p-2"></i>
                         </button>
@@ -44,39 +48,45 @@
         </div>
     </div>
 
-    <!-- *********************** MODAL POUR MODIFIER EXPERIENCES *********************** -->
-    <div class="modal fade" id="updateExperiences" tabindex="-1" aria-labelledby="updateExperiencesLabel" 
+    <!-- *********************** MODAL POUR MODIFIER DISTINCTIONS *********************** -->
+    <div class="modal fade" id="updateDistinctions" tabindex="-1" aria-labelledby="updateDistinctionsLabel" 
         data-bs-backdrop="static" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-4 fw-bold" id="updateExperiencesLabel">Modifier l'expérience</h5>
+                    <h5 class="modal-title fs-4 fw-bold" id="updateDistinctionsLabel">Modifier la distinction</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form [formGroup]="experiencesUpdate" class="form-group">
+                    <form [formGroup]="distinctionsUpdate" class="form-group">
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="organisme" 
-                                placeholder="Organisme ***" formControlName="nom">
-                            <label for="organisme" class="form-label ms-2">
-                                <i class="fa-brands fa-whmcs me-2"></i> Organisme:</label>
+                            <input type="text" class="form-control rounded-pill ps-4" id="organisateur" 
+                                placeholder="Organisateur ***" formControlName="organisateur">
+                            <label for="organisateur" class="form-label ms-2">
+                                <i class="fa-brands fa-whmcs me-2"></i> Organisateur:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="anneeExperiences" 
+                            <input type="text" class="form-control rounded-pill ps-4" id="anneeDistinctions" 
                                 placeholder="Année ***" formControlName="annee">
-                            <label for="anneeExperiences" class="form-label ms-2">
+                            <label for="anneeDistinctions" class="form-label ms-2">
                                 <i class="fa-solid fa-calendar-days me-2"></i> Année:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="typeExpériences" 
+                            <input type="text" class="form-control rounded-pill ps-4" id="typeDistinctions" 
                                 placeholder="Type ***" formControlName="type">
-                            <label for="typeExpériences" class="form-label ms-2">
+                            <label for="typeDistinctions" class="form-label ms-2">
                                 <i class="fa-solid fa-comment me-2"></i> Type:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <textarea type="text" class="form-control rounded-3 ps-4" id="descriptionExperiences" 
+                            <input type="text" class="form-control rounded-pill ps-4" id="ordreDistinctions" 
+                                placeholder="Ordre d'affichage ***" formControlName="ordre">
+                            <label for="ordreDistinctions" class="form-label ms-2">
+                                <i class="fa-solid fa-arrow-up-wide-short me-2"></i> Ordre d'affichage:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-3 ps-4" id="descriptionDistinctionsA" 
                                 placeholder="Description ***" formControlName="description" style="height: 113px;"></textarea>
-                            <label for="descriptionExperiences" class="form-label ms-2">
+                            <label for="descriptionDistinctionsA" class="form-label ms-2">
                                 <i class="fa-solid fa-comment-dots me-2"></i> Description:</label>
                         </div>
                     </form>
@@ -84,45 +94,51 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="onExperiencesUpdate()" [disabled]="experiencesUpdate.invalid">Enregistrer</button>
+                        (click)="onDistinctionsUpdate()" [disabled]="distinctionsUpdate.invalid">Enregistrer</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- *********************** AJOUTER EXPERIENCES *********************** AJOUTER EXPERIENCES -->
-    <div class="modal fade" id="ajouterExperiences" tabindex="-1" aria-labelledby="ajouterExperiencesLabel" 
+    <!-- *********************** AJOUTER DISTINCTION *********************** AJOUTER DISTINCTION -->
+    <div class="modal fade" id="ajouterDistinctions" tabindex="-1" aria-labelledby="ajouterDistinctionsLabel" 
         data-bs-backdrop="static" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-4 fw-bold" id="ajouterExperiencesLabel">Ajouter de l'expérience</h5>
+                    <h5 class="modal-title fs-4 fw-bold" id="ajouterDistinctionsLabel">Ajouter de la distinction</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form [formGroup]="experiencesAdd" class="form-group">
+                    <form [formGroup]="distinctionsAdd" class="form-group">
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="organismeA" 
-                                placeholder="Organisme ***" formControlName="nom">
-                            <label for="organismeA" class="form-label ms-2">
-                                <i class="fa-brands fa-whmcs me-2"></i> Organisme:</label>
+                            <input type="text" class="form-control rounded-pill ps-4" id="organisateurA" 
+                                placeholder="Organisateur ***" formControlName="organisateur">
+                            <label for="organisateurA" class="form-label ms-2">
+                                <i class="fa-brands fa-whmcs me-2"></i> Organisateur:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="anneeExperiencesA" 
+                            <input type="text" class="form-control rounded-pill ps-4" id="anneeDistinctionsA" 
                                 placeholder="Année ***" formControlName="annee">
-                            <label for="anneeExperiencesA" class="form-label ms-2">
+                            <label for="anneeDistinctionsA" class="form-label ms-2">
                                 <i class="fa-solid fa-calendar-days me-2"></i> Année:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control rounded-pill ps-4" id="typeExpériencesA" 
+                            <input type="text" class="form-control rounded-pill ps-4" id="typeDistinctionsA" 
                                 placeholder="Type ***" formControlName="type">
-                            <label for="typeExpériencesA" class="form-label ms-2">
+                            <label for="typeDistinctionsA" class="form-label ms-2">
                                 <i class="fa-solid fa-comment me-2"></i> Type:</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <textarea type="text" class="form-control rounded-3 ps-4" id="descriptionExperiencesA" 
+                            <input type="text" class="form-control rounded-pill ps-4" id="ordreDistinctionsA" 
+                                placeholder="Ordre d'affichage ***" formControlName="ordre">
+                            <label for="ordreDistinctionsA" class="form-label ms-2">
+                                <i class="fa-solid fa-arrow-up-wide-short me-2"></i> Ordre d'affichage:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-3 ps-4" id="descriptionDistinctionsA" 
                                 placeholder="Description ***" formControlName="description" style="height: 113px;"></textarea>
-                            <label for="descriptionExperiencesA" class="form-label ms-2">
+                            <label for="descriptionDistinctionsA" class="form-label ms-2">
                                 <i class="fa-solid fa-comment-dots me-2"></i> Description:</label>
                         </div>
                     </form>
@@ -130,7 +146,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="onExperiencesAdd()" [disabled]="experiencesAdd.invalid">Enregistrer</button>
+                        (click)="onDistinctionsAdd()" [disabled]="distinctionsAdd.invalid">Enregistrer</button>
                 </div>
             </div>
         </div>
@@ -138,7 +154,7 @@
 
     <!-- ************************** MESSAGE ********************* MESSAGE ********************** -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToastExperiences" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="liveToastDistinctions" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
                 <strong class="me-auto"><i [class]="iconeToast"></i> {{ titreToast }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

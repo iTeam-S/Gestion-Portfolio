@@ -3,6 +3,9 @@ import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Competences, CompetencesAdd, CompetencesUpdate, 
+    Distinctions, 
+    DistinctionsAdd, 
+    DistinctionsUpdate, 
     Experiences, ExperiencesAdd, ExperiencesUpdate, 
     Fonction, FonctionUpdate, 
     Formations, FormationsAdd, FormationsUpdate, 
@@ -152,4 +155,39 @@ export class EditPortfolioService implements OnInit {
         donnees.append('identifiant', id);
         return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/competences', donnees);
     }
+
+    // ****************** DISTINCTIONS ******************* DISTINCTIONS ********************
+    getDistinctions(): Observable<Distinctions[]> {
+        return this.http.get<Distinctions[]>('http://localhost:3000/api-iteams/api.php?demande=get/distinctions/1');
+    }
+
+    addDistinctions(data: DistinctionsAdd): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('organisateur', data.organisateur);
+        donnees.append('annee', data.annee);
+        donnees.append('type', data.annee);
+        donnees.append('description', data.description);
+        donnees.append('ordre', data.ordre);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=add/distinctions', donnees);
+    }
+
+    updateDistinctions(data: DistinctionsUpdate): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('organisateur', data.organisateur);
+        donnees.append('annee', data.annee);
+        donnees.append('type', data.type);
+        donnees.append('description', data.description);
+        donnees.append('ordre', data.ordre);
+        donnees.append('identifiant', data.id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/distinctions', donnees);
+    }
+
+    deleteDistinctions(id: string): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('identifiant', id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/distinctions', donnees);
+    }
+
+    // ********************** PROJETS ****************** PROJETS ********************
+    
 }
