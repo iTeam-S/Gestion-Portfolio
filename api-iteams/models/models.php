@@ -9,7 +9,7 @@ abstract class Database {
         $this->password = $lahatra->password;
     }
 
-    protected function db_connect(): object | string {
+    protected function db_connect() {
         try {
             return new PDO("mysql:host=$this->host; dbname=$this->dbname; charset=utf8", 
                 $this->user, $this->password,
@@ -49,7 +49,7 @@ class Membre extends Database {
     }
 
     // ***************************** PRENDRE LES INFORMATIONS D'UNE MEMBRE ************************
-    public function getMembre(array $donnees): array | bool {
+    public function getMembre(array $donnees) {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT id, nom, prenom, prenom_usuel, user_github, 
@@ -305,7 +305,7 @@ class Fonction extends Database {
         $database=null;
     }
 
-    public function getFonction(array $donnees): array | bool {
+    public function getFonction(array $donnees) {
         try {
             $database=Database::db_connect();
             $demande=$database->prepare('SELECT f.id, DATE_FORMAT(f.date_debut_fonction, "%d %b %Y") AS dates, f.id_membre,

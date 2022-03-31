@@ -25,7 +25,7 @@ class ControllerLogin {
             $resultats=$login->authentifier($infos);
             unset($login);
             if($resultats) {
-                if($resultats['TRUE'] === 1) {
+                if(intval($resultats['TRUE']) === 1) {
                     $header = json_decode(file_get_contents('./controllers/jwt-header.json'), true);
                     $token = new JWT;
                     $resultats['token'] = $token->generateToken($header, $resultats, $secret, 84600);
