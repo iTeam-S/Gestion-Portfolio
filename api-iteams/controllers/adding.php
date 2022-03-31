@@ -159,7 +159,7 @@ class ControllerAdd {
         $token=$jwt->isValidToken($secret);
         unset($jwt);
         if(!empty($token)) {
-            if(!empty($nom) && !empty($description) && !empty($lien) && !empty($pdc) && !empty($ordre)) {
+            if(!empty($nom) && !empty($description) && !empty($lien) && !empty($pdc)) {
                $add=new Projets;
                 if(empty($ordre)) $ordre=0;
                 $infos=[
