@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Autres, AutresAdd, 
-    AutresUpdate, 
+import { Autres, AutresAdd, AutresUpdate, 
     Competences, CompetencesAdd, CompetencesUpdate, 
     Distinctions, DistinctionsAdd, DistinctionsUpdate, 
     Experiences, ExperiencesAdd, ExperiencesUpdate, 
