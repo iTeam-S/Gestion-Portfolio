@@ -229,7 +229,7 @@ class ControllerGet {
     public function autres(string $secret) {
         $jwt = new JWT;
         $token = $jwt->isValidToken($secret);
-        unset($token);
+        unset($jwt);
         if(!empty($token)) {
             $donnees=[
                 'identifiant' => strip_tags(trim($token['prenom_usuel']))

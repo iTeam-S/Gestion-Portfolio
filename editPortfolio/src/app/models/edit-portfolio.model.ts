@@ -159,3 +159,31 @@ export class DistinctionsAdd {
     description!: string;
     ordre!: string;
 }
+
+export class Projets {
+    id!: number;
+    nom!: string;
+    description!: string;
+    lien!: string;
+    pdc!: string;
+    id_membre!: number;
+    ordre!: number;
+    prenom_usuel!: string;
+}
+
+export class ProjetsUpdate {
+    nom!: string;
+    description!: string;
+    lien!: string;
+    pdc!: string;
+    ordre!: string;
+    id!: string;
+}
+
+export class ProjetsAdd {
+    nom!: string;
+    description!: string;
+    lien!: string;
+    pdc!: string;
+    ordre!: string;
+}

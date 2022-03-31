@@ -3,13 +3,14 @@ import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Competences, CompetencesAdd, CompetencesUpdate, 
-    Distinctions, 
-    DistinctionsAdd, 
-    DistinctionsUpdate, 
+    Distinctions, DistinctionsAdd, DistinctionsUpdate, 
     Experiences, ExperiencesAdd, ExperiencesUpdate, 
     Fonction, FonctionUpdate, 
     Formations, FormationsAdd, FormationsUpdate, 
-    Membre, MembreUpdate, PasswordUpdate } from '../models/edit-portfolio.model';
+    Membre, MembreUpdate, PasswordUpdate, 
+    Projets, 
+    ProjetsAdd,
+    ProjetsUpdate} from '../models/edit-portfolio.model';
 
 
 @Injectable({
@@ -189,5 +190,34 @@ export class EditPortfolioService implements OnInit {
     }
 
     // ********************** PROJETS ****************** PROJETS ********************
-    
+    getProjets(): Observable<Projets[]> {
+        return this.http.get<Projets[]>('http://localhost:3000/api-iteams/api.php?demande=get/projets/1');
+    }
+
+    addProjets(data: ProjetsAdd): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('description', data.description);
+        donnees.append('lien', data.lien);
+        donnees.append('pdc', data.pdc);
+        donnees.append('ordre', data.ordre);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=add/projets', donnees);
+    }
+
+    updateProjets(data: ProjetsUpdate): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('description', data.description);
+        donnees.append('lien', data.lien);
+        donnees.append('pdc', data.description);
+        donnees.append('ordre', data.ordre);
+        donnees.append('identifiant', data.id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/projets', donnees);
+    }
+
+    deleteProjets(id: string): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('identifiant', id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/projets', donnees);
+    }
 }

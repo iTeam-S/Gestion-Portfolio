@@ -746,7 +746,7 @@ class Projets extends Database {
                 ORDER BY p.ordre DESC');
             $demande->execute($donnees);
             $reponses=$demande->fetchAll(PDO::FETCH_ASSOC);
-            $demande->closeCorsor();
+            $demande->closeCursor();
             return $reponses;
         }
         catch(PDOException $e) {
