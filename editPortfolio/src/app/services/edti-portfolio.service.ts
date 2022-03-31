@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Competences, CompetencesAdd, CompetencesUpdate, 
+import { Autres, AutresAdd, 
+    AutresUpdate, 
+    Competences, CompetencesAdd, CompetencesUpdate, 
     Distinctions, DistinctionsAdd, DistinctionsUpdate, 
     Experiences, ExperiencesAdd, ExperiencesUpdate, 
     Fonction, FonctionUpdate, 
     Formations, FormationsAdd, FormationsUpdate, 
     Membre, MembreUpdate, PasswordUpdate, 
-    Projets, 
-    ProjetsAdd,
-    ProjetsUpdate} from '../models/edit-portfolio.model';
+    Projets, ProjetsAdd, ProjetsUpdate} from '../models/edit-portfolio.model';
 
 
 @Injectable({
@@ -219,5 +219,31 @@ export class EditPortfolioService implements OnInit {
         const donnees = new FormData();
         donnees.append('identifiant', id);
         return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/projets', donnees);
+    }
+
+    // ******************** AUTRES *************** AUTRES *********************
+    getAutres():Observable<Autres[]> {
+        return this.http.get<Autres[]>('http://localhost:3000/api-iteams/api.php?demande=get/autres/1');
+    }
+
+    addAutres(data: AutresAdd): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('lien', data.lien);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=add/autres', donnees);
+    }
+
+    updateAutres(data: AutresUpdate): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('nom', data.nom);
+        donnees.append('lien', data.lien);
+        donnees.append('identifiant', data.id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=update/autres', donnees);
+    }
+
+    deleteAutres(id: string): Observable<any> {
+        const donnees = new FormData();
+        donnees.append('identifiant', id);
+        return this.http.post<FormData>('http://localhost:3000/api-iteams/api.php?demande=delete/autres', donnees)
     }
 }

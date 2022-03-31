@@ -187,3 +187,21 @@ export class ProjetsAdd {
     pdc!: string;
     ordre!: string;
 }
+
+export class Autres {
+    id!: number;
+    nom!: string;
+    lien!: string;
+    id_membre!: number;
+}
+
+export class AutresUpdate {
+    id!: string;
+    nom!: string;
+    lien!: string;
+}
+
+export class AutresAdd {
+    nom!: string;
+    lien!: string;
+}
