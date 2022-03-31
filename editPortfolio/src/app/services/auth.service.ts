@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { adresse } from "src/environments/adresse";
 
 
 @Injectable({
@@ -18,6 +19,6 @@ export class AuthService {
         const data = new FormData();
         data.append('identifiant', donnees.identifiant);
         data.append('password', donnees.password);
-        return this.http.post<FormData>('http://192.168.88.246:3000/api-iteams/api.php?demande=login/token-login', data);
+        return this.http.post<FormData>(adresse+'/api-iteams/api.php?demande=login/token-login', data);
     }
 }
