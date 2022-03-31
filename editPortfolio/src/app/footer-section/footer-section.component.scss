@@ -1,0 +1,14 @@
+footer {
+    // background: linear-gradient(#1d2331e7, #1d2331dc, #1d2331);
+    color: white;
+    background: linear-gradient(#3d5154, #3d5154, #3d5154);
+}
+
+i {
+    transition: scale 0.5s;
+    color: white;
+}
+
+i:hover {
+    scale: 1.15;
+}

@@ -18,6 +18,7 @@ import { CompetencesSectionComponent } from './competences-section/competences-s
 import { DistinctionsSectionComponent } from './distinctions-section/distinctions-section.component';
 import { ProjetsSectionComponent } from './projets-section/projets-section.component';
 import { AutresSectionComponent } from './autres-section/autres-section.component';
+import { FooterSectionComponent } from './footer-section/footer-section.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AutresSectionComponent } from './autres-section/autres-section.componen
     CompetencesSectionComponent,
     DistinctionsSectionComponent,
     ProjetsSectionComponent,
-    AutresSectionComponent
+    AutresSectionComponent,
+    FooterSectionComponent
   ],
   imports: [
     BrowserModule,
