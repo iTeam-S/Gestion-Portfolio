@@ -166,7 +166,7 @@ export class EditPortfolioService implements OnInit {
         const donnees = new FormData();
         donnees.append('organisateur', data.organisateur);
         donnees.append('annee', data.annee);
-        donnees.append('type', data.annee);
+        donnees.append('type', data.type);
         donnees.append('description', data.description);
         donnees.append('ordre', data.ordre);
         return this.http.post<FormData>(adresse+'/index.php?demande=add/distinctions', donnees);
