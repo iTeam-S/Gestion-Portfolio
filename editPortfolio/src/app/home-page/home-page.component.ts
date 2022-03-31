@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 
@@ -32,8 +33,8 @@ export class HomePageComponent implements OnInit {
   }
 
   onSubmitLogin(): void {
-    this.auth.authentifier(this.loginForm.value).subscribe(
-      (reponses) => {
+    this.auth.authentifier(this.loginForm.value).pipe(
+      tap((reponses) => {
         if(reponses !== false && reponses.TRUE === 1) {
           localStorage.setItem('lahatra-iTeam-$', reponses.token);
           this.router.navigateByUrl('edit');
@@ -42,7 +43,7 @@ export class HomePageComponent implements OnInit {
           this.erreur = "Identifiant et/ou mot de passe incorrect(s). Merci !"
           console.log("Erreur:" + reponses);
         }
-      },
-    )
+      })
+    ).subscribe();
   }
 }

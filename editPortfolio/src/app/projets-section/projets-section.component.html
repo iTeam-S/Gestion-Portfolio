@@ -1,1 +1,167 @@
-<p>projets-section works!</p>
+<div class="m-2 m-md-2 p-2 p-md-2"></div>
+<div class="container-fluid">
+    <div class="row border rounded-3 bg-light justify-content-center p-2">
+        <div class="col-12 border rounded-3 shadow text-center titre">
+            <div class="fs-1">Projets</div>
+        </div>
+        <div class="container m-2">
+            <div class="row row-cols-1 row-cols-md-4 g-4 ms-md-4 me-md-4">
+                <div class="col d-flex justify-content-center flex-column" *ngFor="let projet of projets">
+                    <div class="card h-100 rounded-3 p-2 shadow carte">
+                        <div class="">
+                            <h5 class="card-title text-center titreCarte fw-bold">{{ projet.nom }}</h5>
+                            <ul class="card-text">
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-comment-dots me-2"></i> <u>Description</u>: </span> {{ projet.description }}</li>
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-link me-2"></i> <u>Lien</u>: </span> 
+                                        <span class="text-muted">{{ projet.lien }}</span></li>
+                                <li *ngIf="projet.pdc" class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-link me-2"></i> <u>PDC</u>: </span> 
+                                        <span class="text-muted">{{ projet.pdc }}</span></li>
+                                <li class="p-2">
+                                    <span class="fw-bold">
+                                        <i class="fa-solid fa-arrow-up-wide-short me-2"></i> <u>Ordre</u>: </span> <span> {{ projet.ordre }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0">
+                            <i class=" fa-solid fa-pen-to-square text-secondary me-3 me-md-4 stylo" type="button"
+                                data-bs-toggle="modal" data-bs-target="#updateProjets" (click)="onUpdate(projet)"
+                                data-bs-whatever="@getbootstrap"></i>
+                            <i class="fa-solid fa-trash-can text-secondary me-2 stylo" type="button"
+                                (click)="onDelete(projet.id)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 rounded-3 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-link ajouter border rounded-3"
+                            data-bs-toggle="modal" data-bs-target="#ajouterProjets"
+                            data-bs-whatever="@getbootstrap">
+                            <i class="fa-solid fa-plus fs-2 rounded-circle p-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *********************** MODAL POUR MODIFIER PROJETS *********************** -->
+    <div class="modal fade" id="updateProjets" tabindex="-1" aria-labelledby="updateProjetsLabel" 
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="updateProjetsLabel">Modifier le projet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="projetsUpdate" class="form-group">
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="nomProjets" 
+                                placeholder="Nom ***" formControlName="nom">
+                            <label for="nomProjets" class="form-label ms-2">
+                                <i class="fa-solid fa-at me-2"></i> Nom:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="lienProjets" 
+                                placeholder="Lien ***" formControlName="lien">
+                            <label for="lienProjets" class="form-label ms-2">
+                                <i class="fa-solid fa-link me-2"></i> Lien:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="pdcProjets" 
+                                placeholder="PDC ***" formControlName="pdc">
+                            <label for="pdcProjets" class="form-label ms-2">
+                                <i class="fa-solid fa-link me-2"></i> PDC:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="ordreProjets" 
+                                placeholder="Ordre d'affichage ***" formControlName="ordre">
+                            <label for="ordreProjets" class="form-label ms-2">
+                                <i class="fa-solid fa-arrow-up-wide-short me-2"></i> Ordre d'affichage:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-3 ps-4" id="descriptionProjets" 
+                                placeholder="Description ***" formControlName="description" style="height: 113px;"></textarea>
+                            <label for="descriptionProjets" class="form-label ms-2">
+                                <i class="fa-solid fa-comment-dots me-2"></i> Description:</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="onProjetsUpdate()" [disabled]="projetsUpdate.invalid">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *********************** AJOUTER PROJETS *********************** AJOUTER PROJETS -->
+    <div class="modal fade" id="ajouterProjets" tabindex="-1" aria-labelledby="ajouterProjetsLabel" 
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4 fw-bold" id="ajouterProjetsLabel">Ajouter du projet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="projetsAdd" class="form-group">
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="nomProjets" 
+                                placeholder="Nom ***" formControlName="nom">
+                            <label for="nomProjets" class="form-label ms-2">
+                                <i class="fa-solid fa-at me-2"></i> Nom:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="lienProjetsA" 
+                                placeholder="Lien ***" formControlName="lien">
+                            <label for="lienProjetsA" class="form-label ms-2">
+                                <i class="fa-solid fa-link me-2"></i> Lien:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="pdcProjetsA" 
+                                placeholder="PDC ***" formControlName="pdc">
+                            <label for="pdcProjetsA" class="form-label ms-2">
+                                <i class="fa-solid fa-link me-2"></i> PDC:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control rounded-pill ps-4" id="ordreProjetsA" 
+                                placeholder="Ordre d'affichage ***" formControlName="ordre">
+                            <label for="ordreProjetsA" class="form-label ms-2">
+                                <i class="fa-solid fa-arrow-up-wide-short me-2"></i> Ordre d'affichage:</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" class="form-control rounded-3 ps-4" id="descriptionProjetsA" 
+                                placeholder="Description ***" formControlName="description" style="height: 113px;"></textarea>
+                            <label for="descriptionProjetsA" class="form-label ms-2">
+                                <i class="fa-solid fa-comment-dots me-2"></i> Description:</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="onProjetsAdd()" [disabled]="projetsAdd.invalid">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************************** MESSAGE ********************* MESSAGE ********************** -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastProjets" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                <strong class="me-auto"><i [class]="iconeToast"></i> {{ titreToast }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-center" [style.color]="titreToast !== 'Erreur' ? '#19873f' : '#dc3545'">
+                {{ messageToast }}</div>
+        </div>
+    </div>
+</div>
