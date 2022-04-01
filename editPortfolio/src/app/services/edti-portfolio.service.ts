@@ -209,7 +209,7 @@ export class EditPortfolioService implements OnInit {
         donnees.append('nom', data.nom);
         donnees.append('description', data.description);
         donnees.append('lien', data.lien);
-        donnees.append('pdc', data.description);
+        donnees.append('pdc', data.pdc);
         donnees.append('ordre', data.ordre);
         donnees.append('identifiant', data.id);
         return this.http.post<FormData>(adresse+'/index.php?demande=update/projets', donnees);
