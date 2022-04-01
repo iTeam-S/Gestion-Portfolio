@@ -7,8 +7,9 @@
 - Front-End: *Angular2 (Google)*
 
 ### Concernant l'API: 
-   Avant tout, veuillez créer un fichier `db.json` dans le dossier `models`.
-      Dans db.json: `{ "host": "<nom de l'hote", "dbname": "<nom de la base de données>", "user": "<nom d'utilisateur>", "password": "<mot de passe de l'user>" }`
+   Avant tout, veuillez créer un fichier `db.json` le dossier `models`; dans db.json: 
+   `{ "host": "<nom de l'hote", "dbname": "<nom de la base de données>", "user": "<nom d'utilisateur>", "password": "<mot de passe de l'user>" }`
+
    Veuillez aussi créer deux fichiers utils dans *controllers* pour génerer le token: 
       - jwt-header.json (header)
       - jwt-secret.php (*const LAHATRA = "<cle du token>"*)
