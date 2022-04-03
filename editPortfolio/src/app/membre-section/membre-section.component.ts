@@ -16,7 +16,7 @@ export class MembreSectionComponent implements OnInit {
   membreUpdate!: FormGroup;
   passwordUpdate!: FormGroup;
   regexTel: RegExp = /^(\+261|0)3[2-4][0-9]{7}$/;
-  regexMail: RegExp = /^[a-zA-Z0-9.+*?_-]+@[a-zA-Z0-9]{2,7}\.[a-zA-Z0-9]{2,4}$/;
+  regexMail: RegExp = /^[a-zA-Z0-9.+*?_-]+@[a-zA-Z0-9-]{2,7}\.[a-zA-Z0-9]{2,4}$/;
   regexDark: RegExp = /[0-1]/;
   attrHide!: string;
   attrHideChangePassword!: string;
