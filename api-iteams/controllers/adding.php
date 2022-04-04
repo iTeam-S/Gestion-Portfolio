@@ -48,7 +48,7 @@ class ControllerAdd {
                     'lieu' => strip_tags(trim($lieu)),
                     'annee' => strip_tags(trim($annee)),
                     'type' => strip_tags(trim($type)),
-                    'description' => strip_tags($description),
+                    'description' => trim($description),
                     'id_membre' => strip_tags(trim($token['id']))
                 ];
                 $add->addFormations($infos);
@@ -94,7 +94,7 @@ class ControllerAdd {
                     'nom' => strip_tags(trim($nom)),
                     'annee' => strip_tags(trim($annee)),
                     'type' => strip_tags(trim($type)),
-                    'description' => strip_tags($description),
+                    'description' => trim($description),
                     'id_membre' => strip_tags(trim($token['id']))
                 ];
                 $add->addExperiences($infos);
@@ -119,7 +119,7 @@ class ControllerAdd {
                     'organisateur' => strip_tags(trim($organisateur)),
                     'annee' => strip_tags(trim($annee)),
                     'type' => strip_tags(trim($type)),
-                    'description' => strip_tags(trim($description)),
+                    'description' => trim($description),
                     'id_membre' => strip_tags(trim($token['id'])),
                     'ordre' => strip_tags(trim($ordre))
                 ];

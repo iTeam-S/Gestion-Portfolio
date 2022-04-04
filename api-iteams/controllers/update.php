@@ -17,7 +17,7 @@ class ControllerUpdate {
                 'linkedin' => strip_tags(trim($linkedin)),
                 'cv' => strip_tags(trim($cv)),
                 'adresse' => strip_tags(trim($adresse)),
-                'description' => strip_tags(trim($description)),
+                'description' => trim($description),
                 'fonction' => strip_tags(trim($fonction)),
                 'pdc' => strip_tags(trim($pdc)),
                 'dark' => strip_tags(trim($dark)),
@@ -62,7 +62,7 @@ class ControllerUpdate {
                 'lieu' => strip_tags(trim($lieu)),
                 'annee' => strip_tags(trim($annee)),
                 'type' => strip_tags(trim($type)),
-                'description' => strip_tags(trim($description)),
+                'description' => trim($description),
                 'id' => strip_tags(trim($identifiant)),
                 'id_membre' => strip_tags(trim($token['id'])) 
             ];
@@ -101,7 +101,7 @@ class ControllerUpdate {
                 'nom' => strip_tags(trim($nom)),
                 'annee' => strip_tags(trim($annee)),
                 'type' => strip_tags(trim($type)),
-                'description' => strip_tags(trim($description)),
+                'description' => trim($description),
                 'id' => strip_tags(trim($identifiant)),
                 'id_membre' => strip_tags(trim($token['id']))
             ];
@@ -123,7 +123,7 @@ class ControllerUpdate {
                 'organisateur' => strip_tags(trim($organisateur)),
                 'annee' => strip_tags(trim($annee)),
                 'type' => strip_tags(trim($type)),
-                'description' => strip_tags(trim($description)),
+                'description' => trim($description),
                 'ordre' => strip_tags(trim($ordre)),
                 'id' => strip_tags(trim($identifiant)),
                 'id_membre' => strip_tags(trim($token['id']))
