@@ -66,7 +66,7 @@ class JWT {
     public function isValidToken(string $secret) {
         $token = $this->verifyTokenReceived();
         if(!isset($token) && !preg_match('#Bearer\s(\S+)#', $token)) {
-            http_response_code(402);
+            http_response_code(401);
             throw new Exception("Erreur: permission non accordée !");
             exit;
         }
@@ -80,7 +80,7 @@ class JWT {
             $reponses = $this->getInfoPayload($payload);
         }
         else {
-            http_response_code(402);
+            http_response_code(401);
             throw new Exception("Erreur: permission non accordée !");
             exit;
         }
