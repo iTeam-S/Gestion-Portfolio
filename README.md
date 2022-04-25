@@ -2,9 +2,9 @@
 
 - C'est une **application web** qui sert à modifier les informations de chacun des membres de la communauté **iTeam-$**.
 
-- Back-End: *API rest écrit en PHP native*,
+- Back-End: **API rest écrit en PHP native**,
 
-- Front-End: *Angular2 (Google)*
+- Front-End: **Angular (Google)**
 
 ### Concernant l'API: 
    Avant tout, veuillez créer un fichier `db.json` le dossier `models`; dans db.json: 
