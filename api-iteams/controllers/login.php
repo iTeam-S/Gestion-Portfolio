@@ -34,6 +34,6 @@ class ControllerLogin {
             }
             print_r(json_encode($resultats, JSON_FORCE_OBJECT));
         }
-        else throw new Exception("Erreur: les données d'authentifications sont vides. Merci !");       
+        else throw new Exception("Erreur: les données d'authentifications sont vides. Merci !");
     }
 }
