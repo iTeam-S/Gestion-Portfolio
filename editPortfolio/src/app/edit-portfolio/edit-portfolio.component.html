@@ -1,10 +1,12 @@
-<app-menu-portfolio *ngIf="membre$|async as membre" [membre]="membre"></app-menu-portfolio>
-<app-membre-section></app-membre-section>
-<app-fonction-section></app-fonction-section>
-<app-formations-section></app-formations-section>
-<app-experiences-section></app-experiences-section>
-<app-competences-section></app-competences-section>
-<app-distinctions-section></app-distinctions-section>
-<app-projets-section></app-projets-section>
-<app-autres-section></app-autres-section>
-<app-footer-section></app-footer-section>
+<div class="div-scrollable">
+    <app-menu-portfolio *ngIf="membre$|async as membre" [membre]="membre"></app-menu-portfolio>
+    <app-membre-section></app-membre-section>
+    <app-fonction-section></app-fonction-section>
+    <app-formations-section></app-formations-section>
+    <app-experiences-section></app-experiences-section>
+    <app-competences-section></app-competences-section>
+    <app-distinctions-section></app-distinctions-section>
+    <app-projets-section></app-projets-section>
+    <app-autres-section></app-autres-section>
+    <app-footer-section></app-footer-section>
+</div>

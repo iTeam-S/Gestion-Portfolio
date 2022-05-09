@@ -17,5 +17,6 @@ export class EditPortfolioComponent implements OnInit {
 
   ngOnInit(): void {
     this.membre$ = this.edit.getMembre();
+    document.getElementsByClassName('div-scrollable')[0].scrollTo({ top: scrollY, behavior: 'smooth' })
   }
 }
