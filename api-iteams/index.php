@@ -28,10 +28,10 @@ try {
                     if(!empty(trim($url[1]))) {
                         $login=new ControllerLogin;
                         switch($url[1]) {
-                            case 'api-login':
+                            case 'api':
                                 $login->apiLogin($_POST['identifiant'], $_POST['password']);
                             break;
-                            case 'token-login':
+                            case 'token':
                                 $login->tokenLogin($_POST['identifiant'], $_POST['password'], LAHATRA);
                             break;
                             default: throw new Exception("Erreur: la methode d'authentification n'existe pas !");

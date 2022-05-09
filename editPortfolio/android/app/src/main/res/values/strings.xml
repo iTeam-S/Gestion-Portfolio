@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">edit-portfolio</string>
+    <string name="title_activity_main">edit-portfolio</string>
+    <string name="package_name">com.edit.angular</string>
+    <string name="custom_url_scheme">com.edit.angular</string>
+</resources>
