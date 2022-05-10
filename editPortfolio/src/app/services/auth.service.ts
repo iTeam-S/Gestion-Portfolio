@@ -19,6 +19,6 @@ export class AuthService {
         const data = new FormData();
         data.append('identifiant', donnees.identifiant);
         data.append('password', donnees.password);
-        return this.http.post<FormData>(adresse+'/index.php?demande=login/token-login', data);
+        return this.http.post<FormData>(adresse+'/?demande=login/token-login', data);
     }
 }

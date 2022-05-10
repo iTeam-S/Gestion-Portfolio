@@ -30,7 +30,7 @@ export class EditPortfolioService implements OnInit {
 
     // ***************************** MEMBRE *************************** MEMBRE ****************************
     getMembre(): Observable<Membre> {
-        return this.http.get<Membre>(adresse+'/index.php?demande=get/membre/1');
+        return this.http.get<Membre>(adresse+'/?demande=get/membre/1');
     }
 
     updateMembre(data: MembreUpdate): Observable<any> {
@@ -47,31 +47,31 @@ export class EditPortfolioService implements OnInit {
         donnees.append('fonction', data.fonction);
         donnees.append('pdc', data.pdc);
         donnees.append('dark', data.dark);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/membre', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/membre', donnees);
     }
 
     updatePassword(data: PasswordUpdate): Observable<any> {
         const donnees = new FormData();
         donnees.append('lastKeyword', data.lastPassword);
         donnees.append('newKeyword', data.newPassword);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/keyword', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/keyword', donnees);
     }
 
     // ************************** FONCTION ************************* FONCTION *******************************
     getFonction(): Observable<Fonction> {
-        return this.http.get<Fonction>(adresse+'/index.php?demande=get/fonction/1');
+        return this.http.get<Fonction>(adresse+'/?demande=get/fonction/1');
     }
 
     updateFonction(data: FonctionUpdate): Observable<any> {
         const donnees = new FormData();
         donnees.append('id_poste', data.id_poste);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/fonction', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/fonction', donnees);
     }
 
     // *********************** FORMATIONS ************************* FORMATIONS ****************************
     getFormations(): Observable<Formations[]> {
-        return this.http.get<Formations[]>(adresse+'/index.php?demande=get/formations/1');
+        return this.http.get<Formations[]>(adresse+'/?demande=get/formations/1');
     }
 
     addFormations(data: FormationsAdd): Observable<any> {
@@ -80,7 +80,7 @@ export class EditPortfolioService implements OnInit {
         donnees.append('annee', data.annee);
         donnees.append('type', data.type);
         donnees.append('description', data.description);
-        return this.http.post<FormData>(adresse+'/index.php?demande=add/formations', donnees)
+        return this.http.post<FormData>(adresse+'/?demande=add/formations', donnees)
     }
 
     updateFormations(data: FormationsUpdate): Observable<any> {
@@ -90,18 +90,18 @@ export class EditPortfolioService implements OnInit {
         donnees.append('type', data.type);
         donnees.append('description', data.description);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/formations', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/formations', donnees);
     }
 
     deleteFormations(id: string): Observable<any> {
         const donnees = new FormData();
         donnees.append('identifiant', id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=delete/formations', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=delete/formations', donnees);
     }
 
     // ************************ EXPERIENCES *********************** EXPERIENCES *************************
     getExperiences(): Observable<Experiences[]> {
-        return this.http.get<Experiences[]>(adresse+'/index.php?demande=get/experiences/1');
+        return this.http.get<Experiences[]>(adresse+'/?demande=get/experiences/1');
     }
 
     addExperiences(data: ExperiencesAdd): Observable<any> {
@@ -110,7 +110,7 @@ export class EditPortfolioService implements OnInit {
         donnees.append('annee', data.annee);
         donnees.append('type', data.type);
         donnees.append('description', data.description);
-        return this.http.post<FormData>(adresse+'/index.php?demande=add/experiences', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=add/experiences', donnees);
     }
 
     updateExperiences(data: ExperiencesUpdate): Observable<any> {
@@ -120,18 +120,18 @@ export class EditPortfolioService implements OnInit {
         donnees.append('type', data.type);
         donnees.append('description', data.description);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/experiences', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/experiences', donnees);
     }
 
     deleteExperiences(id: string): Observable<any> {
         const donnees = new FormData();
         donnees.append('identifiant', id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=delete/experiences', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=delete/experiences', donnees);
     }
 
     // ********************* COMPETENCES ******************* COMPETENCES **********************
     getCompetences(): Observable<Competences[]> {
-        return this.http.get<Competences[]>(adresse+'/index.php?demande=get/competences/1');
+        return this.http.get<Competences[]>(adresse+'/?demande=get/competences/1');
     }
 
     addCompetences(data: CompetencesAdd): Observable<any> {
@@ -139,7 +139,7 @@ export class EditPortfolioService implements OnInit {
         donnees.append('nom', data.nom);
         donnees.append('liste', data.liste);
         donnees.append('id_categorie', data.id_categorie);
-        return this.http.post<FormData>(adresse+'/index.php?demande=add/competences', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=add/competences', donnees);
     }
 
     updateCompetences(data: CompetencesUpdate): Observable<any> {
@@ -148,18 +148,18 @@ export class EditPortfolioService implements OnInit {
         donnees.append('liste', data.liste);
         donnees.append('id_categorie', data.id_categorie);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/competences', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/competences', donnees);
     }
 
     deleteCompetences(id: string): Observable<any> {
         const donnees = new FormData();
         donnees.append('identifiant', id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=delete/competences', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=delete/competences', donnees);
     }
 
     // ****************** DISTINCTIONS ******************* DISTINCTIONS ********************
     getDistinctions(): Observable<Distinctions[]> {
-        return this.http.get<Distinctions[]>(adresse+'/index.php?demande=get/distinctions/1');
+        return this.http.get<Distinctions[]>(adresse+'/?demande=get/distinctions/1');
     }
 
     addDistinctions(data: DistinctionsAdd): Observable<any> {
@@ -169,7 +169,7 @@ export class EditPortfolioService implements OnInit {
         donnees.append('type', data.type);
         donnees.append('description', data.description);
         donnees.append('ordre', data.ordre);
-        return this.http.post<FormData>(adresse+'/index.php?demande=add/distinctions', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=add/distinctions', donnees);
     }
 
     updateDistinctions(data: DistinctionsUpdate): Observable<any> {
@@ -180,18 +180,18 @@ export class EditPortfolioService implements OnInit {
         donnees.append('description', data.description);
         donnees.append('ordre', data.ordre);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/distinctions', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/distinctions', donnees);
     }
 
     deleteDistinctions(id: string): Observable<any> {
         const donnees = new FormData();
         donnees.append('identifiant', id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=delete/distinctions', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=delete/distinctions', donnees);
     }
 
     // ********************** PROJETS ****************** PROJETS ********************
     getProjets(): Observable<Projets[]> {
-        return this.http.get<Projets[]>(adresse+'/index.php?demande=get/projets/1');
+        return this.http.get<Projets[]>(adresse+'/?demande=get/projets/1');
     }
 
     addProjets(data: ProjetsAdd): Observable<any> {
@@ -201,7 +201,7 @@ export class EditPortfolioService implements OnInit {
         donnees.append('lien', data.lien);
         donnees.append('pdc', data.pdc);
         donnees.append('ordre', data.ordre);
-        return this.http.post<FormData>(adresse+'/index.php?demande=add/projets', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=add/projets', donnees);
     }
 
     updateProjets(data: ProjetsUpdate): Observable<any> {
@@ -212,25 +212,25 @@ export class EditPortfolioService implements OnInit {
         donnees.append('pdc', data.pdc);
         donnees.append('ordre', data.ordre);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/projets', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/projets', donnees);
     }
 
     deleteProjets(id: string): Observable<any> {
         const donnees = new FormData();
         donnees.append('identifiant', id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=delete/projets', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=delete/projets', donnees);
     }
 
     // ******************** AUTRES *************** AUTRES *********************
     getAutres():Observable<Autres[]> {
-        return this.http.get<Autres[]>(adresse+'/index.php?demande=get/autres/1');
+        return this.http.get<Autres[]>(adresse+'/?demande=get/autres/1');
     }
 
     addAutres(data: AutresAdd): Observable<any> {
         const donnees = new FormData();
         donnees.append('nom', data.nom);
         donnees.append('lien', data.lien);
-        return this.http.post<FormData>(adresse+'/index.php?demande=add/autres', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=add/autres', donnees);
     }
 
     updateAutres(data: AutresUpdate): Observable<any> {
@@ -238,12 +238,12 @@ export class EditPortfolioService implements OnInit {
         donnees.append('nom', data.nom);
         donnees.append('lien', data.lien);
         donnees.append('identifiant', data.id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=update/autres', donnees);
+        return this.http.post<FormData>(adresse+'/?demande=update/autres', donnees);
     }
 
     deleteAutres(id: string): Observable<any> {
         const donnees = new FormData();
         donnees.append('identifiant', id);
-        return this.http.post<FormData>(adresse+'/index.php?demande=delete/autres', donnees)
+        return this.http.post<FormData>(adresse+'/?demande=delete/autres', donnees)
     }
 }
