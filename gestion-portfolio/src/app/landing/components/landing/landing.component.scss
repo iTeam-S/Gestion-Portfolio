@@ -1,3 +1,7 @@
+header {
+    background: #008080;
+}
+
 #searchIcon {
     transform: translate(95%, -50%) !important;
 }
@@ -10,6 +14,32 @@ form input {
     padding-left: 2.5rem !important;
 }
 
+#connexionButton button {
+    background: white !important;
+    border: 1px solid white !important;
+    color: #008080 !important;
+    transition: all .5s ease;
+}
+
+#connexionButton button:hover {
+    background: #008080 !important;
+    color: white !important;
+    scale: 1.02;
+    #connexionButton button > * {
+        scale: 1.02;
+    }
+}
+
+.devise {
+    font-size: 3.52rem;
+    color: #008080;
+    text-shadow: 2px 2px 2px rgb(224, 224, 224);
+}
+
+.firstPart {
+    background: white !important;
+}
+
 @media only screen and (max-width: 767px) {
     .divSeparateur {
         margin-top: 1rem;
@@ -20,5 +50,8 @@ form input {
 
     #connexionButton {
         margin-top: 7%;
+    }
+    .devise {
+        font-size: 2.5rem;
     }
 }
