@@ -1,6 +1,29 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12"></div>
-        <div class="col-12"></div>
-    </div>
-</div>
+<header class="fixed-top w-100">
+    <nav class="navbar navbar-expand-md navbar-light bg-light rounded-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-2" routerLink="/" style="cursor: pointer;">
+                <img src="assets/images/iteam-s.png" class="img-fluid" width="60" height="60">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <div class="me-auto divSeparateur"></div>
+                <form class="d-flex form-group position-relative">
+                    <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 text-secondary" 
+                        id="searchIcon"></i>
+                    <input class="form-control rounded-pill shadow" type="search" 
+                        placeholder="Recherche quelques choses ..." aria-label="Search">
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-center" id="connexionButton">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-success rounded-pill fw-bold" 
+                            type="submit">Se connecter</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

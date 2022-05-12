@@ -1,0 +1,24 @@
+#searchIcon {
+    transform: translate(95%, -50%) !important;
+}
+
+form {
+    width: 40% !important;
+}
+
+form input {
+    padding-left: 2.5rem !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .divSeparateur {
+        margin-top: 1rem;
+    }
+    form {
+        width: 100% !important;
+    }
+
+    #connexionButton {
+        margin-top: 7%;
+    }
+}
