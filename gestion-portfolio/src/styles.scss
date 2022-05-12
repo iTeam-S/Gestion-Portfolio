@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Source-sans-code';
+    src: url('assets/fonts/SourceSansPro-Regular.ttf');
+}
 
 
 *, *::before, *::after {
@@ -8,5 +12,6 @@
 }
 
 body {
+    font-family: 'Source-sans-code';
     background: white;
 }

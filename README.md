@@ -58,7 +58,7 @@
 - Projets:
    - `https://api-ep.iteam-s.mg/?demande=get/projets/*`
    - `https://api-ep.iteam-s.mg/?demande=get/projets/1` (get)
-    - `https://api-ep.iteam-s.mg/?demande=add/projets` (add)
+   - `https://api-ep.iteam-s.mg/?demande=add/projets` (add)
    - `https://api-ep.iteam-s.mg/?demande=update/projets` (update)
    - `https://api-ep.iteam-s.mg/?demande=delete/projets` (delete)
 
