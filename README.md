@@ -1,5 +1,9 @@
 # Gestion-portfolio
 
+<p align="center">
+   <a href="https://ep.iteam-s.mg/" target="blank"><img src="https://raw.githubusercontent.com/iTeam-S/Interfaces-portfolio/main/apercu.png" alt="Gestion portfolio Logo" /></a>
+</p>
+
 - C'est une **application web** qui sert à modifier les informations de chacun des membres de la communauté **iTeam-$**.
 
 - Back-End: **API rest écrit en PHP native**,
