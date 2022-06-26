@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Membre } from 'src/output';
 import { Repository } from 'typeorm';
+import { UpdateInfoDto } from './dto/membre.dto';
 
 @Injectable()
 export class MembreService {
@@ -25,5 +26,29 @@ export class MembreService {
             ])
             .where("m.id=:id", { id: donnees.id })
             .getRawOne();
+    }
+
+    async updateInfo(id: number, donnees: UpdateInfoDto): Promise<void> {
+        await this.membreRepository
+            .createQueryBuilder()
+            .update(Membre)
+            .set({
+                userGithub: donnees.user_github,
+                userGithubPic: donnees.user_github_pic,
+                tel1: donnees.tel1,
+                tel2: donnees.tel2,
+                mail: donnees.mail,
+                facebook: donnees.facebook,
+                linkedin: donnees.linkedin,
+                cv: donnees.cv,
+                adresse: donnees.adresse,
+                description: donnees.description,
+                fonction: donnees.fonction,
+                pdc: donnees.pdc,
+                dark: donnees.dark,
+                role: donnees.role
+            })
+            .where("id=:identifiant", { identifiant: id })
+            .execute();
     }
 }
