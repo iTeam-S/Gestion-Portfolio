@@ -14,3 +14,8 @@ export class UpdateInfoDto {
     dark: boolean;
     role: "admin" | "user";
 }
+
+export class UpdatePasswordDto {
+    lastPassword: string;
+    newPassword: string;
+}

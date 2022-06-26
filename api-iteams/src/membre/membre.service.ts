@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { UpdateInfoDto } from './dto/membre.dto';
+import { UpdateInfoDto, UpdatePasswordDto } from './dto/membre.dto';
 
 @Injectable()
 export class MembreService {
@@ -47,6 +47,33 @@ export class MembreService {
                 pdc: donnees.pdc,
                 dark: donnees.dark,
                 role: donnees.role
+            })
+            .where("id=:identifiant", { identifiant: id })
+            .execute();
+    }
+
+    private async verifyPassword(id: number, donnees: UpdatePasswordDto): Promise<Membre> {
+        return await this.membreRepository
+            .createQueryBuilder("m")
+            .select(["m.id"])
+            .where(
+                `m.id=:identifiant 
+                AND m.password=SHA2(:key, 256)`, 
+                { 
+                    identifiant: id,
+                    key: donnees.lastPassword
+                })
+            .getRawOne();
+    }
+
+    async updatePassword(id: number, donnees: UpdatePasswordDto): Promise<void> {
+        const verify = await this.verifyPassword(id, donnees);
+        if(!verify) throw new UnauthorizedException("Credentials incorrects !");
+        await this.membreRepository
+            .createQueryBuilder()
+            .update(Membre)
+            .set({
+                password: donnees.newPassword
             })
             .where("id=:identifiant", { identifiant: id })
             .execute();
