@@ -14,6 +14,7 @@ import { ExperiencesModule } from './experiences/experiences.module';
 import { DistinctionsModule } from './distinctions/distinctions.module';
 import { ProjetsModule } from './projets/projets.module';
 import { AutresModule } from './autres/autres.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -34,14 +35,9 @@ import { AutresModule } from './autres/autres.module';
       synchronize: true,
       autoLoadEntities: true
     }),
-    MembreModule,
-    FonctionModule,
-    FormationsModule,
-    CompetencesModule,
-    ExperiencesModule,
-    DistinctionsModule,
-    ProjetsModule,
-    AutresModule
+    MembreModule, FonctionModule, FormationsModule, 
+    CompetencesModule, ExperiencesModule, DistinctionsModule, 
+    ProjetsModule, AutresModule, AuthModule
   ],
 })
 export class AppModule {}
