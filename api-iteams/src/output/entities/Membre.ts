@@ -93,7 +93,7 @@ export class Membre {
   @Column("enum", {
     name: "role",
     enum: ["admin", "user"],
-    default: () => "'user'",
+    default: ["user"],
   })
   role: "admin" | "user";
 
