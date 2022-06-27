@@ -11,7 +11,7 @@ export class MembreController {
     @UseGuards(AuthGuard('jwtMembre'))
     @Get()
     async getMembre(@Request() req: any) {
-        const donnees = { id: req.user.id };
+        const donnees = { id: parseInt(req.user.id) };
         return await this.membreService.findOne(donnees);
     }
 
@@ -20,7 +20,7 @@ export class MembreController {
     async updateInfoMembre(@Body() donnees: UpdateInfoDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        return await this.membreService.updateInfo(req.user.id, donnees);
+        return await this.membreService.updateInfo(parseInt(req.user.id), donnees);
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
@@ -28,6 +28,6 @@ export class MembreController {
     async updatePasswordMembre(@Body() donnees: UpdatePasswordDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        return await this.membreService.updatePassword(req.user.id, donnees);
+        return await this.membreService.updatePassword(parseInt(req.user.id), donnees);
     }
 }

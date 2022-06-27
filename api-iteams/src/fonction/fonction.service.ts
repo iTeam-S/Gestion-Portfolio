@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Fonction, Membre, Poste } from 'src/output';
 import { Repository } from 'typeorm';
+import { FonctionCreateDto } from './dto';
 
 @Injectable()
 export class FonctionService {
@@ -21,5 +22,17 @@ export class FonctionService {
             .innerJoin(Poste, "p", "p.id=f.id_poste")
             .where("m.id=:identifiant", { identifiant: donnees.id })
             .getRawOne();
+    }
+
+    async create(donnees: FonctionCreateDto): Promise<void> {
+        await this.fonctionRepository
+            .createQueryBuilder()
+            .insert()
+            .into(Fonction)
+            .values({
+                idMembre: donnees.id_membre,
+                idPoste: donnees.id_poste
+            })
+            .execute();
     }
 }
