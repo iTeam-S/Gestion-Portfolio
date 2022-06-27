@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Fonction, Membre, Poste } from 'src/output';
 import { Repository } from 'typeorm';
-import { FonctionCreateDto } from './dto';
+import { FonctionCreateDto, FonctionUpdateDto } from './dto';
 
 @Injectable()
 export class FonctionService {
@@ -34,5 +34,21 @@ export class FonctionService {
                 idPoste: donnees.id_poste
             })
             .execute();
+    }
+
+    async update(id_membre: number, donnees: FonctionUpdateDto): Promise<void> {
+        await this.fonctionRepository
+            .createQueryBuilder()
+            .update(Fonction)
+            .set({
+                idPoste: donnees.id_poste
+            })
+            .where("id=:id AND id_membre=:identifiant",
+                {
+                    id: donnees.id_fonction,
+                    identifiant: id_membre
+                })
+            .execute();
+
     }
 }

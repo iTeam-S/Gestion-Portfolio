@@ -1,5 +1,7 @@
-import { Body, Controller, Get, NotAcceptableException, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, NotAcceptableException, 
+    Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FonctionUpdateDto } from './dto';
 import { FonctionService } from './fonction.service';
 
 @Controller('fonction')
@@ -20,5 +22,12 @@ export class FonctionController {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         const data = { ...donnees, id_membre: parseInt(req.user.id) };
         return await this.fonctionService.create(data);
+    }
+
+    @Patch('update')
+    async updateFonction(@Body() donnees: FonctionUpdateDto,
+        @Request() req: any) {
+        if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
+        return await this.fonctionService.update(parseInt(req.user.id), donnees);
     }
 }
