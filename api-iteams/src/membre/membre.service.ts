@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { UpdateInfoDto, UpdatePasswordDto } from './dto/membre.dto';
+import { UpdateInfoDto, UpdatePasswordDto } from './dto';
 
 @Injectable()
 export class MembreService {

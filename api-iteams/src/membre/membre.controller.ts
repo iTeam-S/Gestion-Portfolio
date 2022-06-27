@@ -1,7 +1,7 @@
 import { Body, Controller, Get, NotAcceptableException, Patch, 
     Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UpdateInfoDto, UpdatePasswordDto } from './dto/membre.dto';
+import { UpdateInfoDto, UpdatePasswordDto } from './dto';
 import { MembreService } from './membre.service';
 
 @Controller('membre')
