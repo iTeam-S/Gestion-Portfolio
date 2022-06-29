@@ -57,4 +57,8 @@ export class FormationsService {
             })
             .execute();
     }
+
+    async remove(donnees: { id: number }): Promise<void> {
+        await this.formationsRepository.delete(donnees.id);
+    }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotAcceptableException, 
+import { Body, Controller, Delete, Get, NotAcceptableException, 
     Post, Put, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FormationsCreateDto, FormationsUpdateDto } from './dto';
@@ -25,11 +25,18 @@ export class FormationsController {
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
-    @Put()
+    @Put('update')
     async updateFormations(@Body() donnees: FormationsUpdateDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         const data = { ...donnees, id_membre: parseInt(req.user.id) };
         return await this.formationsService.update(data);
+    }
+
+    @UseGuards(AuthGuard('jwtMembre'))
+    @Delete('remove')
+    async deleteFormations(@Body() donnees: { id: number }) {
+        if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
+        return await this.formationsService.remove(donnees);
     }
 }
