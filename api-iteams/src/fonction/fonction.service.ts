@@ -15,8 +15,9 @@ export class FonctionService {
         return await this.fonctionRepository
             .createQueryBuilder("f")
             .select([
-                "f.id", "f.date_debut_fonction", "p.nom", "p.categorie",
-                "m.prenom_usuel"
+                "f.id AS id", "f.date_debut_fonction AS date_debut_fonction", 
+                "p.nom AS nom_poste", "p.categorie AS categorie_poste",
+                "m.prenom_usuel AS prenom_usuel"
             ])
             .innerJoin(Membre, "m", "f.id_membre=m.id")
             .innerJoin(Poste, "p", "p.id=f.id_poste")
