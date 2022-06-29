@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Formations, Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { FormationsCreateDto } from './dto/formations.dto';
+import { FormationsCreateDto, FormationsUpdateDto } from './dto';
 
 @Injectable()
 export class FormationsService {
@@ -36,6 +36,24 @@ export class FormationsService {
                 description: donnees.description,
                 ordre: donnees.ordre,
                 idMembre: donnees.id_membre
+            })
+            .execute();
+    }
+
+    async update(donnees: FormationsUpdateDto): Promise<void> {
+        await this.formationsRepository
+            .createQueryBuilder("f")
+            .update(Formations)
+            .set({
+                lieu: donnees.lieu,
+                annee: donnees.annee,
+                type: donnees.type,
+                description: donnees.description,
+                ordre: donnees.ordre
+            })
+            .where(`f.id=:id AND f.id_membre=:identifiant`, {
+                id: donnees.id,
+                identifiant: donnees.id_membre
             })
             .execute();
     }

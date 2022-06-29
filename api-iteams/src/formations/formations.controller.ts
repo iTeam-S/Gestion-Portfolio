@@ -1,7 +1,7 @@
 import { Body, Controller, Get, NotAcceptableException, 
-    Post, Request, UseGuards } from '@nestjs/common';
+    Post, Put, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { FormationsCreateDto } from './dto/formations.dto';
+import { FormationsCreateDto, FormationsUpdateDto } from './dto';
 import { FormationsService } from './formations.service';
 
 @Controller('formations')
@@ -24,4 +24,12 @@ export class FormationsController {
         return await this.formationsService.create(donnees)
     }
 
+    @UseGuards(AuthGuard('jwtMembre'))
+    @Put()
+    async updateFormations(@Body() donnees: FormationsUpdateDto,
+        @Request() req: any) {
+        if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
+        const data = { ...donnees, id_membre: parseInt(req.user.id) };
+        return await this.formationsService.update(data);
+    }
 }
