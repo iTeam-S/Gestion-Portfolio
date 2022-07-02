@@ -59,4 +59,8 @@ export class DistinctionsService {
         })
         .execute();
     }
+
+    async remove(donnees: { id: number }): Promise<void> {
+        await this.distinctionsRepository.delete(donnees.id);
+    }
 }
