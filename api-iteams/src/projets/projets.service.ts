@@ -60,4 +60,8 @@ export class ProjetsService {
         })
         .execute();
     }
+
+    async remove(donnees: {id: number}): Promise<void> {
+        await this.projetsRepository.delete(donnees.id);
+    }
 }
