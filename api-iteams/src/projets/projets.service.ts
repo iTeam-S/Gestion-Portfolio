@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Membre, Projets } from 'src/output';
 import { Repository } from 'typeorm';
+import { ProjetsCreateDto } from './dto';
 
 @Injectable()
 export class ProjetsService {
@@ -22,5 +23,22 @@ export class ProjetsService {
             identifiant: donnes.id
         })
         .getRawMany();
+    }
+
+    async create(id_membre: number, 
+        donnes: ProjetsCreateDto): Promise<void> {
+        await this.projetsRepository
+        .createQueryBuilder()
+        .insert()
+        .into(Projets)
+        .values({
+            nom: donnes.nom,
+            description: donnes.description,
+            lien: donnes.lien,
+            pdc: donnes.pdc,
+            idMembre: id_membre,
+            ordre: donnes.ordre
+        })
+        .execute();
     }
 }
