@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Autres, Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { AutresCreateDto } from './dto/autres.dto';
+import { AutresCreateDto, AutresUpdateDto } from './dto/autres.dto';
 
 @Injectable()
 export class AutresService {
@@ -33,6 +33,22 @@ export class AutresService {
             nom: donnees.nom,
             lien: donnees.lien,
             idMembre: id_membre
+        })
+        .execute();
+    }
+
+    async update(id_membre: number, 
+        donnees: AutresUpdateDto) {
+        await this.autresRepository
+        .createQueryBuilder('a')
+        .update(Autres)
+        .set({
+            nom: donnees.nom,
+            lien: donnees.lien
+        })
+        .where(`a.id=:id AND a.id_membre=:identifiant`, {
+            id: donnees.id,
+            identifiant: id_membre
         })
         .execute();
     }

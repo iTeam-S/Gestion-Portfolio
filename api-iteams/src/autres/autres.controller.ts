@@ -1,7 +1,8 @@
-import { Body, Controller, Get, NotAcceptableException, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, NotAcceptableException, 
+    Post, Put, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AutresService } from './autres.service';
-import { AutresCreateDto } from './dto/autres.dto';
+import { AutresCreateDto, AutresUpdateDto } from './dto/autres.dto';
 
 @Controller('autres')
 export class AutresController {
@@ -20,5 +21,13 @@ export class AutresController {
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         return await this.autresService.create(parseInt(req.user.id), donnees);
+    }
+
+    @UseGuards(AuthGuard('jwtMembre'))
+    @Put('update')
+    async updateAutres(@Body() donnees: AutresUpdateDto, 
+        @Request() req: any) {
+        if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
+        return await this.autresService.update(parseInt(req.user.id), donnees);
     }
 }
