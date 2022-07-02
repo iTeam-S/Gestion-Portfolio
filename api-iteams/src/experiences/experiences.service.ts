@@ -55,4 +55,8 @@ export class ExperiencesService {
             })
             .execute();
     }
+
+    async remove(donnees: { id: number }): Promise<void> {
+        await this.experiencesRepository.delete(donnees.id);
+    }
 }
