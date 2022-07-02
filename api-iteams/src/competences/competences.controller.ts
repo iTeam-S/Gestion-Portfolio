@@ -1,7 +1,7 @@
-import { Body, Controller, Get, NotAcceptableException, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, NotAcceptableException, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CompetencesService } from './competences.service';
-import { CompetencesCreateDto } from './dto';
+import { CompetencesCreateDto, CompetencesUpdateDto } from './dto';
 
 @Controller('competences')
 export class CompetencesController {
@@ -20,5 +20,12 @@ export class CompetencesController {
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         return await this.competencesService.create(parseInt(req.user.id), donnees);
+    }
+
+    @Put('update')
+    async updateCompetences(@Body() donnees: CompetencesUpdateDto, 
+        @Request() req: any) {
+        if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
+        return await this.competencesService.update(parseInt(req.user.id), donnees);
     }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategorieCompetence, Competences, Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { CompetencesCreateDto } from './dto';
+import { CompetencesCreateDto, CompetencesUpdateDto } from './dto';
 
 @Injectable()
 export class CompetencesService {
@@ -36,6 +36,23 @@ export class CompetencesService {
             idCategorie: donnees.id_categorie,
             idMembre: id_membre,
             ordre: 0
+        })
+        .execute();
+    }
+
+    async update(id_membre: number, 
+        donnees: CompetencesUpdateDto): Promise<void> {
+        await this.competencesRepository
+        .createQueryBuilder('c')
+        .update(Competences)
+        .set({
+            nom: donnees.nom,
+            liste: donnees.liste,
+            idCategorie: donnees.id_categorie
+        })
+        .where(`c.id=:id AND c.id_membre=:identifiant`, {
+            id: donnees.id,
+            identifiant: id_membre
         })
         .execute();
     }
