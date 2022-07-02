@@ -4,7 +4,6 @@ export class FormationsCreateDto {
     type: string;
     description: string;
     ordre: number;
-    id_membre?: number;
 }
 
 export class FormationsUpdateDto {
@@ -14,5 +13,4 @@ export class FormationsUpdateDto {
     type: string;
     description: string;
     ordre: number;
-    id_membre?: number;
 }

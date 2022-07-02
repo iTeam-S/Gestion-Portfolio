@@ -24,7 +24,7 @@ export class FormationsService {
             .getRawMany();
     }
 
-    async create(donnees: FormationsCreateDto): Promise<void> {
+    async create(id_membre: number, donnees: FormationsCreateDto): Promise<void> {
         await this.formationsRepository
             .createQueryBuilder()
             .insert()
@@ -34,13 +34,13 @@ export class FormationsService {
                 annee: donnees.annee,
                 type: donnees.type,
                 description: donnees.description,
-                ordre: donnees.ordre,
-                idMembre: donnees.id_membre
+                idMembre: id_membre,
+                ordre: donnees.ordre
             })
             .execute();
     }
 
-    async update(donnees: FormationsUpdateDto): Promise<void> {
+    async update(id_membre: number, donnees: FormationsUpdateDto): Promise<void> {
         await this.formationsRepository
             .createQueryBuilder("f")
             .update(Formations)
@@ -53,7 +53,7 @@ export class FormationsService {
             })
             .where(`f.id=:id AND f.id_membre=:identifiant`, {
                 id: donnees.id,
-                identifiant: donnees.id_membre
+                identifiant: id_membre
             })
             .execute();
     }

@@ -20,8 +20,7 @@ export class FormationsController {
     async createFormations(@Body() donnees: FormationsCreateDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        const data = { ...donnees, id_membre: parseInt(req.user.id) };
-        return await this.formationsService.create(donnees)
+        return await this.formationsService.create(parseInt(req.user.id), donnees)
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
@@ -29,8 +28,7 @@ export class FormationsController {
     async updateFormations(@Body() donnees: FormationsUpdateDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        const data = { ...donnees, id_membre: parseInt(req.user.id) };
-        return await this.formationsService.update(data);
+        return await this.formationsService.update(parseInt(req.user.id), donnees);
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
