@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Distinctions, Membre } from 'src/output';
 import { Repository } from 'typeorm';
+import { DistinctionsCreateDto } from './dto';
 
 @Injectable()
 export class DistinctionsService {
@@ -21,5 +22,22 @@ export class DistinctionsService {
             .innerJoin(Membre, "m", "d.id_membre=m.id")
             .where("m.id=:identifiant", { identifiant: donnees.id })
             .getRawMany();
+    }
+
+    async create(id_membre: number, 
+        donnees: DistinctionsCreateDto): Promise<void> {
+        await this.distinctionsRepository
+        .createQueryBuilder()
+        .insert()
+        .into(Distinctions)
+        .values({
+            organisateur: donnees.organisateur,
+            annee: donnees.annee,
+            type: donnees.type,
+            description: donnees.description,
+            idMembre: id_membre,
+            ordre: donnees.ordre
+        })
+        .execute();
     }
 }
