@@ -20,10 +20,10 @@ export class FonctionController {
     async createFonction(@Body() donnees: { id_poste: number },
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        const data = { ...donnees, id_membre: parseInt(req.user.id) };
-        return await this.fonctionService.create(data);
+        return await this.fonctionService.create(parseInt(req.user.id), donnees);
     }
 
+    @UseGuards(AuthGuard('jwtMembre'))
     @Patch('update')
     async updateFonction(@Body() donnees: FonctionUpdateDto,
         @Request() req: any) {

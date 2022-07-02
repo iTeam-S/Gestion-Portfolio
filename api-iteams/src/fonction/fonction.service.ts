@@ -25,13 +25,13 @@ export class FonctionService {
             .getRawOne();
     }
 
-    async create(donnees: FonctionCreateDto): Promise<void> {
+    async create( id_membre: number, donnees: FonctionCreateDto): Promise<void> {
         await this.fonctionRepository
             .createQueryBuilder()
             .insert()
             .into(Fonction)
             .values({
-                idMembre: donnees.id_membre,
+                idMembre: id_membre,
                 idPoste: donnees.id_poste
             })
             .execute();
@@ -46,7 +46,7 @@ export class FonctionService {
             })
             .where("id=:id AND id_membre=:identifiant",
                 {
-                    id: donnees.id_fonction,
+                    id: donnees.id,
                     identifiant: id_membre
                 })
             .execute();
