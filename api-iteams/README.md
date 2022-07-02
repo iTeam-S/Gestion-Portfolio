@@ -22,52 +22,359 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Documentation API
+ ### Authentification: 
+ ```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/auth/membre \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"identifiant": "",
+	"password": ""
+}'
+ ```
 
-## Installation
-
-```bash
-$ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
+ ### Membre:
+ ```bash
+ curl --request GET \
+  --url http://gp-api.iteam-s.mg/membre \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json'
+ ```
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+  curl --request PATCH \
+  --url https://gp-api.iteam-s.mg/membre/update-info \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	  "user_github": "",
+    "user_github_pic": "",
+    "tel1": "",
+    "tel2": "",
+    "mail": "",
+    "facebook": "",
+    "linkedin": "",
+    "cv": ",
+    "adresse": "",
+    "description": "",
+    "fonction": "",
+    "pdc": "",
+    "dark": 1 ou 0,
+    "role": "admin" ou "user"
+}'
 ```
 
-## Support
+```bash
+ curl --request PATCH \
+  --url https://gp-api.iteam-s.mg/membre/update-password \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "lastPassword": "",
+    "newPassword": ""
+  }'
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+ ### Fonction
+ ```bash
+ curl --request GET \
+  --url http://gp-api.iteam-s.mg/fonction \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json'
+ ```
 
-## Stay in touch
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/fonction/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id_poste": ,
+  }'
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+  curl --request PATCH \
+  --url https://gp-api.iteam-s.mg/fonction/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "id_poste": ,
+  }'
+```
 
-## License
+ ### Formations
+```bash
+  curl --request GET \
+  --url https://gp-api.iteam-s.mg/formations \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+```
 
-Nest is [MIT licensed](LICENSE).
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/formations/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "lieu": "",
+    "annee": "",
+    "type": "",
+    "description": "" 
+  }'
+```
+
+```bash
+  curl --request PUT \
+  --url https://gp-api.iteam-s.mg/formations/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "lieu": "",
+    "annee": "",
+    "type": "",
+    "description": "" 
+  }'
+```
+
+```bash
+  curl --request DELETE \
+  --url https://gp-api.iteam-s.mg/formations/remove \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+  }'
+```
+
+ ### Expériences
+```bash
+  curl --request GET \
+  --url https://gp-api.iteam-s.mg/experiences \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+```
+
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/experiences/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "nom": "",
+    "annee": "",
+    "type": "",
+    "description": "" 
+  }'
+```
+
+```bash
+  curl --request PUT \
+  --url https://gp-api.iteam-s.mg/experiences/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "nom": "",
+    "annee": "",
+    "type": "",
+    "description": "" 
+  }'
+```
+
+```bash
+  curl --request DELETE \
+  --url https://gp-api.iteam-s.mg/experiences/remove \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+  }'
+```
+
+ ### Distinctions
+```bash
+  curl --request GET \
+  --url https://gp-api.iteam-s.mg/distinctions \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+```
+
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/distinctions/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "organisateur": "",
+    "annee": "",
+    "type": "",
+    "description": "",
+    "ordre": ,
+  }'
+```
+
+```bash
+  curl --request PUT \
+  --url https://gp-api.iteam-s.mg/distinctions/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "organisateur": "",
+    "annee": "",
+    "type": "",
+    "description": "",
+    "ordre": ,
+  }'
+```
+
+```bash
+  curl --request DELETE \
+  --url https://gp-api.iteam-s.mg/distinctions/remove \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+  }'
+```
+
+ ### Competences
+```bash
+  curl --request GET \
+  --url https://gp-api.iteam-s.mg/competences \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+```
+
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/competences/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "nom": "",
+    "liste": "",
+    "id_categorie": ,
+  }'
+```
+
+```bash
+  curl --request PUT \
+  --url https://gp-api.iteam-s.mg/competences/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "nom": "",
+    "liste": "",
+    "id_categorie": ,
+  }'
+```
+
+```bash
+  curl --request DELETE \
+  --url https://gp-api.iteam-s.mg/competences/remove \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+  }'
+```
+
+ ### Projets
+```bash
+  curl --request GET \
+  --url https://gp-api.iteam-s.mg/projets \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+```
+
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/projets/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "nom": "",
+    "description": ,
+    "lien": "",
+    "pdc": "",
+    "ordre": ,
+  }'
+```
+
+```bash
+  curl --request PUT \
+  --url https://gp-api.iteam-s.mg/projets/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "description": ,
+    "lien": "",
+    "pdc": "",
+    "ordre": ,
+  }'
+```
+
+```bash
+  curl --request DELETE \
+  --url https://gp-api.iteam-s.mg/projets/remove \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+  }'
+```
+
+ ### Autres
+```bash
+  curl --request GET \
+  --url https://gp-api.iteam-s.mg/autres \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+```
+
+```bash
+  curl --request POST \
+  --url https://gp-api.iteam-s.mg/autres/create \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "nom": "",
+    "lien": ""
+  }'
+```
+
+```bash
+  curl --request PUT \
+  --url https://gp-api.iteam-s.mg/autres/update \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+    "nom": "",
+    "lien": ""
+  }'
+```
+
+```bash
+  curl --request DELETE \
+  --url https://gp-api.iteam-s.mg/autres/remove \
+  --header 'Authorization: Bearer <your token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": ,
+  }'
+```
+
+
+
+- Author - [iTeam-$](https://github.com/iTeam-S)
+- Website - [https://iteam-s.mg/](https://iteam-s.mg/)
+
