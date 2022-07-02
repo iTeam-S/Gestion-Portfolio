@@ -73,7 +73,7 @@ export class MembreService {
             .createQueryBuilder()
             .update(Membre)
             .set({
-                password: donnees.newPassword
+                password: () => "SHA2('"+ donnees.newPassword +"', 256)"
             })
             .where("id=:identifiant", { identifiant: id })
             .execute();
