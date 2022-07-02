@@ -30,7 +30,8 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.DB_NAME,
       entities: [
         Membre, Fonction, Poste, Formations, Competences,
-        CategorieCompetence, Experiences, Distinctions, Projets, Autres
+        CategorieCompetence, Experiences, Distinctions, 
+        Projets, Autres
       ],
       synchronize: true,
       autoLoadEntities: true
