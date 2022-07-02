@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get,
     NotAcceptableException, Post, Put, 
     Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ExperiencesCreateDto, ExperiencesUpdateDto } from './dto/experiences.dto';
+import { ExperiencesCreateDto, ExperiencesUpdateDto } from './dto';
 import { ExperiencesService } from './experiences.service';
 
 @Controller('experiences')

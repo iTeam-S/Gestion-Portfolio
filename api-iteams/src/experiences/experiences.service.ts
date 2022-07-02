@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Experiences, Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { ExperiencesCreateDto, ExperiencesUpdateDto } from './dto/experiences.dto';
+import { ExperiencesCreateDto, ExperiencesUpdateDto } from './dto';
 
 @Injectable()
 export class ExperiencesService {

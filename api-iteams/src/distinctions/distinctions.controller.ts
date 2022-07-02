@@ -1,7 +1,7 @@
-import { Body, Controller, Get, NotAcceptableException, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, NotAcceptableException, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { DistinctionsService } from './distinctions.service';
-import { DistinctionsCreateDto } from './dto';
+import { DistinctionsCreateDto, DistinctionsUpdateDto } from './dto';
 
 @Controller('distinctions')
 export class DistinctionsController {
@@ -20,5 +20,13 @@ export class DistinctionsController {
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         return await this.distinctionsService.create(parseInt(req.user.id), donnees);
+    }
+
+    @UseGuards(AuthGuard('jwtMembre'))
+    @Put('update')
+    async updateDistinctions(@Body() donnees: DistinctionsUpdateDto, 
+        @Request() req: any) {
+        if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
+        return await this.distinctionsService.update(parseInt(req.user.id), donnees);
     }
 }
