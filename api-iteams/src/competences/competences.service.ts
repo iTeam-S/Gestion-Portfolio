@@ -56,4 +56,8 @@ export class CompetencesService {
         })
         .execute();
     }
+
+    async remove(donnees: { id: number }): Promise<void> {
+        await this.competencesRepository.delete(donnees.id);
+    }
 }
