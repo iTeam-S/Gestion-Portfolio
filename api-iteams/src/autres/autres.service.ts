@@ -40,13 +40,13 @@ export class AutresService {
     async update(id_membre: number, 
         donnees: AutresUpdateDto) {
         await this.autresRepository
-        .createQueryBuilder('a')
+        .createQueryBuilder()
         .update(Autres)
         .set({
             nom: donnees.nom,
             lien: donnees.lien
         })
-        .where(`a.id=:id AND a.id_membre=:identifiant`, {
+        .where(`id=:id AND id_membre=:identifiant`, {
             id: donnees.id,
             identifiant: id_membre
         })

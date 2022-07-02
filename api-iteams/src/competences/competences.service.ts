@@ -43,14 +43,14 @@ export class CompetencesService {
     async update(id_membre: number, 
         donnees: CompetencesUpdateDto): Promise<void> {
         await this.competencesRepository
-        .createQueryBuilder('c')
+        .createQueryBuilder()
         .update(Competences)
         .set({
             nom: donnees.nom,
             liste: donnees.liste,
             idCategorie: donnees.id_categorie
         })
-        .where(`c.id=:id AND c.id_membre=:identifiant`, {
+        .where(`id=:id AND id_membre=:identifiant`, {
             id: donnees.id,
             identifiant: id_membre
         })

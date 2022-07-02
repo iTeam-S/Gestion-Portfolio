@@ -44,7 +44,7 @@ export class DistinctionsService {
     async update(id_membre: number, 
         donnees: DistinctionsUpdateDto): Promise<void> {
         await this.distinctionsRepository
-        .createQueryBuilder('d')
+        .createQueryBuilder()
         .update(Distinctions)
         .set({
             organisateur: donnees.organisateur,
@@ -53,7 +53,7 @@ export class DistinctionsService {
             description: donnees.description,
             ordre: donnees.ordre
         })
-        .where(`d.id=:id AND d.id_membre=:identifiant`, {
+        .where(`id=:id AND id_membre=:identifiant`, {
             id: donnees.id,
             identifiant: id_membre
         })

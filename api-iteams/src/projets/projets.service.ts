@@ -45,7 +45,7 @@ export class ProjetsService {
     async update(id_membre: number, 
         donnees: ProjetsUpdateDto): Promise<void> {
         await this.projetsRepository
-        .createQueryBuilder('p')
+        .createQueryBuilder()
         .update(Projets)
         .set({
             nom: donnees.nom,
@@ -54,7 +54,7 @@ export class ProjetsService {
             pdc: donnees.pdc,
             ordre: donnees.ordre
         })
-        .where(`p.id=:id AND p.id_membre=:identifiant`, {
+        .where(`id=:id AND id_membre=:identifiant`, {
             id: donnees.id,
             identifiant: id_membre
         })
