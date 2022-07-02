@@ -5,3 +5,12 @@ export class ProjetsCreateDto {
     pdc: string;
     ordre: number;
 }
+
+export class ProjetsUpdateDto {
+    id: number;
+    nom: string;
+    description: string;
+    lien: string;
+    pdc: string;
+    ordre: number;
+}

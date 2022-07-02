@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Membre, Projets } from 'src/output';
 import { Repository } from 'typeorm';
-import { ProjetsCreateDto } from './dto';
+import { ProjetsCreateDto, ProjetsUpdateDto } from './dto';
 
 @Injectable()
 export class ProjetsService {
@@ -38,6 +38,25 @@ export class ProjetsService {
             pdc: donnes.pdc,
             idMembre: id_membre,
             ordre: donnes.ordre
+        })
+        .execute();
+    }
+
+    async update(id_membre: number, 
+        donnees: ProjetsUpdateDto): Promise<void> {
+        await this.projetsRepository
+        .createQueryBuilder('p')
+        .update(Projets)
+        .set({
+            nom: donnees.nom,
+            description: donnees.description,
+            lien: donnees.lien,
+            pdc: donnees.pdc,
+            ordre: donnees.ordre
+        })
+        .where(`p.id=:id AND p.id_membre=:identifiant`, {
+            id: donnees.id,
+            identifiant: id_membre
         })
         .execute();
     }
