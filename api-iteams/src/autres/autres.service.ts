@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Autres, Membre } from 'src/output';
 import { Repository } from 'typeorm';
-import { AutresCreateDto, AutresUpdateDto } from './dto/autres.dto';
+import { AutresCreateDto, AutresUpdateDto } from './dto';
 
 @Injectable()
 export class AutresService {
@@ -51,5 +51,9 @@ export class AutresService {
             identifiant: id_membre
         })
         .execute();
+    }
+
+    async remove(donnees: {id: number}): Promise<void> {
+        await this.autresRepository.delete(donnees.id);
     }
 }
