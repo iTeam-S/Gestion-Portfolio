@@ -3,7 +3,6 @@ export class ExperiencesCreateDto {
     annee: string;
     type: string;
     description: string;
-    id_membre?: number;
 }
 
 export class ExperiencesUpdateDto {
@@ -12,5 +11,4 @@ export class ExperiencesUpdateDto {
     annee: string;
     type: string;
     description: string;
-    id_membre?: number
 }

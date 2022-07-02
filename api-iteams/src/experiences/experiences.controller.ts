@@ -19,8 +19,7 @@ export class ExperiencesController {
     async createExperiences(@Body() donnees: ExperiencesCreateDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        const data = { ...donnees, id_membre: parseInt(req.user.id) };
-        return await this.experiencesService.create(data);
+        return await this.experiencesService.create(parseInt(req.user.id), donnees);
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
@@ -28,7 +27,6 @@ export class ExperiencesController {
     async updateExperiences(@Body() donnees: ExperiencesUpdateDto,
         @Request() req: any) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        const data = { ...donnees, id_membre: parseInt(req.user.id) };
-        return await this.experiencesService.update(data);
+        return await this.experiencesService.update(parseInt(req.user.id), donnees);
     }
 }

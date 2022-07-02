@@ -24,7 +24,7 @@ export class ExperiencesService {
             .getRawMany()
     }
 
-    async create(donnees: ExperiencesCreateDto): Promise<void> {
+    async create(id_membre: number, donnees: ExperiencesCreateDto): Promise<void> {
         await this.experiencesRepository
             .createQueryBuilder()
             .insert()
@@ -33,13 +33,13 @@ export class ExperiencesService {
                 nom: donnees.nom,
                 annee: donnees.annee,
                 type: donnees.type,
-                idMembre: donnees.id_membre,
+                idMembre: id_membre,
                 ordre: 0
             })
             .execute();
     }
 
-    async update(donnees: ExperiencesUpdateDto): Promise<void> {
+    async update(id_membre: number, donnees: ExperiencesUpdateDto): Promise<void> {
         await this.experiencesRepository
             .createQueryBuilder("e")
             .update(Experiences)
@@ -51,7 +51,7 @@ export class ExperiencesService {
             })
             .where(`e.id=:id AND e.id_membre=:identifiant`, {
                 id: donnees.id,
-                identifiant: donnees.id_membre
+                identifiant: id_membre
             })
             .execute();
     }
