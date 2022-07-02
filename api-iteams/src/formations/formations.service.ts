@@ -21,6 +21,7 @@ export class FormationsService {
             ])
             .innerJoin(Membre, "m", "f.id_membre=m.id")
             .where("m.id=:identifiant", { identifiant: donnees.id })
+            .orderBy("f.id", "DESC")
             .getRawMany();
     }
 
@@ -35,23 +36,22 @@ export class FormationsService {
                 type: donnees.type,
                 description: donnees.description,
                 idMembre: id_membre,
-                ordre: donnees.ordre
+                ordre: 0
             })
             .execute();
     }
 
     async update(id_membre: number, donnees: FormationsUpdateDto): Promise<void> {
         await this.formationsRepository
-            .createQueryBuilder("f")
+            .createQueryBuilder()
             .update(Formations)
             .set({
                 lieu: donnees.lieu,
                 annee: donnees.annee,
                 type: donnees.type,
-                description: donnees.description,
-                ordre: donnees.ordre
+                description: donnees.description
             })
-            .where(`f.id=:id AND f.id_membre=:identifiant`, {
+            .where(`id=:id AND id_membre=:identifiant`, {
                 id: donnees.id,
                 identifiant: id_membre
             })

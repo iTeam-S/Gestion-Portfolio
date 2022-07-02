@@ -3,7 +3,6 @@ export class FormationsCreateDto {
     annee: string;
     type: string;
     description: string;
-    ordre: number;
 }
 
 export class FormationsUpdateDto {
@@ -12,5 +11,4 @@ export class FormationsUpdateDto {
     annee: string;
     type: string;
     description: string;
-    ordre: number;
 }
