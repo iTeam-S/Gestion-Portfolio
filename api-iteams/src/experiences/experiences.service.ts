@@ -21,6 +21,7 @@ export class ExperiencesService {
             ])
             .innerJoin(Membre, "m", "e.id_membre=m.id")
             .where(`m.id=:identifiant`, { identifiant: donnees.id })
+            .orderBy("e.id", "DESC")
             .getRawMany()
     }
 
@@ -41,7 +42,7 @@ export class ExperiencesService {
 
     async update(id_membre: number, donnees: ExperiencesUpdateDto): Promise<void> {
         await this.experiencesRepository
-            .createQueryBuilder("e")
+            .createQueryBuilder()
             .update(Experiences)
             .set({
                 nom: donnees.nom,
@@ -49,7 +50,7 @@ export class ExperiencesService {
                 type: donnees.type,
                 description: donnees.description
             })
-            .where(`e.id=:id AND e.id_membre=:identifiant`, {
+            .where(`id=:id AND id_membre=:identifiant`, {
                 id: donnees.id,
                 identifiant: id_membre
             })

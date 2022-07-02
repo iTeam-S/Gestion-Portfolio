@@ -36,6 +36,6 @@ export class ExperiencesController {
     @Delete('remove')
     async removeExperiences(@Body() donnees: {id: number}) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
-        return await this.removeExperiences(donnees);
+        return await this.experiencesService.remove(donnees);
     }
 }
