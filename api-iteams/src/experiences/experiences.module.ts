@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { ExperiencesService } from './experiences.service';
 import { ExperiencesController } from './experiences.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Experiences } from 'src/output';
+import { Experiences, Membre } from 'src/output';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Experiences])
+    TypeOrmModule.forFeature([Experiences, Membre])
   ],
+  exports: [TypeOrmModule],
   providers: [ExperiencesService],
   controllers: [ExperiencesController]
 })

@@ -1,8 +1,12 @@
-import { Body, Controller, Delete, Get, NotAcceptableException, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, 
+    NotAcceptableException, Post, Put, 
+    Request, UseGuards, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { CompetencesService } from './competences.service';
 import { CompetencesCreateDto, CompetencesUpdateDto } from './dto';
 
+@ApiBearerAuth()
 @Controller('competences')
 export class CompetencesController {
     constructor(private readonly competencesService: CompetencesService) {}
@@ -31,8 +35,8 @@ export class CompetencesController {
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
-    @Delete('remove')
-    async removeCompetences(@Body() donnees: { id: number }) {
+    @Delete('remove/:id')
+    async removeCompetences(@Param() donnees: { id: number }) {
         return await this.competencesService.remove(donnees);
     }
 }

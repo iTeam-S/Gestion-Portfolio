@@ -1,11 +1,17 @@
-import { Body, Controller, Delete, Get, NotAcceptableException, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, 
+    NotAcceptableException, Post, Put, 
+    Request, UseGuards, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { DistinctionsService } from './distinctions.service';
 import { DistinctionsCreateDto, DistinctionsUpdateDto } from './dto';
 
+@ApiBearerAuth()
 @Controller('distinctions')
 export class DistinctionsController {
-    constructor(private readonly distinctionsService: DistinctionsService) {}
+    constructor(
+        private readonly distinctionsService: DistinctionsService
+    ) {}
 
     @UseGuards(AuthGuard('jwtMembre'))
     @Get()
@@ -31,8 +37,8 @@ export class DistinctionsController {
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
-    @Delete('remove')
-    async removeDistinctions(@Body() donnees: { id: number }) {
+    @Delete('remove/:id')
+    async removeDistinctions(@Param() donnees: { id: number }) {
         return await this.distinctionsService.remove(donnees);
     }
 }

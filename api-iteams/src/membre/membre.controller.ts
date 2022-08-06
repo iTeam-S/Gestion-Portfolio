@@ -1,9 +1,11 @@
 import { Body, Controller, Get, NotAcceptableException, Patch, 
     Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { UpdateInfoDto, UpdatePasswordDto } from './dto';
 import { MembreService } from './membre.service';
 
+@ApiBearerAuth()
 @Controller('membre')
 export class MembreController {
     constructor(private readonly membreService: MembreService) {}

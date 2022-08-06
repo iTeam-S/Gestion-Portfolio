@@ -10,6 +10,7 @@ async function bootstrap() {
     .setDescription('Interface de documentation API iTeam-$ Community')
     .setVersion('1.0')
     .addTag('iTeam-$')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

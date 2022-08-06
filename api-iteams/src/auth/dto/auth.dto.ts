@@ -1,5 +1,10 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class authMembreDto {
+    @ApiProperty()
     identifiant: string;
+
+    @ApiProperty()
     password: string;
 }
 

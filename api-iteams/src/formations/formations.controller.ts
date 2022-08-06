@@ -1,9 +1,11 @@
 import { Body, Controller, Delete, Get, NotAcceptableException, 
-    Post, Put, Request, UseGuards } from '@nestjs/common';
+    Post, Put, Request, UseGuards, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { FormationsCreateDto, FormationsUpdateDto } from './dto';
 import { FormationsService } from './formations.service';
 
+@ApiBearerAuth()
 @Controller('formations')
 export class FormationsController {
     constructor(private readonly formationsService: FormationsService) {}
@@ -32,8 +34,8 @@ export class FormationsController {
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
-    @Delete('remove')
-    async deleteFormations(@Body() donnees: { id: number }) {
+    @Delete('remove/:id')
+    async deleteFormations(@Param() donnees: { id: number }) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         return await this.formationsService.remove(donnees);
     }

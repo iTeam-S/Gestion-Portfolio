@@ -8,6 +8,7 @@ import { MembreService } from './membre.service';
   imports: [
     TypeOrmModule.forFeature([Membre])
   ],
+  exports: [TypeOrmModule],
   controllers: [MembreController],
   providers: [MembreService]
 })

@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, NotAcceptableException, 
-    Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, 
+    NotAcceptableException, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { ProjetsCreateDto, ProjetsUpdateDto } from './dto';
 import { ProjetsService } from './projets.service';
 
+@ApiBearerAuth()
 @Controller('projets')
 export class ProjetsController {
     constructor(private readonly projetsService: ProjetsService) {}
@@ -33,7 +35,7 @@ export class ProjetsController {
 
     @UseGuards(AuthGuard('jwtMembre'))
     @Delete('remove')
-    async removeProjets(@Body() donnees: {id: number}) {
+    async removeProjets(@Param() donnees: {id: number}) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         return await this.projetsService.remove(donnees);
     }

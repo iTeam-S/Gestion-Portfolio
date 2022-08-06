@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, 
     NotAcceptableException, Post, Put, 
-    Request, UseGuards } from '@nestjs/common';
+    Request, UseGuards, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { ExperiencesCreateDto, ExperiencesUpdateDto } from './dto';
 import { ExperiencesService } from './experiences.service';
 
+@ApiBearerAuth()
 @Controller('experiences')
 export class ExperiencesController {
     constructor(private readonly experiencesService: ExperiencesService) {}
@@ -33,8 +35,8 @@ export class ExperiencesController {
     }
 
     @UseGuards(AuthGuard('jwtMembre'))
-    @Delete('remove')
-    async removeExperiences(@Body() donnees: {id: number}) {
+    @Delete('remove/:id')
+    async removeExperiences(@Param() donnees: {id: number}) {
         if(!donnees) throw new NotAcceptableException("Credentials incorrects !");
         return await this.experiencesService.remove(donnees);
     }

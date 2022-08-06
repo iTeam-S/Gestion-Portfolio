@@ -1,9 +1,11 @@
 import { Body, Controller, Get, NotAcceptableException, 
     Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { FonctionUpdateDto } from './dto';
 import { FonctionService } from './fonction.service';
 
+@ApiBearerAuth()
 @Controller('fonction')
 export class FonctionController {
     constructor(private readonly fonctionService: FonctionService) {}

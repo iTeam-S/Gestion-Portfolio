@@ -20,6 +20,7 @@ import { JwtStrategy } from './strategy';
       secret: process.env.JWT_SECRET
     })
   ],
+  exports: [TypeOrmModule],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy]
 })

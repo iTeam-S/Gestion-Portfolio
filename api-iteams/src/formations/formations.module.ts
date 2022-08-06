@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { FormationsService } from './formations.service';
 import { FormationsController } from './formations.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Formations } from 'src/output';
+import { Formations, Membre } from 'src/output';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Formations])
+    TypeOrmModule.forFeature([Formations, Membre])
   ],
+  exports: [TypeOrmModule],
   providers: [FormationsService],
   controllers: [FormationsController]
 })
