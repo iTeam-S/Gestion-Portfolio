@@ -13,7 +13,8 @@
 - Front-End: **Angular (Google)**
 
 ### Documentation de la nouvelle API:
-Swagger: `https://gp-api.iteam-s.mg/docs`
+- Swagger: `https://gp-api.iteam-s.mg/docs`
+- Curl: `https://github.com/iTeam-S/Gestion-Portfolio/blob/main/api-iteams/README.md`
 
 
 ### Concernant l'ancien API: 
