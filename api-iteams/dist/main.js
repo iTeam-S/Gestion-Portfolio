@@ -11,10 +11,11 @@ async function bootstrap() {
         .setDescription('Interface de documentation API iTeam-$ Community')
         .setVersion('1.0')
         .addTag('iTeam-$')
+        .addBearerAuth()
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('api', app, document);
-    await app.listen(3000);
+    swagger_1.SwaggerModule.setup('docs', app, document);
+    await app.listen(3031);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

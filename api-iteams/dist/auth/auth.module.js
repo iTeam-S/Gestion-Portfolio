@@ -28,6 +28,7 @@ AuthModule = __decorate([
                 secret: process.env.JWT_SECRET
             })
         ],
+        exports: [typeorm_1.TypeOrmModule],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService, strategy_1.JwtStrategy]
     })

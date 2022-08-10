@@ -17,8 +17,9 @@ let FormationsModule = class FormationsModule {
 FormationsModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([output_1.Formations])
+            typeorm_1.TypeOrmModule.forFeature([output_1.Formations, output_1.Membre])
         ],
+        exports: [typeorm_1.TypeOrmModule],
         providers: [formations_service_1.FormationsService],
         controllers: [formations_controller_1.FormationsController]
     })

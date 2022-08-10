@@ -17,8 +17,9 @@ let FonctionModule = class FonctionModule {
 FonctionModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([output_1.Fonction])
+            typeorm_1.TypeOrmModule.forFeature([output_1.Fonction, output_1.Membre, output_1.Poste])
         ],
+        exports: [typeorm_1.TypeOrmModule],
         controllers: [fonction_controller_1.FonctionController],
         providers: [fonction_service_1.FonctionService]
     })

@@ -17,8 +17,9 @@ let CompetencesModule = class CompetencesModule {
 CompetencesModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([output_1.Competences])
+            typeorm_1.TypeOrmModule.forFeature([output_1.Competences, output_1.Membre, output_1.CategorieCompetence])
         ],
+        exports: [typeorm_1.TypeOrmModule],
         controllers: [competences_controller_1.CompetencesController],
         providers: [competences_service_1.CompetencesService]
     })

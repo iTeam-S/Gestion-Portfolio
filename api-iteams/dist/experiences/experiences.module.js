@@ -17,8 +17,9 @@ let ExperiencesModule = class ExperiencesModule {
 ExperiencesModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([output_1.Experiences])
+            typeorm_1.TypeOrmModule.forFeature([output_1.Experiences, output_1.Membre])
         ],
+        exports: [typeorm_1.TypeOrmModule],
         providers: [experiences_service_1.ExperiencesService],
         controllers: [experiences_controller_1.ExperiencesController]
     })

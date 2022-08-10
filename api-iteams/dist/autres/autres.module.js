@@ -17,8 +17,9 @@ let AutresModule = class AutresModule {
 AutresModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([output_1.Autres])
+            typeorm_1.TypeOrmModule.forFeature([output_1.Autres, output_1.Membre])
         ],
+        exports: [typeorm_1.TypeOrmModule],
         controllers: [autres_controller_1.AutresController],
         providers: [autres_service_1.AutresService]
     })

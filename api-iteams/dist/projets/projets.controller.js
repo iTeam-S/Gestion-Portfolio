@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjetsController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const swagger_1 = require("@nestjs/swagger");
 const dto_1 = require("./dto");
 const projets_service_1 = require("./projets.service");
 let ProjetsController = class ProjetsController {
@@ -70,12 +71,13 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwtMembre')),
     (0, common_1.Delete)('remove'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ProjetsController.prototype, "removeProjets", null);
 ProjetsController = __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.Controller)('projets'),
     __metadata("design:paramtypes", [projets_service_1.ProjetsService])
 ], ProjetsController);

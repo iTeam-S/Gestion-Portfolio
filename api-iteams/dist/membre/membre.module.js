@@ -19,6 +19,7 @@ MembreModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forFeature([output_1.Membre])
         ],
+        exports: [typeorm_1.TypeOrmModule],
         controllers: [membre_controller_1.MembreController],
         providers: [membre_service_1.MembreService]
     })

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FonctionController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const swagger_1 = require("@nestjs/swagger");
 const dto_1 = require("./dto");
 const fonction_service_1 = require("./fonction.service");
 let FonctionController = class FonctionController {
@@ -63,6 +64,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], FonctionController.prototype, "updateFonction", null);
 FonctionController = __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.Controller)('fonction'),
     __metadata("design:paramtypes", [fonction_service_1.FonctionService])
 ], FonctionController);

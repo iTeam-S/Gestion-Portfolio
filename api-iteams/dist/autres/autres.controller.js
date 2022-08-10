@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AutresController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const swagger_1 = require("@nestjs/swagger");
 const autres_service_1 = require("./autres.service");
 const dto_1 = require("./dto");
 let AutresController = class AutresController {
@@ -69,13 +70,14 @@ __decorate([
 ], AutresController.prototype, "updateAutres", null);
 __decorate([
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwtMembre')),
-    (0, common_1.Delete)('remove'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Delete)('remove/:id'),
+    __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AutresController.prototype, "removeAutres", null);
 AutresController = __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.Controller)('autres'),
     __metadata("design:paramtypes", [autres_service_1.AutresService])
 ], AutresController);
