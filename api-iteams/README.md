@@ -24,6 +24,9 @@
 
 
 ## Documentation API
+
+Swagger: `https:gp-api.iteam-s.mg/docs`
+
  ### Authentification: 
  ```bash
   curl --request POST \
