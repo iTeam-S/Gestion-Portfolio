@@ -6,11 +6,17 @@
 
 - C'est une **application web** qui sert à modifier les informations de chacun des membres de la communauté **iTeam-$**.
 
-- Back-End: **API rest écrit en PHP native**,
+- Back-End (ancien): **API rest écrit en PHP native**,
+
+- Back-End (nouveau): **API rest écrit avec Nestjs (framework nodejs)**
 
 - Front-End: **Angular (Google)**
 
-### Concernant l'API: 
+### Documentation de la nouvelle API:
+Swagger: `https://gp-api.iteam-s.mg/docs`
+
+
+### Concernant l'ancien API: 
    Avant tout, veuillez créer un fichier `db.json` le dossier `models`; dans db.json: 
    `{ "host": "<nom de l'hote", "dbname": "<nom de la base de données>", "user": "<nom d'utilisateur>", "password": "<mot de passe de l'user>" }`
 
